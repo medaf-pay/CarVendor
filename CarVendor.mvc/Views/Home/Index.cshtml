@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarVendor.data.Entities.Car>
+﻿@model IEnumerable<CarVendor.mvc.CarViewModel>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -297,8 +297,9 @@
                                                 </h4>
                                                 <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img2.png" alt="" />
                                                 <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                                    <span class="first">Brand: <span class="highlighted">@item.Brand.Name</span></span>
-                                                    <span class="second">Type: <span class="highlighted">@item.Type</span></span>
+                                                    <span class="first">Brand: <span class="highlighted">@item.Brand</span></span>
+                                                    <span class="second">Color: <span class="highlighted">@item.Color</span></span>
+                                                    <span class="first">Category: <span class="highlighted">@item.Category</span></span>
                                                     <div class="clearfix"></div>
                                                 </div>
                                                 <div class="info2 wow fadeIn" data-wow-duration="1s" data-wow-delay=".3s">

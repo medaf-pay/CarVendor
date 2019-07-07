@@ -16,71 +16,64 @@ namespace CarVendor.data.Migrations
 
         protected override void Seed(CarVendor.data.DataBaseContext context)
         {
-            List<Car> cars = new List<Car>()
+            Car car1 = new Car()
             {
-               new Car()
-               {
-                Name="Car1",
-                Model="Sozuki",
-                Price=120,
-                Condition=CarCondition.New,
-                Brand=new Brand()
+                Name = "yaris",
+                Brand = new Brand() { Name = "toyta" },
+                Model = "2011"
+            };
+
+            Car car2 = new Car()
+            {
+                Name = "Krsttala",
+                Brand = new Brand() { Name = "Lancer" },
+                Model = "2011"
+            };
+
+            Category category = new Category()
+            {
+                Name = "Full Option"
+            };
+
+            Category category2 = new Category()
+            {
+                Name = "Half Option"
+            };
+
+            List<CarCategory> CarCategories = new List<CarCategory>()
+            {
+
+                new CarCategory()
                 {
-                    Name="Brand1"
+                    Car=car1,
+                    Category=category,
+                    Price=120,
                 },
-                Type=CarType.Coupe
-               },
-               new Car()
-               {
-                Name="Car2",
-                Model="Sozuki",
-                Price=120,
-                Condition=CarCondition.New,
-                Brand=new Brand()
+
+                new CarCategory()
                 {
-                    Name="Brand1"
-                },
-                Type=CarType.Coupe
-               },
-               new Car()
-               {
-                Name="Car3",
-                Model="Sozuki",
-                Price=120,
-                Condition=CarCondition.New,
-                Brand=new Brand()
+                    Car=car2,
+                    Category=category2,
+                    Price =100
+                }
+
+            };
+
+            context.CarCategories.AddRange(CarCategories);
+
+            List<CarColor> CarColors = new List<CarColor>()
+            {
+                new CarColor()
                 {
-                    Name="Brand1"
-                },
-                Type=CarType.Coupe
-               },
-               new Car()
-               {
-                Name="Car4",
-                Model="Sozuki",
-                Price=120,
-                Condition=CarCondition.New,
-                Brand=new Brand()
-                {
-                    Name="Brand1"
-                },
-                Type=CarType.Coupe
-               },
-               new Car()
-               {
-                Name="Car5",
-                Model="totya",
-                Price=120,
-                Condition=CarCondition.New,
-                Brand=new Brand()
-                {
-                    Name="Brand2"
-                },
-                Type=CarType.CrossOver
-               }
-        };
-            context.Cars.AddRange(cars);
-            context.SaveChanges();
+                    Car=car1,
+                    Color=new Color()
+                    {
+                        Name ="red"
+                    }
+                }
+
+            };
+            context.CarColors.AddRange(CarColors);
         }
     }
 }

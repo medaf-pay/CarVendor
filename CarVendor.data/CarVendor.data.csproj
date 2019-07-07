@@ -63,9 +63,9 @@
     <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\TEntity.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\201907070339298_v0.0.1.cs" />
-    <Compile Include="Migrations\201907070339298_v0.0.1.Designer.cs">
-      <DependentUpon>201907070339298_v0.0.1.cs</DependentUpon>
+    <Compile Include="Migrations\201907071841481_v0.0.0.cs" />
+    <Compile Include="Migrations\201907071841481_v0.0.0.Designer.cs">
+      <DependentUpon>201907071841481_v0.0.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,8 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907070339298_v0.0.1.resx">
-      <DependentUpon>201907070339298_v0.0.1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907071841481_v0.0.0.resx">
+      <DependentUpon>201907071841481_v0.0.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,7 +10,7 @@ namespace CarVendor.data.Entities
     {
         public string Name { get; set; }
         public string Model { get; set; }
-        public decimal Price { get; set; }
+        //public decimal Price { get; set; }
         public CarCondition Condition { get; set; }
         public CarType Type { get; set; }
 

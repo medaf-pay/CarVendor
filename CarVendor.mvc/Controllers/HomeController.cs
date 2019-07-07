@@ -12,8 +12,11 @@ namespace CarVendor.mvc.Controllers
         DataBaseContext db = new DataBaseContext();
         public ActionResult Index()
         {
-            var cars = db.Cars.ToList();
-            return View(cars);
+            var cars = from carCategoris in db.CarCategories
+                       join carColors in db.CarColors on carCategoris.CarId equals carColors.CarId
+                       select new CarViewModel { Name = carCategoris.Car.Name, Brand = carCategoris.Car.Brand.Name, Category = carCategoris.Category.Name, Color = carColors.Color.Name, Price = carCategoris.Price };
+            var availableCars = cars.ToList();
+            return View(availableCars);
         }
 
         public ActionResult About()

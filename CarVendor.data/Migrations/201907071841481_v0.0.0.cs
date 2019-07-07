@@ -3,7 +3,7 @@ namespace CarVendor.data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class v001 : DbMigration
+    public partial class v000 : DbMigration
     {
         public override void Up()
         {
@@ -23,7 +23,6 @@ namespace CarVendor.data.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         Name = c.String(),
                         Model = c.String(),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Condition = c.Int(nullable: false),
                         Type = c.Int(nullable: false),
                         BrandId = c.Long(nullable: false),
@@ -31,6 +30,65 @@ namespace CarVendor.data.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Brands", t => t.BrandId, cascadeDelete: true)
                 .Index(t => t.BrandId);
+            
+            CreateTable(
+                "dbo.CarCategories",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CarId = c.Long(nullable: false),
+                        CategoryId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Cars", t => t.CarId, cascadeDelete: true)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.CarId)
+                .Index(t => t.CategoryId);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.CarColors",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        CarId = c.Long(nullable: false),
+                        ColorId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Cars", t => t.CarId, cascadeDelete: true)
+                .ForeignKey("dbo.Colors", t => t.ColorId, cascadeDelete: true)
+                .Index(t => t.CarId)
+                .Index(t => t.ColorId);
+            
+            CreateTable(
+                "dbo.CarImages",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        ImageURL = c.String(),
+                        CarColorId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.CarColors", t => t.CarColorId, cascadeDelete: true)
+                .Index(t => t.CarColorId);
+            
+            CreateTable(
+                "dbo.Colors",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.OrderItems",
@@ -96,16 +154,31 @@ namespace CarVendor.data.Migrations
             DropForeignKey("dbo.OrderItems", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.Orders", "DeliveryDetailsId", "dbo.DeliveryDetails");
             DropForeignKey("dbo.OrderItems", "CarId", "dbo.Cars");
+            DropForeignKey("dbo.CarColors", "ColorId", "dbo.Colors");
+            DropForeignKey("dbo.CarImages", "CarColorId", "dbo.CarColors");
+            DropForeignKey("dbo.CarColors", "CarId", "dbo.Cars");
+            DropForeignKey("dbo.CarCategories", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.CarCategories", "CarId", "dbo.Cars");
             DropForeignKey("dbo.Cars", "BrandId", "dbo.Brands");
             DropIndex("dbo.Orders", new[] { "OwnerId" });
             DropIndex("dbo.Orders", new[] { "DeliveryDetailsId" });
             DropIndex("dbo.OrderItems", new[] { "OrderId" });
             DropIndex("dbo.OrderItems", new[] { "CarId" });
+            DropIndex("dbo.CarImages", new[] { "CarColorId" });
+            DropIndex("dbo.CarColors", new[] { "ColorId" });
+            DropIndex("dbo.CarColors", new[] { "CarId" });
+            DropIndex("dbo.CarCategories", new[] { "CategoryId" });
+            DropIndex("dbo.CarCategories", new[] { "CarId" });
             DropIndex("dbo.Cars", new[] { "BrandId" });
             DropTable("dbo.Users");
             DropTable("dbo.DeliveryDetails");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderItems");
+            DropTable("dbo.Colors");
+            DropTable("dbo.CarImages");
+            DropTable("dbo.CarColors");
+            DropTable("dbo.Categories");
+            DropTable("dbo.CarCategories");
             DropTable("dbo.Cars");
             DropTable("dbo.Brands");
         }
