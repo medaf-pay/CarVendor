@@ -14,6 +14,7 @@ namespace CarVendor.data.Entities
         public CarCondition Condition { get; set; }
         public CarType Type { get; set; }
 
+
         #region [ Brand ]
         public long BrandId { get; set; }
         public virtual Brand Brand { get; set; }
