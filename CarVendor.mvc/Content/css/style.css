@@ -1,0 +1,1301 @@
+@import "animate.css";
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+@import url(//fonts.googleapis.com/css?family=Lato:400);
+@import url(//fonts.googleapis.com/css?family=Lato:100);
+@import url(//fonts.googleapis.com/css?family=Lato:300);
+@import url(//fonts.googleapis.com/css?family=Lato:700);
+/*========================================================
+                    Main layout styles
+=========================================================*/
+body {
+  font: 300 14px/24px "Lato", sans-serif;
+  color: #aaaaaa;
+  background: #ffffff;
+  min-width: 1327px;
+}
+@media (max-width: 1199px) {
+  body {
+    min-width: 0;
+  }
+}
+a[href^="tel:"] {
+  color: inherit;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+a:hover {
+  color: #8ad329;
+}
+img {
+  max-width: 100%;
+}
+* {
+  -webkit-text-size-adjust: none;
+}
+/* ======= Headers ======= */
+h2 {
+  font: 700 27px/33px "Lato", sans-serif;
+  color: #303030;
+  text-transform: uppercase;
+}
+@media (max-width: 1199px) {
+  h2 {
+    font-size: 25px;
+  }
+}
+@media (max-width: 979px) {
+  h2 {
+    font-size: 19px;
+  }
+}
+@media (max-width: 479px) {
+  h2 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+h3 {
+  font: 700 17px/25px "Lato", sans-serif;
+  color: #303030;
+  text-transform: uppercase;
+}
+h4 {
+  font: 700 17px/32px "Lato", sans-serif;
+  color: #303030;
+}
+@media (max-width: 1199px) {
+  h4 {
+    font-size: 16px;
+  }
+}
+h5 {
+  font: 700 18px/21px "Lato", sans-serif;
+  color: #303030;
+  text-transform: uppercase;
+}
+h6 {
+  font: 700 18px/33px "Lato", sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.heading1 {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+  padding: 12px 18px 14px;
+  background: url(../images/gradient3.png) repeat-x center bottom #ffffff;
+  margin-bottom: 21px;
+}
+.heading1.heading1__offset1 {
+  margin-bottom: 31px;
+}
+/* ======= Buttons ======= */
+.btn-default {
+  display: inline-block;
+  font: 400 15px/32px "Lato", sans-serif;
+  color: #303030;
+  text-align: center;
+  padding: 2px 18px 5px;
+  border-radius: 3px;
+  border: 1px solid #e3e3e3;
+  background: url(../images/gradient4.png) repeat-x center bottom #ffffff;
+}
+.btn-default:hover {
+  -webkit-box-shadow: 1px 1px 1px 0px #5b8d1a;
+  box-shadow: 1px 1px 1px 0px #5b8d1a;
+  background: url(../images/gradient1.png) repeat-x center bottom #8ad329;
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+.btn-default span {
+  position: relative;
+  display: block;
+  padding-right: 18px;
+}
+.btn-default span:hover:after {
+  cursor: pointer;
+}
+.btn-default span:after {
+  font-family: FontAwesome;
+  font-size: 12px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  line-height: 32px;
+  color: #303030;
+  content: '\f054';
+  right: 0;
+  top: 3px;
+}
+.btn-big {
+  font: 700 18px/18px "Lato", sans-serif;
+  color: #ffffff;
+  display: inline-block;
+  padding: 15px 20px 9px;
+  background: url(../images/gradient2.png) repeat-x center bottom #656565;
+  border-radius: 3px;
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+}
+.btn-big:hover {
+  color: #8ad329;
+}
+.btn-big:hover .plus {
+  background: #ffffff;
+  color: #8ad329;
+}
+.btn-big .plus {
+  display: inline-block;
+  font: 700 37px/32px "Lato", sans-serif;
+  border-radius: 200px;
+  background: #8ad329;
+  text-align: center;
+  height: 35px;
+  width: 35px;
+  margin-right: 8px;
+  margin-top: -9px;
+}
+.btn-big-green {
+  display: inline-block;
+  font: 700 18px/32px "Lato", sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 7px 22px 9px;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 1px 0px #5b8d1a;
+  box-shadow: 1px 1px 1px 0px #5b8d1a;
+  background: url(../images/gradient1.png) repeat-x center bottom #8ad329;
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+.btn-big-green:hover {
+  color: #303030;
+  border: 1px solid #e3e3e3;
+  background: url(../images/gradient3.png) repeat-x center bottom #8ad329;
+}
+.btn-big-green span {
+  position: relative;
+  display: block;
+  padding-right: 22px;
+}
+.btn-big-green span:hover:after {
+  cursor: pointer;
+}
+.btn-big-green span:after {
+  font-family: FontAwesome;
+  font-size: 12px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  line-height: 32px;
+  color: #303030;
+  content: '\f054';
+  right: 0;
+  top: 1px;
+}
+/* ======= Wrappers ======= */
+.width-wrapper {
+  width: 1230px;
+  margin: 0 auto;
+}
+.width-wrapper.width-wrapper__inset1 {
+  background: #ffffff;
+  position: relative;
+}
+.width-wrapper.width-wrapper__inset1:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -27px;
+  top: 0;
+  width: 27px;
+  height: 100%;
+  background: url(../images/box-shadow2-right.png) repeat-y center top;
+}
+.width-wrapper.width-wrapper__inset1:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -27px;
+  top: 0;
+  width: 27px;
+  height: 100%;
+  background: url(../images/box-shadow2-left.png) repeat-y center top;
+}
+.width-wrapper.width-wrapper__inset2 {
+  background: #f7f7f7;
+}
+.width-wrapper.width-wrapper__inset3 {
+  background: #e3e3e3;
+}
+@media (max-width: 1199px) {
+  .width-wrapper {
+    width: auto;
+    margin: 0;
+  }
+  .width-wrapper.width-wrapper__inset1:after,
+  .width-wrapper.width-wrapper__inset1:before {
+    display: none;
+  }
+}
+.border-wrapper1 {
+  border-bottom: 1px solid #e3e3e3;
+}
+@media (max-width: 767px) {
+  .border-wrapper1 {
+    border-bottom: none;
+  }
+}
+.button-wrapper1 {
+  margin-top: 30px;
+}
+.wrapper1 {
+  padding-top: 60px;
+}
+.wrapper2 {
+  padding: 30px 0 61px;
+}
+.wrapper3 {
+  padding-bottom: 26px;
+  margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  .wrapper3 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+.wrapper4 {
+  padding: 38px 0 42px;
+}
+.wrapper5 {
+  background: #e3e3e3;
+}
+.wrapper6 {
+  padding-top: 39px;
+  padding-bottom: 30px;
+}
+.wrapper7 {
+  padding-bottom: 29px;
+}
+.wrapper8 {
+  padding-top: 58px;
+}
+@media (max-width: 767px) {
+  .wrapper8 {
+    padding-top: 0;
+  }
+}
+.wrapper9 {
+  padding-top: 61px;
+}
+@media (max-width: 767px) {
+  .wrapper9 {
+    padding-top: 0;
+  }
+}
+.wrapper10 {
+  padding-bottom: 59px;
+}
+/*========================================================
+                    HEADER styles
+=========================================================*/
+#header {
+  position: relative;
+  z-index: 4;
+}
+#header .info {
+  padding: 22px 0 16px;
+  background: #303030;
+}
+#header .info .authorization-block {
+  margin-top: 7px;
+  float: right;
+}
+@media (max-width: 1199px) {
+  #header .info .authorization-block {
+    margin-right: 10px;
+  }
+}
+#header .info .authorization-block .create,
+#header .info .authorization-block .login {
+  font: 400 15px/21px "Lato", sans-serif;
+  color: #ffffff;
+  display: inline-block;
+}
+#header .info .authorization-block .create:hover,
+#header .info .authorization-block .login:hover {
+  color: #8ad329;
+}
+#header .info .authorization-block .create {
+  color: #8ad329;
+}
+#header .info .authorization-block .create:hover {
+  color: #ffffff;
+}
+#header .info .authorization-block .divider {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background: #454545;
+  margin: 0 20px;
+}
+#header .info .authorization-block .authorization {
+  display: inline-block;
+  margin-top: 14px;
+  margin-right: 44px;
+}
+#header #stuck_container {
+  background: url(../images/gradient3.png) repeat-x center bottom #ffffff;
+  position: relative;
+}
+#header #stuck_container:after {
+  background: url(../images/box-shadow1.png) repeat-x center 0;
+  width: 100%;
+  height: 31px;
+  position: absolute;
+  content: '';
+  bottom: -31px;
+  left: 0;
+}
+@media (max-width: 979px) {
+  #header {
+    text-align: center;
+  }
+  #header .info .authorization-block {
+    float: none;
+    display: block;
+    margin-top: 20px;
+    margin-right: 0;
+  }
+}
+@media (max-width: 767px) {
+  #header .info .authorization-block {
+    margin-top: 0px;
+  }
+  #header .info .authorization-block .authorization {
+    margin-right: 0;
+  }
+  #header .info .authorization-block .add {
+    display: block;
+    margin-top: 10px;
+  }
+}
+/* ======= Logo ======= */
+h1 {
+  display: inline-block;
+  float: left;
+  font: 100 68px/64px "Lato", sans-serif;
+  color: #ffffff;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+h1 a:hover {
+  color: #ffffff;
+}
+h1 i {
+  margin-top: -4px;
+  margin-right: 11px;
+  display: inline-block;
+  height: 76px;
+  width: 76px;
+  border-radius: 200px;
+  font-size: 52px !important;
+  line-height: 72px !important;
+  text-align: center;
+  background: url(../images/gradient1.png) repeat-x center bottom #8ad329;
+}
+h1 strong {
+  font-weight: 700;
+}
+@media (max-width: 1199px) {
+  h1 {
+    margin-left: 10px;
+  }
+}
+@media (max-width: 979px) {
+  h1 {
+    float: none;
+    margin-left: 0;
+  }
+}
+/* ======= Main menu variables ======= */
+/* ======= Sub menus common variables ======= */
+/* ======= First level sub menu variables ======= */
+nav {
+  float: none;
+}
+@media (max-width: 1199px) {
+  nav {
+    margin-left: 10px;
+  }
+}
+@media (max-width: 979px) {
+  nav {
+    display: inline-block;
+  }
+}
+/* Main menu styles
+========================================================*/
+.sf-menu > li {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  position: relative;
+  text-align: center;
+}
+.sf-menu > li:first-child {
+  border-left: 1px solid #d7d7d7;
+  border-right: 1px solid #d7d7d7;
+}
+.sf-menu > li + li {
+  border-right: 1px solid #d7d7d7;
+}
+.sf-menu > li > .sf-with-ul:after {
+  font-family: FontAwesome;
+  font-size: 10px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  content: "\f0d7";
+  color: #000000;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -3px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.sf-menu > li > a {
+  text-transform: uppercase;
+  font: 700 18px/18px "Lato", sans-serif;
+  display: block;
+  padding: 19px 30px 27px;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+  color: #000000;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-top: 6px solid transparent;
+}
+.sf-menu > li > a:hover {
+  border-top-color: #8ad329;
+  color: #000000;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.sf-menu > li > a:active {
+  background: transparent;
+  color: #000000;
+}
+.sf-menu .sfHover > a {
+  border-top-color: #8ad329;
+}
+.sf-menu .sfHover > a:after {
+  color: #000000;
+}
+.sf-menu > li.current > a {
+  border-top-color: #8ad329;
+  color: #000000;
+}
+.sf-menu > li.current > .sf-with-ul:after {
+  color: #000000;
+}
+.sf-menu > li.sfHover > a {
+  border-top-color: #8ad329;
+  color: #000000;
+}
+.sf-menu a {
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.sf-menu a:hover {
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+/* First level sub-menu styles
+========================================================*/
+.sf-menu ul {
+  display: none;
+  min-width: 194px;
+  font: 300 16px/16px "Lato", sans-serif;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  background: #333333;
+  background: rgba(51, 51, 51, 0.98);
+  text-align: left;
+  padding: 19px 0;
+  z-index: 2;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.sf-menu ul li {
+  position: relative;
+  display: block;
+}
+.sf-menu ul li > .sf-with-ul:after {
+  font-family: FontAwesome;
+  font-size: 10px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  content: "\f0da";
+  color: #fefefe;
+  bottom: 9px;
+  right: 15px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.sf-menu ul li a {
+  display: block;
+  padding: 9px 5px 10px 28px;
+  color: #fefefe;
+  text-transform: none;
+}
+.sf-menu ul li a:hover {
+  background: #4b4b4b;
+  color: #fefefe;
+}
+.sf-menu ul > .sfHover > a {
+  background: #4b4b4b;
+}
+.sf-menu ul > .sfHover > a:after {
+  color: #fefefe;
+}
+.sf-menu ul li.sfHover > a {
+  background: #4b4b4b;
+  color: #fefefe;
+}
+/* Second level sub-menu styles
+========================================================*/
+.sf-menu ul ul {
+  position: absolute;
+  top: -19px;
+  left: 194px;
+  margin-left: 0;
+  z-index: 4;
+}
+@media only screen and (max-width: 767px) {
+  .sf-menu {
+    display: none;
+  }
+  nav {
+    width: 100%;
+    float: none;
+  }
+  .select-menu {
+    border-radius: none;
+    display: block;
+    text-transform: capitalize;
+    float: none;
+    color: #aaaaaa;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    font: 400 22px/28px Lato, sans-serif;
+    text-align: left;
+    border: 1px solid #c1c1c1;
+    padding: 2px 0;
+    position: relative;
+  }
+  .select-menu option {
+    text-align: left;
+    position: relative;
+  }
+}
+/*Core variables and mixins*/
+/* Stuck menu styles
+========================================================*/
+.isStuck {
+  z-index: 999;
+  position: fixed;
+  -webkit-box-shadow: 0 0 4px 0 #000000;
+  box-shadow: 0 0 4px 0 #000000;
+}
+@media only screen and (max-width: 979px) {
+  .isStuck {
+    display: none !important;
+  }
+}
+/*========================================================
+                    CONTENT styles
+=========================================================*/
+/* ======= Tabs Find a car ======= */
+#tabs {
+  border-radius: 3px;
+  background: #efefef;
+  margin-bottom: 30px;
+  text-align: left;
+  padding-bottom: 16px;
+}
+#tabs .tabs-list {
+  position: relative;
+}
+#tabs .tabs-list .ui-state-focus {
+  outline: medium none !important;
+  border: none;
+}
+#tabs .tabs-list .ui-tabs-active .tab {
+  color: #68a617;
+  background: #efefef;
+}
+#tabs .tabs-list li {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 50%;
+  outline: medium none !important;
+  text-align: center;
+  float: left;
+}
+#tabs .tabs-list li a {
+  outline: medium none !important;
+}
+#tabs .tab {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  display: block;
+  font: 700 17px/17px "Lato", sans-serif;
+  color: #303030;
+  text-transform: uppercase;
+  position: relative;
+  background: #e3e3e3;
+  padding: 16px 1px 17px;
+}
+#tabs .tab.tab-first:after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: #ffffff;
+  right: 0;
+  top: 0;
+}
+#tabs .tab:hover {
+  color: #68a617;
+}
+#tabs #tabs-1,
+#tabs #tabs-2 {
+  padding: 0 10px;
+}
+/* ======= Banner 1 About ======= */
+.banner1 {
+  background: #303030;
+  padding: 15px 20px 24px;
+  border-radius: 3px;
+  margin-bottom: 30px;
+}
+.banner1 h2 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+/* ======= Post 1 Latest News ======= */
+.post1 {
+  padding: 16px 20px 28px;
+  border: 1px solid #e3e3e3;
+}
+.post1 h2 {
+  margin-bottom: 14px;
+}
+.post1 img {
+  width: 100%;
+  margin-bottom: 14px;
+}
+.post1 time {
+  font: 400 14px/21px "Lato", sans-serif;
+  color: #68a617;
+  text-decoration: underline;
+  display: block;
+  margin-bottom: 7px;
+}
+.post1 h3 {
+  margin-bottom: 3px;
+}
+/* ======= Box 1 Latest used cars ======= */
+.box1 h4 {
+  margin-bottom: 9px;
+}
+.box1 img {
+  margin-bottom: 13px;
+  border-radius: 3px;
+}
+.box1 .info {
+  font: 300 14px/24px "Lato", sans-serif;
+  color: #777777;
+  margin-bottom: 4px;
+}
+.box1 .info .highlighted {
+  color: #68a617;
+}
+.box1 .info .first,
+.box1 .info .second {
+  display: inline-block;
+}
+.box1 .info .first {
+  float: left;
+}
+.box1 .info .second {
+  float: right;
+}
+.box1 .info2 .price {
+  float: left;
+}
+.box1 .info2 .price .first,
+.box1 .info2 .price .second {
+  display: block;
+}
+.box1 .info2 .price .first {
+  font: 300 14px/24px "Lato", sans-serif;
+  color: #777777;
+}
+.box1 .info2 .price .second {
+  font: 700 22px/32px "Lato", sans-serif;
+  color: #303030;
+  margin-top: -4px;
+}
+.box1 .info2 .btn-default {
+  margin-top: 7px;
+  float: right;
+}
+.box1 p {
+  margin-bottom: 6px;
+  padding-right: 10px;
+}
+.box1.box1__inset1 .btn-default {
+  float: left;
+}
+@media (max-width: 1199px) {
+  .box1 .info .first,
+  .box1 .info .second {
+    display: block;
+    float: none;
+  }
+  .box1 .info2 .price {
+    float: none;
+  }
+  .box1 .info2 .btn-default {
+    float: none;
+  }
+}
+@media (max-width: 767px) {
+  .box1 {
+    margin-bottom: 50px;
+  }
+  .box1 img {
+    width: 100%;
+  }
+}
+/* ======= Box 2 Latest... ======= */
+.box2 h5 {
+  margin-bottom: 21px;
+}
+@media (max-width: 767px) {
+  .box2 {
+    margin-bottom: 50px;
+  }
+}
+/* ======= Box 3 We have the right tools ======= */
+.box3 {
+  margin-bottom: 30px;
+  border: 1px solid #e5e5e5;
+  padding: 17px 20px 20px;
+}
+.box3 h2 {
+  margin-bottom: 7px;
+}
+.box3 .simple-link {
+  margin-top: 6px;
+}
+.box3.box3__offset1 {
+  margin-top: 9px;
+}
+.box3.box3__inset1 {
+  padding-bottom: 17px;
+}
+.box3.box3__inset1 ul {
+  width: 33.333333333333336%;
+  float: left;
+}
+.box3.box3__inset2 {
+  padding-bottom: 17px;
+}
+.box3.box3__inset2 ul {
+  width: 50%;
+  float: left;
+}
+.box3.box3__inset3 {
+  padding-bottom: 27px;
+  padding-top: 16px;
+}
+@media (max-width: 1199px) {
+  .box3 h2 {
+    font-size: 21px;
+  }
+  .box3.box3__inset1 ul,
+  .box3.box3__inset2 ul {
+    width: 100%;
+    float: none;
+  }
+}
+/* ======= Post 2 Car reviews ======= */
+.post2 {
+  margin-bottom: 21px;
+}
+.post2 time {
+  margin-top: -7px;
+  font-weight: 400;
+  color: #68a617;
+  text-decoration: underline;
+  display: block;
+  margin-bottom: 5px;
+}
+.post2 h3 {
+  margin-bottom: 3px;
+}
+.post2 p {
+  margin-bottom: 12px;
+}
+.post2 .simple-link {
+  margin-top: -6px;
+}
+@media (max-width: 767px) {
+  .post2 {
+    margin-bottom: 50px;
+  }
+  .post2 img {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+/* ======= Box 4 Research by name ======= */
+.box4 {
+  border-radius: 3px;
+  background: #efefef;
+}
+.box4 .heading {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 12px 10px 13px 24px;
+  background: #e3e3e3;
+}
+.box4 .heading h3 {
+  color: #68a617;
+}
+.box4 .content {
+  padding: 25px 10px 26px 10px;
+}
+.box4 ul {
+  width: 50%;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+.box4 ul.first {
+  padding-left: 14px;
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .box4 ul {
+    float: none;
+    width: 100%;
+    padding-left: 14px;
+  }
+  .box4 ul.first {
+    padding-left: 14px;
+  }
+}
+@media (max-width: 479px) {
+  .box4 ul {
+    float: none;
+    width: 100%;
+    padding-left: 14px;
+  }
+  .box4 ul.first {
+    padding-left: 14px;
+  }
+}
+.box4 .btn-big {
+  margin-top: 26px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font: 700 18px/18px "Lato", sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  background: url(../images/gradient1.png) repeat-x center bottom #8ad329;
+  border: none;
+  padding: 18px 15px 15px;
+  -webkit-box-shadow: 1px 1px 1px 0px #5b8d1a;
+  box-shadow: 1px 1px 1px 0px #5b8d1a;
+}
+.box4 .btn-big:hover {
+  color: #303030;
+}
+/* ======= Banner 2 Mazda ======= */
+.banner2 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.banner2 .image-wrapper {
+  position: relative;
+}
+.banner2 .image-wrapper .content {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.banner2 .image-wrapper .content h2 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.banner2 .image-wrapper .content p {
+  margin-bottom: 12px;
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .banner2 p {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .banner2 img {
+    width: 100%;
+  }
+}
+/* ======= Box 5 Call toll free ======= */
+.box5 {
+  border: 1px solid #e3e3e3;
+  border-radius: 2px;
+  padding: 16px 20px 27px;
+}
+.box5 h2 {
+  margin-bottom: 14px;
+}
+.box5 img {
+  margin-bottom: 13px;
+}
+.box5 address {
+  font: 700 17px/25px "Lato", sans-serif;
+  color: #303030;
+  display: block;
+  margin-bottom: 3px;
+}
+@media (max-width: 767px) {
+  .box5 img {
+    width: 100%;
+  }
+}
+/* ======= Banner 3 Find used cars ======= */
+.banner3 {
+  padding: 21px 10px 29px 16px;
+  margin-bottom: 61px;
+  background: url(../images/page3_img1.png) no-repeat center 0;
+  background-size: cover;
+}
+.banner3 h2 {
+  color: #ffffff;
+  margin-bottom: 9px;
+}
+.banner3 .lower-heading {
+  font: 700 17px/25px "Lato", sans-serif;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 4px;
+}
+.banner3 .heading {
+  color: #ffffff;
+}
+.banner3 .btn-big {
+  margin-top: 28px;
+}
+/* ======= Box 6 Carsell top picks ======= */
+.box6 {
+  width: 48%;
+  margin-bottom: 31px;
+}
+.box6 .image-wrapper {
+  position: relative;
+}
+.box6 .image-wrapper .content {
+  padding-right: 20px;
+  position: absolute;
+  left: 22px;
+  bottom: 19px;
+}
+.box6 .image-wrapper .content h6 {
+  margin-bottom: -1px;
+}
+.box6.left {
+  float: left;
+}
+.box6.right {
+  float: right;
+}
+@media (max-width: 767px) {
+  .box6 {
+    width: 100%;
+  }
+  .box6.left,
+  .box6.right {
+    float: none;
+  }
+}
+/* ======= Box 7 Guide to sell your car fast ======= */
+.box7 {
+  border: 1px solid #e3e3e3;
+  padding: 16px 19px 35px;
+  border-radius: 3px;
+  margin-bottom: 30px;
+}
+.box7 h2 {
+  margin-bottom: 14px;
+}
+.box7 img {
+  margin-bottom: 13px;
+}
+.box7 h3 {
+  margin-bottom: 3px;
+}
+.box7 p {
+  margin-bottom: 12px;
+}
+.box7 .btn-default {
+  margin-top: 5px;
+  -webkit-box-shadow: 1px 1px 1px 0px #5b8d1a;
+  box-shadow: 1px 1px 1px 0px #5b8d1a;
+  background: url(../images/gradient1.png) repeat-x center bottom #8ad329;
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+.box7 .btn-default:hover {
+  border: 1px solid #e3e3e3;
+  background: url(../images/gradient4.png) repeat-x center bottom #ffffff;
+  color: #303030;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+@media (max-width: 767px) {
+  .box7 img {
+    width: 100%;
+  }
+}
+/* ======= Box 8 Why Carsell Is The Best Way to Buy a New Car ======= */
+.box8 {
+  margin-top: 2px;
+  margin-bottom: 55px;
+}
+.box8 h2 {
+  margin-bottom: 8px;
+}
+.box8 h3 {
+  margin-bottom: 3px;
+}
+.box8 p {
+  margin-bottom: 7px;
+}
+@media (max-width: 767px) {
+  .box8 .list2__inset1 {
+    margin-bottom: 30px;
+  }
+}
+/* ======= Box 9 Before you choose ======= */
+.box9 {
+  background: #303030;
+  border-radius: 3px;
+}
+.box9 .content {
+  padding: 18px 20px 14px;
+}
+.box9 h2 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+@media (max-width: 767px) {
+  .box9 img {
+    width: 100%;
+  }
+}
+/* ======= Box 10 Privacy Policy ======= */
+.box10 {
+  margin-top: 24px;
+  margin-bottom: -6px;
+}
+.box10 h3 {
+  margin-bottom: 3px;
+}
+.box10 .simple-link {
+  margin-top: 23px;
+  text-decoration: none;
+}
+.box10 p + p {
+  margin-top: 12px;
+}
+@media (max-width: 767px) {
+  .box10 {
+    margin-top: 0;
+    margin-bottom: 50px;
+  }
+}
+/* ======= Google Map  ======= */
+.google-map_contacts iframe {
+  width: 100%;
+  height: 432px;
+}
+@media (max-width: 767px) {
+  .google-map_contacts iframe {
+    height: 200px;
+  }
+}
+/* ======= Address  ======= */
+.contacts-address {
+  margin-top: 54px;
+}
+.contacts-address .our-address {
+  display: block;
+  margin-bottom: 3px;
+  font: 700 17px/25px "Lato", sans-serif;
+  text-transform: uppercase;
+  color: #303030;
+}
+.contacts-address .wrapper {
+  display: block;
+}
+.contacts-address .wide {
+  display: inline-block;
+  min-width: 109px;
+}
+@media (max-width: 1199px) {
+  .contacts-address .wide {
+    min-width: 75px;
+  }
+}
+/* ======= Simple link ======= */
+.simple-link {
+  display: inline-block;
+  text-decoration: underline;
+  color: #68a617;
+  font-weight: 400;
+}
+/* ======= List 1 ======= */
+.list1 li {
+  position: relative;
+  font: 400 15px/21px "Lato", sans-serif;
+  color: #777777;
+}
+.list1 li a:hover {
+  color: #68a617;
+}
+.list1 li + li {
+  margin-top: 12px;
+}
+/* ======= List 2 ======= */
+.list2 li {
+  padding-left: 18px;
+  position: relative;
+  font: 300 14px/24px "Lato", sans-serif;
+}
+.list2 li:before {
+  font-family: FontAwesome;
+  font-size: 10px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  color: #68a617;
+  line-height: 24px;
+  content: '\f138';
+  left: 0;
+  top: 1px;
+}
+.list2.list2__inset1 li + li {
+  margin-top: 12px;
+}
+/* ======= Social buttons 1 ======= */
+.socials1 li {
+  display: inline-block;
+  margin-right: 1px;
+  margin-bottom: 10px;
+}
+.socials1 li a i {
+  color: #ffffff;
+  background: #d61119;
+  text-align: center;
+  font-size: 14px;
+  display: block;
+  width: 23px;
+  height: 23px;
+  line-height: 23px;
+  border-radius: 200px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.socials1 li a i:hover {
+  color: #8ad329;
+}
+/*========================================================
+                    FOOTER styles
+=========================================================*/
+#footer {
+  background: #f7f7f7;
+}
+#footer .privacy-block {
+  font: 300 14px/33px "Lato", sans-serif;
+  color: #777777;
+  padding: 7px 0;
+}
+/*========================================================
+                    Widget styles
+=========================================================*/
+/* UItoTop styles
+========================================================*/
+#toTop {
+  display: none;
+  text-decoration: none;
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  overflow: hidden;
+  border: none;
+  color: #aaaaaa;
+  font-size: 43px;
+  line-height: 38px;
+  z-index: 20;
+  -webkit-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+}
+#toTop:hover {
+  outline: none;
+  color: #8ad329;
+}
+@media only screen and (max-width: 1199px) {
+  #toTop {
+    display: none !important;
+  }
+}
+/*Core variables and mixins*/
