@@ -1,0 +1,352 @@
+@import '../font/font-awesome.css';
+/* CSS for jquery.fancyform.js */
+/*custom mixins */
+/*end custom mixins */
+/* Control Holder */
+.bookingForm1 {
+  position: relative;
+  width: 100%;
+  z-index: 3;
+  font: 300 14px/32px "Lato", sans-serif;
+}
+.bookingForm1 .btn-big {
+  margin-top: 10px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font: 700 18px/18px "Lato", sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  background: url(../../images/gradient1.png) repeat-x center bottom #8ad329;
+  border: none;
+  padding: 18px 15px 15px;
+  -webkit-box-shadow: 1px 1px 1px 0px #5b8d1a;
+  -moz-box-shadow: 1px 1px 1px 0px #5b8d1a;
+  box-shadow: 1px 1px 1px 0px #5b8d1a;
+}
+.bookingForm1 .btn-big:hover {
+  color: #303030;
+}
+.bookingForm1 a.simple {
+  display: inline-block;
+  margin-top: 14px;
+  font: 400 15px/15px "Lato", sans-serif;
+  color: #68a617;
+  text-decoration: underline;
+}
+.bookingForm1 a.simple:hover {
+  color: #303030;
+}
+.bookingForm1 .heading {
+  font: 400 15px/30px "Lato", sans-serif;
+  color: #303030;
+  display: block;
+  margin-bottom: -2px;
+}
+.bookingForm1 input,
+.bookingForm1 textarea {
+  outline: none;
+  -webkit-box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px #e3e3e3 solid;
+  color: #777777;
+  background: #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 9px 17px;
+  line-height: 15px;
+  width: 100%;
+  height: 51px;
+}
+.bookingForm1 input:focus,
+.bookingForm1 textarea:focus {
+  background: #fff;
+}
+.bookingForm1 textarea {
+  min-height: 200px;
+  resize: none;
+  font: 300 14px/32px "Lato", sans-serif;
+}
+.bookingForm1 a.btn {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 6px 15px;
+  border: 1px #ccc solid;
+  background: #f5f5f5;
+  color: #000;
+  font-weight: normal;
+}
+.bookingForm1 a.btn:hover {
+  background: #efefef;
+}
+.bookingForm1 .wrapper .block {
+  float: left;
+  width: 250px;
+}
+.bookingForm1 .wrapper .block + .block {
+  margin-left: 10px;
+}
+.bookingForm1 .wrapper .tmSelect.auto,
+.bookingForm1 .wrapper .tmSelect2.auto {
+  -webkit-box-shadow: 0 0 0 0 #ffffff;
+  -moz-box-shadow: 0 0 0 0 #ffffff;
+  box-shadow: 0 0 0 0 #ffffff;
+}
+@media (max-width: 1199px) {
+  .bookingForm1 .wrapper .block {
+    float: none;
+    width: 100%;
+  }
+  .bookingForm1 .wrapper .block + .block {
+    margin-left: 0;
+  }
+}
+.controlHolder {
+  position: relative;
+  margin-bottom: 10px;
+}
+/* Messages */
+.error-message {
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  font-weight: normal;
+  text-align: left;
+  width: 100%;
+  font-size: 10px;
+  line-height: 1em;
+  color: gray;
+  z-index: 3;
+  color: #fe5353;
+}
+.success-message {
+  position: relative;
+  text-align: left;
+  color: gray;
+  margin: 5px 0px;
+  color: #28a1fe;
+}
+.wrapper .success-message {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -35px;
+  text-align: left;
+  margin: 5px 0px;
+  color: #ffffff;
+}
+/* transformSelect CSS */
+/* 1st type of select */
+.tmSelect,
+.tmSelect2 {
+  clear: both;
+  width: 100%;
+  margin: 0px;
+  height: 51px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.tmSelect li,
+.tmSelect2 li {
+  position: relative;
+  list-style: none;
+}
+.tmSelect span,
+.tmSelect2 span,
+.tmSelect input[type=text],
+.tmSelect2 input[type=text] {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  left: 0;
+  top: 0;
+  margin: 0;
+}
+.tmSelect:after,
+.tmSelect2:after {
+  content: '\f002';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font: normal normal 18px 'FontAwesome';
+  color: #ccc;
+  z-index: 3;
+}
+.tmSelect.auto,
+.tmSelect2.auto {
+  cursor: pointer;
+  padding: 0;
+  margin: 0 0 -10px 0;
+  line-height: 20px;
+  -webkit-box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px #e3e3e3 solid;
+  color: #777777;
+  background: #fff;
+  font: 300 14px/32px "Lato", sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.tmSelect.auto span,
+.tmSelect2.auto span {
+  background: transparent;
+}
+.tmSelect.auto:focus,
+.tmSelect2.auto:focus {
+  background: #fff;
+}
+.tmSelect.auto ul,
+.tmSelect2.auto ul {
+  margin: 1px 0 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  background: #f9f9f9;
+}
+.tmSelect.auto > li:first-child > span,
+.tmSelect2.auto > li:first-child > span {
+  padding: 7px 12px;
+  width: 100%;
+  height: 51px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+}
+.tmSelect ul,
+.tmSelect2 ul,
+.tmSelect .transformSelectDropdown,
+.tmSelect2 .transformSelectDropdown {
+  position: absolute;
+  width: 100%;
+  max-height: 210px;
+  padding: 7px 0px;
+  margin: 0px;
+  -webkit-box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px #e3e3e3 solid;
+  color: #777777;
+  background: #fff;
+  font: 300 14px/32px "Lato", sans-serif;
+  border-top: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: none;
+  background: #f9f9f9;
+  z-index: 10;
+}
+.tmSelect ul:focus,
+.tmSelect2 ul:focus,
+.tmSelect .transformSelectDropdown:focus,
+.tmSelect2 .transformSelectDropdown:focus {
+  background: #fff;
+}
+.tmSelect ul span,
+.tmSelect2 ul span,
+.tmSelect .transformSelectDropdown span,
+.tmSelect2 .transformSelectDropdown span {
+  border: 0;
+  color: #000;
+  padding: 5px 13px;
+}
+.tmSelect ul span:hover,
+.tmSelect2 ul span:hover,
+.tmSelect .transformSelectDropdown span:hover,
+.tmSelect2 .transformSelectDropdown span:hover {
+  background: #ccc;
+}
+.wrapper .tmSelect.auto,
+.wrapper .tmSelect2.auto {
+  -webkit-box-shadow: 0 0 0 0 #ffffff;
+  -moz-box-shadow: 0 0 0 0 #ffffff;
+  box-shadow: 0 0 0 0 #ffffff;
+}
+.no-shadow-wrapper .tmSelect.auto,
+.no-shadow-wrapper .tmSelect2.auto {
+  -webkit-box-shadow: 0 0 0 0 #ffffff;
+  -moz-box-shadow: 0 0 0 0 #ffffff;
+  box-shadow: 0 0 0 0 #ffffff;
+}
+/* 2nd type of select */
+.tmSelect2 {
+  position: relative;
+}
+.tmSelect2:after {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  background: url(../../images/gradient3.png) repeat-x center bottom #ffffff;
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  content: '\f078';
+  color: #303030;
+  font-size: 12px;
+  line-height: 42px;
+}
+.narrow-selects .tmSelect.tmSelect2 {
+  width: 120px;
+}
+.narrow-selects .block-left {
+  float: left;
+}
+.narrow-selects .block-right {
+  float: right;
+}
+@media (max-width: 1199px) {
+  .narrow-selects .tmSelect.tmSelect2 {
+    width: 100%;
+  }
+  .narrow-selects .block-left,
+  .narrow-selects .block-right {
+    float: none;
+  }
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}

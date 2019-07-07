@@ -1,0 +1,115 @@
+#search {
+  float: right;
+  margin-top: 9px;
+  margin-bottom: 0;
+  position: relative;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  border: 1px solid #e3e3e3;
+  box-shadow: none;
+  outline: none;
+  height: 51px;
+  width: 237px;
+  background: #ffffff;
+}
+@media (max-width: 1199px) {
+  #search {
+    margin-right: 10px;
+  }
+}
+#search::-ms-clear {
+  display: none;
+}
+#search input {
+  border-radius: 3px;
+  font: 400 21px/21px "Lato", sans-serif;
+  color: #aaaaaa;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  height: 49px;
+  width: 182px;
+  background: #ffffff;
+  padding: 12px 10px;
+}
+#search input::-ms-clear {
+  display: none;
+}
+#search input::-webkit-input-placeholder {
+  color: #aaaaaa;
+}
+#search input:-moz-placeholder {
+  /* Firefox 18- */
+  color: #aaaaaa;
+}
+#search input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #aaaaaa;
+}
+#search input:-ms-input-placeholder {
+  color: #aaaaaa;
+}
+#search a {
+  position: absolute;
+  font-size: 25px;
+  cursor: pointer;
+  color: #ffffff;
+  top: 4px;
+  height: 41px;
+  width: 41px;
+  text-align: center;
+  background: url(../images/gradient1.png) repeat-x center bottom #8ad329;
+  right: 5px;
+}
+#search a:hover .search_icon:before {
+  color: #303030;
+}
+#search a > .search_icon {
+  position: absolute;
+  top: 8px;
+  left: 11px;
+}
+#search a > .search_icon:before {
+  font-family: FontAwesome;
+  font-size: 21px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  content: '\f002';
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+#search a > .search_icon:hover {
+  background-position: center -17px;
+}
+@media (max-width: 1199px) {
+  #search {
+    width: 187px;
+  }
+  #search input {
+    width: 132px;
+  }
+}
+@media (max-width: 979px) {
+  #search {
+    width: 100%;
+    float: none;
+    text-align: left;
+    margin-top: 0;
+  }
+  #search input {
+    width: 90%;
+  }
+}

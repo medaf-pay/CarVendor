@@ -1,0 +1,288 @@
+@import '../font/font-awesome.css';
+/* CSS for jquery.fancyform.js */
+
+/*custom mixins */
+.customStyle(){
+  .box-shadow(inset 3px 4px 5px 0px rgba(0, 0, 0, 0.06));
+  .box-sizing(border-box);
+  .border-radius(3px);
+  border: 1px #e3e3e3 solid;
+  color: #777777;
+  background: #fff;
+  .box-sizing(border-box);
+  &:focus{
+    background: #fff;
+  }
+}
+.buttonStyle(){
+  .box-shadow(0px 0px 5px 0px rgba(0, 0, 0, 0.2));
+  .border-radius(3px);
+  padding: 6px 15px;
+  border: 1px #ccc solid;
+  background: #f5f5f5;
+  color: #000;
+  font-weight: normal;
+  &:hover {
+    background: #efefef;
+  }
+}
+.customFont(){
+  font: 300 14px/32px @font-family-base;
+}
+.fontAwesome(){
+  font: normal normal 18px 'FontAwesome';
+  color: #ccc;
+}
+/*end custom mixins */
+/* Control Holder */
+.bookingForm1 {
+  position: relative;
+  width: 100%;
+  z-index: 3;
+  .customFont();
+  .btn-big {
+    margin-top: 10px;
+    width: 100%;
+    .box-sizing(border-box);
+    font: 700 18px/18px @font-family-base;
+    color: @white;
+    text-transform: uppercase;
+    text-align: center;
+    background: url(../../images/gradient1.png) repeat-x center bottom @color-1;
+    border: none;
+    padding: 18px 15px 15px;
+    .box-shadow(1px 1px 1px 0px rgba(91, 141, 26, 1));
+    &:hover {
+      color: @color-3;
+    }
+  }
+  a.simple {
+    display: inline-block;
+    margin-top: 14px;
+    font: 400 15px/15px @font-family-base;
+    color: @color-5;
+    text-decoration: underline;
+    &:hover {
+      color: @color-3;
+    }
+  }
+  .heading {
+    font: 400 15px/30px @font-family-base;
+    color: @color-3;
+    display: block;
+    margin-bottom: -2px;
+  }
+  input,
+  textarea{
+    outline: none;
+    .customStyle();
+    padding: 9px 17px;
+    line-height: 15px;
+    .size(51px, 100%);
+  }
+  textarea {
+    min-height: 200px;
+    resize: none;
+    .customFont();
+  }
+  a.btn{
+    .buttonStyle();
+  }
+  .wrapper {
+    .block {
+      float: left;
+      width: 250px;
+      &+.block {
+        margin-left: 10px;
+      }
+    }
+    .tmSelect.auto, .tmSelect2.auto {
+      .box-shadow(0 0 0 0 @white);
+    }
+    @media (max-width: 1199px) {
+      .block {
+        float: none;
+        width: 100%;
+        &+.block {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+.controlHolder{
+  position: relative;
+  margin-bottom: 10px;
+}
+/* Messages */
+.error-message{
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  font-weight: normal;
+  text-align: left;
+  width: 100%;
+  font-size: 10px;
+  line-height: 1em;
+  color: gray;
+  z-index: 3;
+  color: #fe5353;
+}
+.success-message{
+  position: relative;
+  text-align: left;
+  color: gray;
+  margin: 5px 0px;
+  color: #28a1fe;
+}
+
+.wrapper {
+  .success-message{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -35px;
+    text-align: left;
+    margin: 5px 0px;
+    color: @white;
+  }
+}
+/* transformSelect CSS */
+/* 1st type of select */
+.tmSelect, .tmSelect2 {
+  clear: both;
+  width: 100%;
+  margin: 0px;
+  height: 51px;
+  .box-sizing(border-box);
+  li{
+    position: relative;
+    list-style: none;
+  }
+  span, input[type=text] {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    left: 0;
+    top: 0;
+    margin: 0;
+  }
+  &:after{
+    content: '\f002';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    .fontAwesome();
+    z-index: 3;
+  }
+  &.auto{
+    cursor: pointer;
+    span {
+      background: transparent;
+    }
+    padding: 0;
+    margin: 0 0 -10px 0;
+    line-height: 20px;
+    .customStyle();
+    .customFont();
+    .box-sizing(border-box);
+    ul{
+      margin: 1px 0 0;
+      .box-sizing(border-box);
+      width: 100%;
+      background: #f9f9f9;
+    }
+    >li{
+      &:first-child>span{
+        padding: 7px 12px;
+        .size(51px,100%);
+        .box-sizing(border-box);
+        position: relative;
+        z-index: 5;
+      }
+    }
+  }
+  ul, .transformSelectDropdown{
+    position: absolute;
+    width: 100%;
+    max-height: 210px;
+    padding: 7px 0px;
+    margin: 0px;
+    .customStyle();
+    .customFont();
+    border-top: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    .box-sizing(border-box);
+    box-shadow: none;
+    background: #f9f9f9;
+    z-index: 10;
+    span {
+      border: 0;
+      color: #000;
+      padding: 5px 13px;
+      &:hover{
+        background: #ccc;
+      }
+    }
+  }
+}
+
+.wrapper {
+  .tmSelect, .tmSelect2 {
+    &.auto {
+      .box-shadow(0 0 0 0 @white);
+    }
+  }
+}
+
+.no-shadow-wrapper {
+  .tmSelect, .tmSelect2 {
+    &.auto {
+      .box-shadow(0 0 0 0 @white);
+    }
+  }
+}
+
+/* 2nd type of select */
+.tmSelect2{
+  position: relative;
+  &:after{
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    background: url(../../images/gradient3.png) repeat-x center bottom @white;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    text-align: center;
+    .box-sizing(border-box);
+    content: '\f078';
+    color: @color-3;
+    font-size: 12px;
+    line-height: 42px;
+  }
+}
+
+.narrow-selects {
+  .tmSelect.tmSelect2 {
+    width: 120px;
+  }
+  .block-left {
+    float: left;
+  }
+  .block-right {
+    float: right;
+  }
+  @media (max-width: 1199px) {
+    .tmSelect.tmSelect2 {
+      width: 100%;
+    }
+    .block-left,
+    .block-right {
+      float: none;
+    }
+  }
+}
+
+@import "mixins.less";
+@import "../../less/variables.less";

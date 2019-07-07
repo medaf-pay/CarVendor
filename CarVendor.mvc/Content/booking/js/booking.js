@@ -4,10 +4,10 @@ Author: Smart
 Varsion: 1.1
 */
 
-includeScript ('../booking/js/jquery-ui-1.10.3.custom.min.js');
-includeScript ('../booking/js/jquery.fancyform.js');
-includeScript ('../booking/js/jquery.placeholder.js');
-includeScript ('../booking/js/regula.js');
+includeScript ('../../Content/booking/js/jquery-ui-1.10.3.custom.min.js');
+includeScript ('../../Content/booking/js/jquery.fancyform.js');
+includeScript ('../../Content/booking/js/jquery.placeholder.js');
+includeScript('../../Content/booking/js/regula.js');
 
 (function($){
 	$.fn.bookingForm=function(options){

@@ -3,55 +3,7 @@
 <head>
     <title>Home</title>
     <meta charset="utf-8">
-    <meta name="format-detection" content="telephone=no" />
-    <link rel="icon" href="~/Content/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="~/Content/css/grid.css">
-    <link rel="stylesheet" href="~/Content/css/search.css">
-    <link rel="stylesheet" href="~/Content/css/camera.css">
-    <link rel="stylesheet" href="~/Content/booking/css/booking.css">
-    <link rel="stylesheet" href="~/Content/css/style.css">
-    <script src="~/Content/js/jquery.js"></script>
-    <script src="~/Content/js/jquery-migrate-1.2.1.js"></script>
-    <script src="~/Content/js/camera.js"></script>
-    <script src="~/Content/js/jquery.equalheights.js"></script>
-    <script src="~/Content/search/search.js"></script>
-    <script src="~/Content/booking/js/booking.js"></script>
-    <script src="~/Content/booking/js/jquery.placeholder.js"></script>
-    <!--[if (gt IE 9)|!(IE)]><!-->
-    <script src="~/Content/js/jquery.mobile.customized.min.js"></script>
-    <script src="~/Content/js/wow/wow.js"></script>
-    <script>
-        $(document).ready(function () {
-            if ($('html').hasClass('desktop')) {
-                new WOW().init();
-            }
-        });
-    </script>
-    <!--<![endif]-->
-    <script>
-        $(document).ready(function () {
-            $('#camera_wrap').camera({
-                loader: true,
-                pagination: true,
-                minHeight: '',
-                thumbnails: false,
-                height: '52.8735632183908%',
-                caption: true,
-                navigation: false,
-                fx: 'simpleFade',
-                onLoaded: function () {
-                    $('.slider-wrapper')[0].style.height = 'auto';
-                }
-            });
-            $("#tabs").tabs();
-            $('#bookingForm').bookingForm({
-                ownerEmail: '#'
-            });
-            $('#bookingForm2').bookingForm({
-                ownerEmail: '#'
-            });
-        });
-    </script>
+   
     <!--[if lt IE 9]>
     <script src="~/Content/js/html5shiv.js"></script>
     <div id="ie6-alert" style="width: 100%; text-align:center;">
@@ -61,12 +13,11 @@
       </map>
     </div>
     <![endif]-->
-    <script src="~/Content/js/jquery.tabs.js"></script>
+    
 </head>
 
 
 <body>
-
     <!--========================================================
                               HEADER
     =========================================================-->
@@ -128,17 +79,14 @@
             </div>
         </div>
     </header>
-
     <section id="content">
         <div class="width-wrapper width-wrapper__inset1">
             <div class="wrapper1">
                 <div class="container">
-
-                        @RenderBody()
+                    @RenderBody()
                 </div>
             </div>
         </div>
-
     </section>
     <!--========================================================
                               FOOTER
@@ -218,12 +166,8 @@
             </div>
         </div>
     </footer>
-
     <script src="~/Content/js/script.js"></script>
 
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+  
 </body>
 </html>

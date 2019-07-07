@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarVendor.data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,11 @@ namespace CarVendor.mvc.Controllers
 {
     public class HomeController : Controller
     {
+        DataBaseContext db = new DataBaseContext();
         public ActionResult Index()
         {
-            return View();
+            var cars = db.Cars.ToList();
+            return View(cars);
         }
 
         public ActionResult About()
