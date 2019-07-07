@@ -10,5 +10,6 @@ namespace CarVendor.data.Entities
 
         public virtual Car Car { get; set; }
         public virtual Color Color { get; set; }
+
     }
 }
