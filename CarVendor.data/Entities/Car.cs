@@ -20,5 +20,6 @@ namespace CarVendor.data.Entities
         #endregion
         public virtual List<CarCategory> Carcategories { get; set; }
 
+        public virtual ICollection<CarColor> CarColors { get; set; }
     }
 }

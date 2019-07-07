@@ -53,6 +53,7 @@
     <Compile Include="Entities\Car.cs" />
     <Compile Include="Entities\CarCategory.cs" />
     <Compile Include="Entities\CarCondition.cs" />
+    <Compile Include="Entities\CarImage.cs" />
     <Compile Include="Entities\CarType.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\DeliveryDetails.cs" />
