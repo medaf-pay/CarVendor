@@ -18,6 +18,8 @@ namespace CarVendor.data.Entities
         public long BrandId { get; set; }
         public virtual Brand Brand { get; set; }
         #endregion
+        public virtual List<CarCategory> Carcategories { get; set; }
+
         public virtual ICollection<CarColor> CarColors { get; set; }
     }
 }
