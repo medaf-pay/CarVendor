@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<CarVendor.mvc.CarViewModel>
 @{
     ViewBag.Title = "Home Page";
+ 
 }
 <meta charset="utf-8">
 
@@ -90,7 +91,7 @@
                             <div id="tabs-2">
                                 <form id="bookingForm2" class="bookingForm1">
                                     <span class="heading">Make:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
+                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" onchange="filterCars(this.value)">
                                         <option>Any Make</option>
                                         <option>Any Make 1</option>
                                         <option>Any Make 2</option>
@@ -289,34 +290,62 @@
                                     @foreach (var item in Model)
                                     {
 
+                                    <div class="grid_3">
+                                        <div class="box1">
+                                            <h4 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                                <a href="#">@item.Name</a>
+                                            </h4>
+                                            @{ ViewData["colors"] = new SelectList(item.Colors, "Id", "Name");
+                                                ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
+                                                var img = "/images/" + @item.Colors.Select(s=>s.Images.Select(s1=>s1.Name).FirstOrDefault()).FirstOrDefault();
+                                            }
+                                            <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="@img" alt="" />
+                                            <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
+                                                <span class="first" style="margin-left: 32px;">Brand: <span class="highlighted">@item.Brand</span></span>
+                                                <span class="second">Price: <span Id="Price_@item.Id"class="highlighted">@item.Categories.First().Price</span></span>
+                                            </div>
+                                            <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
 
-                                        <div class="grid_3">
-                                            <div class="box1">
-                                                <h4 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                                                    <a href="#">@item.Name</a>
-                                                </h4>
-                                                <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img2.png" alt="" />
-                                                <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                                    <span class="first">Brand: <span class="highlighted">@item.Brand</span></span>
-                                                    <span class="second">Color: <span class="highlighted">@item.Color</span></span>
-                                                    <span class="first">Category: <span class="highlighted">@item.Category</span></span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="info2 wow fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
-                                                    <div class="price">
-                                                        <span class="first">Price:</span>
-                                                        <span class="second">@item.Price</span>
+                                                <div class="second">
+                                                    <div class="editor-label">
+                                                        @Html.Label("Colors")
                                                     </div>
-                                                    <a class="btn-default" href="#">
-                                                        <span>Details</span>
-                                                    </a>
-                                                    <div class="clearfix"></div>
+                                                    <div class="editor-field">
+                                                        @Html.DropDownList("Color", ViewBag.colors as IEnumerable<SelectListItem>, new { onchange = "ColorChange(this.value," + @item.Id + ")" })
+
+                                                    </div>
+
                                                 </div>
+
+                                                <div class="first">
+                                                    <div class="editor-label">
+                                                        @Html.Label("Categories")
+                                                    </div>
+                                                    <div class="editor-field">
+                                                        @Html.DropDownList("Category", ViewBag.categories as IEnumerable<SelectListItem>, new { onchange = "CategoryChange(this.value," + @item.Id + ")" })
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="info2 wow fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
+                                                @*<div class="price">
+                <span class="first">Price:</span>
+                <span class="second">@item.Price</span>
+            </div>*@
+                                                <a class="btn-default" href="#">
+                                                    <span>Details</span>
+                                                </a>
+                                                <div class="clearfix"></div>
                                             </div>
                                         </div>
+                                    </div>
                                     }
+                                    </div>
                                 </div>
-                            </div>
+                            
 
 
                             <div class="button-wrapper1">

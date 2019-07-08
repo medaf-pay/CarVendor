@@ -4,10 +4,10 @@ Author: Smart
 Varsion: 1.1
 */
 
-includeScript ('../../Content/booking/js/jquery-ui-1.10.3.custom.min.js');
-includeScript ('../../Content/booking/js/jquery.fancyform.js');
-includeScript ('../../Content/booking/js/jquery.placeholder.js');
-includeScript('../../Content/booking/js/regula.js');
+includeScript('/Content/booking/js/jquery-ui-1.10.3.custom.min.js');
+includeScript('/Content/booking/js/jquery.fancyform.js');
+includeScript('/Content/booking/js/jquery.placeholder.js');
+includeScript('/Content/booking/js/regula.js');
 
 (function($){
 	$.fn.bookingForm=function(options){
@@ -356,6 +356,6 @@ function className(className){
 }
 
 function includeScript(url){
-	document.write('<script type="text/javascript" src="js/'+ url + '"></script>'); 
+	document.write('<script type="text/javascript" src="'+ url + '"></script>'); 
 	return false;
 }

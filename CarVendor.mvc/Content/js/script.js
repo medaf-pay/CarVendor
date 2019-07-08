@@ -129,4 +129,47 @@ var ua=navigator.userAgent.toLocaleLowerCase(),
 if(!result){
  userScale=",user-scalable=0"
 }
-document.write('<meta name="viewport" content="width=device-width,initial-scale=1.0'+userScale+'">')
+document.write('<meta name="viewport" content="width=device-width,initial-scale=1.0' + userScale + '">')
+
+function ColorChange(colorId,carId)
+{
+    $.ajax({
+        url: "api/CarDetails/GetImageByColorId/" + carId + "/" + colorId, success: function (result) {
+           var tt = result;
+             $('#' + carId).attr("src", result);
+      
+        }
+    });
+
+}
+function CategoryChange(CategoryId, carId) {
+    $.ajax({
+        url: "api/CarDetails/GetPriceCategoryId/" + carId + "/" + CategoryId, success: function (result) {
+            var tt = result;
+            $('#Price_' + carId).text(result);
+            var s = $('#Price_' + carId).val();
+            console.log(s)
+
+        }
+    });
+}
+function filterCars(CarsId) {
+    window.location.href = "/Home/index/1";
+        //$.ajax({
+        //    url: "/Home/index/1", success: function (result) {
+        //        var tt = result;
+        //        //$('#Price_' + carId).text(result);
+        //        //var s = $('#Price_' + carId).val();
+        //        console.log(result)
+
+        //    }
+        //});        //$.ajax({
+        //    url: "/Home/index/1", success: function (result) {
+        //        var tt = result;
+        //        //$('#Price_' + carId).text(result);
+        //        //var s = $('#Price_' + carId).val();
+        //        console.log(result)
+
+        //    }
+        //});
+}
