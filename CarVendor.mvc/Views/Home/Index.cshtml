@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CarVendor.mvc.CarViewModel>
 @{
     ViewBag.Title = "Home Page";
- 
+
 }
 <meta charset="utf-8">
 
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/Content/css/style.css">
 <script src="/Content/js/jquery.js"></script>
 <script src="/Content/js/jquery-migrate-1.2.1.js"></script>
-<script src="~/Content/js/camera.js"></script>
+<script src="/Content/js/camera.js"></script>
 <script src="/Content/js/jquery.equalheights.js"></script>
 <script src="/Content/search/search.js"></script>
 <script src="/Content/booking/js/booking.js"></script>
@@ -290,62 +290,61 @@
                                     @foreach (var item in Model)
                                     {
 
-                                    <div class="grid_3">
-                                        <div class="box1">
-                                            <h4 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                                                <a href="#">@item.Name</a>
-                                            </h4>
-                                            @{ ViewData["colors"] = new SelectList(item.Colors, "Id", "Name");
-                                                ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
-                                                var img = "/images/" + @item.Colors.Select(s=>s.Images.Select(s1=>s1.Name).FirstOrDefault()).FirstOrDefault();
-                                            }
-                                            <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="@img" alt="" />
-                                            <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                                <span class="first" style="margin-left: 32px;">Brand: <span class="highlighted">@item.Brand</span></span>
-                                                <span class="second">Price: <span Id="Price_@item.Id"class="highlighted">@item.Categories.First().Price</span></span>
-                                            </div>
-                                            <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-
-                                                <div class="second">
-                                                    <div class="editor-label">
-                                                        @Html.Label("Colors")
-                                                    </div>
-                                                    <div class="editor-field">
-                                                        @Html.DropDownList("Color", ViewBag.colors as IEnumerable<SelectListItem>, new { onchange = "ColorChange(this.value," + @item.Id + ")" })
-
-                                                    </div>
-
+                                        <div class="grid_3">
+                                            <div class="box1">
+                                                <h4 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                                    <a href="#">@item.Name</a>
+                                                </h4>
+                                                @{ ViewData["colors"] = new SelectList(item.Colors, "Id", "Name");
+                                                    ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
+                                                    var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
+                                                }
+                                                <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="@img" alt="" />
+                                                <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
+                                                    <span class="first" style="margin-left: 32px;">Brand: <span class="highlighted">@item.Brand</span></span>
+                                                    <span class="second">Price: <span Id="Price_@item.Id" class="highlighted">@item.Categories.First().Price</span></span>
                                                 </div>
+                                                <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
 
-                                                <div class="first">
-                                                    <div class="editor-label">
-                                                        @Html.Label("Categories")
+                                                    <div class="second">
+                                                        <div class="editor-label">
+                                                            @Html.Label("Colors")
+                                                        </div>
+                                                        <div class="editor-field">
+                                                            @Html.DropDownList("Color", ViewBag.colors as IEnumerable<SelectListItem>, new { onchange = "ColorChange(this.value," + @item.Id + ")",Id= "color_"+item.Id })
+                                                        </div>
+
                                                     </div>
-                                                    <div class="editor-field">
-                                                        @Html.DropDownList("Category", ViewBag.categories as IEnumerable<SelectListItem>, new { onchange = "CategoryChange(this.value," + @item.Id + ")" })
+
+                                                    <div class="first">
+                                                        <div class="editor-label">
+                                                            @Html.Label("Categories")
+                                                        </div>
+                                                        <div class="editor-field">
+                                                            @Html.DropDownList("Category", ViewBag.categories as IEnumerable<SelectListItem>, new { onchange = "CategoryChange(this.value," + @item.Id + ")",Id= "category_"+item.Id })
+
+                                                        </div>
 
                                                     </div>
 
+                                                    <div class="clearfix"></div>
                                                 </div>
-
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <div class="info2 wow fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
-                                                @*<div class="price">
-                <span class="first">Price:</span>
-                <span class="second">@item.Price</span>
-            </div>*@
-                                                <a class="btn-default" href="#">
-                                                    <span>Details</span>
-                                                </a>
-                                                <div class="clearfix"></div>
+                                                <div class="info2 wow fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
+                                                    @*<div class="price">
+                                                            <span class="first">Price:</span>
+                                                            <span class="second">@item.Price</span>
+                                                        </div>*@
+                                                    <a class="btn-default" style="cursor:pointer" onclick="addToCart({id:@item.Id})">
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <div class="clearfix"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     }
-                                    </div>
                                 </div>
-                            
+                            </div>
+
 
 
                             <div class="button-wrapper1">
