@@ -121,12 +121,12 @@ $(function () {
             })
         }
     }
-    let jsonShoppingCart = readCookie("shoppingCart");
-    let shoppingCart = JSON.parse(jsonShoppingCart);
-    if (shoppingCart && shoppingCart.length > 0) {
-        cart = shoppingCart;
-        updateCart(cart);
-    }
+    //let jsonShoppingCart = readCookie("shoppingCart");
+    //let shoppingCart = JSON.parse(jsonShoppingCart);
+    //if (shoppingCart && shoppingCart.length > 0) {
+    //    cart = shoppingCart;
+    //    updateCart(cart);
+    //}
 });
 var ua = navigator.userAgent.toLocaleLowerCase(),
     regV = /ipod|ipad|iphone/gi,
@@ -197,7 +197,7 @@ function updateCart(cart) {
         sum += eval(cart[i].price);
     }
     $('.cartSpan').html(cart.length + " | " + sum + " $ ");
-    createCookie("shoppingCart", JSON.stringify(cart), 2);
+  //  createCookie("shoppingCart", JSON.stringify(cart), 2);
 }
 
 function createCookie(name, value, days) {
