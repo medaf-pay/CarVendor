@@ -11,7 +11,8 @@ namespace CarVendor.mvc.Controllers
     public class HomeController : Controller
     {
         DataBaseContext db = new DataBaseContext();
-        private static List<CartModel> _shopingCarts = new List<CartModel>();
+        public static List<CartModel> _shopingCarts = new List<CartModel>();
+        
         //[Route("home/Index")]
         //public ActionResult Index()
         //{
@@ -79,13 +80,17 @@ namespace CarVendor.mvc.Controllers
             return Json(model);
         }
 
-        [Route("Home/cart/{sessionId:string}")]
-        public ActionResult Cart(string sessionId)
+        [Route("Home/cart")]
+        public ActionResult Cart(string RequestId)
         {
-           var userCart = _shopingCarts.FirstOrDefault(cart => cart.SessionId == sessionId);
-            if (userCart == null)
-                return HttpNotFound();
-            return View(userCart.CartItems);
+            
+            return View();
         }
+        [Route("Home/CustomerInfo")]
+        public ActionResult CustomerInfo()
+        {
+            return View();
+        }
+      
     }
 }

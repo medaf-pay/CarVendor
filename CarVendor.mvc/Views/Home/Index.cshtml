@@ -6,24 +6,7 @@
 <meta charset="utf-8">
 
 <meta name="format-detection" content="telephone=no" />
-<link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="/Content/css/grid.css">
-<link rel="stylesheet" href="/Content/css/search.css">
-<link rel="stylesheet" href="/Content/css/camera.css">
-<link rel="stylesheet" href="/Content/booking/css/booking.css">
-<link rel="stylesheet" href="/Content/css/style.css">
-<script src="/Content/js/jquery.js"></script>
-<script src="/Content/js/jquery-migrate-1.2.1.js"></script>
-<script src="/Content/js/camera.js"></script>
-<script src="/Content/js/jquery.equalheights.js"></script>
-<script src="/Content/search/search.js"></script>
-<script src="/Content/booking/js/booking.js"></script>
-<script src="/Content/booking/js/jquery.placeholder.js"></script>
-<!--[if (gt IE 9)|!(IE)]><!-->
-<script src="/Content/js/jquery.mobile.customized.min.js"></script>
-<script src="/Content/js/wow/wow.js"></script>
-<script src="/Content/js/script.js"></script>
-<script src="/Content/js/jquery.tabs.js"></script>
+
 <script>
     $(document).ready(function () {
         if ($('html').hasClass('desktop')) {
@@ -334,7 +317,7 @@
                                                             <span class="first">Price:</span>
                                                             <span class="second">@item.Price</span>
                                                         </div>*@
-                                                    <a class="btn-default" style="cursor:pointer" onclick="addToCart({id:@item.Id})">
+                                                    <a class="btn-default" style="cursor:pointer" onclick="addToCart({CarId:@item.Id})">
                                                         <span>Add to Cart</span>
                                                     </a>
                                                     <div class="clearfix"></div>

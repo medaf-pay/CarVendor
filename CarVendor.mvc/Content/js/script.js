@@ -36,7 +36,7 @@ include('/Content/js/device.min.js');
 /* Stick up menu
 ========================================================*/
 include('/Content/js/tmstickup.js');
-$(window).load(function () {
+$(window).on('load',function () {
     if ($('html').hasClass('desktop')) {
         $('#stuck_container').TMStickUp({
         })
@@ -183,9 +183,9 @@ function filterCars(CarsId) {
 }
 
 function addToCart(product) {
-    product.price = $("#Price_" + product.id).text();
-    product.color = { id: $("#color_" + product.id).val(), text: $("#color_" + product.id).children("option:selected").text() };
-    product.category = { id: $("#category_" + product.id).val(), text: $("#category_" + product.id).children("option:selected").text() }
+    product.price = $("#Price_" + product.CarId).text();
+    product.color = { id: $("#color_" + product.CarId).val(), text: $("#color_" + product.CarId).children("option:selected").text() };
+    product.category = { id: $("#category_" + product.CarId).val(), text: $("#category_" + product.CarId).children("option:selected").text() }
 
     cart.push(product);
     updateCart(cart);
@@ -237,6 +237,7 @@ function getJSessionId() {
 }
 
 function goToCart() {
+   
     let shoppingCart = {
         sessionId: getJSessionId(),
         cartItems: cart
@@ -246,7 +247,7 @@ function goToCart() {
         shoppingCart,
         function (result) {
             console.log(result);
-            window.location.href = "/home/cart/" + result.SessionId;
+            window.location.href = "/home/cart?RequestId=" + result.SessionId;
         }
     );
 }

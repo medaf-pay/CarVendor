@@ -9,6 +9,7 @@ namespace CarVendor.mvc.Models
     {
         public string SessionId { get; set; }
         public List<CartItemModel> CartItems { get; set; }
+        public CustomerInfoModel CustomerInfo { get; set; }
         public string Guid { get; set; }
     }
 }

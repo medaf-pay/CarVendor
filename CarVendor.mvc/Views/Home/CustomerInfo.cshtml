@@ -1,0 +1,122 @@
+﻿
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Content/js/angular.min.js"></script>
+<script src="~/Content/js/Module.js"></script>
+<script src="~/Content/js/CartCTR.js"></script>
+<div ng-app="myApp" ng-controller="CustomerInfoCTR">
+    <div class="form-row">
+        <div class="form-group col-md-12 mb-3">
+            <h4 style="color:#0026ff">Enter your Information</h4>
+        </div>
+    </div>
+    <form class="needs-validation" novalidate>
+        <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-4">
+                    <label class="radio-inline"><input type="radio" name="optradio" ng-init="CustomerInfo.Individually='1'" ng-model="CustomerInfo.Individually" value="1">Individually</label>
+                    <label class="radio-inline"><input type="radio" name="optradio" ng-model="CustomerInfo.Individually" value="2">Orgnization</label>
+                </div>
+            </div>
+        </div>
+        <div class="container" ng-if="CustomerInfo.Individually==2">
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-4">
+                    <label for="validationCustom01">Orgnization Name</label>
+                    <input ng-model="CustomerInfo.OrgnizationName" type="text" class="form-control" id="validationCustom01" placeholder="Enter the Orgnization name" value="" required>
+
+                </div>
+                <div class=" form-group col-md-4 mb-4">
+                    <label for="validationCustom02">Web Site</label>
+                    <input type="text" ng-model="CustomerInfo.OrgnizationSite" class="form-control" id="validationCustom02" placeholder="Web site of Orgnization" value="" required>
+
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                    <label for="validationCustom02">Registration No</label>
+                    <input type="text" class="form-control" ng-model="CustomerInfo.RegistrationNo" id="validationCustom02" placeholder="Orgnization Registration No" value="" required>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-4">
+                    <label for="validationCustom01">First name</label>
+                    <input ng-model="CustomerInfo.FName" type="text" class="form-control" id="validationCustom01" placeholder="First name" value="" required>
+
+                </div>
+                <div class=" form-group col-md-4 mb-4">
+                    <label for="validationCustom02">Middle Name</label>
+                    <input type="text" ng-model="CustomerInfo.MName" class="form-control" id="validationCustom02" placeholder="middle name" value="" required>
+
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                    <label for="validationCustom02">Last name</label>
+                    <input type="text" class="form-control" ng-model="CustomerInfo.LName" id="validationCustom02" placeholder="Last name" value="" required>
+
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-4">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" ng-model="CustomerInfo.Email" id="inputEmail4" placeholder="Email">
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                    <label for="inputPassword4">Mobile Number</label>
+                    <input type="tel" class="form-control" id="inputPhone" ng-model="CustomerInfo.Phone" placeholder="Phone">
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-4">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" class="form-control" ng-model="CustomerInfo.Address1" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                    <label for="inputAddress2">Address 2</label>
+                    <input type="text" class="form-control" ng-model="CustomerInfo.Address2" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                    <label for="inputAddress2">Country</label>
+                    <input type="text" class="form-control" id="inputAddress2" ng-model="CustomerInfo.Country" placeholder="Your Country">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4  mb-4">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity" ng-model="CustomerInfo.City">
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                    <label for="inputState">State</label>
+                    <input type="text" class="form-control" id="Your State" ng-model="CustomerInfo.State">
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" ng-model="CustomerInfo.Zip">
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-4">
+                    <label for="inputPassword4">NID</label>
+                    <input type="text" class="form-control" ng-model="CustomerInfo.NID" id="inputNID" placeholder="NID or Passport">
+                </div>
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-12 mb-4" style="direction:rtl">
+                    <button type="button" class="btn btn-primary" ng-click="CompletPay()">Complet and Pay</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

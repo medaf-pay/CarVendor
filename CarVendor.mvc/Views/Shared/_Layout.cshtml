@@ -13,7 +13,26 @@
       </map>
     </div>
     <![endif]-->
+    <link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/Content/css/grid.css">
+    <link rel="stylesheet" href="/Content/css/search.css">
+    <link rel="stylesheet" href="/Content/css/camera.css">
+    <link rel="stylesheet" href="/Content/booking/css/booking.css">
+    <link rel="stylesheet" href="/Content/css/style.css">
 
+    <script src="/Content/js/jquery.min.js"></script>
+    <script src="/Content/js/jquery-migrate-1.2.1.js"></script>
+    <script src="/Content/js/camera.js"></script>
+    <script src="/Content/js/jquery.equalheights.js"></script>
+    <script src="/Content/search/search.js"></script>
+    <script src="/Content/booking/js/booking.js"></script>
+    <script src="/Content/booking/js/jquery.placeholder.js"></script>
+    <!--[if (gt IE 9)|!(IE)]><!-->
+    <script src="/Content/js/jquery.mobile.customized.min.js"></script>
+    <script src="/Content/js/wow/wow.js"></script>
+    <script src="/Content/js/script.js"></script>
+    <script src="/Content/js/jquery.tabs.js"></script>
+    
 </head>
 
 
@@ -44,7 +63,7 @@
             <div class="width-wrapper">
                 <nav>
                     <ul class="sf-menu">
-                        <li class="current"><a href="~/Content/index.html">Home</a></li>
+                        <li class="current"><a href="/">Home</a></li>
                         <li>
                             <a href="~/Content/index-1.html">Find a car</a>
                             <ul>
@@ -67,9 +86,8 @@
                         <li><a href="~/Content/index-2.html">Used cars</a></li>
                         <li><a href="~/Content/index-3.html">New cars</a></li>
                         <li><a href="~/Content/index-4.html">Contacts</a></li>
-                        <li style="background-color: #8ad329;"><a><span class="glyphicon glyphicon-shopping-cart cartSpan"   id="cartSpan"></span></a></li>
-                        <li><a style="cursor:pointer" onclick="goToCart()"><span class="glyphicon glyphicon-shopping-cart cartSpan" id="cartSpan"></span></a></li>
-
+                        <li style="background-color: #8ad329;"><a style="cursor:pointer" onclick="goToCart()"><span class="glyphicon glyphicon-shopping-cart cartSpan" id="cartSpan"></span></a></li>
+                       
                     </ul>
                 </nav>
                 <form id="search" action="search.php" method="GET" accept-charset="utf-8">
