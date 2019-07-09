@@ -184,8 +184,8 @@ function filterCars(CarsId) {
 
 function addToCart(product) {
     product.price = $("#Price_" + product.id).text();
-    product.color = { value: $("#color_" + product.id).val(), text: $("#color_" + product.id).children("option:selected").text() };
-    product.category = { value: $("#category_" + product.id).val(), text: $("#category_" + product.id).children("option:selected").text() }
+    product.color = { id: $("#color_" + product.id).val(), text: $("#color_" + product.id).children("option:selected").text() };
+    product.category = { id: $("#category_" + product.id).val(), text: $("#category_" + product.id).children("option:selected").text() }
 
     cart.push(product);
     updateCart(cart);
@@ -223,4 +223,30 @@ function readCookie(name) {
 
 function eraseCookie(name) {
     createCookie(name, "", -1);
+}
+
+function getJSessionId() {
+    var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
+    if (jsId != null) {
+        if (jsId instanceof Array)
+            jsId = jsId[0].substring(11);
+        else
+            jsId = jsId.substring(11);
+    }
+    return jsId;
+}
+
+function goToCart() {
+    let shoppingCart = {
+        sessionId: getJSessionId(),
+        cartItems: cart
+    }
+    $.post(
+        "Home/cart",
+        shoppingCart,
+        function (result) {
+            console.log(result);
+            window.location.href = "/home/cart/" + result.SessionId;
+        }
+    );
 }

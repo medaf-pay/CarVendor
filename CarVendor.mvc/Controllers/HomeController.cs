@@ -1,4 +1,5 @@
 ﻿using CarVendor.data;
+using CarVendor.mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace CarVendor.mvc.Controllers
     public class HomeController : Controller
     {
         DataBaseContext db = new DataBaseContext();
+        private static List<CartModel> _shopingCarts = new List<CartModel>();
         //[Route("home/Index")]
         //public ActionResult Index()
         //{
@@ -28,7 +30,7 @@ namespace CarVendor.mvc.Controllers
         //    return View(cars);
         //}
         [Route("home/Index/{id}")]
-        public ActionResult Index(long id=0)
+        public ActionResult Index(long id = 0)
         {
          
             var cars = db.Cars.Select(s =>
@@ -46,7 +48,7 @@ namespace CarVendor.mvc.Controllers
 
                     }).ToList()
                 }).ToList();
-            if(id!=0)
+            if (id != 0)
             {
                 cars = cars.Where(c => c.Id == id).ToList();
             }
@@ -67,10 +69,23 @@ namespace CarVendor.mvc.Controllers
             return View();
         }
 
-        public ActionResult Cart()
+        [HttpPost]
+        public ActionResult Cart(CartModel model)
         {
+            var userGuid = Guid.NewGuid();
+            model.Guid = userGuid.ToString();
+            model.SessionId = model.Guid;
+            _shopingCarts.Add(model);
+            return Json(model);
+        }
 
-            return View();
+        [Route("Home/cart/{sessionId:string}")]
+        public ActionResult Cart(string sessionId)
+        {
+           var userCart = _shopingCarts.FirstOrDefault(cart => cart.SessionId == sessionId);
+            if (userCart == null)
+                return HttpNotFound();
+            return View(userCart.CartItems);
         }
     }
 }
