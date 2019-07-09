@@ -6,7 +6,9 @@
 <meta charset="utf-8">
 
 <meta name="format-detection" content="telephone=no" />
-
+<script src="~/Content/js/angular.min.js"></script>
+<script src="~/Content/js/Module.js"></script>
+<script src="~/Content/js/CartCTR.js"></script>
 <script>
     $(document).ready(function () {
         if ($('html').hasClass('desktop')) {
@@ -71,92 +73,27 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div id="tabs-2">
+                            <div id="tabs-2" ng-app="myApp" ng-controller="HomeCTR">
                                 <form id="bookingForm2" class="bookingForm1">
                                     <span class="heading">Make:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" onchange="filterCars(this.value)">
-                                        <option>Any Make</option>
-                                        <option>Any Make 1</option>
-                                        <option>Any Make 2</option>
-                                        <option>Any Make 3</option>
-                                        <option>Any Make 4</option>
-                                        <option>Any Make 5</option>
+                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2"  ng-model="Brandselected" >
+                                        <option>Select Brand</option>
+                                        <option ng-repeat="Brand  in Brands" value="{{Brand.Id}}">{{Brand.Name}}</option>
                                     </select>
                                     <span class="heading">Model:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
-                                        <option>Any Model</option>
-                                        <option>Any Model 1</option>
-                                        <option>Any Model 2</option>
-                                        <option>Any Model 3</option>
-                                        <option>Any Model 4</option>
-                                        <option>Any Model 5</option>
+                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2"  ng-model="Categoryselected">
+
+                                        <option>Select Category</option>
+                                        <option ng-repeat="Category in Categories" value="{{Category.Id}}">{{Category.Name}}</option>
+
                                     </select>
                                     <span class="heading">Region:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
-                                        <option>Any</option>
-                                        <option>Any 1</option>
-                                        <option>Any 2</option>
-                                        <option>Any 3</option>
-                                        <option>Any 4</option>
-                                        <option>Any 5</option>
+                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Colorselected">
+                                        <option>Select Color</option>
+                                        <option ng-repeat="Color in Colors" value="{{Color.Id}}">{{Color.Name}}</option>
                                     </select>
-                                    <div class="narrow-selects">
-                                        <div class="block-left">
-                                            <span class="heading">Min Year:</span>
-                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
-                                                <option>Min</option>
-                                                <option>Min 1</option>
-                                                <option>Min 2</option>
-                                                <option>Min 3</option>
-                                                <option>Min 4</option>
-                                                <option>Min 5</option>
-                                            </select>
-                                        </div>
-                                        <div class="block-right">
-                                            <span class="heading">Max Year:</span>
-                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
-                                                <option>2014</option>
-                                                <option>2013</option>
-                                                <option>2012</option>
-                                                <option>2011</option>
-                                                <option>2010</option>
-                                                <option>2009</option>
-                                            </select>
-                                        </div>
 
-                                        <div class="block-left">
-                                            <span class="heading">Min Price:</span>
-                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
-                                                <option>Min</option>
-                                                <option>Min 1</option>
-                                                <option>Min 2</option>
-                                                <option>Min 3</option>
-                                                <option>Min 4</option>
-                                                <option>Min 5</option>
-                                            </select>
-                                        </div>
-                                        <div class="block-right">
-                                            <span class="heading">Max Price:</span>
-                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
-                                                <option>Max</option>
-                                                <option>Max 1</option>
-                                                <option>Max 2</option>
-                                                <option>Max 3</option>
-                                                <option>Max 4</option>
-                                                <option>Max 5</option>
-                                            </select>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <span class="heading">Body Type:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2">
-                                        <option>Any Make</option>
-                                        <option>Any Make 1</option>
-                                        <option>Any Make 2</option>
-                                        <option>Any Make 3</option>
-                                        <option>Any Make 4</option>
-                                        <option>Any Make 5</option>
-                                    </select>
+
                                     <a href="#" class="btn-big" data-type="submit">Find a car</a>
                                     <a href="#" class="simple">Detailed Search</a>
                                 </form>
@@ -294,7 +231,7 @@
                                                             @Html.Label("Colors")
                                                         </div>
                                                         <div class="editor-field">
-                                                            @Html.DropDownList("Color", ViewBag.colors as IEnumerable<SelectListItem>, new { onchange = "ColorChange(this.value," + @item.Id + ")",Id= "color_"+item.Id })
+                                                            @Html.DropDownList("Color", ViewBag.colors as IEnumerable<SelectListItem>, new { onchange = "ColorChange(this.value," + @item.Id + ")", Id = "color_" + item.Id })
                                                         </div>
 
                                                     </div>
@@ -304,7 +241,7 @@
                                                             @Html.Label("Categories")
                                                         </div>
                                                         <div class="editor-field">
-                                                            @Html.DropDownList("Category", ViewBag.categories as IEnumerable<SelectListItem>, new { onchange = "CategoryChange(this.value," + @item.Id + ")",Id= "category_"+item.Id })
+                                                            @Html.DropDownList("Category", ViewBag.categories as IEnumerable<SelectListItem>, new { onchange = "CategoryChange(this.value," + @item.Id + ")", Id = "category_" + item.Id })
 
                                                         </div>
 

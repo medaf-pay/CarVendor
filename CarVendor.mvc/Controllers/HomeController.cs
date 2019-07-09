@@ -33,7 +33,8 @@ namespace CarVendor.mvc.Controllers
         [Route("home/Index/{id}")]
         public ActionResult Index(long id = 0)
         {
-         
+
+
             var cars = db.Cars.Select(s =>
                 new CarViewModel
                 {

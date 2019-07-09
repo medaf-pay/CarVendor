@@ -48,3 +48,15 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
         $http.post("/api/CartDetails/Payment?SessionId=" + RequestId, $scope.CustomerInfo)
     }
 });
+
+app.controller('HomeCTR', function ($scope, $http) {
+
+    $http.get("/api/CartDetails/getFilters").then(function (data) {
+        $scope.Brands = data.data.Brands;
+        $scope.Categories = data.data.Categories;
+
+        $scope.Colors = data.data.Colors;
+
+    })
+
+});
