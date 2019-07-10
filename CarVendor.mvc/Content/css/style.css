@@ -370,7 +370,7 @@ h6 {
 }
 
     #header .info {
-        padding: 22px 0 16px;
+        padding: 10px 0 12px;
         background: #303030;
     }
 
@@ -479,13 +479,13 @@ h1 {
         margin-top: -4px;
         margin-right: 11px;
         display: inline-block;
-        height: 76px;
-        width: 76px;
+        height: 87px;
+        width: 89px;
         border-radius: 200px;
         font-size: 52px !important;
         line-height: 72px !important;
         text-align: center;
-        background: url(../images/gradient1.png) repeat-x center bottom #8ad329;
+        background: url(../../images/suzukilogo.png) repeat-x center bottom #8ad329;
     }
 
     h1 strong {
@@ -811,7 +811,7 @@ nav {
 .banner1 {
     background: #303030;
     padding: 15px 20px 24px;
-    border-radius: 3px;
+    border-radius: 28px;
     margin-bottom: 30px;
 }
 
@@ -850,6 +850,9 @@ nav {
     margin-bottom: 9px;
 }
 
+.carView{
+   width:97%;
+}
 .box1 img {
     margin-bottom: 13px;
     border-radius: 3px;

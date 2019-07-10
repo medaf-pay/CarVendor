@@ -141,7 +141,7 @@ var cart = [];
 
 function ColorChange(colorId, carId) {
     $.ajax({
-        url: "api/CarDetails/GetImageByColorId/" + carId + "/" + colorId, success: function (result) {
+        url: "/api/CarDetails/GetImageByColorId/" + carId + "/" + colorId, success: function (result) {
             var tt = result;
             $('#' + carId).attr("src", result);
 
@@ -196,7 +196,7 @@ function updateCart(cart) {
     for (var i = 0; i < cart.length; i++) {
         sum += eval(cart[i].price);
     }
-    $('.cartSpan').html(cart.length + " | " + sum + " $ ");
+    $('.cartSpan').html(cart.length + " | " + sum + " EGP");
   //  createCookie("shoppingCart", JSON.stringify(cart), 2);
 }
 

@@ -74,55 +74,69 @@
                                 </div>
                             </div>
                             <div id="tabs-2" ng-app="myApp" ng-controller="HomeCTR">
-                                <form id="bookingForm2" class="bookingForm1">
-                                    <span class="heading">Make:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2"  ng-model="Brandselected" >
-                                        <option>Select Brand</option>
-                                        <option ng-repeat="Brand  in Brands" value="{{Brand.Id}}">{{Brand.Name}}</option>
-                                    </select>
-                                    <span class="heading">Model:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2"  ng-model="Categoryselected">
+                                <form id="" class="bookingForm1 wow fadeIn" >
+                                    <div class="form-row" style="margin-top:10px">
+                                        <div class="form-group col-md-4 mb-4">
 
-                                        <option>Select Category</option>
-                                        <option ng-repeat="Category in Categories" value="{{Category.Id}}">{{Category.Name}}</option>
+                                            <span class="heading">Brand:</span>
+                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Brandselected">
+                                                <option value="">Select Brand</option>
+                                                <option ng-repeat="Brand  in Brands" value="{{Brand.Id}}">{{Brand.Name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row" style="margin-top:10px">
+                                        <div class="form-group col-md-4 mb-4">
+                                            <span class="heading">Category:</span>
+                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Categoryselected">
 
-                                    </select>
-                                    <span class="heading">Region:</span>
-                                    <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Colorselected">
-                                        <option>Select Color</option>
-                                        <option ng-repeat="Color in Colors" value="{{Color.Id}}">{{Color.Name}}</option>
-                                    </select>
+                                                <option value="">Select Category</option>
+                                                <option ng-repeat="Category in Categories" value="{{Category.Id}}">{{Category.Name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row" style="margin-top:10px">
+                                        <div class="form-group col-md-4 mb-4">
+                                            <span class="heading">Color:</span>
+                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Colorselected">
+                                                <option value="">Select Color</option>
+                                                <option ng-repeat="Color in Colors" value="{{Color.Id}}">{{Color.Name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row" style="margin-top:20px">
+                                        <button class="btn-big" ng-click="FindCar()" data-type="submit">Find a car</button>
 
+                                    </div>
 
-                                    <a href="#" class="btn-big" data-type="submit">Find a car</a>
-                                    <a href="#" class="simple">Detailed Search</a>
                                 </form>
                             </div>
+                                
                         </div>
-                        <div class="banner1">
-                            <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                                <a href="#">About our Services</a>
-                            </h2>
-                            <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
-                        </div>
-                        @*<div class="post1">
-                                <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Latest REVIEWS</h2>
-                                <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img1.png" alt="" />
-                                <time class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" datetime="2014-01-01">Monday, June 24, 2013</time>
-                                <h3 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
-                                    <a href="#">Lorem ipsum dolor sit amet conse</a>
-                                </h3>
-                                <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                            </div>*@
-                    </div>
+                                                <div class="banner1">
+                                                    <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                                        <a href="#">About our Services</a>
+                                                    </h2>
+                                                    <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
+                                                </div>
+                                                @*<div class="post1">
+            <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Latest REVIEWS</h2>
+            <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img1.png" alt="" />
+            <time class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" datetime="2014-01-01">Monday, June 24, 2013</time>
+            <h3 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
+                <a href="#">Lorem ipsum dolor sit amet conse</a>
+            </h3>
+            <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+        </div>*@
+                                            </div>
                     <div class="grid_9">
                         <div class="slider-wrapper">
                             <div id="camera_wrap">
                                 <div data-src="/images/slider1.png">
                                     <div class="caption fadeIn">
                                         <div class="heading">
-                                            <span class="first">2014 Mercedes-Benz</span>
-                                            <span class="second">GLK-Class <span class="price">$89999</span></span>
+                                            <span class="first">2019 Alto</span>
+                                            <span class="second"> Start From <span class="price">120000 EGP</span></span>
                                         </div>
                                         <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                             <span class="first">
@@ -137,8 +151,8 @@
                                 <div data-src="/images/slider2.png">
                                     <div class="caption fadeIn">
                                         <div class="heading">
-                                            <span class="first">2014 Lexus</span>
-                                            <span class="second">GX 460 <span class="price">$89999</span></span>
+                                            <span class="first">2019 APV</span>
+                                            <span class="second"> Start From <span class="price">86000 EGP</span></span>
                                         </div>
                                         <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                             <span class="first">
@@ -153,8 +167,8 @@
                                 <div data-src="/images/slider3.png">
                                     <div class="caption fadeIn">
                                         <div class="heading">
-                                            <span class="first">2014 Lexus</span>
-                                            <span class="second">LF-NX Hybrid <span class="price">$89999</span></span>
+                                            <span class="first">2019 Ciaz</span>
+                                            <span class="second"> Start From <span class="price">260000 EGP</span></span>
                                         </div>
                                         <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                             <span class="first">
@@ -169,8 +183,8 @@
                                 <div data-src="/images/slider4.png">
                                     <div class="caption fadeIn">
                                         <div class="heading">
-                                            <span class="first">2014 Cadillac</span>
-                                            <span class="second">Escalade <span class="price">$149999</span></span>
+                                            <span class="first">2019 Ertiga</span>
+                                            <span class="second">Start From <span class="price">195000 EGP</span></span>
                                         </div>
                                         <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                             <span class="first">
@@ -185,8 +199,8 @@
                                 <div data-src="/images/slider5.png">
                                     <div class="caption fadeIn">
                                         <div class="heading">
-                                            <span class="first">2014 Lexus</span>
-                                            <span class="second">IS 350 F Sport <span class="price">$49999</span></span>
+                                            <span class="first">2019 Swift Dzire</span>
+                                            <span class="second">Start From <span class="price">91560 EGP</span></span>
                                         </div>
                                         <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                             <span class="first">
@@ -210,8 +224,8 @@
                                     @foreach (var item in Model)
                                     {
 
-                                        <div class="grid_3">
-                                            <div class="box1">
+                                        <div class="form-group grid_3 col-md-4 mb-3">
+                                            <div class="box1 carView row">
                                                 <h4 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
                                                     <a href="#">@item.Name</a>
                                                 </h4>
@@ -219,10 +233,10 @@
                                                     ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
                                                     var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
                                                 }
-                                                <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="@img" alt="" />
+                                                <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/@item.FirstImageView" alt="" />
                                                 <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                                     <span class="first" style="margin-left: 32px;">Brand: <span class="highlighted">@item.Brand</span></span>
-                                                    <span class="second">Price: <span Id="Price_@item.Id" class="highlighted">@item.Categories.First().Price</span></span>
+                                                    <span class="second">Price: <span Id="Price_@item.Id" class="highlighted">@item.Categories.First().Price</span> EGP</span>
                                                 </div>
                                                 <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
 

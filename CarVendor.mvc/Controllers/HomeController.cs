@@ -13,25 +13,9 @@ namespace CarVendor.mvc.Controllers
         DataBaseContext db = new DataBaseContext();
         public static List<CartModel> _shopingCarts = new List<CartModel>();
         
-        //[Route("home/Index")]
-        //public ActionResult Index()
-        //{
-        //    //var cars = from carCategoris in db.CarCategories
-        //    //           join carColors in db.CarColors on carCategoris.CarId equals carColors.CarId
-        //    //           select new CarViewModel { Name = carCategoris.Car.Name, Brand = carCategoris.Car.Brand.Name, Category = carCategoris.Category.Name, Color = carColors.Color.Name, Price = carCategoris.Price };
-        //    //var availableCars = cars.ToList();
-        //    var cars = db.Cars.Select(s => 
-        //        new CarViewModel {Brand=s.Brand.Name,Name=s.Name,Id=s.Id,
-        //        Categories =s.Carcategories.Select(s1=>new CategoryViewModel{ Id=s1.Category.Id,Name=s1.Category.Name,Price=s1.Price }).ToList(),
-        //        Colors =s.CarColors.Select(s2=>new ColorViewModel {Id=s2.Color.Id,Name=s2.Color.Name,
-        //            Images =s2.CarImages.Select(s3=>new BaseViewModel {Id=s3.Id,Name=s3.ImageURL }).ToList()
-
-        //        }).ToList() }).ToList();
-        //  //  ViewData["Colors"] = new SelectList(cars.Select(s=>s.Colors).ToList(), "Id", "Name");
-        //    return View(cars);
-        //}
-        [Route("home/Index/{id}")]
-        public ActionResult Index(long id = 0)
+    
+        [Route("home/Index")]
+        public ActionResult Index(long Brand = 0,long Category=0, long Color=0)
         {
 
 
@@ -39,8 +23,10 @@ namespace CarVendor.mvc.Controllers
                 new CarViewModel
                 {
                     Brand = s.Brand.Name,
+                    BrandId=s.BrandId,
                     Name = s.Name,
                     Id = s.Id,
+                    FirstImageView=s.CarColors.Select(s1=>s1.CarImages.Select(s3=>s3.ImageURL).FirstOrDefault()).FirstOrDefault(),
                     Categories = s.Carcategories.Select(s1 => new CategoryViewModel { Id = s1.Category.Id, Name = s1.Category.Name, Price = s1.Price }).ToList(),
                     Colors = s.CarColors.Select(s2 => new ColorViewModel
                     {
@@ -50,9 +36,18 @@ namespace CarVendor.mvc.Controllers
 
                     }).ToList()
                 }).ToList();
-            if (id != 0)
+            if (Brand != 0)
             {
-                cars = cars.Where(c => c.Id == id).ToList();
+                cars = cars.Where(c => c.BrandId == Brand).ToList();
+            }
+            if (Category != 0)
+            {
+                cars = cars.Where(c => c.Categories.Any(c1=>c1.Id==Category)).ToList();
+            }
+            if (Color != 0)
+            {
+                cars = cars.Where(c => c.Colors.Any(c1 => c1.Id == Color)).Select(s=> { s.FirstImageView = s.Colors.Where(w => w.Id == Color).Select(s1 => s1.Images.Select(s3 => s3.Name).FirstOrDefault()).FirstOrDefault(); return s; }).ToList();
+               
             }
             //  ViewData["Colors"] = new SelectList(cars.Select(s=>s.Colors).ToList(), "Id", "Name");
             return View(cars);
@@ -92,6 +87,24 @@ namespace CarVendor.mvc.Controllers
         {
             return View();
         }
-      
+        [Route("Home/NewCar")]
+        public ActionResult NewCar()
+        {
+            return View();
+        }
+        [Route("Home/CardInfo")]
+        public ActionResult CardInfo(string RequestId)
+        {
+            var items = _shopingCarts.FirstOrDefault(cart => cart.SessionId == RequestId).CartItems;
+            decimal total = 0;
+            foreach (var item in items)
+            {
+                total += db.CarCategories.Where(c => c.CarId == item.CarId && c.CategoryId == item.Category.Id).Select(s => s.Price).FirstOrDefault() * item.Quantity;
+            }
+            ViewData["total"] = total;
+                
+                return View();
+        }
+
     }
 }

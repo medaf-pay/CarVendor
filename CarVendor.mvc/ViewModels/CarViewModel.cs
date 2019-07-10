@@ -12,7 +12,9 @@ namespace CarVendor.mvc
         public string Brand { get; set; }
         public List<CategoryViewModel> Categories { get; set; }
         public List<ColorViewModel> Colors { get; set; }
-   
+        public string FirstImageView { get; set; }
+        public long BrandId { get; set; }
+
 
     }
     public class BaseViewModel

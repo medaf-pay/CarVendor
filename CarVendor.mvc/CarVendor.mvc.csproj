@@ -171,6 +171,7 @@
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\camera.css" />
+    <Content Include="Content\css\cardInfo.css" />
     <Content Include="Content\css\contact-form.css" />
     <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\normalize.css" />
@@ -242,6 +243,7 @@
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\camera.js" />
+    <Content Include="Content\js\CardInfo.js" />
     <Content Include="Content\js\CartCTR.js" />
     <Content Include="Content\js\device.min.js" />
     <Content Include="Content\js\html5shiv.js" />
@@ -343,6 +345,16 @@
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
+    <Content Include="images\SuzukiAlto2019.jpg" />
+    <Content Include="images\SuzukiAPV2019.jpg" />
+    <Content Include="images\SuzukiErtiga2019.jpg" />
+    <Content Include="images\suzukilogo.ico" />
+    <Content Include="images\SuzukiSiyaz2019.jpg" />
+    <Content Include="images\SuzukiSwiftDzire2019.jpg" />
+    <Content Include="images\SuzukiSX42019.jpg" />
+    <Content Include="images\SuzukiVitara2019.jpg" />
+    <Content Include="images\under-development.png" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -360,6 +372,8 @@
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\CustomerInfo.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Home\NewCar.cshtml" />
+    <Content Include="Views\Home\CardInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

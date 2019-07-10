@@ -13,6 +13,7 @@
       </map>
     </div>
     <![endif]-->
+
     <link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/Content/css/grid.css">
     <link rel="stylesheet" href="/Content/css/search.css">
@@ -21,6 +22,9 @@
     <link rel="stylesheet" href="/Content/css/style.css">
 
     <script src="/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/angular.min.js"></script>
+    <script src="~/Content/js/Module.js"></script>
+    <script src="~/Content/js/CartCTR.js"></script>
     <script src="/Content/js/jquery-migrate-1.2.1.js"></script>
     <script src="/Content/js/camera.js"></script>
     <script src="/Content/js/jquery.equalheights.js"></script>
@@ -29,10 +33,12 @@
     <script src="/Content/booking/js/jquery.placeholder.js"></script>
     <!--[if (gt IE 9)|!(IE)]><!-->
     <script src="/Content/js/jquery.mobile.customized.min.js"></script>
+
+
     <script src="/Content/js/wow/wow.js"></script>
     <script src="/Content/js/script.js"></script>
     <script src="/Content/js/jquery.tabs.js"></script>
-    
+
 </head>
 
 
@@ -45,7 +51,9 @@
             <div class="width-wrapper">
                 <h1>
                     <a href="~/Content/index.html">
-                        <span class="wrapper"><i class="fa fa-car"></i><strong>Car</strong>Sell</span>
+                        <span class="wrapper">
+                            <i></i> <strong>Suzuki</strong>Egypt
+                        </span>
                     </a>
                 </h1>
                 <div class="authorization-block">
@@ -64,28 +72,10 @@
                 <nav>
                     <ul class="sf-menu">
                         <li class="current"><a href="/">Home</a></li>
-                        <li>
-                            <a href="~/Content/index-1.html">Find a car</a>
-                            <ul>
-                                <li><a href="~/Content/#">Lorem ipsum</a></li>
-                                <li>
-                                    <a href="~/Content/#">Conse ctetur</a>
-                                    <ul>
-                                        <li><a href="~/Content/#">Pellentesque</a></li>
-                                        <li><a href="~/Content/#">Aliquam congue</a></li>
-                                        <li><a href="~/Content/#">Mauris accum</a></li>
-                                        <li><a href="~/Content/#">Mctetur</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="~/Content/#">Do eiusmod</a></li>
-                                <li><a href="~/Content/#">Incididunt ut</a></li>
-                                <li><a href="~/Content/#">Et dolore</a></li>
-                                <li><a href="~/Content/#">Ut enim ad minim</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="~/Content/index-2.html">Used cars</a></li>
-                        <li><a href="~/Content/index-3.html">New cars</a></li>
-                        <li><a href="~/Content/index-4.html">Contacts</a></li>
+                      
+                        <li><a href="/Home/NewCar">New cars</a></li>
+                        <li><a href="/Home/About">About</a></li>
+                        <li><a href="/Home/Contact">Contacts</a></li>
                         <li style="background-color: #8ad329;"><a style="cursor:pointer" onclick="goToCart()"><span class="glyphicon glyphicon-shopping-cart cartSpan" id="cartSpan"></span></a></li>
                        
                     </ul>

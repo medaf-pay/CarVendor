@@ -100,5 +100,14 @@ namespace CarVendor.mvc.Controllers
             filters.Colors = db.Colors.Select(s => new BaseViewModel { Id = s.Id, Name = s.Name }).ToList();
             return Ok(filters);
         }
+
+        [HttpGet]
+        [Route("api/CartDetails/Payment")]
+        public IHttpActionResult Payment()
+        {
+           
+            return Ok();
+        }
+
     }
 }
