@@ -15,7 +15,7 @@ namespace CarVendor.mvc.Controllers
         
     
         [Route("home/Index")]
-        public ActionResult Index(long Brand = 0,long Category=0, long Color=0)
+        public ActionResult Index(long Category=0, long Color=0)
         {
 
 
@@ -36,10 +36,7 @@ namespace CarVendor.mvc.Controllers
 
                     }).ToList()
                 }).ToList();
-            if (Brand != 0)
-            {
-                cars = cars.Where(c => c.BrandId == Brand).ToList();
-            }
+        
             if (Category != 0)
             {
                 cars = cars.Where(c => c.Categories.Any(c1=>c1.Id==Category)).ToList();

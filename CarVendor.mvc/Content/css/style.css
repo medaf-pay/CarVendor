@@ -368,11 +368,23 @@ h6 {
     position: relative;
     z-index: 4;
 }
-
+.row_Nav {
+    margin-left: -20px;
+}
     #header .info {
         padding: 10px 0 12px;
         background: #303030;
     }
+@media screen and (max-width: 600px) {
+    .web-menu {
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
+}
 
         #header .info .authorization-block {
             margin-top: 7px;
@@ -433,6 +445,7 @@ h6 {
         bottom: -31px;
         left: 0;
     }
+
 
 @media (max-width: 979px) {
     #header {

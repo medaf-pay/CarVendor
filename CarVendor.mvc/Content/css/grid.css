@@ -141,8 +141,9 @@ table {
 .container .omega {
   margin-right: 0px;
 }
+
 .row {
-  margin-left: -20px;
+    margin-left: -20px;
 }
 .row:before,
 .row:after {

@@ -82,7 +82,7 @@ $(document).ready(function () {
 /* Superfish menu
 ========================================================*/
 include('/Content/js/superfish.js');
-include('/Content/js/jquery.mobilemenu.js');
+//include('/Content/js/jquery.mobilemenu.js');
 
 
 /* Orientation tablet fix
@@ -197,6 +197,8 @@ function updateCart(cart) {
         sum += eval(cart[i].price);
     }
     $('.cartSpan').html(cart.length + " | " + sum + " EGP");
+    $('.cartpart').css("background-color", "#8ad329");
+   
   //  createCookie("shoppingCart", JSON.stringify(cart), 2);
 }
 

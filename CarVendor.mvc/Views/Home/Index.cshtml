@@ -50,7 +50,7 @@
     <div class="width-wrapper width-wrapper__inset1">
         <div class="wrapper1">
             <div class="container">
-                <div class="row">
+                <div class="row_Nav">
                     <div class="grid_3">
                         <div id="tabs">
                             <div class="row">
@@ -66,7 +66,7 @@
                                         <li>
                                             <a href="#tabs-2">
                                                 <div class="tab maxheight">
-                                                    New cars
+                                                  Search
                                                 </div>
                                             </a>
                                         </li>
@@ -75,18 +75,9 @@
                             </div>
                             <div id="tabs-2" ng-app="myApp" ng-controller="HomeCTR">
                                 <form id="" class="bookingForm1 wow fadeIn" >
+                                   
                                     <div class="form-row" style="margin-top:10px">
-                                        <div class="form-group col-md-4 mb-4">
-
-                                            <span class="heading">Brand:</span>
-                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Brandselected">
-                                                <option value="">Select Brand</option>
-                                                <option ng-repeat="Brand  in Brands" value="{{Brand.Id}}">{{Brand.Name}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-row" style="margin-top:10px">
-                                        <div class="form-group col-md-4 mb-4">
+                                        <div class="form-group col-md-12 mb-4">
                                             <span class="heading">Category:</span>
                                             <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Categoryselected">
 
@@ -96,7 +87,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row" style="margin-top:10px">
-                                        <div class="form-group col-md-4 mb-4">
+                                        <div class="form-group col-md-12 mb-4">
                                             <span class="heading">Color:</span>
                                             <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Colorselected">
                                                 <option value="">Select Color</option>
@@ -224,38 +215,38 @@
                                     @foreach (var item in Model)
                                     {
 
-                                        <div class="form-group grid_3 col-md-4 mb-3">
+                                        <div class="form-group  col-md-4 mb-3">
                                             <div class="box1 carView row">
                                                 <h4 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
                                                     <a href="#">@item.Name</a>
                                                 </h4>
                                                 @{ ViewData["colors"] = new SelectList(item.Colors, "Id", "Name");
                                                     ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
-                                                    var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
+                                                   // var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
                                                 }
                                                 <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/@item.FirstImageView" alt="" />
                                                 <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                                    <span class="first" style="margin-left: 32px;">Brand: <span class="highlighted">@item.Brand</span></span>
+                                                    <span class="first" style="padding-right: 48px;margin-left: 14px;">Brand: <span class="highlighted">@item.Brand</span></span>
                                                     <span class="second">Price: <span Id="Price_@item.Id" class="highlighted">@item.Categories.First().Price</span> EGP</span>
                                                 </div>
                                                 <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
 
                                                     <div class="second">
                                                         <div class="editor-label">
-                                                            @Html.Label("Colors")
+                                                            @Html.Label("Color:")
                                                         </div>
-                                                        <div class="editor-field">
-                                                            @Html.DropDownList("Color", ViewBag.colors as IEnumerable<SelectListItem>, new { onchange = "ColorChange(this.value," + @item.Id + ")", Id = "color_" + item.Id })
+                                                        <div class="editor-field dropdown">
+                                                            @Html.DropDownList("Color", ViewBag.colors as IEnumerable<SelectListItem>, new { onchange = "ColorChange(this.value," + @item.Id + ")", Id = "color_" + item.Id, @class = "dropdown-item" })
                                                         </div>
 
                                                     </div>
 
-                                                    <div class="first">
-                                                        <div class="editor-label">
-                                                            @Html.Label("Categories")
+                                                    <div class="first dropdown" style="padding-right: 11px;">
+                                                        <div class="editor-label dropdown" >
+                                                            @Html.Label("Category:")
                                                         </div>
-                                                        <div class="editor-field">
-                                                            @Html.DropDownList("Category", ViewBag.categories as IEnumerable<SelectListItem>, new { onchange = "CategoryChange(this.value," + @item.Id + ")", Id = "category_" + item.Id })
+                                                        <div class="editor-field ">
+                                                            @Html.DropDownList("Category", ViewBag.categories as IEnumerable<SelectListItem>, new { onchange = "CategoryChange(this.value," + @item.Id + ")", Id = "category_" + item.Id, @class = "dropdown-item" })
 
                                                         </div>
 
