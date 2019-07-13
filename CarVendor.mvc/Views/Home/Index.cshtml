@@ -66,7 +66,7 @@
                                         <li>
                                             <a href="#tabs-2">
                                                 <div class="tab maxheight">
-                                                  Search
+                                                    Search
                                                 </div>
                                             </a>
                                         </li>
@@ -74,8 +74,8 @@
                                 </div>
                             </div>
                             <div id="tabs-2" ng-app="myApp" ng-controller="HomeCTR">
-                                <form id="" class="bookingForm1 wow fadeIn" >
-                                   
+                                <form id="" class="bookingForm1 wow fadeIn">
+
                                     <div class="form-row" style="margin-top:10px">
                                         <div class="form-group col-md-12 mb-4">
                                             <span class="heading">Category:</span>
@@ -102,24 +102,24 @@
 
                                 </form>
                             </div>
-                                
+
                         </div>
-                                                <div class="banner1">
-                                                    <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                                                        <a href="#">About our Services</a>
-                                                    </h2>
-                                                    <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
-                                                </div>
-                                                @*<div class="post1">
-            <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Latest REVIEWS</h2>
-            <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img1.png" alt="" />
-            <time class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" datetime="2014-01-01">Monday, June 24, 2013</time>
-            <h3 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
-                <a href="#">Lorem ipsum dolor sit amet conse</a>
-            </h3>
-            <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-        </div>*@
-                                            </div>
+                        <div class="banner1">
+                            <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                <a href="#">About our Services</a>
+                            </h2>
+                            <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
+                        </div>
+                        @*<div class="post1">
+                                <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Latest REVIEWS</h2>
+                                <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img1.png" alt="" />
+                                <time class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" datetime="2014-01-01">Monday, June 24, 2013</time>
+                                <h3 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
+                                    <a href="#">Lorem ipsum dolor sit amet conse</a>
+                                </h3>
+                                <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                            </div>*@
+                    </div>
                     <div class="grid_9">
                         <div class="slider-wrapper">
                             <div id="camera_wrap">
@@ -215,24 +215,28 @@
                                     @foreach (var item in Model)
                                     {
 
-                                        <div class="form-group  col-md-4 mb-3">
-                                            <div class="box1 carView row">
+                                        <div class="form-group col-md-4 mb-3 col-sm-6">
+                                            <div class="box1 carView">
                                                 <h4 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
                                                     <a href="#">@item.Name</a>
                                                 </h4>
                                                 @{ ViewData["colors"] = new SelectList(item.Colors, "Id", "Name");
-                                                    ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
-                                                   // var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
+        ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
+        // var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
                                                 }
-                                                <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/@item.FirstImageView" alt="" />
+                                                <div class="row">
+                                                    <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/@item.FirstImageView" alt="" />
+                                                </div>
+
                                                 <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                                    <span class="first" style="padding-right: 48px;margin-left: 14px;">Brand: <span class="highlighted">@item.Brand</span></span>
+                                                    <span class="first" style="padding-right: 16px;margin-left: 14px;">Brand: <span class="highlighted">@item.Brand</span></span>
                                                     <span class="second">Price: <span Id="Price_@item.Id" class="highlighted">@item.Categories.First().Price</span> EGP</span>
                                                 </div>
-                                                <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
+
+                                                <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
 
                                                     <div class="second">
-                                                        <div class="editor-label">
+                                                        <div class="editor-label" style="margin-left:12px;">
                                                             @Html.Label("Color:")
                                                         </div>
                                                         <div class="editor-field dropdown">
@@ -242,7 +246,7 @@
                                                     </div>
 
                                                     <div class="first dropdown" style="padding-right: 11px;">
-                                                        <div class="editor-label dropdown" >
+                                                        <div class="editor-label dropdown">
                                                             @Html.Label("Category:")
                                                         </div>
                                                         <div class="editor-field ">
@@ -254,16 +258,18 @@
 
                                                     <div class="clearfix"></div>
                                                 </div>
-                                                <div class="info2 wow fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
-                                                    @*<div class="price">
-                                                            <span class="first">Price:</span>
-                                                            <span class="second">@item.Price</span>
-                                                        </div>*@
-                                                    <a class="btn-default" style="cursor:pointer" onclick="addToCart({CarId:@item.Id})">
+                                                <div class="wow fadeIn row" data-wow-duration="1s" data-wow-delay=".3s" style="margin-left:10%; margin-top:2px;">
+                                                    <button type="button" class="btn btn-default" onclick="addToCart({CarId:@item.Id})"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+
+                                                @*<div class="info2 wow fadeIn row" data-wow-duration="1s" data-wow-delay=".3s">
+                                         <a class="btn-default" style="cursor:pointer" onclick="addToCart({CarId:@item.Id})">
                                                         <span>Add to Cart</span>
                                                     </a>
                                                     <div class="clearfix"></div>
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     }

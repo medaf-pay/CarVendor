@@ -13,7 +13,6 @@ namespace CarVendor.mvc.Controllers
         DataBaseContext db = new DataBaseContext();
         public static List<CartModel> _shopingCarts = new List<CartModel>();
         
-    
         [Route("home/Index")]
         public ActionResult Index(long Category=0, long Color=0)
         {
