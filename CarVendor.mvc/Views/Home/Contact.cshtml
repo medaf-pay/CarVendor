@@ -1,17 +1,37 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h3>Contact Us</h3>
+<div class="row col-lg-12">
+    <div class="col-lg-5" style="margin-top:30px">
+        <address>
+            <span class="fa fa-phone" style="font-size:24px"></span>
+                +20237488501/3 <br />
+                <spam class="fa fa-print"></spam> +20237488502 <br />
+              <span class="material-icons" style="font-size:36px">location_on</span> 131 el tahrir st, Dokki, Giza, Egypt<br />
 
-<address>
-    One Nasr Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
 </address>
+        <address>
+            <span class="material-icons">&#xe0be;</span> <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <span class="material-icons">&#xe0be;</span> <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
+    </div>
+    <div class="mapouter col-lg-6  col-lg-offset-6 ">
+        <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=131%20el%20tahere%20st%20&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.pureblack.de/beste-wordpress-themes/"></a></div>
+        <style>
+            .mapouter {
+                position: relative;
+                text-align: right;
+                height: 500px;
+                width: 600px;
+            }
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            .gmap_canvas {
+                overflow: hidden;
+                background: none !important;
+                height: 500px;
+                width: 600px;
+            }
+        </style>
+    </div>
+</div>

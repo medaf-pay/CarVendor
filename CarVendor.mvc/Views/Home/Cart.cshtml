@@ -35,9 +35,11 @@
                     <td> <input type="number" class="form-control" min="1" ng-change="QuantityChange()" ng-model="item.Quantity"></td>
                     <td>{{item.Price*item.Quantity}} </td>
                     <td>
-                        <a href="#" ng-click="DeleteItem($index)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
+                  
+                            <button ng-click="DeleteItem($index)" type="button" class="btn-danger" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        
                     </td>
                 </tr>
 

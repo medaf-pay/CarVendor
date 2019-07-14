@@ -245,7 +245,7 @@ function changeNavSelection(ElementId) {
     var action = url[url.length - 1];
    
     $('#Nav' + action).addClass("current");
-    if (url[url.length - 1] == "")
+    if (url[url.length - 1] == "" || url[url.length - 1] == "Index")
         $('#NavHome').addClass("current");
     
 }

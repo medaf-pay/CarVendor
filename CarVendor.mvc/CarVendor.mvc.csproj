@@ -275,6 +275,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\Aboutimg.png" />
     <Content Include="images\box-shadow1.png" />
     <Content Include="images\box-shadow2-left.png" />
     <Content Include="images\box-shadow2-right.png" />
@@ -329,6 +330,7 @@
     <Content Include="images\page4_img7.png" />
     <Content Include="images\page4_img8.png" />
     <Content Include="images\page4_img9.png" />
+    <Content Include="images\seoudiCompany.png" />
     <Content Include="images\slider1.png" />
     <Content Include="images\slider2.png" />
     <Content Include="images\slider3.png" />
@@ -341,6 +343,7 @@
     <Content Include="Content\booking\font\icomoon.woff" />
     <Content Include="Content\booking\less\booking.less" />
     <Content Include="Content\booking\less\mixins.less" />
+    <Content Include="Content\fonts\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
