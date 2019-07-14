@@ -10,7 +10,7 @@ namespace CarVendor.data.Entities
     {
         public string Color { get; set; }
         public int Quantity { get; set; }
-
+        public string Category { get; set; }
         #region [ Car ]
         public long CarId { get; set; }
         public virtual Car Car { get; set; }

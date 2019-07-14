@@ -5,10 +5,9 @@
 }
 <meta charset="utf-8">
 
+
 <meta name="format-detection" content="telephone=no" />
-<script src="~/Content/js/angular.min.js"></script>
-<script src="~/Content/js/Module.js"></script>
-<script src="~/Content/js/CartCTR.js"></script>
+
 <script>
     $(document).ready(function () {
         if ($('html').hasClass('desktop')) {
@@ -221,8 +220,8 @@
                                                     <a href="#">@item.Name</a>
                                                 </h4>
                                                 @{ ViewData["colors"] = new SelectList(item.Colors, "Id", "Name");
-        ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
-        // var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
+                                                    ViewData["categories"] = new SelectList(item.Categories, "Id", "Name", "Price");
+                                                    // var img = "/images/" + @item.Colors.Select(s => s.Images.Select(s1 => s1.Name).FirstOrDefault()).FirstOrDefault();
                                                 }
                                                 <div class="row">
                                                     <img id="@item.Id" class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/@item.FirstImageView" alt="" />
@@ -265,11 +264,11 @@
 
 
                                                 @*<div class="info2 wow fadeIn row" data-wow-duration="1s" data-wow-delay=".3s">
-                                         <a class="btn-default" style="cursor:pointer" onclick="addToCart({CarId:@item.Id})">
-                                                        <span>Add to Cart</span>
-                                                    </a>
-                                                    <div class="clearfix"></div>
-                                                </div>*@
+                                                    <a class="btn-default" style="cursor:pointer" onclick="addToCart({CarId:@item.Id})">
+                                                                   <span>Add to Cart</span>
+                                                               </a>
+                                                               <div class="clearfix"></div>
+                                                           </div>*@
                                             </div>
                                         </div>
                                     }
