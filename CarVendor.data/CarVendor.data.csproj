@@ -63,28 +63,12 @@
     <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\TEntity.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\201907131126458_v0.0..cs" />
-    <Compile Include="Migrations\201907131126458_v0.0..Designer.cs">
-      <DependentUpon>201907131126458_v0.0..cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907141400297_v0.1.2.cs" />
-    <Compile Include="Migrations\201907141400297_v0.1.2.Designer.cs">
-      <DependentUpon>201907141400297_v0.1.2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907131126458_v0.0..resx">
-      <DependentUpon>201907131126458_v0.0..cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907141400297_v0.1.2.resx">
-      <DependentUpon>201907141400297_v0.1.2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
