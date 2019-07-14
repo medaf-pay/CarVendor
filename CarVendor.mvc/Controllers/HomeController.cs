@@ -47,6 +47,7 @@ namespace CarVendor.mvc.Controllers
             }
             return View(cars);
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -77,16 +78,19 @@ namespace CarVendor.mvc.Controllers
             
             return View();
         }
+
         [Route("Home/CustomerInfo")]
         public ActionResult CustomerInfo()
         {
             return View();
         }
+
         [Route("Home/NewCar")]
         public ActionResult NewCar()
         {
             return View();
         }
+
         [Route("Home/CardInfo")]
         public ActionResult CardInfo(string RequestId)
         {

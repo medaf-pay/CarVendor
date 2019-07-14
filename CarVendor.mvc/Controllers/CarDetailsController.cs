@@ -23,6 +23,7 @@ namespace CarVendor.mvc.Controllers
             var image = db.CarColors.Where(c => c.CarId == carId & c.ColorId == colorId).Select(s => s.CarImages.Select(s1 => s1.ImageURL).FirstOrDefault()).FirstOrDefault();
             return Ok("/images/" + image);
         }
+
         [HttpGet]
         [Route("api/CarDetails/GetPriceCategoryId/{carId}/{categoryId}")]
         public IHttpActionResult GetPriceCategoryId(long carId, long categoryId)
@@ -30,6 +31,7 @@ namespace CarVendor.mvc.Controllers
             var Price = db.CarCategories.Where(c => c.CarId == carId && c.CategoryId == categoryId).Select(s => s.Price).FirstOrDefault();
             return Ok(Price);
         }
+
         [HttpGet]
         [Route("api/CarDetails/CartData")]
         public IHttpActionResult CartData(string SessionId)
@@ -61,9 +63,8 @@ namespace CarVendor.mvc.Controllers
                 Cars.Add(car);
             }
             return Ok(Cars);
-
-            // return View(userCart.CartItems);
         }
+
         [HttpPost]
         [Route("api/CartDetails/SetFinalItems")]
         public IHttpActionResult SetFinalItems(string SessionId, List<CartItemModel> Items)
@@ -73,6 +74,7 @@ namespace CarVendor.mvc.Controllers
 
             // return View(userCart.CartItems);
         }
+
         [HttpGet]
         [Route("api/CartDetails/GetFinalItems")]
         public IHttpActionResult GetFinalItems(string SessionId)
@@ -162,7 +164,6 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/Payment")]
         public IHttpActionResult Payment()
         {
-
             return Ok();
         }
 
