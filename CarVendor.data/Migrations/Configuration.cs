@@ -136,6 +136,8 @@ namespace CarVendor.data.Migrations
             context.CarColors.AddRange(CarColors);
             #endregion
 
+            //};
+            //context.CarColors.AddRange(CarColors);
         }
     }
 }
