@@ -238,6 +238,19 @@ function getJSessionId() {
     return jsId;
 }
 
+changeNavSelection();
+function changeNavSelection(ElementId) {
+    var url = window.location.pathname.split("/");
+    console.log(url);
+    var action = url[url.length - 1];
+   
+    $('#Nav' + action).addClass("current");
+    if (url[url.length - 1] == "")
+        $('#NavHome').addClass("current");
+    
+}
+
+
 function goToCart() {
    
     let shoppingCart = {

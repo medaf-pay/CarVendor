@@ -38,6 +38,7 @@
     <script src="/Content/js/wow/wow.js"></script>
     <script src="/Content/js/script.js"></script>
     <script src="/Content/js/jquery.tabs.js"></script>
+ 
 </head>
 
 
@@ -45,62 +46,65 @@
     <!--========================================================
                               HEADER
     =========================================================-->
-    <header id="header">
-        <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-            <div class="width-wrapper">
-                <h1>
-                    <a >
-                        <span class="wrapper">
-                            <i></i> <strong>Suzuki</strong>Egypt
-                        </span>
-                    </a>
-                </h1>
-                <div class="authorization-block">
-                    <div class="authorization">
-                        <a class="create" href="~/Content/#">Create an account</a>
-                        <span class="divider"></span>
-                        <a class="login" href="~/Content/#">Login</a>
+    <header id="header" >
+        <div >
+            <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
+                <div class="width-wrapper">
+                    <h1>
+                        <a>
+                            <span class="wrapper">
+                                <i></i> <strong>Suzuki</strong>Egypt
+                            </span>
+                        </a>
+                    </h1>
+                    <div class="authorization-block">
+                        <div class="authorization">
+                            <a class="create" href="~/Content/#">Create an account</a>
+                            <span class="divider"></span>
+                            <a class="login" href="~/Content/#">Login</a>
+                        </div>
+                        <a class="add btn-big" href="~/Content/#"><span class="plus">+</span>Add advertisement</a>
                     </div>
-                    <a class="add btn-big" href="~/Content/#"><span class="plus">+</span>Add advertisement</a>
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-        </div>
 
 
-        <div id="stuck_container" >
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div id="stuck_container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
 
-                <div class="width-wrapper collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:70px">
-                  
+                    <div class="width-wrapper collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:70px">
+
                         <ul class="sf-menu navbar-nav mr-auto">
-                            <li class="nav-item current"><a class="nav-link" href="/">Home</a></li>
-                           
-                            <li class="nav-item" style="padding-left:10px"><a class="nav-link"  href="/Home/NewCar">New cars</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Home/About">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Home/Contact">Contacts</a></li>
-                            <li class="nav-item cartpart"  ><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;"  /> <a class="nav-link" style="cursor:pointer" onclick="goToCart()"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>
+                            <li id="NavHome"  class="nav-item"><a class="nav-link" href="/">Home</a></li>
+
+                            <li  id="NavNewCar"   class="nav-item" style="padding-left:10px"><a class="nav-link" href="/Home/NewCar">New cars</a></li>
+                            <li  id="NavAbout" class="nav-item"><a class="nav-link" href="About">About</a></li>
+                            <li  id="NavContact"  class="nav-item"><a class="nav-link" href="/Home/Contact">Contacts</a></li>
+                            <li class="nav-item cartpart"><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer" onclick="goToCart()"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>
 
                         </ul>
-                  
-                    <form id="search" action="search.php" method="GET" accept-charset="utf-8">
-                        <input type="text" name="s" />
-                        <a onclick="document.getElementById('search').submit()">
-                            <div class="search_icon"></div>
-                        </a>
-                    </form>
-                    <div class="clearfix"></div>
-                </div>
 
-            </nav>
+                        <form id="search" action="search.php" method="GET" accept-charset="utf-8">
+                            <input type="text" name="s" />
+                            <a onclick="document.getElementById('search').submit()">
+                                <div class="search_icon"></div>
+                            </a>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </nav>
+            </div>
         </div>
     </header>
     <section id="content">
+        
         <div class="width-wrapper width-wrapper__inset1">
             <div class="wrapper1">
                 <div class="container">
@@ -112,80 +116,81 @@
     <!--========================================================
                               FOOTER
     =========================================================-->
-    <footer id="footer">
-        <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset2">
-            <div class="wrapper4">
-                <div class="container">
-                    <div class="row">
-                        <div class="grid_3">
-                            <div class="box2">
-                                <h5>Cars for sale</h5>
-                                <ul class="list1">
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Used cars for sale</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Second hand cars for sale</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">New cars for sale</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Special Offers</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">Compare Cars</a></li>
-                                </ul>
+    <footer id="footer" >
+        <div class="container">
+            <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset2">
+                <div class="wrapper4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>For Company</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="/Home/About">About Us</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="/Home/Contact">Contact Us</a></li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>Car research</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Research Cars</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Car Valuations</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Car Finance</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Car Insurance</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">Car Comparisons</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"><a href="~/Content/#">Car Facts</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s"><a href="~/Content/#">History Reports</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>News & Reviews</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Car News</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Car Reviews</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Car Videos</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Car Advice</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">New Car Calendar</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>Categories</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">New cars</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Bikes</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Boats</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Trucks</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">Caravans</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"><a href="~/Content/#">Machinery</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="grid_3">
-                            <div class="box2">
-                                <h5>Car research</h5>
-                                <ul class="list1">
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Research Cars</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Car Valuations</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Car Finance</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Car Insurance</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">Car Comparisons</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"><a href="~/Content/#">Car Facts</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s"><a href="~/Content/#">History Reports</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="grid_3">
-                            <div class="box2">
-                                <h5>News & Reviews</h5>
-                                <ul class="list1">
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Car News</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Car Reviews</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Car Videos</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Car Advice</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">New Car Calendar</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="grid_3">
-                            <div class="box2">
-                                <h5>Categories</h5>
-                                <ul class="list1">
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">New cars</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Bikes</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Boats</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Trucks</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">Caravans</a></li>
-                                    <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"><a href="~/Content/#">Machinery</a></li>
-                                </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper5">
+                <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset3">
+                    <div >
+                        <div >
+                            <div class="grid_12">
+                                <div class="privacy-block wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                    <a href="~/Content/index.html">Car sell</a> &copy; <span id="copyright-year"></span>. <a href="~/Content/index-5.html">Privacy policy</a>
+                                    <!--{%FOOTER_LINK} -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="wrapper5">
-            <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset3">
-                <div class="container">
-                    <div class="row">
-                        <div class="grid_12">
-                            <div class="privacy-block wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                                <a href="~/Content/index.html">Car sell</a> &copy; <span id="copyright-year"></span>. <a href="~/Content/index-5.html">Privacy policy</a>
-                                <!--{%FOOTER_LINK} -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </footer>
     <script src="~/Content/js/script.js"></script>
 
