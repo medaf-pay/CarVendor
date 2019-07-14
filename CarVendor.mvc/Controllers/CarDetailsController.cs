@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CarVendor.mvc.ViewModels;
+using CarVendor.data.Entities;
+using CarVendor.mvc.Dtos;
 
 namespace CarVendor.mvc.Controllers
 {
@@ -77,25 +79,80 @@ namespace CarVendor.mvc.Controllers
         {
             var Items = HomeController._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId).CartItems;
             return Ok(Items);
-
-            // return View(userCart.CartItems);
         }
         [HttpPost]
         [Route("api/CartDetails/Payment")]
         public IHttpActionResult Payment(string SessionId, CustomerInfoModel CustomerInfo)
         {
-            HomeController._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId).CustomerInfo = CustomerInfo;
-
+            var customer_cart = HomeController._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId);
+            customer_cart.CustomerInfo = CustomerInfo;
             return Ok();
         }
+        [HttpPost]
+        [Route("api/cartdetails/paybycreditcard")]
+        public IHttpActionResult PayCreditCard(string sessionId, CreditCardModel creditCard)
+        {
+            var customer_cart = HomeController._shopingCarts.FirstOrDefault(cart => cart.SessionId == sessionId);
+            if (customer_cart == null && customer_cart.CustomerInfo == null && customer_cart.CartItems == null && customer_cart.CartItems.Count < 1)
+                return NotFound();
+            List<OrderItem> newOrderItems = new List<OrderItem>();
+            foreach (var orderItem in customer_cart.CartItems)
+            {
+                newOrderItems.Add(new OrderItem()
+                {
+                    CarId = orderItem.CarId,
+                    Color = orderItem.Color.Text,
+                    Quantity = (int)orderItem.Quantity,
+                    Category = orderItem.Category.Text,
+                });
+            }
+            Order newOrder = new Order()
+            {
+                Owner = new User()
+                {
+                    Email = customer_cart.CustomerInfo.Email,
+                    Mobile = customer_cart.CustomerInfo.Phone,
+                    Name = $"{customer_cart.CustomerInfo.FName} {customer_cart.CustomerInfo.MName} {customer_cart.CustomerInfo.LName}",
+                    FirstName = customer_cart.CustomerInfo.FName,
+                    MiddleName = customer_cart.CustomerInfo.MName,
+                    LastName = customer_cart.CustomerInfo.LName,
+                    Address1 = customer_cart.CustomerInfo.Address1,
+                    Address2 = customer_cart.CustomerInfo.Address2,
+                    City = customer_cart.CustomerInfo.City,
+                    Country = customer_cart.CustomerInfo.Country,
+                    Individually = customer_cart.CustomerInfo.Individually,
+                    OrgnizationName = customer_cart.CustomerInfo.OrgnizationName,
+                    OrgnizationSite = customer_cart.CustomerInfo.OrgnizationSite,
+                    State = customer_cart.CustomerInfo.State,
+                    RegistrationNo = customer_cart.CustomerInfo.RegistrationNo,
+                    Zip = customer_cart.CustomerInfo.Zip
+                },
+                OrderItems = newOrderItems,
+                DeliveryDetails = new DeliveryDetails()
+                {
+                    Address = customer_cart.CustomerInfo.Address1,
+                    City = customer_cart.CustomerInfo.City,
+                    ContactNumber = customer_cart.CustomerInfo.Phone,
+                    ContactPerson = $"{customer_cart.CustomerInfo.FName} {customer_cart.CustomerInfo.MName} {customer_cart.CustomerInfo.LName}",
+                    Country = customer_cart.CustomerInfo.Country,
+                    Town = customer_cart.CustomerInfo.State
+                }
+            };
+            db.Orders.Add(newOrder);
+            db.SaveChanges();
 
+            return Ok(new OrderDto()
+            {
+                Id = newOrder.Id
+            });
+        }
 
         [HttpGet]
         [Route("api/CartDetails/getFilters")]
         public IHttpActionResult getFilters()
         {
             filtersModel filters = new filtersModel();
-            filters.Brands= db.Brands.Select(s=>new BaseViewModel { Id=s.Id,Name=s.Name}).ToList();
+            filters.Brands = db.Brands.Select(s => new BaseViewModel { Id = s.Id, Name = s.Name }).ToList();
             filters.Categories = db.Categories.Select(s => new BaseViewModel { Id = s.Id, Name = s.Name }).ToList();
             filters.Colors = db.Colors.Select(s => new BaseViewModel { Id = s.Id, Name = s.Name }).ToList();
             return Ok(filters);
@@ -105,7 +162,7 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/Payment")]
         public IHttpActionResult Payment()
         {
-           
+
             return Ok();
         }
 

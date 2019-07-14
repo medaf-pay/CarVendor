@@ -10,6 +10,6 @@ namespace CarVendor.data.Entities
         where T : struct
     {
         public T Id { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
