@@ -3,7 +3,7 @@ namespace CarVendor.data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class v00 : DbMigration
+    public partial class V010 : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace CarVendor.data.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         Name = c.String(),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -25,7 +25,7 @@ namespace CarVendor.data.Migrations
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CarId = c.Long(nullable: false),
                         CategoryId = c.Long(nullable: false),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cars", t => t.CarId, cascadeDelete: true)
@@ -43,7 +43,7 @@ namespace CarVendor.data.Migrations
                         Condition = c.Int(nullable: false),
                         Type = c.Int(nullable: false),
                         BrandId = c.Long(nullable: false),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Brands", t => t.BrandId, cascadeDelete: true)
@@ -56,7 +56,7 @@ namespace CarVendor.data.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         CarId = c.Long(nullable: false),
                         ColorId = c.Long(nullable: false),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cars", t => t.CarId, cascadeDelete: true)
@@ -71,7 +71,7 @@ namespace CarVendor.data.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         ImageURL = c.String(),
                         CarColorId = c.Long(nullable: false),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.CarColors", t => t.CarColorId, cascadeDelete: true)
@@ -83,7 +83,7 @@ namespace CarVendor.data.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         Name = c.String(),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -93,7 +93,7 @@ namespace CarVendor.data.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         Name = c.String(),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -104,9 +104,10 @@ namespace CarVendor.data.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         Color = c.String(),
                         Quantity = c.Int(nullable: false),
+                        Category = c.String(),
                         CarId = c.Long(nullable: false),
                         OrderId = c.Long(nullable: false),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cars", t => t.CarId, cascadeDelete: true)
@@ -121,7 +122,7 @@ namespace CarVendor.data.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         DeliveryDetailsId = c.Long(nullable: false),
                         OwnerId = c.Long(nullable: false),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeliveryDetails", t => t.DeliveryDetailsId, cascadeDelete: true)
@@ -140,7 +141,7 @@ namespace CarVendor.data.Migrations
                         Town = c.String(),
                         ContactPerson = c.String(),
                         ContactNumber = c.String(),
-                        IsDeleted = c.Boolean(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -153,7 +154,20 @@ namespace CarVendor.data.Migrations
                         Email = c.String(),
                         Password = c.String(),
                         Mobile = c.String(),
-                        IsDeleted = c.Boolean(),
+                        Individually = c.Int(nullable: false),
+                        OrgnizationName = c.String(),
+                        OrgnizationSite = c.String(),
+                        RegistrationNo = c.String(),
+                        FirstName = c.String(),
+                        MiddleName = c.String(),
+                        LastName = c.String(),
+                        Address1 = c.String(),
+                        Address2 = c.String(),
+                        Country = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        Zip = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

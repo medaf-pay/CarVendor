@@ -45,9 +45,9 @@ namespace CarVendor.mvc.Controllers
                 cars = cars.Where(c => c.Colors.Any(c1 => c1.Id == Color)).Select(s=> { s.FirstImageView = s.Colors.Where(w => w.Id == Color).Select(s1 => s1.Images.Select(s3 => s3.Name).FirstOrDefault()).FirstOrDefault(); return s; }).ToList();
                
             }
-            //  ViewData["Colors"] = new SelectList(cars.Select(s=>s.Colors).ToList(), "Id", "Name");
             return View(cars);
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -78,16 +78,19 @@ namespace CarVendor.mvc.Controllers
             
             return View();
         }
+
         [Route("Home/CustomerInfo")]
         public ActionResult CustomerInfo()
         {
             return View();
         }
+
         [Route("Home/NewCar")]
         public ActionResult NewCar()
         {
             return View();
         }
+
         [Route("Home/CardInfo")]
         public ActionResult CardInfo(string RequestId)
         {

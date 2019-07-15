@@ -138,6 +138,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Dtos\OrderDto.cs" />
+    <Compile Include="Models\CreditCardModel.cs" />
     <Compile Include="Models\CustomerInfoModel.cs" />
     <Compile Include="ViewModels\CarViewModel.cs" />
     <Compile Include="Controllers\CarDetailsController.cs" />
@@ -377,6 +380,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Home\NewCar.cshtml" />
     <Content Include="Views\Home\CardInfo.cshtml" />
+    <Content Include="Views\Requests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

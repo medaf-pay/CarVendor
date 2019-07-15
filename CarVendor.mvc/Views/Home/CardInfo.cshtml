@@ -7,92 +7,83 @@
 <!------ Include the above in your HEAD tag ---------->
 <form ng-app="myApp" ng-controller="CardInfoCTR">
     <ul class="nav nav-tabs">
-        <li ng-class="{'active': SubTab==$index+1}" ng-repeat="item in SubTabList" >
-            <a ng-click="SelectSubTab($index+1)" >{{item}}</a>
+        <li ng-class="{'active': SubTab==$index+1}" ng-repeat="item in SubTabList">
+            <a ng-click="SelectSubTab($index+1)">{{item}}</a>
         </li>
-       
-       
     </ul>
 
     <div class="container col-lg-12" ng-if="SubTab==1">
-        <div class="row"  style="margin:5%;margin-left:30%">
+        <div class="row" style="margin:5%;margin-left:30%">
             <div class="col-xs-12 col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Payment Details
                         </h3>
-                        
                     </div>
                     <div class="panel-body">
-                        
-                            <div class="form-group">
-                                <label for="cardNumber">
-                                    CARD NUMBER
-                                </label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" ng-model="CreaditCard.Number" id="cardNumber" placeholder="Valid Card Number"
-                                           required autofocus />
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                </div>
+
+                        <div class="form-group">
+                            <label for="cardNumber">
+                                CARD NUMBER
+                            </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="CreditCard.Number" id="cardNumber" placeholder="Valid Card Number"
+                                       required autofocus />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-7 col-md-7">
-                                    <div class="form-group">
-                                        <label for="expityMonth">
-                                            EXPIRY DATE
-                                        </label>
-                                        <div class="col-xs-6 col-lg-6 pl-ziro">
-                                            <input type="text" class="form-control"  ng-model="CreaditCard.ExpiryDateMonth" id="expityMonth" placeholder="MM" required />
-                                        </div>
-                                        <div class="col-xs-6 col-lg-6 pl-ziro">
-                                            <input type="text" class="form-control"  ng-model="CreaditCard.ExpiryDateYear" id="expityYear" placeholder="YY" required />
-                                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label for="expityMonth">
+                                        EXPIRY DATE
+                                    </label>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <input type="text" class="form-control" ng-model="CreditCard.ExpiryDateMonth" id="expityMonth" placeholder="MM" required />
                                     </div>
-                                </div>
-                                <div class="col-xs-5 col-md-5 pull-right">
-                                    <div class="form-group">
-                                        <label for="cvCode">
-                                            CV CODE
-                                        </label>
-                                        <input type="password" class="form-control" ng-model="CreaditCard.CVCode" id="cvCode" placeholder="CV" required />
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <input type="text" class="form-control" ng-model="CreditCard.ExpiryDateYear" id="expityYear" placeholder="YY" required />
                                     </div>
                                 </div>
                             </div>
-                       
+                            <div class="col-xs-5 col-md-5 pull-right">
+                                <div class="form-group">
+                                    <label for="cvCode">
+                                        CV CODE
+                                    </label>
+                                    <input type="password" class="form-control" ng-model="CreditCard.CVCode" id="cvCode" placeholder="CV" required />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                 </div>
+                </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active">
                         <a href="#"><span class="badge pull-right"><span></span> {{totalPrice}} EGP</span> Final Payment</a>
                     </li>
                 </ul>
                 <br />
-                <a  class="btn btn-success btn-lg btn-block" ng-click="PayByCreditCard()" role="button">Pay</a>
+                <a class="btn btn-success btn-lg btn-block" ng-click="PayByCreditCard()" role="button">Pay</a>
             </div>
         </div>
     </div>
 
-   
-       
-    <div  class="container col-lg-12"  ng-if="SubTab==2">
-
+    <div class="container col-lg-12" ng-if="SubTab==2">
         <div class="container">
             <div class="form-row">
                 <div class="form-group col-md-4 mb-4">
                     <label for="validationCustom01">Bank Name</label>
                     <input ng-model="BankInfo.BName" type="text" class="form-control" id="validationCustom01" placeholder="bank name" value="" required>
-
                 </div>
                 <div class=" form-group col-md-4 mb-4">
                     <label for="validationCustom02">Bank Branch</label>
                     <input type="text" ng-model="BankInfo.BBranch" class="form-control" id="validationCustom02" placeholder="branch of bank" value="" required>
-
                 </div>
                 <div class=" form-group col-md-4 mb-4">
                     <label for="validationCustom02">Payment Date</label>
                     <input type="date" ng-model="BankInfo.PaymentDate" class="form-control" id="validationCustom02" placeholder="Date" value="" required>
-
                 </div>
             </div>
         </div>
@@ -117,17 +108,14 @@
             <div class="form-row">
                 <div class="form-group col-md-4 mb-4">
                     <label for="inputAddress">Memo and Notes</label>
-                    <textarea  class="form-control" ng-model="BankInfo.Memo" id="inputAddress" placeholder="Notes"></textarea>
+                    <textarea class="form-control" ng-model="BankInfo.Memo" id="inputAddress" placeholder="Notes"></textarea>
                 </div>
-              
             </div>
-          
         </div>
-
-    <button class="btn btn-primary" ng-click="SentBankTransferData()">Send</button>
+        <button class="btn btn-primary" ng-click="SentBankTransferData()">Send</button>
     </div>
-            
-            </form>
+    <img src="~/Content/images/camera-loader.gif" alt="loading" ng-if="loading==true" />
+</form>
 <style>
     body {
         margin-top: 20px;

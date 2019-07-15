@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CarVendor.data.Entities
 {
-  public  class TEntity<T>
-        where T : struct
+    public class TEntity<T>
+          where T : struct
     {
         public T Id { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
