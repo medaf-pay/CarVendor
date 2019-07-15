@@ -62,6 +62,7 @@ namespace CarVendor.mvc.Controllers
                      }).FirstOrDefault();
                 Cars.Add(car);
             }
+            HomeController._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId).CartItems = Cars;
             return Ok(Cars);
         }
 

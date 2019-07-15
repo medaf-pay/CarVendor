@@ -118,7 +118,12 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         $scope.loading = true;
         $http.post("/api/CartDetails/paybycreditcard?SessionId=" + RequestId, $scope.CreditCard).then(function () {
             $scope.loading = false;
-            window.location.href = "/Home/CardInfo?RequestId=" + RequestId;
+            redirect();
+         
         })
+
+    }
+    function redirect() {
+        window.location.href = "/Home/CardInfo?RequestId=" + RequestId;
     }
 });
