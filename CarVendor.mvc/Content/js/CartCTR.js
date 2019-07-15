@@ -83,6 +83,7 @@ app.controller('HomeCTR', function ($scope, $http) {
 
 });
 app.controller('CardInfoCTR', function ($scope, $http) {
+    $scope.loading = false;
     $scope.CreditCard = {};
     $scope.BankInfo = {};
     var urlParams = new URLSearchParams(window.location.search);
@@ -108,11 +109,15 @@ app.controller('CardInfoCTR', function ($scope, $http) {
 
     }
     $scope.SentBankTransferData = function () {
+        $scope.loading = true;
+
        
     }
     $scope.PayByCreditCard = function () {
         $scope.CreditCard.TotalPrice = $scope.totalPrice;
+        $scope.loading = true;
         $http.post("/api/CartDetails/paybycreditcard?SessionId=" + RequestId, $scope.CreditCard).then(function () {
+            $scope.loading = false;
             window.location.href = "/Home/CardInfo?RequestId=" + RequestId;
         })
     }
