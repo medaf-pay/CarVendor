@@ -1,4 +1,5 @@
 ﻿using CarVendor.data;
+using CarVendor.mvc.Common;
 using CarVendor.mvc.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace CarVendor.mvc.Controllers
     public class HomeController : Controller
     {
         DataBaseContext db = new DataBaseContext();
-        public static List<CartModel> _shopingCarts = new List<CartModel>();
+      
         
         [Route("home/Index")]
         public ActionResult Index(long Category=0, long Color=0)
@@ -68,7 +69,7 @@ namespace CarVendor.mvc.Controllers
             var userGuid = Guid.NewGuid();
             model.Guid = userGuid.ToString();
             model.SessionId = model.Guid;
-            _shopingCarts.Add(model);
+            Utilities._shopingCarts.Add(model);
             return Json(model);
         }
 
@@ -94,7 +95,7 @@ namespace CarVendor.mvc.Controllers
         [Route("Home/CardInfo")]
         public ActionResult CardInfo(string RequestId)
         {
-            var items = _shopingCarts.FirstOrDefault(cart => cart.SessionId == RequestId).CartItems;
+            var items = Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == RequestId).CartItems;
             decimal total = 0;
             foreach (var item in items)
             {

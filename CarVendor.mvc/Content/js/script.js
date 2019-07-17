@@ -258,7 +258,7 @@ function goToCart() {
         cartItems: cart
     }
     $.post(
-        "Home/cart",
+        "/Home/cart",
         shoppingCart,
         function (result) {
             console.log(result);

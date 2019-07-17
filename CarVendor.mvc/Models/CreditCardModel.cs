@@ -12,5 +12,7 @@ namespace CarVendor.mvc.Models
         public string ExpiryDateYear { get; set; }
         public string CVCode { get; set; }
         public decimal TotalPrice { get; set; }
+ 
     }
+   
 }

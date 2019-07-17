@@ -11,61 +11,61 @@
             <h4 style="color:#0026ff">Enter your Information</h4>
         </div>
     </div>
-    <form class="needs-validation" novalidate>
+    <form class="needs-validation" name="CustomerInfoFrom" novalidate>
         <div class="container">
             <div class="form-row">
-                <div class="form-group col-md-4 mb-4">
-                    <label class="radio-inline"><input type="radio" name="optradio" ng-init="CustomerInfo.Individually='1'" ng-model="CustomerInfo.Individually" value="1">Individually</label>
+                <div class="form-group col-md-4 mb-4" >
+                    <label class="radio-inline" style="margin-right:10px"><input type="radio" name="optradio" ng-init="CustomerInfo.Individually='1'" ng-model="CustomerInfo.Individually" value="1">Individual</label>
                     <label class="radio-inline"><input type="radio" name="optradio" ng-model="CustomerInfo.Individually" value="2">Orgnization</label>
                 </div>
             </div>
         </div>
         <div class="container" ng-if="CustomerInfo.Individually==2">
-            <div class="form-row">
-                <div class="form-group col-md-4 mb-4">
-                    <label for="validationCustom01">Orgnization Name</label>
-                    <input ng-model="CustomerInfo.OrgnizationName" type="text" class="form-control" id="validationCustom01" placeholder="Enter the Orgnization name" value="" required>
+            <div class="form-row" >
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':(CustomerInfoFrom.InputOrgnizationName.$touched||SubmetAction)&&CustomerInfoFrom.InputOrgnizationName.$invalid}">
+                    <label for="validationCustom01">Corporate Name</label>
+                    <input ng-model="CustomerInfo.OrgnizationName" type="text" name="InputOrgnizationName"   class="form-control" id="validationCustom01" placeholder="Enter the Corporate name" value="" required>
 
                 </div>
-                <div class=" form-group col-md-4 mb-4">
-                    <label for="validationCustom02">Web Site</label>
-                    <input type="text" ng-model="CustomerInfo.OrgnizationSite" class="form-control" id="validationCustom02" placeholder="Web site of Orgnization" value="" required>
+                <div class=" form-group col-md-4 mb-4" ng-class="{'submitted':(CustomerInfoFrom.InputOrgnizationSite.$touched||SubmetAction)&&CustomerInfoFrom.InputOrgnizationSite.$invalid}">
+                    <label for="validationCustom02">Corporate Web Site</label>
+                    <input type="text" ng-model="CustomerInfo.OrgnizationSite" name="InputOrgnizationSite" class="form-control" id="validationCustom02" placeholder="Web site of Corporate" value="" required>
 
                 </div>
-                <div class="form-group col-md-4 mb-4">
-                    <label for="validationCustom02">Registration No</label>
-                    <input type="text" class="form-control" ng-model="CustomerInfo.RegistrationNo" id="validationCustom02" placeholder="Orgnization Registration No" value="" required>
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputRegistrationNo.$touched||SubmetAction)&&CustomerInfoFrom.InputRegistrationNo.$invalid}">
+                    <label for="validationCustom02">Corporate Registration No</label>
+                    <input type="text" class="form-control" ng-model="CustomerInfo.RegistrationNo" name="InputRegistrationNo" id="validationCustom02" placeholder="Corporate Registration No" value="" required>
 
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="form-row">
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputFName.$touched||SubmetAction)&&CustomerInfoFrom.InputFName.$invalid}">
                     <label for="validationCustom01">First name</label>
-                    <input ng-model="CustomerInfo.FName" type="text" class="form-control" id="validationCustom01" placeholder="First name" value="" required>
+                    <input ng-model="CustomerInfo.FName" type="text" name="InputFName" class="form-control" id="validationCustom01" placeholder="First name" value="" required>
 
                 </div>
-                <div class=" form-group col-md-4 mb-4">
+                <div class=" form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputMName.$touched||SubmetAction)&&CustomerInfoFrom.InputMName.$invalid}">
                     <label for="validationCustom02">Middle Name</label>
-                    <input type="text" ng-model="CustomerInfo.MName" class="form-control" id="validationCustom02" placeholder="middle name" value="" required>
+                    <input type="text"  ng-model="CustomerInfo.MName" name="InputMName" class="form-control" id="validationCustom02" placeholder="middle name" value="" required>
 
                 </div>
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputLName.$touched||SubmetAction)&&CustomerInfoFrom.InputLName.$invalid}">
                     <label for="validationCustom02">Last name</label>
-                    <input type="text" class="form-control" ng-model="CustomerInfo.LName" id="validationCustom02" placeholder="Last name" value="" required>
+                    <input type="text" class="form-control" ng-model="CustomerInfo.LName" name="InputLName" id="validationCustom02" placeholder="Last name" value="" required>
 
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-6 mb-4">
+                <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(CustomerInfoFrom.InputEmail.$touched||SubmetAction)&&CustomerInfoFrom.InputEmail.$invalid}">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" ng-model="CustomerInfo.Email" id="inputEmail4" placeholder="Email">
+                    <input type="email" class="form-control" ng-model="CustomerInfo.Email" name="InputEmail"  id="inputEmail4" placeholder="Email" required>
                 </div>
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputPhone.$touched||SubmetAction)&&CustomerInfoFrom.InputPhone.$invalid}">
                     <label for="inputPassword4">Mobile Number</label>
-                    <input type="tel" class="form-control" id="inputPhone" ng-model="CustomerInfo.Phone" placeholder="Phone">
+                    <input type="tel" class="form-control" id="inputPhone" name="InputPhone" ng-model="CustomerInfo.Phone" placeholder="Phone" required>
                 </div>
 
             </div>
@@ -73,40 +73,40 @@
         </div>
         <div class="container">
             <div class="form-row">
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputAddress1.$touched||SubmetAction)&&CustomerInfoFrom.InputAddress1.$invalid}">
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control" ng-model="CustomerInfo.Address1" id="inputAddress" placeholder="1234 Main St">
+                    <input type="text" class="form-control"  ng-model="CustomerInfo.Address1" name="InputAddress1" id="inputAddress" placeholder="1234 Main St" required>
                 </div>
-                <div class="form-group col-md-4 mb-4">
-                    <label for="inputAddress2">Address 2</label>
-                    <input type="text" class="form-control" ng-model="CustomerInfo.Address2" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputAddress2.$touched||SubmetAction)&&CustomerInfoFrom.InputAddress2.$invalid}">
+                    <label for="inputAddress2">Delivery Address</label>
+                    <input type="text" class="form-control"  ng-model="CustomerInfo.Address2" name="InputAddress2" id="inputAddress2" placeholder="1234 Main St" required>
                 </div>
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':(CustomerInfoFrom.InputCountry.$touched||SubmetAction)&&CustomerInfoFrom.InputCountry.$invalid}">
                     <label for="inputAddress2">Country</label>
-                    <input type="text" class="form-control" id="inputAddress2" ng-model="CustomerInfo.Country" placeholder="Your Country">
+                    <input type="text" class="form-control" id="inputAddress2"  name="InputCountry" ng-model="CustomerInfo.Country"  placeholder="Your Country" required>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4  mb-4">
+                <div class="form-group col-md-4  mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputCity.$touched||SubmetAction)&&CustomerInfoFrom.InputCity.$invalid}">
                     <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity" ng-model="CustomerInfo.City">
+                    <input type="text" class="form-control" id="inputCity" name="InputCity" ng-model="CustomerInfo.City" required>
                 </div>
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputState.$touched||SubmetAction)&&CustomerInfoFrom.InputState.$invalid}" >
                     <label for="inputState">State</label>
-                    <input type="text" class="form-control" id="Your State" ng-model="CustomerInfo.State">
+                    <input type="text" class="form-control" id="Your State" name="InputState" ng-model="CustomerInfo.State" required>
                 </div>
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputZip.$touched||SubmetAction)&&CustomerInfoFrom.InputZip.$invalid}" >
                     <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip" ng-model="CustomerInfo.Zip">
+                    <input type="text" class="form-control" id="inputZip" name="InputZip" ng-model="CustomerInfo.Zip" required>
                 </div>
             </div>
         </div>
 
         <div class="container">
             <div class="form-row">
-                <div class="form-group col-md-4 mb-4">
+                <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputNID.$touched||SubmetAction)&&CustomerInfoFrom.InputNID.$invalid}">
                     <label for="inputPassword4">NID</label>
-                    <input type="text" class="form-control" ng-model="CustomerInfo.NID" id="inputNID" placeholder="NID or Passport">
+                    <input type="text" class="form-control" ng-model="CustomerInfo.NID" name="InputNID" placeholder="NID or Passport" required/>
                 </div>
 
             </div>
@@ -120,3 +120,4 @@
         </div>
     </form>
 </div>
+

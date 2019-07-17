@@ -49,23 +49,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseContext.cs" />
+    <Compile Include="Entities\BankTransferInfo.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Car.cs" />
     <Compile Include="Entities\CarCategory.cs" />
     <Compile Include="Entities\CarColor.cs" />
     <Compile Include="Entities\CarCondition.cs" />
+    <Compile Include="Entities\CardInfo.cs" />
     <Compile Include="Entities\CarImage.cs" />
     <Compile Include="Entities\CarType.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Color.cs" />
-    <Compile Include="Entities\DeliveryDetails.cs" />
+    <Compile Include="Entities\CustomerDeliveryDetails.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderItem.cs" />
+    <Compile Include="Entities\PaymethodType.cs" />
     <Compile Include="Entities\TEntity.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\201907141425061_V0.1.0.cs" />
-    <Compile Include="Migrations\201907141425061_V0.1.0.Designer.cs">
-      <DependentUpon>201907141425061_V0.1.0.cs</DependentUpon>
+    <Compile Include="Entities\CorporateDetails.cs" />
+    <Compile Include="Migrations\201907161829133_m2.cs" />
+    <Compile Include="Migrations\201907161829133_m2.Designer.cs">
+      <DependentUpon>201907161829133_m2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907161831579_m3.cs" />
+    <Compile Include="Migrations\201907161831579_m3.Designer.cs">
+      <DependentUpon>201907161831579_m3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,8 +82,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907141425061_V0.1.0.resx">
-      <DependentUpon>201907141425061_V0.1.0.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907161829133_m2.resx">
+      <DependentUpon>201907161829133_m2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907161831579_m3.resx">
+      <DependentUpon>201907161831579_m3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

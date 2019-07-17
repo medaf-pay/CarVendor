@@ -58,11 +58,17 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
 
     $scope.CompletPay = function () {
         carsData.CustomerInfo = $scope.CustomerInfo
-        $http.post("/api/CartDetails/Payment?SessionId=" + RequestId, $scope.CustomerInfo).then(function () {
+        if ($scope.CustomerInfoFrom.$valid) {
+            $scope.SubmetAction = false;
+            $http.post("/api/CartDetails/Payment?SessionId=" + RequestId, $scope.CustomerInfo).then(function () {
 
-            window.location.href = "/Home/CardInfo?RequestId=" + RequestId;
+                window.location.href = "/Home/CardInfo?RequestId=" + RequestId;
 
-        })
+            })
+        }
+        else {
+            $scope.SubmetAction = true;
+        }
         
     }
 });
@@ -109,21 +115,36 @@ app.controller('CardInfoCTR', function ($scope, $http) {
 
     }
     $scope.SentBankTransferData = function () {
-        $scope.loading = true;
+
+        if ($scope.CartInfoFrom.$valid) {
+            $scope.loading = true;
+            $http.post("/api/CartDetails/SetInfoBankTransfer?SessionId=" + RequestId, $scope.BankInfo).then(function () {
+                $scope.loading = false;
+
+                window.location.href = "/Requests";
+
+            });
+        }
+        else {
+            $scope.SubmetAction = true;
+        }
 
        
     }
     $scope.PayByCreditCard = function () {
         $scope.CreditCard.TotalPrice = $scope.totalPrice;
-        $scope.loading = true;
-        $http.post("/api/CartDetails/paybycreditcard?SessionId=" + RequestId, $scope.CreditCard).then(function () {
-            $scope.loading = false;
-            redirect();
-         
-        })
+       
 
+        if ($scope.CartInfoFrom.$valid) {
+            $scope.loading = true;
+            $http.post("/api/CartDetails/paybycreditcard?SessionId=" + RequestId, $scope.CreditCard).then(function () {
+                $scope.loading = false;
+                window.location.href = "/Requests";
+            })
+        }
+        else {
+            $scope.SubmetAction = true;
+        }
     }
-    function redirect() {
-        window.location.href = "/Home/CardInfo?RequestId=" + RequestId;
-    }
+ 
 });
