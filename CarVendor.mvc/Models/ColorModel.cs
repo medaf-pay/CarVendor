@@ -9,5 +9,6 @@ namespace CarVendor.mvc.Models
     {
         public long Id { get; set; }
         public string Text { get; set; }
+        public decimal Price { get; set; }
     }
 }

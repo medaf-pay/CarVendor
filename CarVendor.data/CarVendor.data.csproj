@@ -57,7 +57,7 @@
     <Compile Include="Entities\CarCondition.cs" />
     <Compile Include="Entities\CardInfo.cs" />
     <Compile Include="Entities\CarImage.cs" />
-    <Compile Include="Entities\CarType.cs" />
+    <Compile Include="Entities\CarFamily.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Color.cs" />
     <Compile Include="Entities\CustomerDeliveryDetails.cs" />
@@ -74,6 +74,18 @@
     <Compile Include="Migrations\201907161831579_m3.Designer.cs">
       <DependentUpon>201907161831579_m3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907211113141_m31.cs" />
+    <Compile Include="Migrations\201907211113141_m31.Designer.cs">
+      <DependentUpon>201907211113141_m31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907211118183_m4.cs" />
+    <Compile Include="Migrations\201907211118183_m4.Designer.cs">
+      <DependentUpon>201907211118183_m4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907241555325_m41.cs" />
+    <Compile Include="Migrations\201907241555325_m41.Designer.cs">
+      <DependentUpon>201907241555325_m41.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +99,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907161831579_m3.resx">
       <DependentUpon>201907161831579_m3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907211113141_m31.resx">
+      <DependentUpon>201907211113141_m31.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907211118183_m4.resx">
+      <DependentUpon>201907211118183_m4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907241555325_m41.resx">
+      <DependentUpon>201907241555325_m41.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

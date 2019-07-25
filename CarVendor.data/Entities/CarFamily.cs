@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarVendor.data.Entities
 {
-    public enum CarType
+    public class CarFamily:TEntity<int>
     {
-        Sedan, Hatchback, SUV,Saloon, Coupe, CrossOver
+        public String Name { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

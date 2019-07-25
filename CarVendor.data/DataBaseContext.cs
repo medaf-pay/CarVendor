@@ -33,7 +33,7 @@ namespace CarVendor.data
         public DbSet<CustomerDeliveryDetails> CustomerDeliveryDetails { get; set; }
         public DbSet<PaymethodType> paymethodTypes { get; set; }
         public DbSet<BankTransferInfo> BanksTransferInfo { get; set; }
-
+        public DbSet<CarFamily> CarFamilies { get; set; }
 
 
 

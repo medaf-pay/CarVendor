@@ -497,7 +497,9 @@ h6 {
 .submitted .ng-invalid {
     border: 1px solid red;
 }
-
+.submitted .custom-file-label {
+    border: 1px solid red;
+}
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -595,7 +597,7 @@ nav {
 
 @media (max-width: 1199px) {
     nav {
-        margin-left: 10px;
+      
     }
 }
 

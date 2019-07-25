@@ -249,20 +249,8 @@ function changeNavSelection(ElementId) {
         $('#NavHome').addClass("current");
     
 }
-
-
 function goToCart() {
    
-    let shoppingCart = {
-        sessionId: getJSessionId(),
-        cartItems: cart
-    }
-    $.post(
-        "/Home/cart",
-        shoppingCart,
-        function (result) {
-            console.log(result);
-            window.location.href = "/home/cart?RequestId=" + result.SessionId;
-        }
-    );
+    $('#cartClickId').click();
+
 }

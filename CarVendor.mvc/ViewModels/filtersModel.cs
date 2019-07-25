@@ -10,6 +10,8 @@ namespace CarVendor.mvc.ViewModels
         public List<BaseViewModel> Brands { get; set; }
         public List<BaseViewModel> Categories { get; set; }
         public List<BaseViewModel> Colors { get; set; }
+        public List<CarFamilyModel> CarFamilies { get; set; }
+        public List<String> Models { get; set; }
     }
 
 }

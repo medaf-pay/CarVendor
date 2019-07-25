@@ -12,7 +12,8 @@ namespace CarVendor.data.Entities
         public string Model { get; set; }
         //public decimal Price { get; set; }
         public CarCondition Condition { get; set; }
-        public CarType Type { get; set; }
+        public int TypeId  { get; set; }
+        public CarFamily Type { get; set; }
 
 
         #region [ Brand ]
@@ -21,6 +22,6 @@ namespace CarVendor.data.Entities
         #endregion
         public virtual ICollection<CarCategory> Carcategories { get; set; }
 
-        public virtual ICollection<CarColor> CarColors { get; set; }
+    
     }
 }

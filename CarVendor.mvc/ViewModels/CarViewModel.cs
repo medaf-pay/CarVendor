@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CarVendor.data.Entities;
 
 namespace CarVendor.mvc
 {
@@ -11,11 +12,9 @@ namespace CarVendor.mvc
         public string Name { get; set; }
         public string Brand { get; set; }
         public List<CategoryViewModel> Categories { get; set; }
-        public List<ColorViewModel> Colors { get; set; }
         public string FirstImageView { get; set; }
         public long BrandId { get; set; }
-
-
+        public CarFamilyModel CarFamily { get;  set; }
     }
     public class BaseViewModel
     {
@@ -25,12 +24,18 @@ namespace CarVendor.mvc
     }
     public class CategoryViewModel : BaseViewModel
     {
-        public decimal Price { get; set; }
+        public List<ColorViewModel> Colors { get; set; }
+
+       
     }
     public class ColorViewModel : BaseViewModel
     {
-        
+        public decimal Price { get; set; }
         public List<BaseViewModel> Images { get; set; }
     }
-  
+    public class CarFamilyModel : BaseViewModel
+    {
+
+    }
+
 }

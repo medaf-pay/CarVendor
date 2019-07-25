@@ -14,7 +14,7 @@ app.controller('CartCTR', function ($scope, $http, $location) {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
         angular.forEach($scope.Items, function (value, key) {
-            $scope.totalPrice = $scope.totalPrice + value.Price * value.Quantity;
+            $scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
         $('.cartSpan').html($scope.totalQuantity + " | " + $scope.totalPrice + " EGP");
@@ -47,7 +47,7 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
         angular.forEach($scope.Items, function (value, key) {
-            $scope.totalPrice = $scope.totalPrice + value.Price * value.Quantity;
+            $scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
         $('.cartSpan').html($scope.totalQuantity + " | " + $scope.totalPrice + " EGP");
@@ -74,18 +74,71 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
 });
 
 app.controller('HomeCTR', function ($scope, $http) {
-
-
+  
+    $http.get("/api/CarDetails/IndexData").then(function (data) {
+        $scope.Cars = data.data;
+        $scope.CarPrice = new Array($scope.Cars.length);
+    });
     $http.get("/api/CartDetails/getFilters").then(function (data) {
         $scope.Brands = data.data.Brands;
         $scope.Categories = data.data.Categories;
 
         $scope.Colors = data.data.Colors;
-
     })
-    $scope.FindCar = function () {
-        window.location.href = "/Home/Index?Category=" + $scope.Categoryselected + "&Color=" + $scope.Colorselected;
+    $scope.CategoryChange = function (car, Id,index) {
+        cardata = car.Categories.find(x => x.Id == Id).Colors[0];
+        $scope.CarColorselected = cardata.Id.toString();
+        $scope.CarPrice[index] = cardata.Price;
+        car.FirstImageView = cardata.Images[0].Name
     }
+    $scope.ColorChange = function (car,Category, ColorId,index) {
+
+        cardata = Category.Colors.find(x => x.Id == ColorId);
+       
+        $scope.CarPrice[index] = cardata.Price;
+        car.FirstImageView = cardata.Images[0].Name
+    }
+    $scope.FindCar = function () {
+        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Category=" + $scope.Categoryselected + "&Color=" + $scope.Colorselected).then(
+            function (data) {
+                $scope.Cars = data.data;
+            })
+    }
+    var cartProduct = [];
+    $scope.addToCart = function (product) {
+        product.CarId = product.Id;
+
+        product.price = $("#Price_" + product.Id).text();
+        product.color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
+        product.category = { id: $("#category_" + product.Id).val(), text: $("#category_" + product.Id).children("option:selected").text() }
+
+        cartProduct.push(product);
+        updateCart(cartProduct);
+    }
+
+    function updateCart(cart) {
+        let sum = 0;
+        for (var i = 0; i < cart.length; i++) {
+            sum += eval(cart[i].price);
+        }
+        $('.cartSpan').html(cart.length + " | " + sum + " EGP");
+        $('.cartpart').css("background-color", "#8ad329");
+
+        //  createCookie("shoppingCart", JSON.stringify(cart), 2);
+    }
+    $scope.goToCart = function () {
+
+
+        let shoppingCart = {
+            sessionId: null,
+            cartItems: cartProduct
+        }
+        $http.post("/Home/cart", shoppingCart).then(function (result) {
+            console.log(result);
+            window.location.href = "/home/cart?RequestId=" + result.data.SessionId;
+        });
+    }
+   
 
 });
 app.controller('CardInfoCTR', function ($scope, $http) {
@@ -107,7 +160,7 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
         angular.forEach($scope.Items, function (value, key) {
-            $scope.totalPrice = $scope.totalPrice + value.Price * value.Quantity;
+            $scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
         $('.cartSpan').html($scope.totalQuantity + " | " + $scope.totalPrice + " EGP");

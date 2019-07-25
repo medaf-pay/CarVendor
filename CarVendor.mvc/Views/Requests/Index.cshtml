@@ -5,15 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Orders</h2><br/>
+<div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("New Order", "", "Home")
 </p>
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayName("Sequence")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OrderItems)
@@ -21,50 +23,74 @@
         <th>
             @Html.DisplayNameFor(model => model.DeliveryDetails)
         </th>
-        <th></th>
+        <th>@Html.DisplayNameFor(model => model.DeliveryDetails.State)</th>
     </tr>
-
+    @{int i = 0;}
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @foreach (var order in item.OrderItems)
-                {
-                    <div>
-
-                        <span>
+        i++;
+    <tr>
+        <td>
+           
+            <span>@i</span>
+        </td>
+        <td>
+            @foreach (var order in item.OrderItems)
+            {
+                <div class="row">
+                    <div class="col-md-3">
+                        <span style="color:green">
+                            Car Name:
+                        </span>
+                        <span style="color:chocolate">
                             @order.Car.Name
                         </span>
-                        <span>
+                    </div>
+                    <div class="col-md-2">
+                        <span style="color:green">
+                            Model:
+                        </span>
+                        <span style="color:chocolate">
                             @order.Car.Model
                         </span>
-                        <span>
-                          Quantity:  @order.Quantity
+                    </div>
+                    <div class="col-md-2">
+                        <span style="color:green">
+                            Quantity:
                         </span>
-                        <span>
+                        <span style="color:chocolate">
+                            @order.Quantity
+                        </span>
+                    </div>
+                    <div class="col-md-2">
+                        <span style="color:green">
+                            Color:
+                        </span>
+                        <span style="color:chocolate">
                             @order.Color
                         </span>
-                        <span>
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:green">
+                            Category:
+                        </span>
+                        <span style="color:chocolate">
                             @order.Category
                         </span>
                     </div>
+                </div>
 
-                }
+            }
 
-            </td>
-            <td>
-                @{ }
-                @Html.DisplayFor(modelItem => item.DeliveryDetails.FirstName))
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+        </td>
+        <td>
+            @{ }
+            @Html.DisplayFor(modelItem => item.DeliveryDetails.FirstName) @Html.DisplayFor(modelItem => item.DeliveryDetails.MiddleName)  @Html.DisplayFor(modelItem => item.DeliveryDetails.LastName)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.DeliveryDetails.State)
+        </td>
+    </tr>
     }
 
 </table>
