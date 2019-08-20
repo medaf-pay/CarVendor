@@ -290,12 +290,14 @@
     <Content Include="images\box-shadow2-left.png" />
     <Content Include="images\box-shadow2-right.png" />
     <Content Include="images\camera-loader.gif" />
+    <Content Include="images\celerio_sz2_cbpm_rf_32_cropped.png" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\form-loader.gif" />
     <Content Include="images\gradient1.png" />
     <Content Include="images\gradient2.png" />
     <Content Include="images\gradient3.png" />
     <Content Include="images\gradient4.png" />
+    <Content Include="images\ignis_sz3_pwp_rf_32_cropped-copy.png" />
     <Content Include="images\page1_img1.png" />
     <Content Include="images\page1_img10.png" />
     <Content Include="images\page1_img11.png" />
@@ -367,6 +369,8 @@
     <Content Include="images\SuzukiSwiftDzire2019.jpg" />
     <Content Include="images\SuzukiSX42019.jpg" />
     <Content Include="images\SuzukiVitara2019.jpg" />
+    <Content Include="images\swiftsport.png" />
+    <Content Include="images\sz3_swift.png" />
     <Content Include="images\under-development.png" />
     <Content Include="HtmlPage1.html" />
     <Content Include="Web.config" />
@@ -421,6 +425,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -51,7 +51,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(NewCarFrom.InputCarName.$touched||SubmetAction)&&NewCarFrom.InputCarName.$invalid}">
                         <label>Car Name:</label>
-                        <input type="text" class="form-control" ng-model="NewCar.CarName" name="InputCarName" id="inputEmail4" placeholder="Enter name of car" required>
+                        <input type="text" class="form-control" ng-model="NewCar.CarName" name="InputCarName" id="inputEmail4" placeholder="Enter car name" required>
                     </div>
 
                     <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(NewCarFrom.SelectModel.$touched||SubmetAction)&&NewCarFrom.SelectModel.$invalid}">
@@ -131,7 +131,7 @@
 
                                     <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(NewCarFrom.InputPrice{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&NewCarFrom.InputPrice{{$parent.$parent.$index}}{{$index}}.$invalid}">
                                         <label>Price:</label>
-                                        <input type="text" class="form-control" name="InputPrice{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Price" placeholder="Enter price of car" required>
+                                        <input type="text" class="form-control" name="InputPrice{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Price" placeholder="Enter the car price" required>
                                     </div>
                                     <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(NewCarFrom.SelectColor{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&NewCarFrom.SelectColor{{$parent.$parent.$index}}{{$index}}.$invalid}">
 
@@ -145,7 +145,7 @@
                                     </div>
                                     <div class="form-group col-md-6 mb-6" ng-class="{'submitted':(NewCarFrom.InputQuantity{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&NewCarFrom.InputQuantity{{$parent.$parent.$index}}{{$index}}.$invalid}">
                                         <label>Quantity:</label>
-                                        <input type="number" class="form-control" name="InputQuantity{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Quantity" placeholder="Enter No of car available" required>
+                                        <input type="number" class="form-control" name="InputQuantity{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Quantity" placeholder="Enter No of available cars" required>
                                     </div>
                                     <div class="form-group col-md-4 mb-4">
                                         <div>

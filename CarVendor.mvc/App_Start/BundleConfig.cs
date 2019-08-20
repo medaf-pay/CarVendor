@@ -10,7 +10,7 @@ namespace CarVendor.mvc
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = true;
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                 "~/Content/js/jquery.min.js",
