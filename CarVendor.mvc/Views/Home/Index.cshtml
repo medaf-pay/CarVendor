@@ -58,12 +58,12 @@
                                 <div class="grid_3">
                                     <ul class="tabs-list">
                                         @*<li>/Content/js
-                                                <a href="#tabs-1">
-                                                    <div class="tab tab-first maxheight">
-                                                        Used cars
-                                                    </div>
-                                                </a>
-                                            </li>*@
+                                <a href="#tabs-1">
+                                    <div class="tab tab-first maxheight">
+                                        Used cars
+                                    </div>
+                                </a>
+                            </li>*@
                                         <li>
                                             <a href="#tabs-2">
                                                 <div class="tab maxheight">
@@ -109,7 +109,7 @@
                                         <button class="btn-big" ng-click="FindCar()" data-type="submit">Find a car</button>
 
                                     </div>
-                                    
+
                                 </form>
                             </div>
 
@@ -121,14 +121,14 @@
                             <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
                         </div>
                         @*<div class="post1">
-                                <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Latest REVIEWS</h2>
-                                <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img1.png" alt="" />
-                                <time class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" datetime="2014-01-01">Monday, June 24, 2013</time>
-                                <h3 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
-                                    <a href="#">Lorem ipsum dolor sit amet conse</a>
-                                </h3>
-                                <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                            </div>*@
+                <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Latest REVIEWS</h2>
+                <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img1.png" alt="" />
+                <time class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" datetime="2014-01-01">Monday, June 24, 2013</time>
+                <h3 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
+                    <a href="#">Lorem ipsum dolor sit amet conse</a>
+                </h3>
+                <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+            </div>*@
                     </div>
                     <div class="grid_9">
                         <div class="slider-wrapper">
@@ -231,37 +231,37 @@
                                             </h4>
 
                                             <div class="row">
-                                                <img id="car.Id" class="wow fadeIn" width="270px" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" />
+                                                <img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" />
                                             </div>
 
                                             <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <span class="first col-md-6" style="padding-right: 22px;">Brand: <span class="highlighted">{{car.Brand}}</span></span>
-                                                <span class="second" style="padding-right: 7px;" >Price: <span Id="Price_{{car.Id}}" ng-init="CarPrice[$index]=car.Categories[0].Colors[0].Price" class="highlighted">{{CarPrice[$index]}}</span>  EGP</span>
+                                                <span class="second" style="padding-right: 7px;">Price: <span Id="Price_{{car.Id}}" ng-init="CarPrice[$index]=car.Categories[0].Colors[0].Price" class="highlighted">{{CarPrice[$index]}}</span>  EGP</span>
                                             </div>
 
                                             <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
 
                                                 <div class="container" style="padding-right: 11px;">
                                                     <div class="form-row" style="margin-top:10px">
-                                                        <div class="form-group col-md-6 ">
+                                                        <div class="form-group col-md-6">
                                                             <span class="heading">Category:</span>
                                                             <select name="Make" Id="category_{{car.Id}}" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-change="CategoryChange(car,CarCategoryselected,$index)" ng-init="CarCategoryselected=car.Categories[0].Id.toString()" ng-model="CarCategoryselected">
-                                                               
-                                                                <option ng-repeat="Category in car.Categories"   value="{{Category.Id}}">{{Category.Name}}</option>
+
+                                                                <option ng-repeat="Category in car.Categories" value="{{Category.Id}}">{{Category.Name}}</option>
                                                             </select>
                                                         </div>
-                                                    
-                                                            <div class="form-group col-md-5">
-                                                                <span class="heading">Color:</span>
-                                                                <select name="Make"  Id="color_{{car.Id}}" class="tmSelect auto" ng-repeat="Category in car.Categories |filter: {Id:CarCategoryselected }" ng-change="ColorChange(car,Category,CarColorselected,$parent.$index)" data-class="tmSelect tmSelect2"  ng-init="CarColorselected=Category.Colors[0].Id.toString()" ng-model="CarColorselected">
 
-                                                                 
-                                                                          <option  ng-repeat="Color in Category.Colors"   value="{{Color.Id}}">{{Color.Name}}</option>
+                                                        <div class="form-group col-md-5">
+                                                            <span class="heading" style="padding-right:20px">Color:</span>
+                                                            <select name="Make" Id="color_{{car.Id}}" class="tmSelect auto" ng-repeat="Category in car.Categories |filter: {Id:CarCategoryselected }" ng-change="ColorChange(car,Category,CarColorselected,$parent.$index)" data-class="tmSelect tmSelect2" ng-init="CarColorselected=Category.Colors[0].Id.toString()" ng-model="CarColorselected">
 
-                                                                  
-                                                                </select>
-                                                            </div>
-                                                        
+
+                                                                <option ng-repeat="Color in Category.Colors" value="{{Color.Id}}">{{Color.Name}}</option>
+
+
+                                                            </select>
+                                                        </div>
+
 
                                                     </div>
 
@@ -278,14 +278,14 @@
 
 
                                             @*<div class="info2 wow fadeIn row" data-wow-duration="1s" data-wow-delay=".3s">
-                                                <a class="btn-default" style="cursor:pointer" onclick="addToCart({CarId:@item.Id})">
-                                                               <span>Add to Cart</span>
-                                                           </a>
-                                                           <div class="clearfix"></div>
-                                                       </div>*@
+        <a class="btn-default" style="cursor:pointer" onclick="addToCart({CarId:@item.Id})">
+                       <span>Add to Cart</span>
+                   </a>
+                   <div class="clearfix"></div>
+               </div>*@
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
