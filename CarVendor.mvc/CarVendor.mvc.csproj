@@ -194,6 +194,7 @@
     <Content Include="Content\images\box-shadow2-right.png" />
     <Content Include="Content\images\camera-loader.gif" />
     <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\final-final.png" />
     <Content Include="Content\images\form-loader.gif" />
     <Content Include="Content\images\gradient1.png" />
     <Content Include="Content\images\gradient2.png" />
@@ -243,6 +244,8 @@
     <Content Include="Content\images\page4_img7.png" />
     <Content Include="Content\images\page4_img8.png" />
     <Content Include="Content\images\page4_img9.png" />
+    <Content Include="Content\images\siglogo.png" />
+    <Content Include="Content\images\SiteLogo.gif" />
     <Content Include="Content\images\slider1.png" />
     <Content Include="Content\images\slider2.png" />
     <Content Include="Content\images\slider3.png" />
@@ -344,6 +347,7 @@
     <Content Include="images\page4_img9.png" />
     <Content Include="images\Rolling.gif" />
     <Content Include="images\seoudiCompany.png" />
+    <Content Include="images\siglogo.png" />
     <Content Include="images\slider1.png" />
     <Content Include="images\slider2.png" />
     <Content Include="images\slider3.png" />
