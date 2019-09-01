@@ -1,40 +1,65 @@
 <htm>
     <head>
+        <style>
+            #customers {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
 
+                #customers td, #customers th {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                }
+
+                #customers tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+
+                #customers tr:hover {
+                    background-color: #ddd;
+                }
+
+                #customers th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: left;
+                    background-color: #4CAF50;
+                    color: white;
+                }
+        </style>
     </head>
-    <body>
-        <H1>Dear Team</H1>
-        <h3>This order has been submitted</h3>
-        <h3>CustomerName:{{CustomerInfo.FName}} {{CustomerInfo.MName}} {{CustomerInfo.LName}}</h3>
-        <h3>CustomerMobile:{{CustomerInfo.Phone}}</h3>
-        <h3>CustomerAdress:{{CustomerInfo.Address1}}</h3>
-        <H1>Order Details:-</H1>
-        <table>
-            <tr>
-                <th>Car Name</th>
-                <th>Brand</th>
-                <th>Color</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Quantity</th>
-            </tr>
-            {{#CartItems}}
-        <tr>
-            <td>{{CarName}}</td>
-            <td>{{Brand}}</td>
-            <td>{{Color.Text}}</td>
-            <td>{{Color.Text}}</td>
-            <td>{{Category.Text}}</td>
-            <td>{{Price}}</td>
-            <td>{{Quantity}}</td>
-        </tr>
-            {{/CartItems}}
-        <tr>
-            <td colspan="5">Total</td>
-            <td>{{Total Price}}</td>
-            <td>{{Total Quantity}}</td>
 
-        </tr>
+    <body>
+        <h3>Dear Team</h3>
+        <4>This order has been submitted</4>
+        <h4>CustomerName:{{CustomerInfo.FName}} {{CustomerInfo.MName}} {{CustomerInfo.LName}}</h4>
+        <h4>CustomerMobile:{{CustomerInfo.Phone}}</h4>
+        <h4>CustomerAdress:{{CustomerInfo.Address1}}</h4>
+
+        <hr />
+
+        <h3>Order Details:-</h3>
+
+        <table id="customers">
+                <tr>
+                    <th>Car Name</th>
+                    <th>Brand</th>
+                    <th>Color</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+                {{#CartItems}}
+            <tr>
+                <td>{{CarName}}</td>
+                <td>{{Brand}}</td>
+                <td>{{Color.Text}}</td>
+                <td>{{Category.Text}}</td>
+                <td>{{Price}}</td>
+                <td>{{Quantity}}</td>
+            </tr>
+                {{/CartItems}}
         </table>
     </body>
 </htm>
