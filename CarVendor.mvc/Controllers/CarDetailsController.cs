@@ -61,21 +61,24 @@ namespace CarVendor.mvc.Controllers
 
             if (Category != 0)
             {
-                cars = cars.Select(s => { s.Categories= s.Categories.Where(c1 => c1.Id == Category).Select(s1 => { return s1; }).ToList(); return s; }).Where(c => c.Categories.Count > 0).ToList();
-           cars=cars.Where(c => c.Categories.Count > 0).ToList();
+                cars = cars.Select(s => { s.Categories = s.Categories.Where(c1 => c1.Id == Category).Select(s1 => { return s1; }).ToList(); return s; }).Where(c => c.Categories.Count > 0).ToList();
+                cars = cars.Where(c => c.Categories.Count > 0).ToList();
             }
             if (Color != 0)
             {
-                cars = cars.Select(s => {
-                    s.Categories = s.Categories.Select(s1 => 
+                cars = cars.Select(s =>
+                {
+                    s.Categories = s.Categories.Select(s1 =>
                     { s1.Colors = s1.Colors.Where(c => c.Id == Color).Select(s2 => { return s2; }).ToList(); return s1; }).Where(c1 => c1.Colors.Count > 0).ToList();
                     s.FirstImageView = s.Categories.Select(s1 => s1.Colors.Select(s2 => s2.Images.Select(s3 => s3.Name).FirstOrDefault()).FirstOrDefault()).FirstOrDefault();
 
-                    return s; }).Where(c => c.Categories.Count > 0).ToList();
-              
+                    return s;
+                }).Where(c => c.Categories.Count > 0).ToList();
+
             }
             return Ok(cars);
         }
+
         [HttpGet]
         [Route("api/CarDetails/GetImageByColorId/{carId}/{colorId}")]
         public IHttpActionResult GetImageByColorId(long carId, long colorId)
@@ -117,9 +120,9 @@ namespace CarVendor.mvc.Controllers
                          CarName = s.Name,
                          Category = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => new CategoryModel { Id = s1.Category.Id, Text = s1.Category.Name }).FirstOrDefault(),
                          Color = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).
-                         Select(s2=>s2.CarColors.Where(c => c.ColorId == item.Color.Id).
-                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name,Price=s1.Price }).FirstOrDefault()).FirstOrDefault(),
-                       //  Price = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.Price).FirstOrDefault(),
+                         Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
+                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name, Price = s1.Price }).FirstOrDefault()).FirstOrDefault(),
+                         //  Price = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.Price).FirstOrDefault(),
                          Quantity = 1
                      }).FirstOrDefault();
                 Cars.Add(car);
@@ -145,6 +148,7 @@ namespace CarVendor.mvc.Controllers
             var Items = Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId).CartItems;
             return Ok(Items);
         }
+
         [HttpPost]
         [Route("api/CartDetails/Payment")]
         public IHttpActionResult Payment(string SessionId, CustomerInfoModel CustomerInfo)
@@ -153,12 +157,13 @@ namespace CarVendor.mvc.Controllers
             customer_cart.CustomerInfo = CustomerInfo;
             return Ok();
         }
+
         [HttpPost]
         [Route("api/cartdetails/paybycreditcard")]
         public IHttpActionResult PayCreditCard(string sessionId, CreditCardModel creditCard)
         {
-            long result= Utilities.SetOrderDetails(sessionId,db, creditCard);
-            if (result==-1)
+            long result = Utilities.SetOrderDetails(sessionId, db, creditCard);
+            if (result == -1)
                 return NotFound();
             return Ok(result);
         }
@@ -184,11 +189,11 @@ namespace CarVendor.mvc.Controllers
             filters.CarFamilies = db.CarFamilies.Select(s => new CarFamilyModel { Id = s.Id, Name = s.Name }).ToList();
             filters.Models = new List<string>();
             var year = DateTime.Now.Year;
-            for (int y=year+1;y> year-10;y--)
+            for (int y = year + 1; y > year - 10; y--)
             {
-                
-                    filters.Models.Add(y.ToString());
-               
+
+                filters.Models.Add(y.ToString());
+
             }
             return Ok(filters);
         }
@@ -211,8 +216,8 @@ namespace CarVendor.mvc.Controllers
             {
                 Directory.CreateDirectory(path);
             }
-     
-          
+
+
             foreach (string key in HttpContext.Current.Request.Files)
             {
                 HttpPostedFile postedFile = HttpContext.Current.Request.Files[key];
@@ -228,7 +233,7 @@ namespace CarVendor.mvc.Controllers
         [HttpPost]
         public HttpResponseMessage AddNewCar(NewCarModel carModel)
         {
-          
+
             Car car = new Car()
             {
                 BrandId = carModel.Brand,
@@ -247,7 +252,7 @@ namespace CarVendor.mvc.Controllers
                 carCategory.CategoryId = item.Category;
                 carCategory.IsDeleted = false;
                 carCategory.CarColors = new List<CarColor>();
-                foreach(var colorData in item.moreDetails)
+                foreach (var colorData in item.moreDetails)
                 {
                     CarColor = new CarColor();
                     CarColor.CarImages = new List<CarImage>()

@@ -85,6 +85,10 @@ namespace CarVendor.mvc.Common
 
             newOrder.DeliveryDetails = Owner;
             db.Orders.Add(newOrder);
+            // TODO: Send Mail Here
+            EmailTemplate Email = new EmailTemplate();
+            var emailHtml = Email.ReadTemplateEmail(customer_cart);
+            GmailSender.SendEmail("islam.ibrahim@medafinvestment.com", "Serious!1", "i_gad_@hotmail.com", "Order", emailHtml, null);
             try
             {
                 db.SaveChanges();

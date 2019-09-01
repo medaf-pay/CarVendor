@@ -79,42 +79,45 @@ app.controller('HomeCTR', function ($scope, $http) {
         $scope.Cars = data.data;
         $scope.CarPrice = new Array($scope.Cars.length);
     });
+
     $http.get("/api/CartDetails/getFilters").then(function (data) {
         $scope.Brands = data.data.Brands;
         $scope.Categories = data.data.Categories;
 
         $scope.Colors = data.data.Colors;
-    })
-    $scope.CategoryChange = function (car, Id,index) {
-        cardata = car.Categories.find(x => x.Id == Id).Colors[0];
+    });
+
+    $scope.CategoryChange = function (car, Id, index) {
+        cardata = car.Categories.find(x => x.Id === Id).Colors[0];
         $scope.CarColorselected = cardata.Id.toString();
         $scope.CarPrice[index] = cardata.Price;
-        car.FirstImageView = cardata.Images[0].Name
-    }
-    $scope.ColorChange = function (car,Category, ColorId,index) {
+        car.FirstImageView = cardata.Images[0].Name;
+    };
 
-        cardata = Category.Colors.find(x => x.Id == ColorId);
-       
+    $scope.ColorChange = function (car, Category, ColorId, index) {
+
+        cardata = Category.Colors.find(x => x.Id === ColorId);
+
         $scope.CarPrice[index] = cardata.Price;
-        car.FirstImageView = cardata.Images[0].Name
-    }
+        car.FirstImageView = cardata.Images[0].Name;
+    };
+
     $scope.FindCar = function () {
         $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Category=" + $scope.Categoryselected + "&Color=" + $scope.Colorselected).then(
             function (data) {
                 $scope.Cars = data.data;
-            })
-    }
+            });
+    };
     var cartProduct = [];
+
     $scope.addToCart = function (product) {
         product.CarId = product.Id;
-
         product.price = $("#Price_" + product.Id).text();
         product.color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
         product.category = { id: $("#category_" + product.Id).val(), text: $("#category_" + product.Id).children("option:selected").text() }
-
         cartProduct.push(product);
         updateCart(cartProduct);
-    }
+    };
 
     function updateCart(cart) {
         let sum = 0;
@@ -123,24 +126,21 @@ app.controller('HomeCTR', function ($scope, $http) {
         }
         $('.cartSpan').html(cart.length + " | " + sum + " EGP");
         $('.cartpart').css("background-color", "#8ad329");
-
-        //  createCookie("shoppingCart", JSON.stringify(cart), 2);
     }
+
     $scope.goToCart = function () {
-
-
         let shoppingCart = {
             sessionId: null,
             cartItems: cartProduct
-        }
+        };
         $http.post("/Home/cart", shoppingCart).then(function (result) {
-            console.log(result);
             window.location.href = "/home/cart?RequestId=" + result.data.SessionId;
         });
-    }
+    };
    
 
 });
+
 app.controller('CardInfoCTR', function ($scope, $http) {
     $scope.loading = false;
     $scope.CreditCard = {};
@@ -151,11 +151,13 @@ app.controller('CardInfoCTR', function ($scope, $http) {
     $scope.SubTabList = ["Credit Card", "Bank Transfer"];
     $scope.SelectSubTab = function (tab) {
         $scope.SubTab = tab;
-    }
+    };
+
     $http.get("/api/CartDetails/GetFinalItems?SessionId=" + RequestId).then(function (data) {
         $scope.Items = data.data;
         calcTotal();
-    })
+    });
+
     function calcTotal() {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
@@ -167,37 +169,32 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         $('.cartpart').css("background-color", "#8ad329");
 
     }
+
     $scope.SentBankTransferData = function () {
 
         if ($scope.CartInfoFrom.$valid) {
             $scope.loading = true;
             $http.post("/api/CartDetails/SetInfoBankTransfer?SessionId=" + RequestId, $scope.BankInfo).then(function () {
                 $scope.loading = false;
-
                 window.location.href = "/Requests";
-
             });
         }
         else {
             $scope.SubmetAction = true;
         }
+    };
 
-       
-    }
     $scope.PayByCreditCard = function () {
         $scope.CreditCard.TotalPrice = $scope.totalPrice;
-       
-
         if ($scope.CartInfoFrom.$valid) {
             $scope.loading = true;
-            $http.post("/api/CartDetails/paybycreditcard?SessionId=" + RequestId, $scope.CreditCard).then(function () {
+            $http.post("/api/CartDetails/paybycreditcard?SessionId=" + RequestId, $scope.CreditCard).then(function (data) {
                 $scope.loading = false;
                 window.location.href = "/Requests";
-            })
+            });
         }
         else {
             $scope.SubmetAction = true;
         }
-    }
- 
+    };
 });
