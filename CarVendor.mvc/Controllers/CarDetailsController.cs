@@ -122,7 +122,7 @@ namespace CarVendor.mvc.Controllers
                          Color = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).
                          Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
                          Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name, Price = s1.Price }).FirstOrDefault()).FirstOrDefault(),
-                         //  Price = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.Price).FirstOrDefault(),
+                         Price = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2=>s2.Price).FirstOrDefault()).FirstOrDefault(),
                          Quantity = 1
                      }).FirstOrDefault();
                 Cars.Add(car);
