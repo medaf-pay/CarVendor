@@ -7,12 +7,12 @@ namespace CarVendor.data.Migrations
     {
         public override void Up()
         {
-            AlterColumn("dbo.CustomerDeliveryDetails", "PaymethodType", c => c.Int());
+            AddColumn("dbo.Users", "Password", c => c.String());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.CustomerDeliveryDetails", "PaymethodType", c => c.Long());
+            DropColumn("dbo.Users", "Password");
         }
     }
 }
