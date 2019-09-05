@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace CarVendor.mvc.Controllers
-{
+{[Authorize]
     public class HomeController : Controller
     {
         DataBaseContext db = new DataBaseContext();

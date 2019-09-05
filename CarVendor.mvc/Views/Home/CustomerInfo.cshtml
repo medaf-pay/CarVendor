@@ -75,11 +75,11 @@
             <div class="form-row">
                 <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputAddress1.$touched||SubmetAction)&&CustomerInfoFrom.InputAddress1.$invalid}">
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control"  ng-model="CustomerInfo.Address1" name="InputAddress1" id="inputAddress" placeholder="1234 Main St" required>
+                    <input type="text" class="form-control"  ng-model="CustomerInfo.MainAddress" name="InputAddress1" id="inputAddress" placeholder="1234 Main St" required>
                 </div>
                 <div class="form-group col-md-4 mb-4" ng-class="{'submitted':( CustomerInfoFrom.InputAddress2.$touched||SubmetAction)&&CustomerInfoFrom.InputAddress2.$invalid}">
                     <label for="inputAddress2">Delivery Address</label>
-                    <input type="text" class="form-control"  ng-model="CustomerInfo.Address2" name="InputAddress2" id="inputAddress2" placeholder="1234 Main St" required>
+                    <input type="text" class="form-control"  ng-model="CustomerInfo.DeliveryAddress" name="InputAddress2" id="inputAddress2" placeholder="1234 Main St" required>
                 </div>
                 <div class="form-group col-md-4 mb-4" ng-class="{'submitted':(CustomerInfoFrom.InputCountry.$touched||SubmetAction)&&CustomerInfoFrom.InputCountry.$invalid}">
                     <label for="inputAddress2">Country</label>

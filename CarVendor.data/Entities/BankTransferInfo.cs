@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CarVendor.data.Entities
 {
   public  class BankTransferInfo
-    {[ForeignKey("UserDeliveryDetails")]
+    {
         public long Id { get; set; }
         public string BName { get; set; }
         public string BBranch { get; set; }
@@ -18,6 +18,6 @@ namespace CarVendor.data.Entities
         public string ACH { get; set; }
         public string Memo { get; set; }
         
-        public virtual CustomerDeliveryDetails UserDeliveryDetails { get; set; }
+        //public virtual CustomerDeliveryDetails UserDeliveryDetails { get; set; }
     }
 }

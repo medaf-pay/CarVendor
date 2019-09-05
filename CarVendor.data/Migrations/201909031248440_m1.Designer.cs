@@ -7,13 +7,13 @@ namespace CarVendor.data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class m4 : IMigrationMetadata
+    public sealed partial class m1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(m4));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(m1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907211118183_m4"; }
+            get { return "201909031248440_m1"; }
         }
         
         string IMigrationMetadata.Source

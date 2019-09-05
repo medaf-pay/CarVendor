@@ -64,26 +64,26 @@ namespace CarVendor.mvc.Common
             }
             CorporateDetails corporateDetails = null;
 
-            CustomerDeliveryDetails Owner = new CustomerDeliveryDetails()
-            {
-                Email = customer_cart.CustomerInfo.Email,
-                Mobile = customer_cart.CustomerInfo.Phone,
-                FirstName = customer_cart.CustomerInfo.FName,
-                MiddleName = customer_cart.CustomerInfo.MName,
-                LastName = customer_cart.CustomerInfo.LName,
-                Address = customer_cart.CustomerInfo.Address1,
-                DeliveryAddress = customer_cart.CustomerInfo.Address2,
-                City = customer_cart.CustomerInfo.City,
-                Country = customer_cart.CustomerInfo.Country,
-                Individually = customer_cart.CustomerInfo.Individually,
-                PaymethodTypeId = 1,
-                Zip = customer_cart.CustomerInfo.Zip,
-                CardInfo = card,
-                BankTransferInfo = bankTransferInfo
+            //CustomerDeliveryDetails Owner = new CustomerDeliveryDetails()
+            //{
+            //    Email = customer_cart.CustomerInfo.Email,
+            //    Mobile = customer_cart.CustomerInfo.Phone,
+            //    FirstName = customer_cart.CustomerInfo.FName,
+            //    MiddleName = customer_cart.CustomerInfo.MName,
+            //    LastName = customer_cart.CustomerInfo.LName,
+            //    Address = customer_cart.CustomerInfo.MainAddress,
+            //    DeliveryAddress = customer_cart.CustomerInfo.DeliveryAddress,
+            //    City = customer_cart.CustomerInfo.City,
+            //    Country = customer_cart.CustomerInfo.Country,
+            //    Individually = customer_cart.CustomerInfo.Individually,
+            //    PaymethodTypeId = 1,
+            //    Zip = customer_cart.CustomerInfo.Zip,
+            //    CardInfo = card,
+            //    BankTransferInfo = bankTransferInfo
 
-            };
+            //};
 
-            newOrder.DeliveryDetails = Owner;
+            //newOrder.DeliveryDetails = Owner;
             db.Orders.Add(newOrder);
             // TODO: Send Mail Here
             EmailTemplate Email = new EmailTemplate();
@@ -101,12 +101,12 @@ namespace CarVendor.mvc.Common
             {
                 corporateDetails = new CorporateDetails()
                 {
-                    OrgnizationName = customer_cart.CustomerInfo.OrgnizationName,
-                    OrgnizationSite = customer_cart.CustomerInfo.OrgnizationSite,
-                    RegistrationNo = customer_cart.CustomerInfo.RegistrationNo,
-                    Id = newOrder.DeliveryDetailsId
+                    CorporateName = customer_cart.CustomerInfo.OrgnizationName,
+                    CorporateSite = customer_cart.CustomerInfo.OrgnizationSite,
+                    RegistrationNo = customer_cart.CustomerInfo.RegistrationNo
+                    //Id = newOrder.DeliveryDetailsId
                 };
-                db.corporateDetails.Add(corporateDetails);
+                db.CorporatesDetails.Add(corporateDetails);
                 db.SaveChanges();
             }
 
