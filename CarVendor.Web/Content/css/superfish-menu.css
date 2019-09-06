@@ -1,0 +1,193 @@
+/* ======= Main menu variables ======= */
+/* ======= Sub menus common variables ======= */
+/* ======= First level sub menu variables ======= */
+nav {
+  float: none;
+}
+@media (max-width: 1199px) {
+  nav {
+    margin-left: 10px;
+  }
+}
+@media (max-width: 979px) {
+  nav {
+    display: inline-block;
+  }
+}
+/* Main menu styles
+========================================================*/
+.sf-menu > li {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  position: relative;
+  text-align: center;
+}
+.sf-menu > li:first-child {
+  border-left: 1px solid #d7d7d7;
+  border-right: 1px solid #d7d7d7;
+}
+.sf-menu > li + li {
+  border-right: 1px solid #d7d7d7;
+}
+.sf-menu > li > .sf-with-ul:after {
+  font-family: FontAwesome;
+  font-size: 10px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  content: "\f0d7";
+  color: #000000;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -3px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.sf-menu > li > a {
+  text-transform: uppercase;
+  font: 700 18px/18px "Lato", sans-serif;
+  display: block;
+  padding: 19px 30px 27px;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+  color: #000000;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-top: 6px solid transparent;
+}
+.sf-menu > li > a:hover {
+  border-top-color: #8ad329;
+  color: #000000;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.sf-menu > li > a:active {
+  background: transparent;
+  color: #000000;
+}
+.sf-menu .sfHover > a {
+  border-top-color: #8ad329;
+}
+.sf-menu .sfHover > a:after {
+  color: #000000;
+}
+.sf-menu > li.current > a {
+  border-top-color: #8ad329;
+  color: #000000;
+}
+.sf-menu > li.current > .sf-with-ul:after {
+  color: #000000;
+}
+.sf-menu > li.sfHover > a {
+  border-top-color: #8ad329;
+  color: #000000;
+}
+.sf-menu a {
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.sf-menu a:hover {
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+/* First level sub-menu styles
+========================================================*/
+.sf-menu ul {
+  display: none;
+  min-width: 194px;
+  font: 300 16px/16px "Lato", sans-serif;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  background: #333333;
+  background: rgba(51, 51, 51, 0.98);
+  text-align: left;
+  padding: 19px 0;
+  z-index: 2;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.sf-menu ul li {
+  position: relative;
+  display: block;
+}
+.sf-menu ul li > .sf-with-ul:after {
+  font-family: FontAwesome;
+  font-size: 10px;
+  position: absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: default;
+  content: "\f0da";
+  color: #fefefe;
+  bottom: 9px;
+  right: 15px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.sf-menu ul li a {
+  display: block;
+  padding: 9px 5px 10px 28px;
+  color: #fefefe;
+  text-transform: none;
+}
+.sf-menu ul li a:hover {
+  background: #4b4b4b;
+  color: #fefefe;
+}
+.sf-menu ul > .sfHover > a {
+  background: #4b4b4b;
+}
+.sf-menu ul > .sfHover > a:after {
+  color: #fefefe;
+}
+.sf-menu ul li.sfHover > a {
+  background: #4b4b4b;
+  color: #fefefe;
+}
+/* Second level sub-menu styles
+========================================================*/
+.sf-menu ul ul {
+  position: absolute;
+  top: -19px;
+  left: 194px;
+  margin-left: 0;
+  z-index: 4;
+}
+@media only screen and (max-width: 767px) {
+  .sf-menu {
+    display: none;
+  }
+  nav {
+    width: 100%;
+    float: none;
+  }
+  .select-menu {
+    border-radius: none;
+    display: block;
+    text-transform: capitalize;
+    float: none;
+    color: #aaaaaa;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    font: 400 22px/28px Lato, sans-serif;
+    text-align: left;
+    border: 1px solid #c1c1c1;
+    padding: 2px 0;
+    position: relative;
+  }
+  .select-menu option {
+    text-align: left;
+    position: relative;
+  }
+}
+/*Core variables and mixins*/

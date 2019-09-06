@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+
+    <!--[if lt IE 9]>
+    <script src="~/Content/js/html5shiv.js"></script>
+    <div id="ie6-alert" style="width: 100%; text-align:center;">
+      <img src="~/Content/http://beatie6.frontcube.com/images/ie6.jpg" alt="Upgrade IE 6" width="640" height="344" border="0" usemap="#Map" longdesc="http://die6.frontcube.com" />
+      <map name="Map" id="Map"><area shape="rect" coords="496,201,604,329" href="~/Content/http://www.microsoft.com/windows/internet-explorer/default.aspx" target="_blank" alt="Download Interent Explorer" /><area shape="rect" coords="380,201,488,329" href="~/Content/http://www.apple.com/safari/download/" target="_blank" alt="Download Apple Safari" /><area shape="rect" coords="268,202,376,330" href="~/Content/http://www.opera.com/download/" target="_blank" alt="Download Opera" /><area shape="rect" coords="155,202,263,330" href="~/Content/http://www.mozilla.com/" target="_blank" alt="Download Firefox" />
+        <area shape="rect" coords="35,201,143,329" href="~/Content/http://www.google.com/chrome" target="_blank" alt="Download Google Chrome" />
+      </map>
+    </div>
+    <![endif]-->
+    @using Microsoft.AspNet.Identity;
+
+@{ 
+var userId=User.Identity.GetUserId();
+    }
+
+    <link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
+
+
+
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/Content/js")
+
+
+    <script src="/Content/js/jquery-migrate-1.2.1.js"></script>
+
+    <script src="/Content/booking/js/booking.js"></script>
+
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+   
+</head>
+
+
+<body>
+    <!--========================================================
+                              HEADER
+    =========================================================-->
+    <header id="header" >
+        <div >
+            <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
+                <div class="width-wrapper">
+                    <h1>
+                        
+                        <a href="/">
+
+                            <img class="thumbnail" height="99px" width="260px" style="margin-top: -4px;" src="~/Content/images/final-final.png" />
+
+
+                        
+
+                        </a>
+                    </h1>
+                    <div class="authorization-block">
+                       @if (userId==null)
+                       {  <div class="authorization">
+                            <a class="create" href="/Account/Register">Create an account</a>
+                            <span class="divider"></span>
+                            <a class="login" href="/Account/login">Login</a>
+                        </div>
+                       }
+                        <a class="add btn-big" href="#"><span class="plus">+</span>Add advertisement</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+
+            <div id="stuck_container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+                    <div class="width-wrapper collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:70px">
+
+                        <ul class="sf-menu navbar-nav mr-auto">
+                            <li id="NavHome"  class="nav-item"><a class="nav-link" href="/">Home</a></li>
+
+                            <li  id="NavNewCar"   class="nav-item" style="padding-left:10px"><a class="nav-link" href="/car/create">New cars</a></li>
+                            <li  id="NavAbout" class="nav-item"><a class="nav-link" href="/Home/About">About Us</a></li>
+                            <li  id="NavContact"  class="nav-item"><a class="nav-link" href="/Home/Contact">Contact Us</a></li>
+                            <li class="nav-item cartpart"><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer" onclick="goToCart()"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>
+
+                        </ul>
+
+                        <form id="search" action="search.php" method="GET" accept-charset="utf-8">
+                            <input type="text" name="s" />
+                            <a onclick="document.getElementById('search').submit()">
+                                <div class="search_icon"></div>
+                            </a>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </header>
+    <section id="content">
+        
+        <div class="width-wrapper width-wrapper__inset1">
+            <div class="wrapper1">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--========================================================
+                              FOOTER
+    =========================================================-->
+    <footer  id="footer" >
+        <div class="container">
+            <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset2">
+                <div class="wrapper4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>Company Information</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="/Home/About">About Us</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="/Home/Contact">Contact Us</a></li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>Car research</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Research Cars</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Car Evaluation</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Car Finance</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Car Insurance</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">Car Comparisons</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"><a href="~/Content/#">Car Facts</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s"><a href="~/Content/#">History Reports</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>News & Reviews</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Car News</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Car Reviews</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Car Videos</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Car Advice</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">New Car Calendar</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid_3">
+                                <div class="box2">
+                                    <h5>Categories</h5>
+                                    <ul class="list1">
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">New cars</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Bikes</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Boats</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Trucks</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s"><a href="~/Content/#">Caravans</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"><a href="~/Content/#">Machinery</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper5">
+                <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset3">
+                    <div >
+                        <div >
+                            <div class="grid_12">
+                                <div class="privacy-block wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                    <a href="~/Content/index.html">Car sell</a> &copy; <span id="copyright-year"></span>. <a href="~/Content/index-5.html">Privacy policy</a>
+                                    <!--{%FOOTER_LINK} -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <script src="~/Content/js/script.js"></script>
+
+
+</body>
+</html>
