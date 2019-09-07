@@ -16,7 +16,9 @@
     @using Microsoft.AspNet.Identity;
 
 @{ 
-var userId=User.Identity.GetUserId();
+    var userId=User.Identity.GetUserId();
+    var userName = User.Identity.GetUserName();
+
     }
 
     <link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
@@ -57,13 +59,21 @@ var userId=User.Identity.GetUserId();
                         </a>
                     </h1>
                     <div class="authorization-block">
-                       @if (userId==null)
-                       {  <div class="authorization">
-                            <a class="create" href="/Account/Register">Create an account</a>
-                            <span class="divider"></span>
-                            <a class="login" href="/Account/login">Login</a>
-                        </div>
-                       }
+                        @if (userId == null)
+                        {<div class="authorization">
+                                <a class="create" href="/Account/Register">Create an account</a>
+                                <span class="divider"></span>
+                                <a class="login" href="/Account/login">Login</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="authorization">
+                                <a class="create" href="/Requests/Index">Wellcome @userName</a>
+                                <span class="divider"></span>
+                                <a class="login" href="/Account/LogOff">Logout</a>
+                            </div>
+                        }
                         <a class="add btn-big" href="#"><span class="plus">+</span>Add advertisement</a>
                     </div>
                 </div>

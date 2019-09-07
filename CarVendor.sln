@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarVendor.mvc", "CarVendor.mvc\CarVendor.mvc.csproj", "{838C8717-A796-44C4-80A1-992323246B9C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarVendor.data", "CarVendor.data\CarVendor.data.csproj", "{01E76FA5-ED48-450D-A07E-108A981F489F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarVendor.Web", "CarVendor.Web\CarVendor.Web.csproj", "{FD576A49-BD86-439A-8F9B-F38822B4B9EA}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{838C8717-A796-44C4-80A1-992323246B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{838C8717-A796-44C4-80A1-992323246B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{838C8717-A796-44C4-80A1-992323246B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{838C8717-A796-44C4-80A1-992323246B9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{01E76FA5-ED48-450D-A07E-108A981F489F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01E76FA5-ED48-450D-A07E-108A981F489F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01E76FA5-ED48-450D-A07E-108A981F489F}.Release|Any CPU.ActiveCfg = Release|Any CPU
