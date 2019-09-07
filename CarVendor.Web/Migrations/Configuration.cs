@@ -1,18 +1,19 @@
-namespace CarVendor.data.Migrations
+namespace CarVendor.Web.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CarVendor.data.DataBaseContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<CarVendor.Web.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "CarVendor.Web.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(CarVendor.data.DataBaseContext context)
+        protected override void Seed(CarVendor.Web.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -70,17 +70,9 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserAddress.cs" />
     <Compile Include="Entities\UserRole.cs" />
-    <Compile Include="Migrations\201909031248440_m1.cs" />
-    <Compile Include="Migrations\201909031248440_m1.Designer.cs">
-      <DependentUpon>201909031248440_m1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909031458377_m2.cs" />
-    <Compile Include="Migrations\201909031458377_m2.Designer.cs">
-      <DependentUpon>201909031458377_m2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909031503431_m3.cs" />
-    <Compile Include="Migrations\201909031503431_m3.Designer.cs">
-      <DependentUpon>201909031503431_m3.cs</DependentUpon>
+    <Compile Include="Migrations\201909071719428_asw.cs" />
+    <Compile Include="Migrations\201909071719428_asw.Designer.cs">
+      <DependentUpon>201909071719428_asw.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,14 +82,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909031248440_m1.resx">
-      <DependentUpon>201909031248440_m1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909031458377_m2.resx">
-      <DependentUpon>201909031458377_m2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909031503431_m3.resx">
-      <DependentUpon>201909031503431_m3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909071719428_asw.resx">
+      <DependentUpon>201909071719428_asw.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
