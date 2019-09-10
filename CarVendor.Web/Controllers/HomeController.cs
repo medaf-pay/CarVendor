@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace CarVendor.mvc.Controllers
-{ [Authorize]
+{ 
     public class HomeController : Controller
     {
         DataBaseContext db = new DataBaseContext();
@@ -33,30 +33,29 @@ namespace CarVendor.mvc.Controllers
 
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Cart(CartModel model)
         {
-            var userGuid = Guid.NewGuid();
-            model.Guid = userGuid.ToString();
-            model.SessionId = model.Guid;
+           
+            Utilities._shopingCarts = new List<CartModel>();
             Utilities._shopingCarts.Add(model);
             return Json(model);
         }
-
+        [Authorize]
         [Route("Home/cart")]
         public ActionResult Cart(string RequestId)
         {
             
             return View();
         }
-
+        [Authorize]
         [Route("Home/CustomerInfo")]
         public ActionResult CustomerInfo()
         {
             return View();
         }
-
+        [Authorize(Roles ="Admin")]
         [Route("Home/NewCar")]
         public ActionResult NewCar()
         {
@@ -66,7 +65,7 @@ namespace CarVendor.mvc.Controllers
         [Route("Home/CardInfo")]
         public ActionResult CardInfo(string RequestId)
         {
-            var items = Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == RequestId).CartItems;
+            var items = Utilities._shopingCarts.FirstOrDefault().CartItems;
             decimal total = 0;
             foreach (var item in items)
             {

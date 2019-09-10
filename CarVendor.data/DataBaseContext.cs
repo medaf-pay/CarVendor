@@ -32,15 +32,15 @@ namespace CarVendor.data
         public DbSet<CardInfo> CardsInfo   { get; set; }
         public DbSet<CorporateDetails> CorporatesDetails { get; set; }
         public DbSet<User> Users   { get; set; }
-        public DbSet<Role>Roles { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
+        //public DbSet<Role>Roles { get; set; }
+        //public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<UserAddress> UserAddress { get; set; }
 
         public DbSet<PaymethodType> paymethodTypes { get; set; }
         public DbSet<BankTransferInfo> BanksTransferInfo { get; set; }
         public DbSet<CarFamily> CarFamilies { get; set; }
 
-
+   
 
     }
 }

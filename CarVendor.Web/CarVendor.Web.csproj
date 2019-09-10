@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Stubble.Core, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stubble.Core.1.4.12\lib\net45\Stubble.Core.dll</HintPath>
@@ -202,10 +205,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Dtos\OrderDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909091410021_q1.cs" />
+    <Compile Include="Migrations\201909091410021_q1.Designer.cs">
+      <DependentUpon>201909091410021_q1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankTransferModel.cs" />
     <Compile Include="Models\CartItemModel.cs" />
@@ -214,6 +223,7 @@
     <Compile Include="Models\ColorModel.cs" />
     <Compile Include="Models\CreditCardModel.cs" />
     <Compile Include="Models\CustomerInfoModel.cs" />
+    <Compile Include="Models\ForgotPasswordDTO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -223,7 +233,15 @@
     <Compile Include="ViewModels\NewCarModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Common\EmailTemplate.html" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.min.js" />
+    <Content Include="Common\ForgotPasswordEmailTemplate.html" />
+    <Content Include="Common\WelcomeEmailTemplate.html" />
+    <Content Include="Common\OrderDetailsEmailTemplate.html" />
     <Content Include="Content\booking\booking.php" />
     <Content Include="Content\booking\css\booking.css" />
     <Content Include="Content\booking\font\font-awesome.css" />
@@ -265,6 +283,7 @@
     <Content Include="Content\images\gradient2.png" />
     <Content Include="Content\images\gradient3.png" />
     <Content Include="Content\images\gradient4.png" />
+    <Content Include="Content\images\NoData.png" />
     <Content Include="Content\images\page1_img1.png" />
     <Content Include="Content\images\page1_img10.png" />
     <Content Include="Content\images\page1_img11.png" />
@@ -473,6 +492,7 @@
     <Content Include="Scripts\booking\less\booking.less" />
     <Content Include="Scripts\booking\less\mixins.less" />
     <Content Include="images\_Layout.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\css\animate.css" />
     <Content Include="Scripts\css\camera.css" />
@@ -541,7 +561,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Register1.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -552,14 +572,15 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Car\Create.cshtml" />
     <Content Include="Views\Home\CardInfo.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\CustomerInfo.cshtml" />
     <Content Include="Views\Home\NewCar.cshtml" />
     <Content Include="Views\Requests\Index.cshtml" />
+    <Content Include="Views\Account\LogOff.cshtml" />
+    <Content Include="Views\Account\Register11.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -582,6 +603,11 @@
       <Project>{01e76fa5-ed48-450d-a07e-108a981f489f}</Project>
       <Name>CarVendor.data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201909091410021_q1.resx">
+      <DependentUpon>201909091410021_q1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

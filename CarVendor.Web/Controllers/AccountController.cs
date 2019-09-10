@@ -9,6 +9,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CarVendor.Web.Models;
+using System.Collections.Generic;
+using CarVendor.data.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
+using CarVendor.data;
+using CarVendor.mvc.Common;
 
 namespace CarVendor.Web.Controllers
 {
@@ -17,6 +22,7 @@ namespace CarVendor.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private DataBaseContext db=new DataBaseContext();
 
         public AccountController()
         {
@@ -137,6 +143,7 @@ namespace CarVendor.Web.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        
         public ActionResult Register()
         {
             return View();
@@ -151,12 +158,72 @@ namespace CarVendor.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+             
+               
+                var ASPUser = new ApplicationUser { UserName = model.Email, Email = model.Email};
+              
+                    var UserAddresses = new List<UserAddress>()
+                    {
+                        new UserAddress()
+                        {
+                            IsDeleted=false,
+                            Address=new Address()
+                            {
+                                IsDeleted=false,
+                                City=model.City,
+                                Zip=model.Zip,
+                                State=model.State,
+                                MainAddress=model.MainAddress,
+                                DeliveryAddress=model.DeliveryAddress,
+                                Country=model.Country
+
+                            }
+                        }
+                    };
+
+
+                    var user = new data.Entities.User()
+                    {
+                        Email = model.Email,
+                        FName = model.FName,
+                        LName = model.LName,
+                        Individually = model.Individually,
+                        IsDeleted = false,
+                        MName = model.MName,
+                        NationalId = model.NationalId,
+                        Phone = model.Phone,
+
+                        UserAddresses = UserAddresses,
+
+                    };
+                    if (model.Individually == 2)
+                    {
+                        var corporateDetails = new CorporateDetails()
+                        {
+                            CorporateName = model.CorporateName,
+                            CorporateSite = model.CorporateSite,
+                            RegistrationNo = model.RegistrationNo,
+                            user = user
+                        };
+                        db.CorporatesDetails.Add(corporateDetails);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                    }
+                 
+                var result = await UserManager.CreateAsync(ASPUser, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    await SignInManager.SignInAsync(ASPUser, isPersistent:false, rememberBrowser:false);
+                    EmailTemplate Email = new EmailTemplate();
+                    string path = @"~/Common/WelcomeEmailTemplate.html";
+                    var emailHtml = Email.ReadTemplateEmail(user, path);
+                    GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", model.Email, "Welcome", emailHtml, null);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -202,19 +269,36 @@ namespace CarVendor.Web.Controllers
         {
             if (!string.IsNullOrEmpty(model.Email))
             {
-                var user =  UserManager.FindByName(model.Email);
-                bool confirm = UserManager.IsEmailConfirmed(user.Id);
-                if (user == null || !confirm)
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                var ASPUser =  UserManager.FindByName(model.Email);
+                //bool confirm = UserManager.IsEmailConfirmed(user.Id);
+                //if (user == null || !confirm)
+                //{
+                //    // Don't reveal that the user does not exist or is not confirmed
+                //    return View("ForgotPasswordConfirmation");
+                //}
+                var user = db.Users.Where(c=>c.Email==model.Email).FirstOrDefault();
+               if (user == null || ASPUser==null)
+               {
+                   // Don't reveal that the user does not exist or is not confirmed
+                   return View("ForgotPasswordConfirmation");
                 }
-
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                string code =  UserManager.GeneratePasswordResetToken(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                 UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                string code =  UserManager.GeneratePasswordResetToken(ASPUser.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                ForgotPasswordDTO forgotPasswordDTO = new ForgotPasswordDTO()
+                {
+                    FName = user.FName,
+                    LName = user.LName,
+                    MName = user.MName,
+                    callbackUrl = callbackUrl
+                };
+                EmailTemplate Email = new EmailTemplate();
+                string path = @"~/Common/ForgotPasswordEmailTemplate.html";
+                var emailHtml = Email.ReadTemplateEmail(forgotPasswordDTO, path);
+                GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", model.Email, "Reset Password", emailHtml, null);
+
+                UserManager.SendEmailAsync(ASPUser.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -389,11 +473,11 @@ namespace CarVendor.Web.Controllers
         //
         // POST: /Account/LogOff
         [HttpGet]
-        [ValidateAntiForgeryToken]
+      
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
 
         //

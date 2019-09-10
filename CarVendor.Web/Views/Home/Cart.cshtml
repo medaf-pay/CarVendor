@@ -5,7 +5,7 @@
 <div ng-app="myApp" ng-controller="CartCTR">
 
 
-    <div class="table-responsive">
+    <div class="table-responsive" ng-if="Items.length>0">
         <table class="table">
             <thead class="thead-dark" style="background-color:gray">
                 <tr>
@@ -43,18 +43,20 @@
         </table>
     </div>
 
-    <div class="row">
+    <div class="row" ng-if="Items.length>0">
         <div class="form-group col-lg-12 col-md-12 col-sm-12">
 
             <div class="container form-group ">
-                <h4 style="background-color:gray" class="col-lg-6">Total Price <label style="margin-left:50%;color:brown">{{totalPrice}}</label></h4>
-                <h4 style="background-color:gray" class="col-lg-6">Total Quantity <label style="margin-left:50%;color:brown">{{totalQuantity}}</label></h4>
+                <h4 style="background-color:gray;color:white"  class="col-lg-6">Total Price <label style="margin-left:50%;color:white">{{totalPrice}}</label></h4>
+                <h4 style="background-color:gray;color:white" class="col-lg-6">Total Quantity <label style="margin-left:50%;color:white">{{totalQuantity}}</label></h4>
             </div>
             <div class="form-group col-lg-12 col-md-12 col-sm-12" style="direction:rtl">
                 <button type="button" class="btn btn-success" ng-click="GoToCustomerInfo()">Check Out</button>
             </div>
         </div>
     </div>
-
-
+    <div ng-if="Items.length==0">
+       
+        <img src="~/Content/images/NoData.png" />
+    </div>
 </div>

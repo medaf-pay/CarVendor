@@ -13,7 +13,7 @@ namespace CarVendor.mvc.Controllers
         // GET: Requests
         public ActionResult Index()
         {
-            var dbOrders = _db.Orders.Include("OrderItems").Include("DeliveryDetails").ToList();
+            var dbOrders = _db.Orders.Include("OrderItems").Include("User").ToList();
 
             return View(dbOrders);
         }

@@ -97,18 +97,18 @@ namespace CarVendor.mvc.Controllers
 
         [HttpGet]
         [Route("api/CarDetails/CartData")]
-        public IHttpActionResult CartData(string SessionId)
+        public IHttpActionResult CartData()
         {
-            var userCart = Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId);
-            if (userCart == null)
-                return Ok(NotFound());
+            var userCart = Utilities._shopingCarts.FirstOrDefault();
+            if (userCart.CartItems == null)
+                return Ok();
             List<CartItemModel> Cars = new List<CartItemModel>();
             CartItemModel car;
             foreach (var item in userCart.CartItems)
             {
                 if (Cars.Any(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id))
                 {
-                    Cars.Where(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id).Select(s => { s.Quantity = s.Quantity + 1; return s; }).ToList();
+                    Cars.Where(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id).Select(s => { s.Quantity = s.Quantity +1; return s; }).ToList();
                     continue;
                 }
                 car = new CartItemModel();
@@ -123,19 +123,19 @@ namespace CarVendor.mvc.Controllers
                          Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
                          Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name, Price = s1.Price }).FirstOrDefault()).FirstOrDefault(),
                          Price = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2=>s2.Price).FirstOrDefault()).FirstOrDefault(),
-                         Quantity = 1
+                         Quantity = item.Quantity==0?1: item.Quantity
                      }).FirstOrDefault();
                 Cars.Add(car);
             }
-            Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId).CartItems = Cars;
+            Utilities._shopingCarts.FirstOrDefault().CartItems = Cars;
             return Ok(Cars);
         }
 
         [HttpPost]
         [Route("api/CartDetails/SetFinalItems")]
-        public IHttpActionResult SetFinalItems(string SessionId, List<CartItemModel> Items)
+        public IHttpActionResult SetFinalItems( List<CartItemModel> Items)
         {
-            Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId).CartItems = Items;
+            Utilities._shopingCarts.FirstOrDefault().CartItems = Items;
             return Ok();
 
             // return View(userCart.CartItems);
@@ -143,17 +143,17 @@ namespace CarVendor.mvc.Controllers
 
         [HttpGet]
         [Route("api/CartDetails/GetFinalItems")]
-        public IHttpActionResult GetFinalItems(string SessionId)
+        public IHttpActionResult GetFinalItems()
         {
-            var Items = Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId).CartItems;
+            var Items = Utilities._shopingCarts.FirstOrDefault().CartItems;
             return Ok(Items);
         }
 
         [HttpPost]
         [Route("api/CartDetails/Payment")]
-        public IHttpActionResult Payment(string SessionId, CustomerInfoModel CustomerInfo)
+        public IHttpActionResult Payment( CustomerInfoModel CustomerInfo)
         {
-            var customer_cart = Utilities._shopingCarts.FirstOrDefault(cart => cart.SessionId == SessionId);
+            var customer_cart = Utilities._shopingCarts.FirstOrDefault();
             customer_cart.CustomerInfo = CustomerInfo;
             return Ok();
         }
@@ -162,7 +162,7 @@ namespace CarVendor.mvc.Controllers
         [Route("api/cartdetails/paybycreditcard")]
         public IHttpActionResult PayCreditCard(string sessionId, CreditCardModel creditCard)
         {
-            long result = Utilities.SetOrderDetails(sessionId, db, creditCard);
+            long result = Utilities.SetOrderDetails( db, creditCard);
             if (result == -1)
                 return NotFound();
             return Ok(result);
@@ -172,7 +172,7 @@ namespace CarVendor.mvc.Controllers
         [Route("api/cartdetails/SetInfoBankTransfer")]
         public IHttpActionResult SetInfoBankTransfer(string sessionId, BankTransferModel BankTransfer)
         {
-            long result = Utilities.SetOrderDetails(sessionId, db, null, BankTransfer);
+            long result = Utilities.SetOrderDetails( db, null, BankTransfer);
             if (result == -1)
                 return NotFound();
             return Ok(result);

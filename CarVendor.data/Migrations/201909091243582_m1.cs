@@ -3,7 +3,7 @@ namespace CarVendor.data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class asw : DbMigration
+    public partial class m1 : DbMigration
     {
         public override void Up()
         {
@@ -144,14 +144,12 @@ namespace CarVendor.data.Migrations
                         Id = c.Long(nullable: false),
                         CorporateName = c.String(),
                         CorporateSite = c.String(),
-                        RegistrationNo = c.Int(nullable: false),
+                        RegistrationNo = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.Id)
                 .Index(t => t.Id);
-            
   
-          
             
             CreateTable(
                 "dbo.OrderItems",
@@ -198,8 +196,6 @@ namespace CarVendor.data.Migrations
             DropForeignKey("dbo.OrderItems", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderItems", "CarId", "dbo.Cars");
             DropForeignKey("dbo.CorporateDetails", "Id", "dbo.Users");
-            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
-            DropForeignKey("dbo.UserRoles", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.UserAddresses", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserAddresses", "AddressId", "dbo.Addresses");
             DropForeignKey("dbo.CarCategories", "CategoryId", "dbo.Categories");
@@ -211,8 +207,6 @@ namespace CarVendor.data.Migrations
             DropForeignKey("dbo.Cars", "BrandId", "dbo.Brands");
             DropIndex("dbo.OrderItems", new[] { "OrderId" });
             DropIndex("dbo.OrderItems", new[] { "CarId" });
-            DropIndex("dbo.UserRoles", new[] { "RoleId" });
-            DropIndex("dbo.UserRoles", new[] { "UserId" });
             DropIndex("dbo.UserAddresses", new[] { "AddressId" });
             DropIndex("dbo.UserAddresses", new[] { "UserId" });
             DropIndex("dbo.CorporateDetails", new[] { "Id" });
@@ -226,11 +220,7 @@ namespace CarVendor.data.Migrations
             DropTable("dbo.PaymethodTypes");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderItems");
-            DropTable("dbo.Roles");
-            DropTable("dbo.UserRoles");
-            DropTable("dbo.Addresses");
-         
-       
+        
             DropTable("dbo.CorporateDetails");
             DropTable("dbo.CardInfoes");
             DropTable("dbo.Categories");

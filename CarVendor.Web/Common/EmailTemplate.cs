@@ -11,11 +11,11 @@ namespace CarVendor.mvc.Common
 {
     public class EmailTemplate
     {
-        public string ReadTemplateEmail(CartModel model)
+        public string ReadTemplateEmail<T>(T model,string Path)
         {
             var stubble = new StubbleBuilder().Build();
            
-            using (StreamReader streamReader = new StreamReader(HttpContext.Current.Server.MapPath(@"~/Common/EmailTemplate.html"), Encoding.UTF8))
+            using (StreamReader streamReader = new StreamReader(HttpContext.Current.Server.MapPath(Path), Encoding.UTF8))
 
             {
                return stubble.Render(streamReader.ReadToEnd(), model);

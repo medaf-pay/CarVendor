@@ -1,9 +1,9 @@
 ﻿
 
 app.controller('CartCTR', function ($scope, $http, $location) {
-    var urlParams = new URLSearchParams(window.location.search);
-    var RequestId = urlParams.get('RequestId');
-    $http.get("/api/CarDetails/CartData?SessionId=" + RequestId).then(function (data) {
+    //var urlParams = new URLSearchParams(window.location.search);
+    //var RequestId = urlParams.get('RequestId');
+    $http.get("/api/CarDetails/CartData").then(function (data) {
         console.log(data);
         $scope.Items = data.data;
     
@@ -29,17 +29,23 @@ app.controller('CartCTR', function ($scope, $http, $location) {
         calcTotal();
     }
     $scope.GoToCustomerInfo = function () {
+
+        $http.post("/api/CartDetails/SetFinalItems", $scope.Items).then(function () {
+            window.location.href = "/Home/CustomerInfo";
+        })
        
-        $http.post("/api/CartDetails/SetFinalItems?SessionId=" + RequestId, $scope.Items)
-        window.location.href = "/Home/CustomerInfo?RequestId=" + RequestId;
     }
 
 });
 
 app.controller('CustomerInfoCTR', function ($scope, $http) {
-    var urlParams = new URLSearchParams(window.location.search);
-    var RequestId = urlParams.get('RequestId');
-    $http.get("/api/CartDetails/GetFinalItems?SessionId=" + RequestId).then(function (data) {
+    //var urlParams = new URLSearchParams(window.location.search);
+    //var RequestId = urlParams.get('RequestId');
+    $http.get("/api/User/UserInfoDetails").then(function (data) {
+        $scope.Items = data.data;
+      
+    })
+    $http.get("/api/CartDetails/GetFinalItems" ).then(function (data) {
         $scope.Items = data.data; 
         calcTotal();
     })
@@ -60,9 +66,9 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
         carsData.CustomerInfo = $scope.CustomerInfo
         if ($scope.CustomerInfoFrom.$valid) {
             $scope.SubmetAction = false;
-            $http.post("/api/CartDetails/Payment?SessionId=" + RequestId, $scope.CustomerInfo).then(function () {
+            $http.post("/api/CartDetails/Payment", $scope.CustomerInfo).then(function () {
 
-                window.location.href = "/Home/CardInfo?RequestId=" + RequestId;
+                window.location.href = "/Home/CardInfo" ;
 
             })
         }
@@ -74,12 +80,19 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
 });
 
 app.controller('HomeCTR', function ($scope, $http) {
-  
+    var cartProduct = [];
     $http.get("/api/CarDetails/IndexData").then(function (data) {
         $scope.Cars = data.data;
         $scope.CarPrice = new Array($scope.Cars.length);
     });
+    $http.get("/api/CarDetails/CartData").then(function (data) {
+        console.log(data);
+        cartProduct = data.data;
 
+        updateCart(cartProduct); 
+
+       
+    });
     $http.get("/api/CartDetails/getFilters").then(function (data) {
         $scope.Brands = data.data.Brands;
         $scope.Categories = data.data.Categories;
@@ -88,7 +101,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     });
 
     $scope.CategoryChange = function (car, Id, index) {
-        cardata = car.Categories.find(x => x.Id === Id).Colors[0];
+        cardata = car.Categories.find(x => x.Id == Id).Colors[0];
         $scope.CarColorselected = cardata.Id.toString();
         $scope.CarPrice[index] = cardata.Price;
         car.FirstImageView = cardata.Images[0].Name;
@@ -96,35 +109,38 @@ app.controller('HomeCTR', function ($scope, $http) {
 
     $scope.ColorChange = function (car, Category, ColorId, index) {
 
-        cardata = Category.Colors.find(x => x.Id === ColorId);
+        cardata = Category.Colors.find(x => x.Id == ColorId);
 
         $scope.CarPrice[index] = cardata.Price;
         car.FirstImageView = cardata.Images[0].Name;
     };
 
     $scope.FindCar = function () {
-        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Category=" + $scope.Categoryselected + "&Color=" + $scope.Colorselected).then(
+        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Category=" + $scope.Categoryselected + "&Color=0" + $scope.Colorselected).then(
             function (data) {
                 $scope.Cars = data.data;
             });
     };
-    var cartProduct = [];
+   
 
     $scope.addToCart = function (product) {
         product.CarId = product.Id;
-        product.price = $("#Price_" + product.Id).text();
-        product.color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
-        product.category = { id: $("#category_" + product.Id).val(), text: $("#category_" + product.Id).children("option:selected").text() }
+        product.Price = $("#Price_" + product.Id).text();
+        product.Color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
+        product.Category = { id: $("#category_" + product.Id).val(), text: $("#category_" + product.Id).children("option:selected").text() }
+        product.Quantity = 1;
         cartProduct.push(product);
         updateCart(cartProduct);
     };
 
     function updateCart(cart) {
         let sum = 0;
+        let TatalQuantity = 0;
         for (var i = 0; i < cart.length; i++) {
-            sum += eval(cart[i].price);
+            sum += eval(cart[i].Price);
+            TatalQuantity += eval(cart[i].Quantity)
         }
-        $('.cartSpan').html(cart.length + " | " + sum + " EGP");
+        $('.cartSpan').html(TatalQuantity + " | " + sum + " EGP");
         $('.cartpart').css("background-color", "#8ad329");
     }
 
@@ -134,7 +150,7 @@ app.controller('HomeCTR', function ($scope, $http) {
             cartItems: cartProduct
         };
         $http.post("/Home/cart", shoppingCart).then(function (result) {
-            window.location.href = "/home/cart?RequestId=" + result.data.SessionId;
+            window.location.href = "/home/cart";
         });
     };
    
@@ -153,7 +169,7 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         $scope.SubTab = tab;
     };
 
-    $http.get("/api/CartDetails/GetFinalItems?SessionId=" + RequestId).then(function (data) {
+    $http.get("/api/CartDetails/GetFinalItems").then(function (data) {
         $scope.Items = data.data;
         calcTotal();
     });

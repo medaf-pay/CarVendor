@@ -12,12 +12,14 @@ namespace CarVendor.data.Entities
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public DateTime OrderDate { get; set; }
         public string OrderNumber { get; set; }
+        public long UserId { get; set; }
+        public virtual User User { get; set; }
         #region [ DeliveryDetails ]
         //public long DeliveryDetailsId { get; set; }
         //[ForeignKey("DeliveryDetailsId")]
         //public virtual CustomerDeliveryDetails DeliveryDetails { get; set; }
         #endregion
-        
-     
+
+
     }
 }

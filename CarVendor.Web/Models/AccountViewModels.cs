@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Foolproof;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CarVendor.Web.Models
@@ -66,6 +67,7 @@ namespace CarVendor.Web.Models
     {
         [Required]
         [EmailAddress]
+        [Key]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -76,9 +78,44 @@ namespace CarVendor.Web.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
+        [Required]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [Display(Name = "Customer Segment")]
+        public int Individually { get; set; }
+        [RequiredIf("Individually", 2)]
+        [Display(Name = "Corporate Registration No")]
+        public string RegistrationNo { get; set; }
+        [RequiredIf("Individually", 2)]
+        [Display(Name = "Corporate Name")]
+        public string CorporateName { get; set; }
+        [RequiredIf("Individually", 2)]
+        [Display(Name = "Corporate Site")]
+        public string CorporateSite { get; set; }
+
+        [Required]
+        [Display(Name = "Frist Name")]
+        public string FName { get; set; }
+        [Required]
+        [Display(Name = "Middle Name")]
+        public string MName { get; set; }
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LName { get; set; }
+        [Required]
+        [Display(Name = "Phone No")]
+        public string Phone { get; set; }
+        [Required]
+        [Display(Name = "National ID")]
+        public string NationalId { get; set; }
+        public string MainAddress { get; set; }
+        public string DeliveryAddress { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
     }
 
     public class ResetPasswordViewModel

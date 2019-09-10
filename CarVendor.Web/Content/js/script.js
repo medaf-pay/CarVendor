@@ -254,3 +254,19 @@ function goToCart() {
     $('#cartClickId').click();
 
 }
+
+function CustomerType(type) {
+    if (type == 2) {
+        $('.CorporateDev').css("display", "block");
+    }
+    else {
+        $('.CorporateDev').css("display", "none");
+    }
+}
+
+function CheckIdentity(value) {
+    if (value != 2) {
+        CustomerType()
+    }
+}
+

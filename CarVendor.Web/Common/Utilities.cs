@@ -11,10 +11,10 @@ namespace CarVendor.mvc.Common
     public class Utilities
     {
         public static List<CartModel> _shopingCarts = new List<CartModel>();
-        public static long SetOrderDetails(string sessionId, DataBaseContext db, CreditCardModel creditCard =null, BankTransferModel BankTransfer=null)
+        public static long SetOrderDetails( DataBaseContext db, CreditCardModel creditCard =null, BankTransferModel BankTransfer=null)
         {
 
-            var customer_cart = _shopingCarts.FirstOrDefault(cart => cart.SessionId == sessionId);
+            var customer_cart = _shopingCarts.FirstOrDefault();
             if (customer_cart == null && customer_cart.CustomerInfo == null && customer_cart.CartItems == null && customer_cart.CartItems.Count < 1)
                 return -1;
             List<OrderItem> newOrderItems = new List<OrderItem>();
@@ -87,8 +87,9 @@ namespace CarVendor.mvc.Common
             db.Orders.Add(newOrder);
             // TODO: Send Mail Here
             EmailTemplate Email = new EmailTemplate();
-            var emailHtml = Email.ReadTemplateEmail(customer_cart);
-            GmailSender.SendEmail("islam.ibrahim@medafinvestment.com", "Serious!1", "magdy.ismail.200@gmail.com", "Order", emailHtml, null);
+            string path = @"~/Common/OrderDetailsEmailTemplate.html";
+            var emailHtml = Email.ReadTemplateEmail(customer_cart, path);
+            GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", "magdy.ismail.200@gmail.com", "Order", emailHtml, null);
             try
             {
                 db.SaveChanges();
@@ -103,7 +104,7 @@ namespace CarVendor.mvc.Common
                 {
                     CorporateName = customer_cart.CustomerInfo.OrgnizationName,
                     CorporateSite = customer_cart.CustomerInfo.OrgnizationSite,
-                    RegistrationNo = customer_cart.CustomerInfo.RegistrationNo
+                  ///  RegistrationNo = customer_cart.CustomerInfo.RegistrationNo
                     //Id = newOrder.DeliveryDetailsId
                 };
                 db.CorporatesDetails.Add(corporateDetails);
@@ -113,5 +114,6 @@ namespace CarVendor.mvc.Common
             return newOrder.Id;
             
         }
-    }
+
+          }
 }

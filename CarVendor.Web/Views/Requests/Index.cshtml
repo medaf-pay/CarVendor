@@ -5,92 +5,102 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Orders</h2><br/>
+<h2>Orders</h2><br />
 <div>
 
-<p>
-    @Html.ActionLink("New Order", "", "Home")
-</p>
+    <p>
+        @Html.ActionLink("New Order", "", "Home")
+    </p>
 </div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Sequence")
-        </th>
-        <th>
-            @Html.DisplayName("Ordered Items")
-        </th>
-        <th>
-            @Html.DisplayName("Delivery Details")
-        </th>
-        @*<th>@Html.DisplayNameFor(model => model.DeliveryDetails.State)</th>*@
-    </tr>
-    @{int i = 0;}
-    @foreach (var item in Model)
-    {
-        i++;
-    <tr>
-        <td>
-           
-            <span>@i</span>
-        </td>
-        <td>
-            @foreach (var order in item.OrderItems)
-            {
-                <div class="row">
-                    <div class="col-md-3">
-                        <span style="color:green">
-                            Car Name:
-                        </span>
-                        <span style="color:chocolate">
-                            @order.Car.Name
-                        </span>
-                    </div>
-                    <div class="col-md-2">
-                        <span style="color:green">
-                            Model:
-                        </span>
-                        <span style="color:chocolate">
-                            @order.Car.Model
-                        </span>
-                    </div>
-                    <div class="col-md-2">
-                        <span style="color:green">
-                            Quantity:
-                        </span>
-                        <span style="color:chocolate">
-                            @order.Quantity
-                        </span>
-                    </div>
-                    <div class="col-md-2">
-                        <span style="color:green">
-                            Color:
-                        </span>
-                        <span style="color:chocolate">
-                            @order.Color
-                        </span>
-                    </div>
-                    <div class="col-md-3">
-                        <span style="color:green">
-                            Category:
-                        </span>
-                        <span style="color:chocolate">
-                            @order.Category
-                        </span>
-                    </div>
-                </div>
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Sequence")
+            </th>
+            <th>
+                @Html.DisplayName("Ordered Items")
+            </th>
+            <th>
+                @Html.DisplayName("Delivery Details")
+            </th>
+            @*<th>@Html.DisplayNameFor(model => model.DeliveryDetails.State)</th>*@
+        </tr>
+        @{int i = 0;}
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>
 
-            }
+                    <span>@i</span>
+                </td>
+                <td>
+                    @foreach (var order in item.OrderItems)
+                    {
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span style="color:green">
+                                    Car Name:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Car.Name
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <span style="color:green">
+                                    Model:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Car.Model
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <span style="color:green">
+                                    Quantity:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Quantity
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <span style="color:green">
+                                    Color:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Color
+                                </span>
+                            </div>
+                            <div class="col-md-3">
+                                <span style="color:green">
+                                    Category:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Category
+                                </span>
+                            </div>
+                        </div>
 
-        </td>
-        <td>
-            @{ }
-            @Html.DisplayFor(modelItem => item.user.FName) @Html.DisplayFor(modelItem => item.user.MName)  @Html.DisplayFor(modelItem => item.user.LName)
-        </td>
-        @*<td>
-        @Html.DisplayFor(modelItem => item..State)
-        </td>*@
-    </tr>
-    }
+                    }
 
-</table>
+                </td>
+                <td>
+                    @{ }
+                    @Html.DisplayFor(modelItem => item.User.FName) @Html.DisplayFor(modelItem => item.User.MName)  @Html.DisplayFor(modelItem => item.User.LName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item..State)
+                    </td>*@
+            </tr>
+                        }
+
+    </table>
+}
+else {
+    <div>
+
+        <img src="~/Content/images/NoData.png" />
+
+     </div>
+}

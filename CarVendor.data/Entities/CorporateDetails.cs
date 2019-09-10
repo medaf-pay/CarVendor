@@ -11,10 +11,11 @@ namespace CarVendor.data.Entities
     public class CorporateDetails
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id { get; set; }
         public string CorporateName { get; set; }
         public string CorporateSite { get; set; }
-        public int RegistrationNo { get; set; }
+        public string RegistrationNo { get; set; }
 
         [ForeignKey("Id")]
         public virtual User user { get; set; }
