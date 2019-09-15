@@ -5,7 +5,7 @@
         public int Individually { get; set; }
         public string OrgnizationName { get; set; }
         public string OrgnizationSite { get; set; }
-        public int RegistrationNo { get; set; }
+        public string RegistrationNo { get; set; }
         public string FName { get; set; }
         public string MName { get; set; }
         public string LName { get; set; }
@@ -19,5 +19,6 @@
         public string Zip { get; set; }
         public string NID { get; internal set; }
         public string Password { get; internal set; }
+        public long Id { get; internal set; }
     }
 }

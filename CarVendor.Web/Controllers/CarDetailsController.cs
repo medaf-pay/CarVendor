@@ -12,8 +12,7 @@ using CarVendor.mvc.Dtos;
 using CarVendor.mvc.Common;
 using System.Web;
 using System.IO;
-using System.Web.Script.Serialization;
-using System.Reflection;
+using Microsoft.AspNet.Identity;
 
 namespace CarVendor.mvc.Controllers
 {
@@ -99,9 +98,13 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CarDetails/CartData")]
         public IHttpActionResult CartData()
         {
-            var userCart = Utilities._shopingCarts.FirstOrDefault();
+            if (Utilities._shopingCarts.Count()== 0)
+                return Ok(new List<CartItemModel>());
+
+                var userCart = Utilities._shopingCarts.FirstOrDefault();
+
             if (userCart.CartItems == null)
-                return Ok();
+                return Ok(new List<CartItemModel>());
             List<CartItemModel> Cars = new List<CartItemModel>();
             CartItemModel car;
             foreach (var item in userCart.CartItems)
@@ -153,18 +156,31 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/Payment")]
         public IHttpActionResult Payment( CustomerInfoModel CustomerInfo)
         {
-            var customer_cart = Utilities._shopingCarts.FirstOrDefault();
-            customer_cart.CustomerInfo = CustomerInfo;
-            return Ok();
+            string Email = User.Identity.GetUserName();
+            var Address = db.Users.Where(c => c.Email == Email).Select(s => s.UserAddresses.Where(c1 => c1.IsDeleted != true).OrderByDescending(o => o.Id).Select(s1 => s1.Address).FirstOrDefault()).FirstOrDefault();
+
+            Address.DeliveryAddress = CustomerInfo.DeliveryAddress;
+            db.SaveChanges();
+            if(Utilities._shopingCarts.FirstOrDefault().CartItems.Sum(s=>s.Quantity)>10)
+            {
+                long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
+                Utilities.SetOrderDetails(db,null,null, UserId);
+                Utilities._shopingCarts = new List<CartModel>();
+                return Ok(10);
+            }
+
+            return Ok(1);
         }
 
         [HttpPost]
         [Route("api/cartdetails/paybycreditcard")]
-        public IHttpActionResult PayCreditCard(string sessionId, CreditCardModel creditCard)
+        public IHttpActionResult PayCreditCard( CreditCardModel creditCard)
         {
-            long result = Utilities.SetOrderDetails( db, creditCard);
+            long UserId = db.Users.Where(c => c.Email == User.Identity.GetUserName()).Select(s => s.Id).FirstOrDefault();
+            long result = Utilities.SetOrderDetails( db, creditCard,null, UserId);
             if (result == -1)
                 return NotFound();
+            Utilities._shopingCarts = new List<CartModel>();
             return Ok(result);
         }
 
@@ -172,9 +188,11 @@ namespace CarVendor.mvc.Controllers
         [Route("api/cartdetails/SetInfoBankTransfer")]
         public IHttpActionResult SetInfoBankTransfer(string sessionId, BankTransferModel BankTransfer)
         {
-            long result = Utilities.SetOrderDetails( db, null, BankTransfer);
+            long UserId = db.Users.Where(c => c.Email == User.Identity.GetUserName()).Select(s => s.Id).FirstOrDefault();
+            long result = Utilities.SetOrderDetails( db, null, BankTransfer, UserId);
             if (result == -1)
                 return NotFound();
+            Utilities._shopingCarts = new List<CartModel>();
             return Ok(result);
         }
 
@@ -198,12 +216,12 @@ namespace CarVendor.mvc.Controllers
             return Ok(filters);
         }
 
-        [HttpGet]
-        [Route("api/CartDetails/Payment")]
-        public IHttpActionResult Payment()
-        {
-            return Ok();
-        }
+        //[HttpGet]
+        //[Route("api/CartDetails/Payment")]
+        //public IHttpActionResult Payment()
+        //{
+        //    return Ok();
+        //}
 
         [Route("api/CartDetails/UploadFiles")]
         [HttpPost]

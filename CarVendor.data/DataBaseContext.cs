@@ -19,7 +19,7 @@ namespace CarVendor.data
         {
 
         }
-     
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Car> Cars { get; set; }

@@ -41,9 +41,10 @@ app.controller('CartCTR', function ($scope, $http, $location) {
 app.controller('CustomerInfoCTR', function ($scope, $http) {
     //var urlParams = new URLSearchParams(window.location.search);
     //var RequestId = urlParams.get('RequestId');
+   
     $http.get("/api/User/UserInfoDetails").then(function (data) {
-        $scope.Items = data.data;
-      
+        $scope.CustomerInfo = data.data;
+        $scope.CustomerInfo.Individually = data.data.Individually.toString();
     })
     $http.get("/api/CartDetails/GetFinalItems" ).then(function (data) {
         $scope.Items = data.data; 
@@ -66,10 +67,15 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
         carsData.CustomerInfo = $scope.CustomerInfo
         if ($scope.CustomerInfoFrom.$valid) {
             $scope.SubmetAction = false;
-            $http.post("/api/CartDetails/Payment", $scope.CustomerInfo).then(function () {
+            $http.post("/api/CartDetails/Payment", $scope.CustomerInfo).then(function (data) {
+                if (data.data == 1) { window.location.href = "/Home/CardInfo"; }
+                else {
+                    window.location.href = "/Requests/index";
+                }
 
-                window.location.href = "/Home/CardInfo" ;
-
+            }, function (erroe) {
+                alert(1);
+                console.log(erroe);
             })
         }
         else {
@@ -88,8 +94,9 @@ app.controller('HomeCTR', function ($scope, $http) {
     $http.get("/api/CarDetails/CartData").then(function (data) {
         console.log(data);
         cartProduct = data.data;
-
-        updateCart(cartProduct); 
+        if (cartProduct.length > 0) {
+            updateCart(cartProduct);
+        }
 
        
     });
@@ -129,7 +136,7 @@ app.controller('HomeCTR', function ($scope, $http) {
         product.Color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
         product.Category = { id: $("#category_" + product.Id).val(), text: $("#category_" + product.Id).children("option:selected").text() }
         product.Quantity = 1;
-        cartProduct.push(product);
+        cartProduct.push(angular.copy(product));
         updateCart(cartProduct);
     };
 
@@ -204,7 +211,7 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         $scope.CreditCard.TotalPrice = $scope.totalPrice;
         if ($scope.CartInfoFrom.$valid) {
             $scope.loading = true;
-            $http.post("/api/CartDetails/paybycreditcard?SessionId=" + RequestId, $scope.CreditCard).then(function (data) {
+            $http.post("/api/CartDetails/paybycreditcard", $scope.CreditCard).then(function (data) {
                 $scope.loading = false;
                 window.location.href = "/Requests";
             });

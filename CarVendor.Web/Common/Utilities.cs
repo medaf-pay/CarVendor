@@ -11,7 +11,7 @@ namespace CarVendor.mvc.Common
     public class Utilities
     {
         public static List<CartModel> _shopingCarts = new List<CartModel>();
-        public static long SetOrderDetails( DataBaseContext db, CreditCardModel creditCard =null, BankTransferModel BankTransfer=null)
+        public static long SetOrderDetails( DataBaseContext db, CreditCardModel creditCard =null, BankTransferModel BankTransfer=null,long UserId=0)
         {
 
             var customer_cart = _shopingCarts.FirstOrDefault();
@@ -26,14 +26,18 @@ namespace CarVendor.mvc.Common
                     Color = orderItem.Color.Text,
                     Quantity = (int)orderItem.Quantity,
                     Category = orderItem.Category.Text,
+                    IsDeleted=false
+                    
                 });
             }
 
             Order newOrder = new Order()
             {
                 OrderDate = DateTime.Now,
-                OrderNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month + DateTime.Now.Year,
-                OrderItems = newOrderItems
+                OrderNumber ="S"+ DateTime.Now.Day.ToString() + "I" + DateTime.Now.Month + "G" + DateTime.Now.Year.ToString().Substring(2,2),
+                OrderItems = newOrderItems,
+                IsDeleted=false,
+                UserId= UserId
             };
             CardInfo card = null;
             if (creditCard != null)
@@ -96,20 +100,11 @@ namespace CarVendor.mvc.Common
             }
             catch (Exception ex)
             {
-                throw;
+             
+                throw new Exception("error",ex);
+
             }
-            if (customer_cart.CustomerInfo.Individually == 2)
-            {
-                corporateDetails = new CorporateDetails()
-                {
-                    CorporateName = customer_cart.CustomerInfo.OrgnizationName,
-                    CorporateSite = customer_cart.CustomerInfo.OrgnizationSite,
-                  ///  RegistrationNo = customer_cart.CustomerInfo.RegistrationNo
-                    //Id = newOrder.DeliveryDetailsId
-                };
-                db.CorporatesDetails.Add(corporateDetails);
-                db.SaveChanges();
-            }
+        
 
             return newOrder.Id;
             
