@@ -1,6 +1,9 @@
 ﻿using CarVendor.data;
 using CarVendor.mvc.Common;
 using CarVendor.mvc.Models;
+using CarVendor.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +15,34 @@ namespace CarVendor.mvc.Controllers
     public class HomeController : Controller
     {
         DataBaseContext db = new DataBaseContext();
-      
-        
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        public HomeController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+        public HomeController() { }
         [Route("home/Index")]
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ViewBag.role = UserManager.GetRoles(user.GetUserId())[0];    
+            }
+            
+                return View();
         }
 
         public ActionResult About()

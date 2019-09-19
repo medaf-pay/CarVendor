@@ -49,6 +49,7 @@
       <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="Stubble.Core, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stubble.Core.1.4.12\lib\net45\Stubble.Core.dll</HintPath>
     </Reference>
@@ -210,9 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909091410021_q1.cs" />
-    <Compile Include="Migrations\201909091410021_q1.Designer.cs">
-      <DependentUpon>201909091410021_q1.cs</DependentUpon>
+    <Compile Include="Migrations\201909191205573_v0.0.0.cs" />
+    <Compile Include="Migrations\201909191205573_v0.0.0.Designer.cs">
+      <DependentUpon>201909191205573_v0.0.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -605,8 +606,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909091410021_q1.resx">
-      <DependentUpon>201909091410021_q1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909191205573_v0.0.0.resx">
+      <DependentUpon>201909191205573_v0.0.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

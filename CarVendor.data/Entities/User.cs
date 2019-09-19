@@ -22,8 +22,5 @@ namespace CarVendor.data.Entities
        
         public virtual ICollection<UserAddress> UserAddresses { get; set; }
        public virtual ICollection<Order> Orders { get; set; }
-
-
-
     }
 }

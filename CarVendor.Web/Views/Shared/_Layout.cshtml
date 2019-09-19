@@ -93,10 +93,9 @@
 
                         <ul class="sf-menu navbar-nav mr-auto">
                             <li id="NavHome" class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                            @if (@ViewContext.HttpContext.User.IsInRole("Admin"))
-                            {
+                         
                                 <li id="NavNewCar" class="nav-item" style="padding-left:10px"><a class="nav-link" href="/car/create">New cars</a></li>
-                            }
+                            
                             <li id="NavAbout" class="nav-item"><a class="nav-link" href="/Home/About">About Us</a></li>
                                 <li id="NavContact" class="nav-item"><a class="nav-link" href="/Home/Contact">Contact Us</a></li>
                                 <li onclick="goToCart()" class="nav-item cartpart"><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer" ><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>

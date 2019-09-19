@@ -10,11 +10,9 @@ namespace CarVendor.data.Entities
     {
         public string Name { get; set; }
         public string Model { get; set; }
-        //public decimal Price { get; set; }
         public CarCondition Condition { get; set; }
-        public int TypeId  { get; set; }
+        public int TypeId { get; set; }
         public CarFamily Type { get; set; }
-
 
         #region [ Brand ]
         public long BrandId { get; set; }
@@ -22,6 +20,6 @@ namespace CarVendor.data.Entities
         #endregion
         public virtual ICollection<CarCategory> Carcategories { get; set; }
 
-    
+
     }
 }

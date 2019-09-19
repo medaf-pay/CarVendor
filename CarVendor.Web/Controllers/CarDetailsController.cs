@@ -176,7 +176,8 @@ namespace CarVendor.mvc.Controllers
         [Route("api/cartdetails/paybycreditcard")]
         public IHttpActionResult PayCreditCard( CreditCardModel creditCard)
         {
-            long UserId = db.Users.Where(c => c.Email == User.Identity.GetUserName()).Select(s => s.Id).FirstOrDefault();
+            string Email = User.Identity.GetUserName();
+            long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
             long result = Utilities.SetOrderDetails( db, creditCard,null, UserId);
             if (result == -1)
                 return NotFound();
@@ -188,7 +189,8 @@ namespace CarVendor.mvc.Controllers
         [Route("api/cartdetails/SetInfoBankTransfer")]
         public IHttpActionResult SetInfoBankTransfer(string sessionId, BankTransferModel BankTransfer)
         {
-            long UserId = db.Users.Where(c => c.Email == User.Identity.GetUserName()).Select(s => s.Id).FirstOrDefault();
+            string Email = User.Identity.GetUserName();
+            long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
             long result = Utilities.SetOrderDetails( db, null, BankTransfer, UserId);
             if (result == -1)
                 return NotFound();

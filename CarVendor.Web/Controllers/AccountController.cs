@@ -160,7 +160,7 @@ namespace CarVendor.Web.Controllers
             {
              
                
-                var ASPUser = new ApplicationUser { UserName = model.Email, Email = model.Email};
+     
               
                     var UserAddresses = new List<UserAddress>()
                     {
@@ -210,14 +210,16 @@ namespace CarVendor.Web.Controllers
                     }
                     else
                     {
-                        db.Users.Add(user);
+                        
                         db.SaveChanges();
                     }
-                 
+
+                var ASPUser = new ApplicationUser { user=user,UserName = model.Email, Email = model.Email };
+
                 var result = await UserManager.CreateAsync(ASPUser, model.Password);
                 if (result.Succeeded)
                 {
-
+                    UserManager.AddToRole(ASPUser.Id, "User");
                     await SignInManager.SignInAsync(ASPUser, isPersistent:false, rememberBrowser:false);
                     EmailTemplate Email = new EmailTemplate();
                     string path = @"~/Common/WelcomeEmailTemplate.html";

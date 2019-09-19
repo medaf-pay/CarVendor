@@ -10,6 +10,5 @@ namespace CarVendor.data.Entities
     {
         public int Id { get; set; }
         public string Type { get; set; }
-        //public virtual ICollection<CustomerDeliveryDetails> CustomerDeliveryDetails { get; set; }
     }
 }

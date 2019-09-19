@@ -17,7 +17,5 @@ namespace CarVendor.data.Entities
         public string InputReferenceNo { get; set; }
         public string ACH { get; set; }
         public string Memo { get; set; }
-        
-        //public virtual CustomerDeliveryDetails UserDeliveryDetails { get; set; }
     }
 }

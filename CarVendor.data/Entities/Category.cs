@@ -9,7 +9,7 @@ namespace CarVendor.data.Entities
     public class Category : TEntity<long>
     {
         public string Name { get; set; }
-        public  virtual ICollection<CarCategory> Carcategories { get; set; }
+        public  virtual ICollection<CarCategory> CarCategories { get; set; }
 
     }
 }
