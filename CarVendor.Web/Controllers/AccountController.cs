@@ -78,7 +78,6 @@ namespace CarVendor.Web.Controllers
             {
                 return View(model);
             }
-
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -321,8 +320,9 @@ namespace CarVendor.Web.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return  View();
         }
+
 
         //
         // POST: /Account/ResetPassword
@@ -529,6 +529,34 @@ namespace CarVendor.Web.Controllers
                 ModelState.AddModelError("", error);
             }
         }
+
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel ChangePasswordViewModel)
+        {
+            if ( !ModelState.IsValid)
+            {
+                View("Error");
+            }
+
+            var result= await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), ChangePasswordViewModel.OldPassword, ChangePasswordViewModel.NewPassword);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

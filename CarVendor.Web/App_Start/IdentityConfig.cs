@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CarVendor.Web.Models;
+using System.Security.Principal;
 
 namespace CarVendor.Web
 {
@@ -86,6 +87,8 @@ namespace CarVendor.Web
             }
             return manager;
         }
+
+       
     }
 
     // Configure the application sign-in manager which is used in this application.
@@ -105,5 +108,6 @@ namespace CarVendor.Web
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
+
     }
 }
