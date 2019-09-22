@@ -223,7 +223,7 @@ namespace CarVendor.Web.Controllers
                     EmailTemplate Email = new EmailTemplate();
                     string path = @"~/Common/WelcomeEmailTemplate.html";
                     var emailHtml = Email.ReadTemplateEmail(user, path);
-                    GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", model.Email, "Welcome", emailHtml, null);
+                    GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", new List<string>(){ model.Email } , "Welcome", emailHtml, null);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -297,7 +297,7 @@ namespace CarVendor.Web.Controllers
                 EmailTemplate Email = new EmailTemplate();
                 string path = @"~/Common/ForgotPasswordEmailTemplate.html";
                 var emailHtml = Email.ReadTemplateEmail(forgotPasswordDTO, path);
-                GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", model.Email, "Reset Password", emailHtml, null);
+                GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", new List<string>() { model.Email }, "Reset Password", emailHtml, null);
 
                 UserManager.SendEmailAsync(ASPUser.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");

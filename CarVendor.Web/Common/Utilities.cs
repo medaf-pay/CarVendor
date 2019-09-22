@@ -93,7 +93,7 @@ namespace CarVendor.mvc.Common
             EmailTemplate Email = new EmailTemplate();
             string path = @"~/Common/OrderDetailsEmailTemplate.html";
             var emailHtml = Email.ReadTemplateEmail(customer_cart, path);
-            GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", "magdy.ismail.200@gmail.com", "Order", emailHtml, null);
+            GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", new List<string>() { "magdy.ismail.200@gmail.com" , "mahmoud.omar@medafinvestment.com" }, "Order", emailHtml, null);
             try
             {
                 db.SaveChanges();
