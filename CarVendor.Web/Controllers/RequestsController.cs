@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web;
 using CarVendor.data.Entities;
 using System.Collections.Generic;
+using System;
 
 namespace CarVendor.mvc.Controllers
 {
@@ -30,7 +31,7 @@ namespace CarVendor.mvc.Controllers
 
 
         // GET: Requests
-        public ActionResult Index()
+        public ActionResult Index(DateTime? FromDate,DateTime? ToDate)
         {
 
             var user = User.Identity;
