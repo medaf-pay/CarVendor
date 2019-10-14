@@ -31,15 +31,38 @@ namespace CarVendor.mvc.Controllers
 
 
         // GET: Requests
-        public ActionResult Index(DateTime? FromDate,DateTime? ToDate)
+        public ActionResult Index(DateTime? StartDate, DateTime? EndDate)
         {
-
+           
             var user = User.Identity;
             string role = UserManager.GetRoles(user.GetUserId())[0];
             if(role == "Admin")
             {
-                List<Order> _orders = db.Orders.ToList();
-                return View(_orders.ToList());
+                if (EndDate < StartDate)
+                {
+                    ViewBag.ErrorMsg = "End Date Must be After Start Date";
+                    List<Order> _orders = db.Orders.ToList();
+                    return View(_orders.ToList());
+                }
+                else if ((EndDate == null || StartDate == null) && EndDate != StartDate)
+                {
+                    ViewBag.ErrorMsg = "Make sure to enter both Start and End Dates";
+                    List<Order> _orders = db.Orders.ToList();
+                    return View(_orders.ToList());
+                }
+                else if(EndDate==null&&StartDate==null)
+                {
+                    ViewBag.ErrorMsg = "";
+                    List<Order> _orders = db.Orders.ToList();
+                    return View(_orders.ToList());
+                }
+                else
+                {
+                    List<Order> _orders = db.Orders.Where(o=>o.OrderDate>StartDate&&o.OrderDate<EndDate).ToList();
+                    return View(_orders.ToList());
+                }
+
+                
             }
             var aspUser = User.Identity;
             var userId =  UserManager.FindById(aspUser.GetUserId()).user.Id;
@@ -47,6 +70,8 @@ namespace CarVendor.mvc.Controllers
             return View(orders.ToList());
 
         }
+
+
 
         // GET: Requests/Details/5
         public ActionResult Details(int id)

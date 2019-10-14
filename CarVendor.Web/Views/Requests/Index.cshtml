@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<CarVendor.data.Entities.Order>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -173,12 +172,14 @@
 {
     @Html.ValidationSummary(true);
 
-    @Html.Label("")
- @Html.TextBox("FromDate", null, new { @class = "date-picker" })
-    @Html.TextBox("ToDate", null, new { @class = "date-picker" })
-    <input type="submit" value="Enter the value" />
+  <label>Start Date</label>
+ @Html.TextBox("StartDate", null, new { @class = "date-picker" })
+    <label>End Date</label>
+    @Html.TextBox("EndDate", null, new { @class = "date-picker" })
+    <input type="submit" value="Query" />
 
 } 
+<p>@ViewBag.ErrorMsg</p>
 @if (Model.Count() > 0)
 {
     <table class="table">

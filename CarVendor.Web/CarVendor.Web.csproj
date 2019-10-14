@@ -231,7 +231,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CarViewModel.cs" />
-    <Compile Include="ViewModels\DateJuery.cs" />
+    <Compile Include="ViewModels\DateQueryViewModel.cs" />
     <Compile Include="ViewModels\filtersModel.cs" />
     <Compile Include="ViewModels\NewCarModel.cs" />
   </ItemGroup>
@@ -544,7 +544,9 @@
     <Content Include="Scripts\search\results.php" />
     <Content Include="Scripts\search\search.css" />
     <Content Include="Scripts\search\search.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
