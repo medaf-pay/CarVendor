@@ -103,7 +103,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     $http.get("/api/CartDetails/getFilters").then(function (data) {
         $scope.Brands = data.data.Brands;
         $scope.Categories = data.data.Categories;
-
+        $scope.Families = data.data.CarFamilies;
         $scope.Colors = data.data.Colors;
     });
 
@@ -123,7 +123,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     };
 
     $scope.FindCar = function () {
-        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Category=" + $scope.Categoryselected + "&Color=0" + $scope.Colorselected).then(
+        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Family=" + $scope.Familyselected + "&Category=" + $scope.Categoryselected + "&Color=0" + $scope.Colorselected).then(
             function (data) {
                 $scope.Cars = data.data;
             });

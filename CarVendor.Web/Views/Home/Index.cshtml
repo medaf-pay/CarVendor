@@ -82,8 +82,18 @@
 
                                             <span class="heading">Brand:</span>
                                             <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Brandselected">
-                                                <option value="">Select Brand</option>
+                                                <option value="">All Brands</option>
                                                 <option ng-repeat="Brand  in Brands" value="{{Brand.Id}}">{{Brand.Name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row" style="margin-top:10px">
+                                        <div class="form-group col-md-12 mb-4">
+
+                                            <span class="heading">Family:</span>
+                                            <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Familyselected">
+                                                <option value="">All Families</option>
+                                                <option ng-repeat="Family  in Families" value="{{Family.Id}}">{{Family.Name}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -92,7 +102,7 @@
                                             <span class="heading">Category:</span>
                                             <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Categoryselected">
 
-                                                <option value="">Select Category</option>
+                                                <option value="">All Categoies</option>
                                                 <option ng-repeat="Category in Categories" value="{{Category.Id}}">{{Category.Name}}</option>
                                             </select>
                                         </div>
@@ -101,7 +111,7 @@
                                         <div class="form-group col-md-12 mb-4">
                                             <span class="heading">Color:</span>
                                             <select name="Make" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-model="Colorselected">
-                                                <option value="">Select Color</option>
+                                                <option value="">All Colors</option>
                                                 <option ng-repeat="Color in Colors" value="{{Color.Id}}">{{Color.Name}}</option>
                                             </select>
                                         </div>
@@ -256,6 +266,17 @@
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
+                                         @{if (User.IsInRole("Admin"))
+                                             {
+                                                
+                                            <div>
+                                            
+                                                <button type="button" class="btn btn-secondary"><a class="nav-link" style="color:white" href="/cars/edit/{{car.Id}}">Edit</a></button>
+                                                <button type="button" class="btn btn-danger"><a class="nav-link" style="color:white" href="/cars/delete/{{car.Id}}">Delete</a></button>
+                                            </div>
+                                                 }
+
+                                             }
                                             <div class="wow fadeIn row" data-wow-duration="1s" data-wow-delay=".3s" style="margin-left:28%; margin-top:2px;">
                                                 <button type="button" class="btn btn-default" ng-click="addToCart(car)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
                                                 <div class="clearfix"></div>

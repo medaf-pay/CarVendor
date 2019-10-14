@@ -29,7 +29,6 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
             $scope.NewCar.Options = $scope.Options;
             $scope.SubmetAction = false;
             $scope.AddNewCar($scope.NewCar);
-
         }
         else {
             $scope.SubmetAction = true;

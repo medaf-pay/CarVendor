@@ -24,7 +24,7 @@ namespace CarVendor.mvc.Controllers
 
         [HttpGet]
         [Route("api/CarDetails/IndexData")]
-        public IHttpActionResult IndexData(long Brand = 0, long Category = 0, long Color = 0)
+        public IHttpActionResult IndexData(long Brand = 0,long Family = 0, long Category = 0, long Color = 0)
         {
 
             var cars = db.Cars.Select(s =>
@@ -57,7 +57,10 @@ namespace CarVendor.mvc.Controllers
             {
                 cars = cars.Where(c => c.BrandId == Brand).ToList();
             }
-
+            if (Family !=0)
+            {
+                cars = cars.Where(c => c.CarFamily.Id == Family).ToList();
+            }
             if (Category != 0)
             {
                 cars = cars.Select(s => { s.Categories = s.Categories.Where(c1 => c1.Id == Category).Select(s1 => { return s1; }).ToList(); return s; }).Where(c => c.Categories.Count > 0).ToList();

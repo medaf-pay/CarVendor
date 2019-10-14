@@ -39,5 +39,11 @@ namespace CarVendor.Web.Models
         }
 
         public System.Data.Entity.DbSet<CarVendor.data.Entities.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<CarVendor.data.Entities.Car> Cars { get; set; }
+
+        public System.Data.Entity.DbSet<CarVendor.data.Entities.Brand> Brands { get; set; }
+
+        public System.Data.Entity.DbSet<CarVendor.data.Entities.CarFamily> CarFamilies { get; set; }
     }
 }
