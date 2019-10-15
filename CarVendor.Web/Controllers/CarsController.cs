@@ -97,17 +97,18 @@ namespace CarVendor.Web.Controllers
         // GET: Cars/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Car car = db.Cars.Find(id);
-            if (car == null)
-            {
-                return HttpNotFound();
-            }
-            return View(car);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Car car = db.Cars.Find(id);
+            //if (car == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View();
         }
+
 
         // POST: Cars/Delete/5
         [HttpPost, ActionName("Delete")]

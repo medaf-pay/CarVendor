@@ -252,6 +252,43 @@ namespace CarVendor.mvc.Controllers
             return Request.CreateResponse(filesPaths);
         }
 
+
+
+        [Route("api/CartDetails/GetCar/{carId}")]
+        [HttpGet]
+        public IHttpActionResult GetCarById(long carId)
+        {
+            var car = db.Cars.Where(s => s.Id == carId).Select(c => new CarViewModel
+            {
+                Brand = c.Brand.Name,
+                BrandId = c.BrandId,
+                Name = c.Name,
+                Id = c.Id,
+                Categories=c.Carcategories.Select(cat=>new CategoryViewModel
+                {
+                    Name=cat.Category.Name,
+                    Id=cat.Category.Id,
+                    Colors=cat.CarColors.Select(col=>new ColorViewModel
+                    {
+                        Id=col.ColorId,
+                        Name=col.Color.Name,
+                        Price=col.Price,
+                        Images=col.CarImages.Select(img=>new BaseViewModel
+                        {
+                            Id=img.Id,
+                            Name=img.ImageURL
+
+                        }).ToList()
+
+                    }).ToList()
+
+                }).ToList(),
+                //CarFamily = new CarFamilyModel { }
+            }).FirstOrDefault();
+
+            return Ok(car);
+        }
+
         [Route("api/CartDetails/AddNewCar")]
         [HttpPost]
         public HttpResponseMessage AddNewCar(NewCarModel carModel)

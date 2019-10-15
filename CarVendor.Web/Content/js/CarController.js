@@ -16,6 +16,8 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
         $scope.Models = data.data.Models;
         $scope.CarFamilies = data.data.CarFamilies;
     })
+
+
     $scope.SetNewCategory = function () {
         $scope.Options.push(angular.copy(Option));
     }
@@ -51,6 +53,10 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
         $scope.Options.splice(index, 1)
 
     }
+
+    //$scope.DeleteCar = function (car) {
+        
+    //}
      
     $scope.AddNewCar = function (Car) {
       
@@ -99,4 +105,38 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
             });
         
     };
+});
+
+
+
+
+CarApp.controller('DeleteCar', function ($scope, $http, Upload, $window, $timeout, $location) {
+    debugger;
+    var id = Number(location.pathname.split("/").pop());
+    debugger;
+    $scope.editCar = {};
+
+    $http.get("/api/CartDetails/getFilters").then(function (data) {
+        $scope.Brands = data.data.Brands;
+        $scope.Categories = data.data.Categories;
+
+        $scope.Colors = data.data.Colors;
+        $scope.Models = data.data.Models;
+        //$scope.CarFamilies = data.data.CarFamilies;
+    })
+
+    $http.get("/api/CartDetails/GetCar/" + id).then(function (data) {
+        debugger;
+        console.log("data", data)
+        $scope.editCar = data.data;
+                   debugger;
+        //$scope.Brands = data.data.Brands;
+        //$scope.Categories = data.data.Categories;
+
+        //$scope.Colors = data.data.Colors;
+        //$scope.Models = data.data.Models;
+        //$scope.CarFamilies = data.data.CarFamilies;
+    });
+
+    console.log("EditCarrrr",$scope.editCar);
 });
