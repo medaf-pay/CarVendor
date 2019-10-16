@@ -80,6 +80,39 @@ namespace CarVendor.mvc.Controllers
             }
             return Ok(cars);
         }
+        [HttpGet]
+        [Route("api/CarDetails/GetCarByCode/{Id}")]
+        public IHttpActionResult GetCarByCode(long Id)
+        {
+
+            CarModel cars = db.Cars.Where(c=>c.Id==Id).Select(s =>
+                new CarModel
+                {
+                    Brand = s.Brand.Id,
+                   CarName=s.Name,
+                    Id = s.Id,
+                    Model=s.Model,
+                    Options= s.Carcategories.Select(s1 =>
+                    new Option
+                    {
+                        Category = s1.Category.Id,
+                        moreDetails = s1.CarColors.Select(s2 => new MoreDetails
+                        {
+                         
+                            Color = s2.ColorId,
+                            Quantity = s2.Quantity,
+                            Price = s2.Price,
+                            Images = s2.CarImages.Select(s3 => new BaseViewModel { Id = s3.Id, Name = s3.ImageURL }).ToList()
+
+                        }).ToList()
+
+
+                    }).ToList(),
+                    CarFamily =s.TypeId
+                }).FirstOrDefault();
+       
+            return Ok(cars);
+        }
 
         [HttpGet]
         [Route("api/CarDetails/GetImageByColorId/{carId}/{colorId}")]
@@ -254,7 +287,7 @@ namespace CarVendor.mvc.Controllers
 
         [Route("api/CartDetails/AddNewCar")]
         [HttpPost]
-        public HttpResponseMessage AddNewCar(NewCarModel carModel)
+        public HttpResponseMessage AddNewCar(CarModel carModel)
         {
 
             Car car = new Car()
@@ -299,5 +332,7 @@ namespace CarVendor.mvc.Controllers
             //Send OK Response to Client.
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+
+
     }
 }

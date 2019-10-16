@@ -237,7 +237,7 @@
     <Compile Include="ViewModels\CarViewModel.cs" />
     <Compile Include="ViewModels\DateQueryViewModel.cs" />
     <Compile Include="ViewModels\filtersModel.cs" />
-    <Compile Include="ViewModels\NewCarModel.cs" />
+    <Compile Include="ViewModels\CarModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />

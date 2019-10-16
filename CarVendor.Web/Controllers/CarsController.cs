@@ -60,10 +60,10 @@ namespace CarVendor.Web.Controllers
         }
 
         // GET: Cars/Edit/5
-        public ActionResult Edit(long id)
+        public ActionResult Edit(long CarCode)
         {
            
-            Car car = db.Cars.Find(id);
+            Car car = db.Cars.Find(CarCode);
             if (car == null)
             {
                 return HttpNotFound();

@@ -1,31 +1,31 @@
 ﻿var CarApp = angular.module('CarApp', ['ngFileUpload']);
 CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeout) {
-    $scope.EditCar = {}
+    $scope.EditCar = { }
     var urlParams = new URLSearchParams(window.location.search);
-    var CarId = urlParams.get('');
+    var CarId = urlParams.get('CarCode');
+    console.log(CarId);
     $scope.successMessagebool = false;
     var Option = {
         Categoryselected: null, MoreDetails: [{ Price: null, Colorselected: null, file: null }]
     };
     var details = { Price: null, Colorselected: null, file: null };
     $scope.Options = [{ Categoryselected: null, MoreDetails:[{ Price: null, Colorselected: null, file: null }] }]
-
-    $http.get("/api/CartDetails/getFilters").then(function (data) {
-        $scope.Brands = data.data.Brands;
-        $scope.Categories = data.data.Categories;
-
-        $scope.Colors = data.data.Colors;
-        $scope.Models = data.data.Models;
-        $scope.CarFamilies = data.data.CarFamilies;
-    });
-    $http.get("/api/CartDetails/getFilters").then(function (data) {
-        $scope.Brands = data.data.Brands;
-        $scope.Categories = data.data.Categories;
-
-        $scope.Colors = data.data.Colors;
-        $scope.Models = data.data.Models;
-        $scope.CarFamilies = data.data.CarFamilies;
+    $http.get("/api/CarDetails/GetCarByCode/" + CarId).then(function (data) {
+        $scope.EditCar = data.data;
+        $scope.EditCar.CarFamily = data.data.CarFamily.toString();
+        $scope.EditCar.Brand = data.data.Brand.toString();
+        $scope.Options = $scope.EditCar.Options;
     })
+    $http.get("/api/CartDetails/getFilters").then(function (data) {
+        $scope.Brands = data.data.Brands;
+        $scope.Categories = data.data.Categories;
+
+        $scope.Colors = data.data.Colors;
+        $scope.Models = data.data.Models;
+        $scope.CarFamilies = data.data.CarFamilies;
+    
+    });
+ 
     $scope.SetNewCategory = function () {
         $scope.Options.push(angular.copy(Option));
     }
