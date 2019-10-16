@@ -34,7 +34,11 @@
     <script src="/Content/booking/js/booking.js"></script>
 
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
-
+    <script>
+        function onSelect(value) {
+            window.location.href = "/" + value + "/Create";
+        }
+    </script>
 
 
 </head>
@@ -62,10 +66,10 @@
                     <div class="authorization-block">
                         @if (userId == null)
                         {<div class="authorization">
-                            <a class="create" href="/Account/Register">Create an account</a>
-                            <span class="divider"></span>
-                            <a class="login" href="/Account/login">Login</a>
-                        </div>
+                                <a class="create" href="/Account/Register">Create an account</a>
+                                <span class="divider"></span>
+                                <a class="login" href="/Account/login">Login</a>
+                            </div>
                         }
                         else
                         {
@@ -98,10 +102,25 @@
                             <li id="NavHome" class="nav-item"><a class="nav-link" href="/">Home</a></li>
                             @{if (User.IsInRole("Admin"))
                                 {
-                                    <li id="NavNewCar" class="nav-item" style="padding-left:10px"><a class="nav-link" href="/cars/create">New cars</a></li>
                                     <li id="NavNewCar" class="nav-item" style="padding-left:10px"><a class="nav-link" href="/Requests/Index">Orders</a></li>
+
+                                    <li id="NavNewCar" class="nav-item" style="padding-left:10px">
+
+                                        <div class="form-group col-md-12 mb-4" style="margin-top:10px">
+                                            <select name="menu" class="tmSelect auto" data-class="tmSelect tmSelect2" onChange="window.document.location.href=this.options[this.selectedIndex].value;">
+                                                <option selected="AdminPanel">Admin Panel</option>
+                                                <option value="/Brands/index">Brands</option>
+                                                <option value="/CarFamilies/index">Family</option>
+                                                <option value="/Categories/index">Category</option>
+                                                <option value="/cars/index">Cars</option>
+                                                <option value="/mails/index">Customer Service Mails</option>
+
+                                            </select>
+                                        </div>
+                                    </li>
+
                                 } }
-                            
+
                             <li id="NavAbout" class="nav-item"><a class="nav-link" href="/Home/About">About Us</a></li>
                             <li id="NavContact" class="nav-item"><a class="nav-link" href="/Home/Contact">Contact Us</a></li>
                             <li onclick="goToCart()" class="nav-item cartpart"><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>

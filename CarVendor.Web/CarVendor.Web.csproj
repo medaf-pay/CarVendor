@@ -202,9 +202,13 @@
     <Compile Include="Common\JwtManager.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CarDetailsController.cs" />
+    <Compile Include="Controllers\CarFamiliesController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -212,9 +216,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909191205573_v0.0.0.cs" />
-    <Compile Include="Migrations\201909191205573_v0.0.0.Designer.cs">
-      <DependentUpon>201909191205573_v0.0.0.cs</DependentUpon>
+    <Compile Include="Migrations\201910151138026_v0.0.0.cs" />
+    <Compile Include="Migrations\201910151138026_v0.0.0.Designer.cs">
+      <DependentUpon>201910151138026_v0.0.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -592,6 +596,26 @@
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Edit.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Brands\Create.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Details.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\CarFamilies\Create.cshtml" />
+    <Content Include="Views\CarFamilies\Delete.cshtml" />
+    <Content Include="Views\CarFamilies\Details.cshtml" />
+    <Content Include="Views\CarFamilies\Edit.cshtml" />
+    <Content Include="Views\CarFamilies\Index.cshtml" />
+    <Content Include="Views\Mails\Create.cshtml" />
+    <Content Include="Views\Mails\Delete.cshtml" />
+    <Content Include="Views\Mails\Details.cshtml" />
+    <Content Include="Views\Mails\Edit.cshtml" />
+    <Content Include="Views\Mails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -616,12 +640,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909191205573_v0.0.0.resx">
-      <DependentUpon>201909191205573_v0.0.0.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <EmbeddedResource Include="Migrations\201910151138026_v0.0.0.resx">
+      <DependentUpon>201910151138026_v0.0.0.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
