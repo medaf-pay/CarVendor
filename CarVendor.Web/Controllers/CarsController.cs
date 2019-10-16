@@ -60,20 +60,17 @@ namespace CarVendor.Web.Controllers
         }
 
         // GET: Cars/Edit/5
-        public ActionResult Edit(long? id)
+        public ActionResult Edit(long id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+           
             Car car = db.Cars.Find(id);
             if (car == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BrandId = new SelectList(db.Brands, "Id", "Name", car.BrandId);
-            ViewBag.TypeId = new SelectList(db.CarFamilies, "Id", "Name", car.TypeId);
-            return View(car);
+            //ViewBag.BrandId = new SelectList(db.Brands, "Id", "Name", car.BrandId);
+            //ViewBag.TypeId = new SelectList(db.CarFamilies, "Id", "Name", car.TypeId);
+            return View();
         }
 
         // POST: Cars/Edit/5

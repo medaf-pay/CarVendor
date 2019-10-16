@@ -216,9 +216,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910151138026_v0.0.0.cs" />
-    <Compile Include="Migrations\201910151138026_v0.0.0.Designer.cs">
-      <DependentUpon>201910151138026_v0.0.0.cs</DependentUpon>
+    <Compile Include="Migrations\201910161241409_s1.cs" />
+    <Compile Include="Migrations\201910161241409_s1.Designer.cs">
+      <DependentUpon>201910161241409_s1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -345,6 +345,7 @@
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\camera.js" />
+    <Content Include="Content\js\EditCarController.js" />
     <Content Include="Content\js\CarController.js" />
     <Content Include="Content\js\CardInfo.js" />
     <Content Include="Content\js\CartCTR.js" />
@@ -643,8 +644,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910151138026_v0.0.0.resx">
-      <DependentUpon>201910151138026_v0.0.0.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910161241409_s1.resx">
+      <DependentUpon>201910161241409_s1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,79 +1,182 @@
-﻿@model CarVendor.data.Entities.Car
+﻿
+<script src="~/Content/js/angular.min.js"></script>
+<script src="~/Content/js/ng-file-upload.min.js"></script>
+<script src="~/Content/js/EditCarController.js"></script>
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    .thumb {
+        width: 24px;
+        height: 24px;
+        float: none;
+        position: relative;
+        top: 7px;
+    }
+
+    form .progress {
+        line-height: 15px;
+    }
+
+    .progress {
+        display: inline-block;
+        width: 100px;
+        border: 3px groove #ccc;
+    }
+
+        .progress > div {
+            font-size: smaller;
+            background-color: red;
+            width: 0%;
+        }
+</style>
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
+<form ng-app="CarApp" ng-controller="EditCarCTR" name="EditCarFrom" novalidate>
+    <section id="successId">
+        <div style="height:100px;text-align: center;vertical-align: middle;line-height: 50px; " class="col-lg-12 col-sm-12 col-xs-12 alert alert-success" ng-hide="!successMessagebool">
+            <strong>{{ successMessage }}</strong>
+        </div>
+    </section>
+    <section ng-if="!successMessagebool">
+        <div class="shadow-sm p-4 mb-4 " style="background-color: #8080800a;">
+            <div class="shadow-sm p-2 mb-3 col-lg-2" style="background-color: #8080800a;font-weight:700;color:brown">Main Information:</div>
+            <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.InputCarName.$touched||SubmetAction)&&EditCarFrom.InputCarName.$invalid}">
+                        <label>Car Name:</label>
+                        <input type="text" class="form-control" ng-model="EditCar.CarName" name="InputCarName" id="inputEmail4" placeholder="Enter car name" required>
+                    </div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Car</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+                    <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.SelectModel.$touched||SubmetAction)&&EditCarFrom.SelectModel.$invalid}">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        <label>Model:</label>
+                        <select name="SelectModel" class="form-control" ng-model="EditCar.Model" required>
+                            <option value="">Select Car Model</option>
+                            <option ng-repeat="Model  in Models" value="{{Model}}">{{Model}}</option>
+                        </select>
+
+
+                    </div>
+                    <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.SelectCarFamily.$touched||SubmetAction)&&EditCarFrom.SelectCarFamily.$invalid}">
+
+                        <label>Family:</label>
+                        <select name="SelectCarFamily" class="form-control" ng-model="EditCar.CarFamily" required>
+                            <option value="">Select Car Family</option>
+                            <option ng-repeat="CarFamily  in CarFamilies" value="{{CarFamily.Id}}">{{CarFamily.Name}}</option>
+                        </select>
+
+
+                    </div>
+                    <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.SelectBrand.$touched||SubmetAction)&&EditCarFrom.SelectBrand.$invalid}">
+
+                        <label>Brand:</label>
+                        <select name="SelectBrand" class="form-control" ng-model="EditCar.Brand" required>
+                            <option value="">Select Car Brand</option>
+                            <option ng-repeat="Brand  in Brands" value="{{Brand.Id}}">{{Brand.Name}}</option>
+                        </select>
+
+
+                    </div>
+                </div>
+
             </div>
         </div>
+        <div class="shadow-sm p-4 mb-4 " style="background-color: #8080700a;">
+            <div class="shadow-sm p-2 mb-3 col-lg-2" style="background-color: #8080800a;font-weight:700;color:brown">Options Information:</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="shadow-sm p-4 mb-4 " style="background-color: #8080800a;" ng-repeat="Option in Options">
+                <div class="col-lg-12">
+                    <div class="shadow-sm p-2 mb-3 col-lg-2" style="background-color: #8080800a;font-weight:700;color:brown">
+                        Category {{$index+1}}:
+                    </div>
+                    <div ng-if="Options.length>1" class="float-right" style="float:right;margin-top: -39px;">
+                        <button ng-click="DeleteCategory($index)" type="button" class="btn-danger" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Condition, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                </div>
+                <div class="container">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TypeId, "TypeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TypeId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TypeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.SelectCategory{{$index}}.$touched||SubmetAction)&&EditCarFrom.SelectCategory{{$index}}.$invalid}">
+                            <label>Category:</label>
+                            <select name="SelectCategory{{$index}}" class="form-control" ng-model="Option.Category" required>
+                                <option value="">Select Car Category</option>
+                                <option ng-repeat="Category in Categories" value="{{Category.Id}}">{{Category.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="shadow-sm p-4 mb-4 col-lg-12 " style="background-color: #8080800a;" ng-repeat="Details in Option.MoreDetails">
+                            <div class="col-lg-12">
+                                <div class="shadow-sm p-2 mb-3 col-lg-2" style="background-color: #8080800a;font-weight:700;color:brown">
+                                    Options Type {{$index+1}}:
+                                </div>
+                                <div ng-if="Option.MoreDetails.length>1" class="float-right" style="float:right;margin-top: -39px;">
+                                    <button ng-click="DeleteOption($parent.$parent.$index,$index)" type="button" class="btn-danger" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BrandId, "BrandId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("BrandId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            </div>
+                            <div class="container">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDeleted)
-                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.InputPrice{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&EditCarFrom.InputPrice{{$parent.$parent.$index}}{{$index}}.$invalid}">
+                                        <label>Price:</label>
+                                        <input type="text" class="form-control" name="InputPrice{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Price" placeholder="Enter the car price" required>
+                                    </div>
+                                    <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.SelectColor{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&EditCarFrom.SelectColor{{$parent.$parent.$index}}{{$index}}.$invalid}">
+
+                                        <label>Color:</label>
+
+                                        <select name="SelectColor{{$parent.$parent.$index}}{{$index}}" class="form-control" ng-model="Details.Color" required>
+                                            <option value="">Select Car Color</option>
+                                            <option ng-repeat="Color in Colors" value="{{Color.Id}}">{{Color.Name}}</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group col-md-6 mb-6" ng-class="{'submitted':(EditCarFrom.InputQuantity{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&EditCarFrom.InputQuantity{{$parent.$parent.$index}}{{$index}}.$invalid}">
+                                        <label>Quantity:</label>
+                                        <input type="number" class="form-control" name="InputQuantity{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Quantity" placeholder="Enter No of available cars" required>
+                                    </div>
+                                    <div class="form-group col-md-4 mb-4">
+                                        <div>
+                                            <label>Car Photo:</label>
+                                        </div>
+                                        <div class="custom-file" style="max-width: 280px;" ng-class="{'submitted':(EditCarFrom.Inputfile{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&Details.file==null}">
+
+                                            <input type="file" class="custom-file-input" name="Inputfile{{$parent.$parent.$index}}{{$index}}" id="validatedCustomFile" ng-model="Details.file" ngf-select="SetFile($files,'img{{$parent.$index}}{{$index}}')" required>
+                                            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+
+
+                                        </div>
+                                        <img ng-if="Details.file!=null" id="img{{$parent.$parent.$index}}{{$index}}" src="" width="280" height="150" />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" ng-click="SetNewOptions($index)">New Option</button>
+                    </div>
+
                 </div>
             </div>
+            <button class="btn btn-primary" ng-click="SetNewCategory()">New Category</button>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+    </section>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+    <button class="btn btn-primary" ng-click="SaveCar()">Save The Car</button>
+</form>

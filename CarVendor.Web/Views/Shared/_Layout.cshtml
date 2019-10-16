@@ -100,41 +100,37 @@
 
                         <ul class="sf-menu navbar-nav mr-auto">
                             <li id="NavHome" class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                            @{if (User.IsInRole("Admin"))
-                                {
-                                    <li id="NavNewCar" class="nav-item" style="padding-left:10px"><a class="nav-link" href="/Requests/Index">Orders</a></li>
 
-                                    <li id="NavNewCar" class="nav-item" style="padding-left:10px">
-
-                                        <div class="form-group col-md-12 mb-4" style="margin-top:10px">
-                                            <select name="menu" class="tmSelect auto" data-class="tmSelect tmSelect2" onChange="window.document.location.href=this.options[this.selectedIndex].value;">
-                                                <option selected="AdminPanel">Admin Panel</option>
-                                                <option value="/Brands/index">Brands</option>
-                                                <option value="/CarFamilies/index">Family</option>
-                                                <option value="/Categories/index">Category</option>
-                                                <option value="/cars/index">Cars</option>
-                                                <option value="/mails/index">Customer Service Mails</option>
-
-                                            </select>
-                                        </div>
-                                    </li>
-
-                                } }
 
                             <li id="NavAbout" class="nav-item"><a class="nav-link" href="/Home/About">About Us</a></li>
                             <li id="NavContact" class="nav-item"><a class="nav-link" href="/Home/Contact">Contact Us</a></li>
                             <li onclick="goToCart()" class="nav-item cartpart"><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>
 
                         </ul>
+                        @{if (User.IsInRole("Admin"))
+                            {
+                        <ul class="sf-menu navbar-nav " style="float:right; margin-right:10px;" >
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Panel <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Brands/index">Brands</a></li>
+                                    <li><a href="/CarFamilies/index">Family</a></li>
+                                    <li><a href="/Categories/index">Category</a></li>
+                                    <li><a href="/cars/index">Cars</a></li>
 
-                        <form id="search" action="search.php" method="GET" accept-charset="utf-8">
-                            <input type="text" name="s" />
-                            <a onclick="document.getElementById('search').submit()">
-                                <div class="search_icon"></div>
-                            </a>
-                        </form>
-                        <div class="clearfix"></div>
-                    </div>
+                                    <li><a href="/mails/index">Customer Service Mails</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                                    } }
+                                    <form id="search" action="search.php" method="GET" accept-charset="utf-8">
+                                        <input type="text" name="s" />
+                                        <a onclick="document.getElementById('search').submit()">
+                                            <div class="search_icon"></div>
+                                        </a>
+                                    </form>
+                                    <div class="clearfix"></div>
+                            </div>
 
                 </nav>
             </div>
