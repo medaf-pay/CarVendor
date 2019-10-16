@@ -221,6 +221,18 @@ namespace CarVendor.mvc.Controllers
             return Ok(filters);
         }
 
+
+
+        [HttpDelete]
+        [Route("api/deleteCar/{id}")]
+        public IHttpActionResult DeleteConfirmed(long id)
+        {
+            Car car = db.Cars.Where(s=>s.Id==id).FirstOrDefault();
+            db.Cars.Remove(car);
+            db.SaveChanges();
+            return Ok();
+        }
+
         //[HttpGet]
         //[Route("api/CartDetails/Payment")]
         //public IHttpActionResult Payment()

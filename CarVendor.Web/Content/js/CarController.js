@@ -6,7 +6,7 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
         Categoryselected: null, MoreDetails: [{ Price: null, Colorselected: null, file: null }]
     };
     var details = { Price: null, Colorselected: null, file: null };
-    $scope.Options = [{ Categoryselected: null, MoreDetails:[{ Price: null, Colorselected: null, file: null }] }]
+    $scope.Options = [{ Categoryselected: null, MoreDetails: [{ Price: null, Colorselected: null, file: null }] }];
 
     $http.get("/api/CartDetails/getFilters").then(function (data) {
         $scope.Brands = data.data.Brands;
@@ -15,15 +15,15 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
         $scope.Colors = data.data.Colors;
         $scope.Models = data.data.Models;
         $scope.CarFamilies = data.data.CarFamilies;
-    })
+    });
 
 
     $scope.SetNewCategory = function () {
         $scope.Options.push(angular.copy(Option));
-    }
+    };
     $scope.SetNewOptions = function (index) {
         $scope.Options[index].MoreDetails.push(angular.copy(details));
-    }
+    };
 
     $scope.SaveCar = function () {
     
@@ -111,32 +111,26 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
 
 
 CarApp.controller('DeleteCar', function ($scope, $http, Upload, $window, $timeout, $location) {
-    debugger;
     var id = Number(location.pathname.split("/").pop());
-    debugger;
     $scope.editCar = {};
 
-    $http.get("/api/CartDetails/getFilters").then(function (data) {
-        $scope.Brands = data.data.Brands;
-        $scope.Categories = data.data.Categories;
-
-        $scope.Colors = data.data.Colors;
-        $scope.Models = data.data.Models;
-        //$scope.CarFamilies = data.data.CarFamilies;
-    })
-
     $http.get("/api/CartDetails/GetCar/" + id).then(function (data) {
-        debugger;
-        console.log("data", data)
+        console.log("data", data);
         $scope.editCar = data.data;
-                   debugger;
-        //$scope.Brands = data.data.Brands;
-        //$scope.Categories = data.data.Categories;
-
-        //$scope.Colors = data.data.Colors;
-        //$scope.Models = data.data.Models;
-        //$scope.CarFamilies = data.data.CarFamilies;
     });
+
+
+    $scope.DeleteCar = function (car) {
+        console.log(car);
+        $http.delete("/api/deleteCar/" + car.Id).then(function (data) {
+          
+                $window.location.href = '/';
+        });
+    };
+
+    $scope.Back = function () {
+        $window.location.href = '/';
+    };
 
     console.log("EditCarrrr",$scope.editCar);
 });

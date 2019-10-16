@@ -212,10 +212,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909191205573_v0.0.0.cs" />
-    <Compile Include="Migrations\201909191205573_v0.0.0.Designer.cs">
-      <DependentUpon>201909191205573_v0.0.0.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankTransferModel.cs" />
@@ -633,11 +629,6 @@
       <Project>{01e76fa5-ed48-450d-a07e-108a981f489f}</Project>
       <Name>CarVendor.data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909191205573_v0.0.0.resx">
-      <DependentUpon>201909191205573_v0.0.0.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
