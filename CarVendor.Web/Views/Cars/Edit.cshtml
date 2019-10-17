@@ -153,12 +153,12 @@
                                         </div>
                                         <div class="custom-file" style="max-width: 280px;" ng-class="{'submitted':(EditCarFrom.Inputfile{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&Details.file==null}">
 
-                                            <input type="file" class="custom-file-input" name="Inputfile{{$parent.$parent.$index}}{{$index}}" id="validatedCustomFile" ng-model="Details.file" ngf-select="SetFile($files,'img{{$parent.$index}}{{$index}}')" required>
+                                            <input type="file" class="custom-file-input" name="Inputfile{{$parent.$parent.$index}}{{$index}}" id="validatedCustomFile" ng-model="Details.file" ngf-select="SetFile($files,'img{{$parent.$index}}{{$index}}')">
                                             <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
 
 
-                                        </div>
-                                        <img ng-if="Details.file!=null" id="img{{$parent.$parent.$index}}{{$index}}" src="" width="280" height="150" />
+                                        </div>{{console.log(Details.imgURL)}}
+                                        <img ng-if="Details.file!==null" id="img{{$parent.$parent.$index}}{{$index}}" src="~/images/{{Details.file.Name}}" width="280" height="150" />
 
                                     </div>
 
@@ -178,5 +178,6 @@
 
 
 
-    <button class="btn btn-primary" ng-click="SaveCar()">Save The Car</button>
+    <button class="btn btn-primary" ng-click="SaveCar()">Update car</button>
+    <button class="btn btn-danger" ng-click="cancelUpdate()"> Cancel </button>
 </form>
