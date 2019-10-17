@@ -4,28 +4,17 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Car</h4>
+<div class="row">
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal col-4">
         <dt>
-            @Html.DisplayNameFor(model => model.Brand.Name)
+            @Html.DisplayName("Brand")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Brand.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Type.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type.Name)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -43,29 +32,18 @@
             @Html.DisplayFor(model => model.Model)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Condition)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
     </dl>
+    <div class="col-8">
+        <img src="/images/@Model.Carcategories.FirstOrDefault().CarColors.FirstOrDefault().CarImages.FirstOrDefault().ImageURL" alt="@Model.Model" />
+    </div>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
+        <h3>Are you sure you want to delete this?</h3>
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
