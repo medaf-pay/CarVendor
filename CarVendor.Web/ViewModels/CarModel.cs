@@ -12,14 +12,14 @@ namespace CarVendor.mvc.ViewModels
         public long Brand { get; set; }
         public int CarFamily { get; set; }
         public List<Option> Options { get; set; }
-        public long Id { get; internal set; }
+        public long Id { get;  set; }
     }
 
     public class Option
     {
         public long Category { get; set; }
         public List<MoreDetails> moreDetails { get; set; }
-      
+        public long Id { get;  set; }
     }
     public class MoreDetails
     {
@@ -29,5 +29,6 @@ namespace CarVendor.mvc.ViewModels
         public int Quantity { get; set; }
         public string file { get; set; }
         public List<BaseViewModel> Images { get; internal set; }
+        public long Id { get;  set; }
     }
 }

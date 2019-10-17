@@ -1,29 +1,33 @@
 ﻿var CarApp = angular.module('CarApp', ['ngFileUpload']);
 CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeout) {
-    $scope.EditCar = {}
+    $scope.EditCar = { Id: 0}
     var urlParams = new URLSearchParams(window.location.search);
     var CarId = urlParams.get('CarCode');
     console.log(CarId);
     $scope.successMessagebool = false;
     var Option = {
-        Categoryselected: null, MoreDetails: [{ Price: null, Colorselected: null, file: null }]
+        Id: 0, Categoryselected: null, MoreDetails: [{ Id: 0, Price: null, Colorselected: null, file: null }]
     };
 
-    var details = { Price: null, Colorselected: null, file: null };
+    var details = { Id: 0, Price: null, Colorselected: null, file: null };
 
-    $scope.Options = [{ Categoryselected: null, MoreDetails: [{ Price: null, Colorselected: null, file: null }] }];
+    $scope.Options = [{ Id: 0, Categoryselected: null, MoreDetails: [{ Id: 0, Price: null, Colorselected: null, file: null }] }];
 
     $http.get("/api/CarDetails/GetCarByCode/" + CarId).then(function (data) {
         $scope.EditCar = data.data;
+
         $scope.EditCar.CarFamily = data.data.CarFamily.toString();
         $scope.EditCar.Brand = data.data.Brand.toString();
+        $scope.EditCar.Id = data.data.Id;
         angular.forEach(data.data.Options, function (categoreyValue, categoryKey) {
             $scope.Options[categoryKey] = angular.copy(Option);
             $scope.Options[categoryKey].Category = categoreyValue.Category.toString();
+            $scope.Options[categoryKey].Id = categoreyValue.Id;
             angular.forEach(categoreyValue.moreDetails, function (value, key) {
                 $scope.Options[categoryKey].MoreDetails[key] = angular.copy(details);
                 $scope.Options[categoryKey].MoreDetails[key].Color = value.Color.toString();
                 $scope.Options[categoryKey].MoreDetails[key].Price = value.Price;
+                $scope.Options[categoryKey].MoreDetails[key].Id = value.Id;
                 $scope.Options[categoryKey].MoreDetails[key].Quantity = value.Quantity;
                 $scope.Options[categoryKey].MoreDetails[key].file = value.Images[0];
             });
@@ -97,6 +101,7 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
 
             $scope.Result = response.data;
             var i = 0;
+            
             angular.forEach(Car.Options, function (Optionvalue, Optionkey) {
                 angular.forEach(Optionvalue.MoreDetails, function (value, key) {
                     value.file = response.data[i++];
