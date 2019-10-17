@@ -21,7 +21,7 @@ namespace CarVendor.mvc.Controllers
     {
         private DataBaseContext db = new DataBaseContext();
 
-
+       
         [HttpGet]
         [Route("api/CarDetails/IndexData")]
         public IHttpActionResult IndexData(long Brand = 0,long Family = 0, long Category = 0, long Color = 0)
@@ -333,6 +333,73 @@ namespace CarVendor.mvc.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
+        [Route("api/CartDetails/edit/{carCode}")]
+        [HttpPost]
+        public HttpResponseMessage Edit(long carCode, CarModel carModel)
+        {
+            Car car = db.Cars.Where(c => c.Id == carCode).FirstOrDefault();
+            //   List<long> UpdatedCarcategories = carModel.Options.Select(s => s.Category).ToList();
+            //   List<long> OldCarcategories= car.Carcategories.Select(s => s.Id).ToList();
+            //   List<long> CarcategoriesDeleted = OldCarcategories.Except(UpdatedCarcategories).ToList();
+            //var CategotyDeleted=db.CarCategories
 
+            car.BrandId = carModel.Brand;
+            car.Condition = CarCondition.New;
+            car.IsDeleted = false;
+            car.Model = carModel.Model;
+            car.Name = carModel.CarName;
+            car.TypeId = carModel.CarFamily;
+            
+            List<CarCategory> carCategories = new List<CarCategory>();
+            CarCategory carCategory;
+            CarColor CarColor;
+            foreach (var item in carModel.Options)
+            {
+                if (car.Carcategories.Any(c => c.Id == item.Category))
+                {
+                    car.Carcategories.Where(c => c.Id == item.Category).Select(s => { s.CategoryId = item.Category; s.IsDeleted = false; return s; });
+
+
+                    foreach (var colorData in item.moreDetails)
+                    {
+                        if (car.Carcategories.Where(c => c.Id == item.Category).FirstOrDefault().CarColors.Any(c1 => c1.Id == colorData.Color))
+                        {
+                            car.Carcategories.Where(c => c.Id == item.Category).Select(s => s.CarColors.Where(c1 => c1.Id == colorData.Color).Select(s1 =>
+                            {
+
+                                s1.CarImages.Select(s2 => { s2.ImageURL = colorData.file; s2.IsDeleted = false; return s2; });
+                                s1.ColorId = colorData.Color;
+                                s1.IsDeleted = false;
+                                s1.Price = colorData.Price;
+                                s1.Quantity = colorData.Quantity;
+                                return s1;
+                            }));
+
+                        }
+                        else
+                        {
+                            car.Carcategories.Where(c => c.Id == item.Category).Select(s => s.CarColors.Where(c1 => c1.Id == colorData.Color).Select(s1 =>
+                            {
+                                s1.IsDeleted = true; return s1;
+                            }));
+                        }
+
+                    }
+                }
+                else
+                {
+                    car.Carcategories.Where(c => c.Id == item.Category).Select(s =>
+                    {
+                        s.IsDeleted = true;
+                        return s;
+                    });
+                }
+
+            }
+            db.SaveChanges();
+
+            //Send OK Response to Client.
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }
