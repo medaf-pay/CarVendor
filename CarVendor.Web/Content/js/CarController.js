@@ -15,16 +15,16 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
         $scope.Colors = data.data.Colors;
         $scope.Models = data.data.Models;
         $scope.CarFamilies = data.data.CarFamilies;
-    })
+    });
     $scope.SetNewCategory = function () {
         $scope.Options.push(angular.copy(Option));
-    }
+    };
     $scope.SetNewOptions = function (index) {
         $scope.Options[index].MoreDetails.push(angular.copy(details));
-    }
+    };
 
     $scope.SaveCar = function () {
-    
+
         if ($scope.NewCarFrom.$valid) {
             $scope.NewCar.Options = $scope.Options;
             $scope.SubmetAction = false;
@@ -33,24 +33,23 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
         else {
             $scope.SubmetAction = true;
         }
-    }
+    };
 
-    $scope.SetFile = function (file,Id)
-    {
+    $scope.SetFile = function (file, Id) {
         var y = $scope.Options;
-        if (file.length!=0)
-            $("#" + Id ).attr('src', URL.createObjectURL(file[0]));
-        
-    }
+        if (file.length != 0)
+            $("#" + Id).attr('src', URL.createObjectURL(file[0]));
+
+    };
     $scope.DeleteOption = function (categoryIndex, index) {
-      
+
         $scope.Options[categoryIndex].MoreDetails.splice(index, 1)
-    
-    }
+
+    };
     $scope.DeleteCategory = function (index) {
         $scope.Options.splice(index, 1)
 
-    }
+    };
      
     $scope.AddNewCar = function (Car) {
       
@@ -65,9 +64,9 @@ CarApp.controller('CreateCarCTR', function ($scope, $http, Upload, $window, $tim
                 
                 data:
                 {
-                    files: $scope.CarImages,
+                    files: $scope.CarImages
                   
-                },
+                }
             }).then(function (response) {
                 
                     $scope.Result = response.data;
