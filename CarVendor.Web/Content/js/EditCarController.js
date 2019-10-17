@@ -9,12 +9,24 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
         Categoryselected: null, MoreDetails: [{ Price: null, Colorselected: null, file: null }]
     };
     var details = { Price: null, Colorselected: null, file: null };
-    $scope.Options = [{ Categoryselected: null, MoreDetails:[{ Price: null, Colorselected: null, file: null }] }]
+    $scope.Options = [{ Categoryselected: null, MoreDetails: [{ Price: null, Colorselected: null, file: null }] }];
     $http.get("/api/CarDetails/GetCarByCode/" + CarId).then(function (data) {
         $scope.EditCar = data.data;
         $scope.EditCar.CarFamily = data.data.CarFamily.toString();
         $scope.EditCar.Brand = data.data.Brand.toString();
-        $scope.Options = $scope.EditCar.Options;
+        angular.forEach(data.data.Options, function (Optionvalue, Optionkey) {
+            $scope.Options[Optionkey] = angular.copy(Option);
+            $scope.Options[Optionkey].Category = Optionvalue.Category.toString();
+            angular.forEach(Optionvalue.moreDetails, function (value, key) {
+                $scope.Options[Optionkey].MoreDetails[key] = angular.copy(details);
+                $scope.Options[Optionkey].MoreDetails[key].Color = value.Color.toString();
+                $scope.Options[Optionkey].MoreDetails[key].Price = value.Price;
+                $scope.Options[Optionkey].MoreDetails[key].Quantity = value.Quantity;
+
+            });
+        });
+      
+
     })
     $http.get("/api/CartDetails/getFilters").then(function (data) {
         $scope.Brands = data.data.Brands;
