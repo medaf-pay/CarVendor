@@ -2,33 +2,46 @@
 
 @{
     ViewBag.Title = "Index";
+    int i = 0;
 }
-
+<style>
+    th, td {
+        text-align: center
+    }
+</style>
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-striped col-lg-8">
     <tr>
+        <th>
+            Number
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.mail)
         </th>
-       
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
+        <td>
+            @(++i)
+        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.mail)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
-}
+    }
 
 </table>
