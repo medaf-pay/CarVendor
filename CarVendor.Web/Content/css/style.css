@@ -936,6 +936,7 @@ nav {
 
 .carView{
    width:97%;
+
 }
 .box1 img {
     margin-bottom: 13px;
@@ -949,7 +950,7 @@ nav {
 }
 
     .box1 .info .highlighted {
-        color: #68a617;
+        color: #81d218;
     }
 
     .box1 .info .first,
@@ -964,7 +965,7 @@ nav {
     .box1 .info .second {
         float: right;
     }
-
+ 
 .box1 .info2 .price {
     float: left;
 }

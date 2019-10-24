@@ -14,10 +14,11 @@
     </div>
     <![endif]-->
     @using Microsoft.AspNet.Identity;
-
+    @using CarVendor.data;
     @{
+        DataBaseContext db = new DataBaseContext();
         var userId = User.Identity.GetUserId();
-        var userName = User.Identity.GetUserName();
+        var userName = db.Users.Where(c=>c.Email==User.Identity.Name).Select(s=>s.FName).FirstOrDefault();
 
     }
 
@@ -74,14 +75,14 @@
                         else
                         {
                             <div class="authorization">
-                                <a class="create" href="/Requests/Index">Wellcome @userName</a>
+                                <a class="create" href="/Requests/Index">Wellcome  @userName</a>
                                 <span class="divider"></span>
                                 <a class="login" href="/Account/LogOff">Logout</a>
                                 <span class="divider"></span>
                                 <a class="login" href="/Account/ChangePassword">ChangePassword</a>
                             </div>
                         }
-                        <a class="add btn-big" href="#"><span class="plus">+</span>Add advertisement</a>
+                        @*<a class="add btn-big" href="#"><span class="plus">+</span>Add advertisement</a>*@
                     </div>
                 </div>
                 <div class="clearfix"></div>
