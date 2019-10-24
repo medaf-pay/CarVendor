@@ -255,13 +255,6 @@ namespace CarVendor.mvc.Controllers
             return Ok(filters);
         }
 
-        //[HttpGet]
-        //[Route("api/CartDetails/Payment")]
-        //public IHttpActionResult Payment()
-        //{
-        //    return Ok();
-        //}
-
         [Route("api/CartDetails/UploadFiles")]
         [HttpPost]
         public HttpResponseMessage UploadFiles()
@@ -273,7 +266,6 @@ namespace CarVendor.mvc.Controllers
             {
                 Directory.CreateDirectory(path);
             }
-
 
             foreach (string key in HttpContext.Current.Request.Files)
             {
@@ -339,11 +331,6 @@ namespace CarVendor.mvc.Controllers
         public HttpResponseMessage Edit(long carCode, CarModel carModel)
         {
             Car car = db.Cars.Where(c => c.Id == carCode).FirstOrDefault();
-            //   List<long> UpdatedCarcategories = carModel.Options.Select(s => s.Category).ToList();
-            //   List<long> OldCarcategories= car.Carcategories.Select(s => s.Id).ToList();
-            //   List<long> CarcategoriesDeleted = OldCarcategories.Except(UpdatedCarcategories).ToList();
-            //var CategotyDeleted=db.CarCategories
-
             car.BrandId = carModel.Brand;
             car.Condition = CarCondition.New;
             car.IsDeleted = false;
@@ -352,85 +339,75 @@ namespace CarVendor.mvc.Controllers
             car.TypeId = carModel.CarFamily;
             car.Carcategories.Select(s =>
             {
-               
+
                 s.IsDeleted = true;
                 return s;
             }).ToList();
+
             car.Carcategories.Select(s => s.CarColors.Select(s1 =>
             {
                 s1.IsDeleted = true; return s1;
             }).ToList()).ToList();
+
             foreach (var item in carModel.Options)
             {
-                if (item.Id!=0)
+                if (item.Id != 0)
                 {
                     car.Carcategories.Where(c => c.Id == item.Id).Select(s => { s.Id = item.Id; s.CategoryId = item.Category; s.IsDeleted = false; return s; }).ToList();
-
 
                     foreach (var colorData in item.moreDetails)
                     {
                         if (car.Carcategories.Where(c => c.Id == item.Id).FirstOrDefault().CarColors.Any(c1 => c1.Id == colorData.Id))
                         {
                             var color = car.Carcategories.Where(c => c.Id == item.Id).Select(s => s.CarColors.Where(c1 => c1.Id == colorData.Id).FirstOrDefault()).FirstOrDefault();
-                            //.Select(s1 =>
-                            //{
                             color.Id = colorData.Id;
-                            color.CarImages.Select(s2 => { s2.ImageURL = colorData.file; s2.IsDeleted = false; return s2; });
+                            color.CarImages.Select(s2 => { s2.ImageURL = colorData.file; s2.IsDeleted = false; return s2; }).ToList();
                             color.ColorId = colorData.Color;
                             color.IsDeleted = false;
                             color.Price = colorData.Price;
                             color.Quantity = colorData.Quantity;
-                            //    return s1;
-                            //}));
-
                         }
                         else
                         {
-
                             CarColor CarColor;
-                           
-                                CarColor = new CarColor();
-                                CarColor.CarImages = new List<CarImage>()
-                    {
-                        new CarImage{ ImageURL=colorData.file,IsDeleted=false}
-                    };
-                                CarColor.ColorId = colorData.Color;
-                                CarColor.IsDeleted = false;
-                                CarColor.Price = colorData.Price;
-                                CarColor.Quantity = colorData.Quantity;
+                            CarColor = new CarColor();
+                            CarColor.CarImages = new List<CarImage>()
+                                {
+                                    new CarImage{ ImageURL=colorData.file,IsDeleted=false}
+                                };
+                            CarColor.ColorId = colorData.Color;
+                            CarColor.IsDeleted = false;
+                            CarColor.Price = colorData.Price;
+                            CarColor.Quantity = colorData.Quantity;
                             car.Carcategories.Where(c => c.Id == item.Id).FirstOrDefault().CarColors.Add(CarColor);
-                            }
-
+                        }
                     }
                 }
                 else
                 {
                     CarCategory carCategory;
                     CarColor CarColor;
-                  
-                        carCategory = new CarCategory();
-                        carCategory.CategoryId = item.Category;
-                        carCategory.IsDeleted = false;
-                        carCategory.CarColors = new List<CarColor>();
-                        foreach (var colorData in item.moreDetails)
-                        {
-                            CarColor = new CarColor();
-                            CarColor.CarImages = new List<CarImage>()
+
+                    carCategory = new CarCategory();
+                    carCategory.CategoryId = item.Category;
+                    carCategory.IsDeleted = false;
+                    carCategory.CarColors = new List<CarColor>();
+                    foreach (var colorData in item.moreDetails)
+                    {
+                        CarColor = new CarColor();
+                        CarColor.CarImages = new List<CarImage>()
                     {
                         new CarImage{ ImageURL=colorData.file,IsDeleted=false}
                     };
-                            CarColor.ColorId = colorData.Color;
-                            CarColor.IsDeleted = false;
-                            CarColor.Price = colorData.Price;
-                            CarColor.Quantity = colorData.Quantity;
+                        CarColor.ColorId = colorData.Color;
+                        CarColor.IsDeleted = false;
+                        CarColor.Price = colorData.Price;
+                        CarColor.Quantity = colorData.Quantity;
 
-                            carCategory.CarColors.Add(CarColor);
-                        }
-                       car.Carcategories.Add(carCategory);
-
-                    
+                        carCategory.CarColors.Add(CarColor);
+                    }
+                    car.Carcategories.Add(carCategory);
                 }
-
             }
             db.SaveChanges();
 
