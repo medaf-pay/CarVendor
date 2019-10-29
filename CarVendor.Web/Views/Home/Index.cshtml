@@ -237,15 +237,17 @@
 
                                     <div class="form-group col-md-4 mb-3 col-sm-6" ng-repeat="car  in Cars">
                                         <div class="box1 carView">
-                                            <h4 class="wow fadeIn" style="color:forestgreen;font-weight:800" data-wow-duration="1s" data-wow-delay="0.1s">
-                                               {{car.Name}}
-                                            </h4>
-                                            <div class="row">
-                                                <img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" />
-                                            </div>
+                                            <a href="/cars/details?id={{car.Id}}&Category={{CarCategoryselected}}">
+                                                <h4 class="wow fadeIn"  style="color:forestgreen;font-weight:800" data-wow-duration="1s" data-wow-delay="0.1s">
+                                                    {{car.Name}}
+                                                </h4>
+                                                <div  class="row">
+                                                    <img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" />
+                                                </div>
+                                            </a>
                                             <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <span class="first col-md-6" style="padding-right: 22px; color:black;font-weight:700">Brand: <span class="highlighted">{{car.Brand}}</span></span>
-                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" ng-init="CarPrice[$index]=car.Categories[0].Colors[0].Price" class="highlighted">{{CarPrice[$index]}}</span>  EGP</span>
+                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:#ff0000" ng-init="CarPrice[$index]=car.Categories[0].Colors[0].Price" class="highlighted">{{CarPrice[$index]}}</span>  EGP</span>
                                             </div>
                                             <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <div class="container" style="padding-right: 11px;">

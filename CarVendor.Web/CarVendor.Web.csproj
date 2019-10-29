@@ -216,9 +216,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910161241409_s1.cs" />
-    <Compile Include="Migrations\201910161241409_s1.Designer.cs">
-      <DependentUpon>201910161241409_s1.cs</DependentUpon>
+    <Compile Include="Migrations\201910281227449_v0.0.0.cs" />
+    <Compile Include="Migrations\201910281227449_v0.0.0.Designer.cs">
+      <DependentUpon>201910281227449_v0.0.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -264,6 +264,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\carosel.css" />
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap.3.0.0.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
@@ -503,6 +504,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\carosel.js" />
     <Content Include="Scripts\css\animate.css" />
     <Content Include="Scripts\css\camera.css" />
     <Content Include="Scripts\css\contact-form.css" />
@@ -594,7 +596,6 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Cars\Create.cshtml" />
     <Content Include="Views\Cars\Delete.cshtml" />
-    <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Edit.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
@@ -617,6 +618,7 @@
     <Content Include="Views\Mails\Details.cshtml" />
     <Content Include="Views\Mails\Edit.cshtml" />
     <Content Include="Views\Mails\Index.cshtml" />
+    <Content Include="Views\Cars\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -644,8 +646,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910161241409_s1.resx">
-      <DependentUpon>201910161241409_s1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910281227449_v0.0.0.resx">
+      <DependentUpon>201910281227449_v0.0.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

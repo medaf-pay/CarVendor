@@ -128,7 +128,10 @@ app.controller('HomeCTR', function ($scope, $http) {
                 $scope.Cars = data.data;
             });
     };
-   
+    
+    $scope.ViewCarCategoryDetails = function (id) {
+        window.location.href = `Cars/Details/id=${id}/Category=${$scope.Categoryselected}`;
+    };
 
     $scope.addToCart = function (product) {
         product.CarId = product.Id;

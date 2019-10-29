@@ -23,7 +23,7 @@ namespace CarVendor.Web.Controllers
         }
 
         // GET: Cars/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult Details(long? id,int Category)
         {
             if (id == null)
             {
@@ -34,7 +34,8 @@ namespace CarVendor.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(car);
+           var CarCategory= car.Carcategories.Where(cat => cat.Id == Category).FirstOrDefault();
+            return View(CarCategory);
         }
 
         // GET: Car/Create

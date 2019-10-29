@@ -39,11 +39,11 @@
 
 
             if (bodyWidth >= 1200) {
-                incno = itemsSplit[3];
+                incno = itemsSplit[1];
                 itemWidth = sampwidth / incno;
             }
             else if (bodyWidth >= 992) {
-                incno = itemsSplit[2];
+                incno = itemsSplit[1];
                 itemWidth = sampwidth / incno;
             }
             else if (bodyWidth >= 768) {
@@ -74,7 +74,7 @@
         var divStyle = $(el + ' ' + itemsDiv).css('transform');
         var values = divStyle.match(/-?[\d\.]+/g);
         var xds = Math.abs(values[4]);
-        if (e == 0) {
+        if (e === 0) {
             translateXval = parseInt(xds) - parseInt(itemWidth * s);
             $(el + ' ' + rightBtn).removeClass("over");
 
@@ -83,7 +83,7 @@
                 $(el + ' ' + leftBtn).addClass("over");
             }
         }
-        else if (e == 1) {
+        else if (e === 1) {
             var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
             translateXval = parseInt(xds) + parseInt(itemWidth * s);
             $(el + ' ' + leftBtn).removeClass("over");

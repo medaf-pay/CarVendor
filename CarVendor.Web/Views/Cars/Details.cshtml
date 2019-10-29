@@ -1,53 +1,854 @@
-﻿@model CarVendor.data.Entities.Car
+﻿@model CarVendor.data.Entities.CarCategory
 
 @{
     ViewBag.Title = "Details";
 }
+<link href="~/Content/carosel.css" rel="stylesheet" />
+<h4>Car Category Details</h4>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+            <div class="MultiCarousel-inner">
+                @*<div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div >
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div >
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div >
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>*@
+                <div>
+                    <div  >
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div >
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary leftLst"><</button>
+            <button class="btn btn-primary rightLst">></button>
+        </div>
+    </div>
 
-<h2>Details</h2>
 
-<div>
-    <h4>Car</h4>
-    <hr />
+
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Brand.Name)
+            @Html.DisplayNameFor(model => model.Car.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Brand.Name)
+            @Html.DisplayFor(model => model.Car.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Type.Name)
+            @Html.DisplayNameFor(model => model.Category.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type.Name)
+            @Html.DisplayFor(model => model.Category.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.EngineCapacity)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.EngineCapacity)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.DisplayNameFor(model => model.TransfersNo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model)
+            @Html.DisplayFor(model => model.TransfersNo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Condition)
+            @Html.DisplayNameFor(model => model.CylindersNo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Condition)
+            @Html.DisplayFor(model => model.CylindersNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CastingsNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CastingsNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectronicFuelInjection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectronicFuelInjection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaximumTorque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaximumTorque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnginePower)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnginePower)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Acceleration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Acceleration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TractionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TractionType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatsNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeatsNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoorsNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoorsNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvgFuelConsumption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvgFuelConsumption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelTankCapacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuelTankCapacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroundClearance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroundClearance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelRecommended)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuelRecommended)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverAirbags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverAirbags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontPassengerAirbags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontPassengerAirbags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectricChairs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectricChairs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrakeSystemABS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrakeSystemABS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectronicBrakeDistribution)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectronicBrakeDistribution)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectronicBalanceProgram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectronicBalanceProgram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AntitheftAlarmSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AntitheftAlarmSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImmobilizerSystemAgainstTheft)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImmobilizerSystemAgainstTheft)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SportRims)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SportRims)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RimSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RimSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontFogLanterns)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontFogLanterns)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackFogLanterns)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackFogLanterns)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackCleaners)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackCleaners)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectricSideMirrors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectricSideMirrors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectricallyFoldingSideMirrors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectricallyFoldingSideMirrors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SideMirrorsSignals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SideMirrorsSignals)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.XenonBulbsLighting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.XenonBulbsLighting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeadlampWipers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeadlampWipers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SensitiveHeadlamps)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SensitiveHeadlamps)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeadlampControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeadlampControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeadlampLightingLED)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeadlampLightingLED)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaillightsLightingLED)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaillightsLightingLED)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackSpoiler)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackSpoiler)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IntelligentParkingSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IntelligentParkingSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoundSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoundSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CDDriver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CDDriver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AUXPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AUXPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USBPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USBPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bluetooth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bluetooth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontHeadrests)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontHeadrests)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RearHeadrests)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RearHeadrests)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectricWindshield)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectricWindshield)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectricRearGlass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectricRearGlass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OneTouchGlassControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OneTouchGlassControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RemoteControlToLockAndOpenDoors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RemoteControlToLockAndOpenDoors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverHeightControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverHeightControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeatherBrushes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeatherBrushes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EngineStartStopButtonSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EngineStartStopButtonSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sunroof)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sunroof)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectricSunroof)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectricSunroof)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackCamera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackCamera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComputerTrips)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComputerTrips)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SteeringWheelType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SteeringWheelType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ControllableSteeringWheel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ControllableSteeringWheel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ControlTheSoundSystemOfTheSteeringWheel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ControlTheSoundSystemOfTheSteeringWheel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CruiseControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CruiseControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeatherSteeringWheel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeatherSteeringWheel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeatherTransmission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeatherTransmission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontDoorStorage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontDoorStorage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackDoorStorageAreas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackDoorStorageAreas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PossibilityToFoldBackSeats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PossibilityToFoldBackSeats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lighter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lighter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MobileAshtray)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MobileAshtray)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CentralDoorLock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CentralDoorLock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlarmSoundWhenTheCarIsNotClosed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlarmSoundWhenTheCarIsNotClosed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontCupHolder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontCupHolder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackCupHolder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackCupHolder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontArmrest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontArmrest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirConditionedFrontArmrest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirConditionedFrontArmrest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackArmrest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackArmrest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackTrunkCover)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackTrunkCover)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontStorageDrawer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontStorageDrawer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerOutlet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PowerOutlet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackOutletPowerOutlet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackOutletPowerOutlet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackWipers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackWipers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RainSensitiveWindshieldWipers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RainSensitiveWindshieldWipers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackLight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackLight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SensitiveHeadlampsForLighting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SensitiveHeadlampsForLighting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackTrunkSpace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackTrunkSpace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackSeatBelt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackSeatBelt)
         </dd>
 
         <dt>
@@ -64,3 +865,5 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<script src="~/Scripts/carosel.js"></script>
+
