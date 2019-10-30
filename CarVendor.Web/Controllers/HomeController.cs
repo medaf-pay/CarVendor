@@ -34,8 +34,23 @@ namespace CarVendor.mvc.Controllers
         }
         public HomeController() { }
         [Route("home/Index")]
-        public ActionResult Index()
+        public ActionResult Index(string Cuurency)
         {
+            if (Cuurency=="USD")
+            {
+                ViewBag.Cuurency = Cuurency;
+                ViewBag.Divisor = 16;
+            }
+            else if (Cuurency=="EUR")
+            {
+                ViewBag.Cuurency = Cuurency;
+                ViewBag.Divisor = 20;
+            }
+            else
+            {
+                ViewBag.Cuurency = "EGP";
+                ViewBag.Divisor = 1;
+            }
             if (User.Identity.IsAuthenticated)
             {
                 var user = User.Identity;

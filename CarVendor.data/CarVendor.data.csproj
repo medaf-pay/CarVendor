@@ -69,6 +69,7 @@
     <Compile Include="Entities\TEntity.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserAddress.cs" />
+    <Compile Include="Entities\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

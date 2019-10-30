@@ -11,6 +11,8 @@ namespace CarVendor.data.Entities
         public virtual ICollection<CarImage> CarImages { get; set; }
         public virtual CarCategory CarCategory { get; set; }
         public virtual Color Color { get; set; }
+        public virtual ICollection<Video> Videos { get; set; }
+
 
     }
 }

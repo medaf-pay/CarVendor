@@ -42,7 +42,22 @@
         });
     });
 </script>
+<style>
+    .mainContainer {
+        position: relative;
+    }
+    .num1 {
+        position:absolute;
+        z-index: 2;
+    }
 
+    .num2 {
+        position:absolute;
+        height:200px;
+        width:270px;
+        z-index: 1;
+    }
+</style>
 
 
 <!--             CONTENT
@@ -58,13 +73,6 @@
                             <div class="row">
                                 <div class="grid_3">
                                     <ul class="tabs-list">
-                                        @*<li>/Content/js
-                                                <a href="#tabs-1">
-                                                    <div class="tab tab-first maxheight">
-                                                        Used cars
-                                                    </div>
-                                                </a>
-                                            </li>*@
                                         <li>
                                             <a href="#tabs-2">
                                                 <div class="tab maxheight">
@@ -131,15 +139,6 @@
                             </h2>
                             <p class="wow fadeIn" style="color:black" data-wow-duration="1s" data-wow-delay="0.2s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
                         </div>
-                        @*<div class="post1">
-                                <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Latest REVIEWS</h2>
-                                <img class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" src="~/images/page1_img1.png" alt="" />
-                                <time class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" datetime="2014-01-01">Monday, June 24, 2013</time>
-                                <h3 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
-                                    <a href="#">Lorem ipsum dolor sit amet conse</a>
-                                </h3>
-                                <p class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                            </div>*@
                     </div>
                     <div class="grid_9">
                         <div class="slider-wrapper">
@@ -236,18 +235,25 @@
 
 
                                     <div class="form-group col-md-4 mb-3 col-sm-6" ng-repeat="car  in Cars">
+                                        
                                         <div class="box1 carView">
                                             <a href="/cars/details?id={{car.Id}}&Category={{CarCategoryselected}}">
-                                                <h4 class="wow fadeIn"  style="color:forestgreen;font-weight:800" data-wow-duration="1s" data-wow-delay="0.1s">
+                                                <h4 class="wow fadeIn" style="color:forestgreen;font-weight:800" data-wow-duration="1s" data-wow-delay="0.1s">
                                                     {{car.Name}}
                                                 </h4>
-                                                <div  class="row">
-                                                    <img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" />
+
+                                                <div class="row">
+                                                    <div class='mainContainer'>
+                                                        <div class='num1'><span class="badge" style="background-color:wheat;color:red;margin:10px;">-42%</span></div>
+                                                        <div class='num2'><img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" /></div>
+                                                    </div>
+                                            
+                                                    
                                                 </div>
                                             </a>
-                                            <div class="row info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
+                                            <div class="row info wow fadeIn" style="margin-top:205px;" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <span class="first col-md-6" style="padding-right: 22px; color:black;font-weight:700">Brand: <span class="highlighted">{{car.Brand}}</span></span>
-                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:#ff0000" ng-init="CarPrice[$index]=car.Categories[0].Colors[0].Price" class="highlighted">{{CarPrice[$index]}}</span>  EGP</span>
+                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price/@ViewBag.Divisor)" class="highlighted">{{CarPrice[$index]}}</span> @ViewBag.Cuurency </span>
                                             </div>
                                             <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <div class="container" style="padding-right: 11px;">
@@ -268,17 +274,17 @@
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
-                                         @{if (User.IsInRole("Admin"))
-                                             {
-                                                
-                                            <div>
-                                            
-                                                <button type="button" class="btn btn-secondary"><a class="nav-link" style="color:white" href="/cars/edit?CarCode={{car.Id}}">Edit</a></button>
-                                                <button type="button" class="btn btn-danger"><a class="nav-link" style="color:white" href="/cars/delete/{{car.Id}}">Delete</a></button>
-                                            </div>
-                                                 }
+                                            @{if (User.IsInRole("Admin"))
+                                                {
 
-                                             }
+                                                    <div>
+
+                                                        <button type="button" class="btn btn-secondary"><a class="nav-link" style="color:white" href="/cars/edit?CarCode={{car.Id}}">Edit</a></button>
+                                                        <button type="button" class="btn btn-danger"><a class="nav-link" style="color:white" href="/cars/delete/{{car.Id}}">Delete</a></button>
+                                                    </div>
+                                                }
+
+                                            }
                                             <div class="wow fadeIn row" data-wow-duration="1s" data-wow-delay=".3s" style="margin-left:28%; margin-top:2px;">
                                                 <button type="button" class="btn btn-default" ng-click="addToCart(car)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
                                                 <div class="clearfix"></div>

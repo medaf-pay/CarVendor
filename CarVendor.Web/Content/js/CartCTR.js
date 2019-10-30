@@ -35,6 +35,13 @@ app.controller('CartCTR', function ($scope, $http, $location) {
         })
        
     }
+    $scope.Clear = function () {
+
+        $http.post("/api/CartDetails/SetFinalItems").then(function () {
+            window.location.href = "/Home/index";
+        })
+
+    }
 
 });
 
@@ -68,9 +75,9 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
         if ($scope.CustomerInfoFrom.$valid) {
             $scope.SubmetAction = false;
             $http.post("/api/CartDetails/Payment", $scope.CustomerInfo).then(function (data) {
-                if (data.data == 1) { window.location.href = "/Home/CardInfo"; }
+                if (data.data === 1) { window.location.href = "/Home/CardInfo"; }
                 else {
-                    window.location.href = "/Requests/index";
+                    window.location.href = "/Requests/Confirmation";
                 }
 
             }, function (erroe) {

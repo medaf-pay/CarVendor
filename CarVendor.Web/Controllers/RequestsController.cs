@@ -78,7 +78,10 @@ namespace CarVendor.mvc.Controllers
         {
             return View();
         }
-
+        public ActionResult Confirmation()
+        {
+            return View();
+        }
 
     }
 }
