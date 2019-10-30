@@ -253,7 +253,7 @@
                                             </a>
                                             <div class="row info wow fadeIn" style="margin-top:205px;" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <span class="first col-md-6" style="padding-right: 22px; color:black;font-weight:700">Brand: <span class="highlighted">{{car.Brand}}</span></span>
-                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price/@ViewBag.Divisor)" class="highlighted">{{CarPrice[$index]}}</span> @ViewBag.Cuurency </span>
+                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:#ff0000" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price/@ViewBag.Divisor)" class="highlighted">{{CarPrice[$index]}}</span> @ViewBag.Cuurency </span>
                                             </div>
                                             <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <div class="container" style="padding-right: 11px;">
