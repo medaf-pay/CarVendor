@@ -44,8 +44,9 @@ namespace CarVendor.mvc.Controllers
                             Id = s2.ColorId,
                             Name = s2.Color.Name,
                             Price = s2.Price,
-                            Images = s2.CarImages.Select(s3 => new BaseViewModel { Id = s3.Id, Name = s3.ImageURL }).ToList()
-
+                            Images = s2.CarImages.Select(s3 => new BaseViewModel { Id = s3.Id, Name = s3.ImageURL }).ToList(),
+                            Discount =s2.Discount,
+                            NewPrice = s2.Price-s2.Discount
                         }).ToList()
 
 
@@ -103,6 +104,7 @@ namespace CarVendor.mvc.Controllers
                              Color = s2.ColorId,
                              Quantity = s2.Quantity,
                              Price = s2.Price,
+                             Discount = s2.Discount,
                              Images = s2.CarImages.Select(s3 => new BaseViewModel { Id = s3.Id, Name = s3.ImageURL }).ToList()
 
                          }).ToList()
@@ -365,6 +367,7 @@ namespace CarVendor.mvc.Controllers
                             color.ColorId = colorData.Color;
                             color.IsDeleted = false;
                             color.Price = colorData.Price;
+                            color.Discount = colorData.Discount;
                             color.Quantity = colorData.Quantity;
                         }
                         else

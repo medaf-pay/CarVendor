@@ -14,34 +14,36 @@ app.controller('CartCTR', function ($scope, $http, $location) {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
         angular.forEach($scope.Items, function (value, key) {
-            $scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
+            $scope.totalPrice = $scope.totalPrice + value.Color.NewPrice * value.Quantity;
+            //$scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
+
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
         $('.cartSpan').html($scope.totalQuantity + " | " + $scope.totalPrice + " EGP");
         $('.cartpart').css("background-color", "#8ad329");
 
-    }
+    };
     $scope.QuantityChange = function () {
         calcTotal();
-    }
+    };
     $scope.DeleteItem = function (index) {
         $scope.Items.splice(index, 1)
         calcTotal();
-    }
+    };
     $scope.GoToCustomerInfo = function () {
 
         $http.post("/api/CartDetails/SetFinalItems", $scope.Items).then(function () {
             window.location.href = "/Home/CustomerInfo";
-        })
-       
-    }
+        });
+
+    };
     $scope.Clear = function () {
 
         $http.post("/api/CartDetails/SetFinalItems").then(function () {
             window.location.href = "/Home/index";
-        })
+        });
 
-    }
+    };
 
 });
 
@@ -52,11 +54,11 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
     $http.get("/api/User/UserInfoDetails").then(function (data) {
         $scope.CustomerInfo = data.data;
         $scope.CustomerInfo.Individually = data.data.Individually.toString();
-    })
-    $http.get("/api/CartDetails/GetFinalItems" ).then(function (data) {
-        $scope.Items = data.data; 
+    });
+    $http.get("/api/CartDetails/GetFinalItems").then(function (data) {
+        $scope.Items = data.data;
         calcTotal();
-    })
+    });
     function calcTotal() {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
@@ -71,7 +73,7 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
    
 
     $scope.CompletPay = function () {
-        carsData.CustomerInfo = $scope.CustomerInfo
+        carsData.CustomerInfo = $scope.CustomerInfo;
         if ($scope.CustomerInfoFrom.$valid) {
             $scope.SubmetAction = false;
             $http.post("/api/CartDetails/Payment", $scope.CustomerInfo).then(function (data) {
@@ -83,13 +85,13 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
             }, function (erroe) {
                 alert(1);
                 console.log(erroe);
-            })
+            });
         }
         else {
             $scope.SubmetAction = true;
         }
-        
-    }
+
+    };
 });
 
 app.controller('HomeCTR', function ($scope, $http) {
@@ -97,6 +99,9 @@ app.controller('HomeCTR', function ($scope, $http) {
     $http.get("/api/CarDetails/IndexData").then(function (data) {
         $scope.Cars = data.data;
         $scope.CarPrice = new Array($scope.Cars.length);
+        $scope.carDiscount = new Array($scope.Cars.length);
+        $scope.carNewPrice = new Array($scope.Cars.length);
+
     });
     $http.get("/api/CarDetails/CartData").then(function (data) {
         console.log(data);
@@ -118,6 +123,9 @@ app.controller('HomeCTR', function ($scope, $http) {
         cardata = car.Categories.find(x => x.Id == Id).Colors[0];
         $scope.CarColorselected = cardata.Id.toString();
         $scope.CarPrice[index] = cardata.Price;
+        $scope.carDiscount[index] = cardata.Discount;
+        $scope.carNewPrice[index] = cardata.NewPrice;
+
         car.FirstImageView = cardata.Images[0].Name;
     };
 
@@ -126,6 +134,9 @@ app.controller('HomeCTR', function ($scope, $http) {
         cardata = Category.Colors.find(x => x.Id == ColorId);
 
         $scope.CarPrice[index] = cardata.Price;
+        $scope.carDiscount[index] = cardata.Discount;
+        $scope.carNewPrice[index] = cardata.NewPrice;
+
         car.FirstImageView = cardata.Images[0].Name;
     };
 

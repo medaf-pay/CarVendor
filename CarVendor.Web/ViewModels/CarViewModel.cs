@@ -31,6 +31,10 @@ namespace CarVendor.mvc
     public class ColorViewModel : BaseViewModel
     {
         public decimal Price { get; set; }
+        public decimal Discount { get; set; }
+
+        public decimal NewPrice { get; set; }
+
         public List<BaseViewModel> Images { get; set; }
     }
     public class CarFamilyModel : BaseViewModel

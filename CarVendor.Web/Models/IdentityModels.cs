@@ -51,5 +51,9 @@ namespace CarVendor.Web.Models
         public System.Data.Entity.DbSet<CarVendor.data.Entities.Mail> Mails { get; set; }
 
         public System.Data.Entity.DbSet<CarVendor.data.Entities.CarCategory> CarCategories { get; set; }
+        public System.Data.Entity.DbSet<CarVendor.data.Entities.Currency> Currencies { get; set; }
+
+        public System.Data.Entity.DbSet<CarVendor.data.Entities.Conversion> Conversions { get; set; }
+
     }
 }

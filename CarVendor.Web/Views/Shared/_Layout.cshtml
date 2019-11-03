@@ -18,7 +18,8 @@
     @{
         DataBaseContext db = new DataBaseContext();
         var userId = User.Identity.GetUserId();
-        var userName = db.Users.Where(c=>c.Email==User.Identity.Name).Select(s=>s.FName).FirstOrDefault();
+        var userName = db.Users.Where(c => c.Email == User.Identity.Name).Select(s => s.FName).FirstOrDefault();
+        var conversions = db.Conversions.ToList();
 
     }
 
@@ -39,7 +40,13 @@
         function onSelect(value) {
             window.location.href = "/" + value + "/Create";
         }
+
+        function changeFunc() {
+                var selectBox = document.getElementById("currencydropdown");
+            window.location.href = "/home/index?Conversion=" + selectBox.options[selectBox.selectedIndex].value;
+            }
     </script>
+
 
 
 </head>
@@ -64,9 +71,24 @@
 
                         </a>
                     </h1>
+
+
                     <div class="authorization-block">
+
+                        <select id="currencydropdown" onchange="changeFunc()" class="form-control">
+                            @for (int i = 0; i < conversions.Count; i++)
+                            {
+                            <option value="@i">@conversions[i].ToCurrency.Name</option>
+                            }
+                        </select>
+                        <select class="form-control">
+                            <option value="Ar">Arabic</option>
+                            <option value="AM">English</option>
+                            <option value="Fr">French</option>
+                        </select>
                         @if (userId == null)
-                        {<div class="authorization">
+                        {
+                            <div class="authorization">
                                 <a class="create" href="/Account/Register">Create an account</a>
                                 <span class="divider"></span>
                                 <a class="login" href="/Account/login">Login</a>
@@ -108,16 +130,8 @@
                             <li onclick="goToCart()" class="nav-item cartpart"><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>
 
                         </ul>
-                        <ul class="sf-menu navbar-nav " style="float:right; margin-right:10px;">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Currency<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/home/index?Cuurency=EGP">EGP</a></li>
-                                    <li><a href="/home/index?Cuurency=USD">USD</a></li>
-                                    <li><a href="/home/index?Cuurency=EUR">EUR</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+
+
                         @{if (User.IsInRole("Admin"))
                             {
                                 <ul class="sf-menu navbar-nav " style="float:right; margin-right:10px;">

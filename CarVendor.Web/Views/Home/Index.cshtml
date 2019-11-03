@@ -244,16 +244,16 @@
 
                                                 <div class="row">
                                                     <div class='mainContainer'>
-                                                        <div class='num1'><span class="badge" style="background-color:wheat;color:red;margin:10px;">-42%</span></div>
+                                                        <div class='num1' ng-if="carDiscount[$index]!=0"><span class="badge"  ng-init="carDiscount[$index]=(car.Categories[0].Colors[0].Discount/@ViewBag.Conversion.Value)" style="background-color:wheat;color:red;margin:10px;">- <span ng-bind="(carDiscount[$index]/@ViewBag.Conversion.Value)" ></span> @ViewBag.Conversion.ToCurrency.Name</span></div>
                                                         <div class='num2'><img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" /></div>
                                                     </div>
-                                            
-                                                    
                                                 </div>
                                             </a>
                                             <div class="row info wow fadeIn" style="margin-top:205px;" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <span class="first col-md-6" style="padding-right: 22px; color:black;font-weight:700">Brand: <span class="highlighted">{{car.Brand}}</span></span>
-                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price/@ViewBag.Divisor)" class="highlighted">{{CarPrice[$index]}}</span> @ViewBag.Cuurency </span>
+                                                <span class="second" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price/@ViewBag.Conversion.Value)" class="highlighted">{{CarPrice[$index]}}</span> @ViewBag.Conversion.ToCurrency.Name </span>
+                                                <span class="second" ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700" >New Price: <span Id="Price_{{car.Id}}" style="" ng-init="carNewPrice[$index]=(car.Categories[0].Colors[0].NewPrice/@ViewBag.Conversion.Value)" class="highlighted">{{carNewPrice[$index]}}</span> @ViewBag.Conversion.ToCurrency.Name </span>
+
                                             </div>
                                             <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <div class="container" style="padding-right: 11px;">

@@ -71,8 +71,6 @@
                             <option value="">Select Car Family</option>
                             <option ng-repeat="CarFamily  in CarFamilies" value="{{CarFamily.Id}}">{{CarFamily.Name}}</option>
                         </select>
-
-
                     </div>
                     <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.SelectBrand.$touched||SubmetAction)&&EditCarFrom.SelectBrand.$invalid}">
 
@@ -133,6 +131,10 @@
                                         <label>Price:</label>
                                         <input type="text" class="form-control" name="InputPrice{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Price" placeholder="Enter the car price" required>
                                     </div>
+                                    <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.InputDiscount{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&EditCarFrom.InputDiscount{{$parent.$parent.$index}}{{$index}}.$invalid}">
+                                        <label>Discount:</label>
+                                        <input type="text" class="form-control" name="InputDiscount{{$parent.$parent.$index}}{{$index}}" ng-model="Details.Discount" placeholder="Enter the car Discount" required>
+                                    </div>
                                     <div class="form-group col-md-6 mb-4" ng-class="{'submitted':(EditCarFrom.SelectColor{{$parent.$parent.$index}}{{$index}}.$touched||SubmetAction)&&EditCarFrom.SelectColor{{$parent.$parent.$index}}{{$index}}.$invalid}">
 
                                         <label>Color:</label>
@@ -176,8 +178,6 @@
 
     </section>
 
-
-
-    <button class="btn btn-primary" ng-click="SaveCar()">Update car</button>
+    <button class="btn btn-primary" ng-click="SaveCar()">Update Car</button>
     <button class="btn btn-danger" ng-click="cancelUpdate()"> Cancel </button>
 </form>

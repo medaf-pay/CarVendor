@@ -39,7 +39,8 @@ namespace CarVendor.mvc.Common
                 IsDeleted=false,
                 UserId= UserId
             };
-            CardInfo card = null;
+            customer_cart.Order = newOrder;
+             CardInfo card = null;
             if (creditCard != null)
             {
                 card = new CardInfo()
@@ -88,6 +89,18 @@ namespace CarVendor.mvc.Common
             //};
 
             //newOrder.DeliveryDetails = Owner;
+            customer_cart.CustomerInfo = db.Users.Where(s => s.Id == UserId).Select(u => new CustomerInfoModel
+            {
+                Individually = u.Individually,
+                FName = u.FName,
+                MName = u.MName,
+                LName = u.LName,
+                Phone = u.Phone,
+                DeliveryAddress = u.UserAddresses.Where(a=>a.User.Id==UserId).FirstOrDefault().Address.DeliveryAddress,
+                MainAddress = u.UserAddresses.Where(a => a.User.Id == UserId).FirstOrDefault().Address.MainAddress
+
+                //DeliveryAddress=u.UserAddresses,
+            }).FirstOrDefault();
             db.Orders.Add(newOrder);
             // TODO: Send Mail Here
             EmailTemplate Email = new EmailTemplate();

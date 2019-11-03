@@ -17,9 +17,27 @@ namespace CarVendor.data
         public DataBaseContext()
                    : base("name=CarVendorDb")
         {
-
+         
         }
-        public DbSet<Address> Addresses { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // configures one-to-many relationship
+
+            modelBuilder.Entity<Conversion>()
+            .HasRequired(c => c.ToCurrency)
+            .WithMany()
+            .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Conversion>()
+                .HasRequired(s => s.FromCurrency)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+        }
+    
+    public DbSet<Address> Addresses { get; set; }
+    public DbSet<Conversion> Conversions { get; set; }
+    public DbSet<Currency> Currencies { get; set; }
+
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Car> Cars { get; set; }

@@ -3,15 +3,16 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
     $scope.EditCar = { Id: 0}
     var urlParams = new URLSearchParams(window.location.search);
     var CarId = urlParams.get('CarCode');
+    $scope.CarCode = CarId;
     console.log(CarId);
     $scope.successMessagebool = false;
     var Option = {
-        Id: 0, Categoryselected: null, MoreDetails: [{ Id: 0, Price: null, Colorselected: null, file: null }]
+        Id: 0, Categoryselected: null, MoreDetails: [{ Id: 0, Price: null, Discount: null, Colorselected: null, file: null }]
     };
 
-    var details = { Id: 0, Price: null, Colorselected: null, file: null };
+    var details = { Id: 0, Price: null, Discount: null, Colorselected: null, file: null };
 
-    $scope.Options = [{ Id: 0, Categoryselected: null, MoreDetails: [{ Id: 0, Price: null, Colorselected: null, file: null }] }];
+    $scope.Options = [{ Id: 0, Categoryselected: null, MoreDetails: [{ Id: 0, Price: null, Discount: null, Colorselected: null, file: null }] }];
 
     $http.get("/api/CarDetails/GetCarByCode/" + CarId).then(function (data) {
         $scope.EditCar = data.data;
@@ -27,6 +28,7 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
                 $scope.Options[categoryKey].MoreDetails[key] = angular.copy(details);
                 $scope.Options[categoryKey].MoreDetails[key].Color = value.Color.toString();
                 $scope.Options[categoryKey].MoreDetails[key].Price = value.Price;
+                $scope.Options[categoryKey].MoreDetails[key].Discount = value.Discount;
                 $scope.Options[categoryKey].MoreDetails[key].Id = value.Id;
                 $scope.Options[categoryKey].MoreDetails[key].Quantity = value.Quantity;
                 $scope.Options[categoryKey].MoreDetails[key].file = value.Images[0];
@@ -39,7 +41,6 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
     $http.get("/api/CartDetails/getFilters").then(function (data) {
         $scope.Brands = data.data.Brands;
         $scope.Categories = data.data.Categories;
-
         $scope.Colors = data.data.Colors;
         $scope.Models = data.data.Models;
         $scope.CarFamilies = data.data.CarFamilies;
@@ -131,6 +132,6 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
 
     };
     $scope.cancelUpdate = function () {
-        window.location.href = "../";
+        window.location.href = "/cars/edit?CarCode=" + $scope.CarCode;
     };
 });

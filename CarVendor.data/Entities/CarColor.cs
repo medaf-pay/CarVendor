@@ -7,6 +7,7 @@ namespace CarVendor.data.Entities
         public long CarCategoryId { get; set; }
         public long ColorId { get; set; }
         public decimal Price { get; set; }
+        public decimal Discount { get; set; }
         public int Quantity { get; set; }
         public virtual ICollection<CarImage> CarImages { get; set; }
         public virtual CarCategory CarCategory { get; set; }

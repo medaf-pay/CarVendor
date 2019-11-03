@@ -61,7 +61,9 @@
     <Compile Include="Entities\CarFamily.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Color.cs" />
+    <Compile Include="Entities\Conversion.cs" />
     <Compile Include="Entities\CorporateDetails.cs" />
+    <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Mail.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderItem.cs" />

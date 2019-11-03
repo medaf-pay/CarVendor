@@ -32,25 +32,27 @@
 
     <body>
         <h3>Dear Team</h3>
-        <4>This order has been submitted</4>
-        <h4>CustomerName:{{CustomerInfo.FName}} {{CustomerInfo.MName}} {{CustomerInfo.LName}}</h4>
-        <h4>CustomerMobile:{{CustomerInfo.Phone}}</h4>
-        <h4>CustomerAdress:{{CustomerInfo.Address1}}</h4>
+        <h4>This order has been submitted</h4>
+        <h4>Customer Name:{{CustomerInfo.FName}} {{CustomerInfo.MName}} {{CustomerInfo.LName}}</h4>
+        <h4>Customer Mobile:{{CustomerInfo.Phone}}</h4>
+        <h4>Customer Adress:{{CustomerInfo.MainAddress}}</h4>
+        <h4>Delivery Address:{{CustomerInfo.DeliveryAddress}}</h4>
+        <h4>Order Number:{{Order.OrderNumber}}</h4>
 
         <hr />
 
         <h3>Order Details:-</h3>
 
         <table id="customers">
-                <tr>
-                    <th>Car Name</th>
-                    <th>Brand</th>
-                    <th>Color</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                </tr>
-                {{#CartItems}}
+            <tr>
+                <th>Car Name</th>
+                <th>Brand</th>
+                <th>Color</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            {{#CartItems}}
             <tr>
                 <td>{{CarName}}</td>
                 <td>{{Brand}}</td>
@@ -59,7 +61,7 @@
                 <td>{{Price}}</td>
                 <td>{{Quantity}}</td>
             </tr>
-                {{/CartItems}}
+            {{/CartItems}}
         </table>
     </body>
 </htm>

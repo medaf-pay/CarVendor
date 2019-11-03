@@ -108,6 +108,7 @@ namespace CarVendor.Web.Migrations
             CarColor carcolor = new CarColor()
             {
                 Price = 12345678,
+                Discount=70000,
                 Quantity = 4,
                 CarCategory = carcategory,
                 Color = new Color() { Name = "red" },
