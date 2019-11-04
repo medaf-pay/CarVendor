@@ -27,9 +27,9 @@
                     <td>{{item.CarName}}</td>
                     <td>{{item.Category.Text}}</td>
                     <td>{{item.Color.Text}}</td>
-                    <td>{{item.Color.Price}}</td>
+                    <td>{{item.Color.NewPrice/currencyValue}}<b> {{currency}}</b></td>
                     <td> <input type="number" class="form-control" min="1" ng-change="QuantityChange()" ng-model="item.Quantity"></td>
-                    <td>{{item.Color.Price*item.Quantity}} </td>
+                    <td>{{(item.Color.NewPrice*item.Quantity)/currencyValue}}<b> {{currency}}</b> </td>
                     <td>
                   
                             <button ng-click="DeleteItem($index)" type="button" class="btn-danger" aria-label="Close">
@@ -47,7 +47,7 @@
         <div class="form-group col-lg-12 col-md-12 col-sm-12">
 
             <div class="container form-group ">
-                <h4 style="background-color:gray;color:white"  class="col-lg-6">Total Price <label style="margin-left:50%;color:white">{{totalPrice}}</label></h4>
+                <h4 style="background-color:gray;color:white"  class="col-lg-6">Total Price <label style="margin-left:50%;color:white">{{totalPrice/currencyValue}}</label></h4>
                 <h4 style="background-color:gray;color:white" class="col-lg-6">Total Quantity <label style="margin-left:50%;color:white">{{totalQuantity}}</label></h4>
             </div>
             <div class="form-group col-lg-12 col-md-12 col-sm-12" style="direction:rtl">

@@ -41,10 +41,7 @@
             window.location.href = "/" + value + "/Create";
         }
 
-        function changeFunc() {
-                var selectBox = document.getElementById("currencydropdown");
-            window.location.href = "/home/index?Conversion=" + selectBox.options[selectBox.selectedIndex].value;
-            }
+       
     </script>
 
 
@@ -75,10 +72,10 @@
 
                     <div class="authorization-block">
 
-                        <select id="currencydropdown" onchange="changeFunc()" class="form-control">
+                        <select id="currencydropdown"  class="form-control">
                             @for (int i = 0; i < conversions.Count; i++)
                             {
-                            <option value="@i">@conversions[i].ToCurrency.Name</option>
+                            <option value="@conversions[i].Value">@conversions[i].ToCurrency.Name</option>
                             }
                         </select>
                         <select class="form-control">

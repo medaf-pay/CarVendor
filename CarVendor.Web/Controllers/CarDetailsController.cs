@@ -163,8 +163,10 @@ namespace CarVendor.mvc.Controllers
                          Category = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => new CategoryModel { Id = s1.Category.Id, Text = s1.Category.Name }).FirstOrDefault(),
                          Color = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).
                          Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
-                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name, Price = s1.Price }).FirstOrDefault()).FirstOrDefault(),
+                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name  , Price = s1.Price , NewPrice = s1.Price-s1.Discount}).FirstOrDefault()).FirstOrDefault(),
                          Price = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price).FirstOrDefault()).FirstOrDefault(),
+                         NewPrice = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price-s2.Discount).FirstOrDefault()).FirstOrDefault(),
+
                          Quantity = item.Quantity == 0 ? 1 : item.Quantity
                      }).FirstOrDefault();
                 Cars.Add(car);

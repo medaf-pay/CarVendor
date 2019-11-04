@@ -13,6 +13,8 @@ namespace CarVendor.mvc.Models
         public ColorModel Color { get; set; }
         public CategoryModel Category { get; set; }
         public decimal  Price { get; set; }
+        public decimal NewPrice { get; set; }
+
         public long Quantity { get; set; }
     }
 }

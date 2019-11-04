@@ -1,8 +1,25 @@
-﻿
-
-app.controller('CartCTR', function ($scope, $http, $location) {
+﻿app.controller('CartCTR', function ($scope, $http, $location) {
     //var urlParams = new URLSearchParams(window.location.search);
     //var RequestId = urlParams.get('RequestId');
+    $scope.currency = "EGP";
+    $scope.currencyValue = 1;
+    $scope.cart;
+    $('#currencydropdown').change(function () {
+
+        updateCurrency($('#currencydropdown option:selected').text(),
+            $('#currencydropdown option:selected').val());
+        console.log($scope.currency);
+    });
+    function updateCurrency(text, value) {
+        $scope.currency = text;
+        $scope.currencyValue = value;
+        console.log($scope.currency, "update");
+     
+            calcTotal();
+        
+
+        $scope.$apply();
+    }
     $http.get("/api/CarDetails/CartData").then(function (data) {
         console.log(data);
         $scope.Items = data.data;
@@ -15,11 +32,11 @@ app.controller('CartCTR', function ($scope, $http, $location) {
         $scope.totalQuantity = 0;
         angular.forEach($scope.Items, function (value, key) {
             $scope.totalPrice = $scope.totalPrice + value.Color.NewPrice * value.Quantity;
-            //$scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
+            //$scope.totalPrice = $scope.totalPrice + value.Color.NPrice * value.Quantity;
 
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
-        $('.cartSpan').html($scope.totalQuantity + " | " + $scope.totalPrice + " EGP");
+        $('.cartSpan').html($scope.totalQuantity + " | " + eval($scope.totalPrice / $scope.currencyValue) + $scope.currency);
         $('.cartpart').css("background-color", "#8ad329");
 
     };
@@ -27,7 +44,7 @@ app.controller('CartCTR', function ($scope, $http, $location) {
         calcTotal();
     };
     $scope.DeleteItem = function (index) {
-        $scope.Items.splice(index, 1)
+        $scope.Items.splice(index, 1);
         calcTotal();
     };
     $scope.GoToCustomerInfo = function () {
@@ -50,7 +67,26 @@ app.controller('CartCTR', function ($scope, $http, $location) {
 app.controller('CustomerInfoCTR', function ($scope, $http) {
     //var urlParams = new URLSearchParams(window.location.search);
     //var RequestId = urlParams.get('RequestId');
-   
+
+    $scope.currency = "EGP";
+    $scope.currencyValue = 1;
+    $scope.cart;
+    //$('#currencydropdown').change(function () {
+
+    //    updateCurrency($('#currencydropdown option:selected').text(),
+    //        $('#currencydropdown option:selected').val());
+    //    console.log($scope.currency);
+    //});
+    //function updateCurrency(text, value) {
+    //    $scope.currency = text;
+    //    $scope.currencyValue = value;
+    //    console.log($scope.currency, "update");
+    //    if (cartProduct.length != 0) {
+    //        updateCart(cartProduct);
+    //    }
+
+    //    $scope.$apply();
+    //}
     $http.get("/api/User/UserInfoDetails").then(function (data) {
         $scope.CustomerInfo = data.data;
         $scope.CustomerInfo.Individually = data.data.Individually.toString();
@@ -63,10 +99,10 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
         angular.forEach($scope.Items, function (value, key) {
-            $scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
+            $scope.totalPrice = $scope.totalPrice + value.Color.NewPrice * value.Quantity;
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
-        $('.cartSpan').html($scope.totalQuantity + " | " + $scope.totalPrice + " EGP");
+        $('.cartSpan').html($scope.totalQuantity + " | " + eval($scope.totalPrice / $scope.currencyValue) + $scope.currency);
         $('.cartpart').css("background-color", "#8ad329");
 
     }
@@ -95,7 +131,30 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
 });
 
 app.controller('HomeCTR', function ($scope, $http) {
+
     var cartProduct = [];
+    var eventValue = null;
+    $scope.currency = "EGP";
+    $scope.currencyValue = 1;
+    $scope.cart;
+    $('#currencydropdown').change(function () {
+
+        updateCurrency($('#currencydropdown option:selected').text(),
+            $('#currencydropdown option:selected').val());
+        console.log($scope.currency);
+    });
+    function updateCurrency(text, value) {
+        $scope.currency = text;
+        $scope.currencyValue = value;
+        console.log($scope.currency, "update");
+        if (cartProduct.length != 0) {
+            updateCart(cartProduct);
+        }
+
+        $scope.$apply();
+    }
+
+ 
     $http.get("/api/CarDetails/IndexData").then(function (data) {
         $scope.Cars = data.data;
         $scope.CarPrice = new Array($scope.Cars.length);
@@ -121,7 +180,7 @@ app.controller('HomeCTR', function ($scope, $http) {
 
     $scope.CategoryChange = function (car, Id, index) {
         cardata = car.Categories.find(x => x.Id == Id).Colors[0];
-        $scope.CarColorselected = cardata.Id.toString();
+        //$scope.CarColorselected = cardata.Id.toString();
         $scope.CarPrice[index] = cardata.Price;
         $scope.carDiscount[index] = cardata.Discount;
         $scope.carNewPrice[index] = cardata.NewPrice;
@@ -151,9 +210,11 @@ app.controller('HomeCTR', function ($scope, $http) {
         window.location.href = `Cars/Details/id=${id}/Category=${$scope.Categoryselected}`;
     };
 
-    $scope.addToCart = function (product) {
+    $scope.addToCart = function (product, categoryId, colorId,index) {
+        // var dd= $scope.CarColorselected color_
+        colorId = $("#color_" + product.Id).val();
         product.CarId = product.Id;
-        product.Price = $("#Price_" + product.Id).text();
+        product.NewPrice = product.Categories.find(x => x.Id == categoryId).Colors.find(c => c.Id == colorId).NewPrice;
         product.Color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
         product.Category = { id: $("#category_" + product.Id).val(), text: $("#category_" + product.Id).children("option:selected").text() }
         product.Quantity = 1;
@@ -165,13 +226,15 @@ app.controller('HomeCTR', function ($scope, $http) {
         let sum = 0;
         let TatalQuantity = 0;
         for (var i = 0; i < cart.length; i++) {
-            sum += eval(cart[i].Price);
-            TatalQuantity += eval(cart[i].Quantity)
+            sum += cart[i].NewPrice * eval(cart[i].Quantity);
+            TatalQuantity += eval(cart[i].Quantity);
         }
-        $('.cartSpan').html(TatalQuantity + " | " + sum + " EGP");
+        sum = sum / $scope.currencyValue;
+        $('.cartSpan').html(TatalQuantity + " | " + sum + $scope.currency);
         $('.cartpart').css("background-color", "#8ad329");
     }
 
+ 
     $scope.goToCart = function () {
         let shoppingCart = {
             sessionId: null,
@@ -189,6 +252,21 @@ app.controller('CardInfoCTR', function ($scope, $http) {
     $scope.loading = false;
     $scope.CreditCard = {};
     $scope.BankInfo = {};
+    $scope.currency = "EGP";
+    $scope.currencyValue = 1;
+    //$('#currencydropdown').change(function () {
+
+    //    updateCurrency($('#currencydropdown option:selected').text(),
+    //        $('#currencydropdown option:selected').val());
+    //    console.log($scope.currency);
+    //});
+    //function updateCurrency(text, value) {
+    //    $scope.currency = text;
+    //    $scope.currencyValue = value;
+
+    //    $scope.$apply();
+    //}
+
     var urlParams = new URLSearchParams(window.location.search);
     var RequestId = urlParams.get('RequestId');
     $scope.SubTab = 1;
@@ -206,10 +284,10 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         $scope.totalPrice = 0;
         $scope.totalQuantity = 0;
         angular.forEach($scope.Items, function (value, key) {
-            $scope.totalPrice = $scope.totalPrice + value.Color.Price * value.Quantity;
+            $scope.totalPrice = $scope.totalPrice + value.Color.NewPrice * value.Quantity;
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
-        $('.cartSpan').html($scope.totalQuantity + " | " + $scope.totalPrice + " EGP");
+        $('.cartSpan').html($scope.totalQuantity + " | " + eval($scope.totalPrice / $scope.currencyValue) + $scope.currency);
         $('.cartpart').css("background-color", "#8ad329");
 
     }
