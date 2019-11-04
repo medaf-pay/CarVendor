@@ -1,9 +1,6 @@
 namespace CarVendor.Web.Migrations
 {
-    using CarVendor.data;
-    using CarVendor.data.Entities;
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -13,6 +10,7 @@ namespace CarVendor.Web.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "CarVendor.Web.Models.ApplicationDbContext";
         }
 
         protected override void Seed(CarVendor.Web.Models.ApplicationDbContext context)
@@ -125,9 +123,9 @@ namespace CarVendor.Web.Migrations
             //};
 
 
-            //db.CarColors.Add(carcolor);
-            //db.CarColors.Add(carcolor1);
-            //db.SaveChanges();
+            db.CarColors.Add(carcolor);
+            db.CarColors.Add(carcolor1);
+            db.SaveChanges();
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
         }
