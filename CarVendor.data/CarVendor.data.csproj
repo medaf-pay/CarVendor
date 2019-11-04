@@ -72,11 +72,21 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserAddress.cs" />
     <Compile Include="Entities\Video.cs" />
+    <Compile Include="Migrations\201911040949579_V0.0.1.cs" />
+    <Compile Include="Migrations\201911040949579_V0.0.1.Designer.cs">
+      <DependentUpon>201911040949579_V0.0.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911040949579_V0.0.1.resx">
+      <DependentUpon>201911040949579_V0.0.1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

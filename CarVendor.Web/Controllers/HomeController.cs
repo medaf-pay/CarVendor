@@ -34,16 +34,8 @@ namespace CarVendor.mvc.Controllers
         }
         public HomeController() { }
         [Route("home/Index")]
-        public ActionResult Index(int? Conversion)
+        public ActionResult Index()
         {
-            if (Conversion==null)
-            {
-                ViewBag.Conversion = db.Conversions.ToList()[0];
-            }
-            else
-            {
-                ViewBag.Conversion = db.Conversions.ToList()[(int)Conversion];
-            }
 
             if (User.Identity.IsAuthenticated)
             {
