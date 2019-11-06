@@ -1,6 +1,7 @@
 ﻿using CarVendor.data;
 using CarVendor.data.Entities;
 using CarVendor.mvc.Models;
+using CarVendor.Web.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace CarVendor.mvc.Common
     public class Utilities
     {
         public static List<CartModel> _shopingCarts = new List<CartModel>();
+        public static CurrencyDTO _currencyDTO = new CurrencyDTO() { Code=1,Name="EGP"};
+    
+      
         public static long SetOrderDetails( DataBaseContext db, CreditCardModel creditCard =null, BankTransferModel BankTransfer=null,long UserId=0)
         {
 

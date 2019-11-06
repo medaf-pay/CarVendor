@@ -160,7 +160,35 @@ function CategoryChange(CategoryId, carId) {
         }
     });
 }
+function Onload() {
+    
+    $.ajax({
+        url: "/api/CartDetails/ReadCurancy", success: function(result)
+        {
+            Currency = result;
+            var yy = $('#currencydropdown #' + result.Code)
+            console.log(yy)
+             yy.attr("selected", true);
+            console.log(yy)
+           
 
+        }
+    });
+}
+function ChangeCurrency() {
+    var code = $('#currencydropdown option:selected').val();
+    $.ajax({
+        url: "/api/CartDetails/ChangeCurrency?CCode=" + code, success: function (result) {
+            Currency = result;
+            $('#currencydropdown #' + result.Code).attr("selected", true);
+            location.reload();
+            console.log(result)
+
+
+        }
+    });
+}
+Onload();
 function filterCars(CarsId) {
     window.location.href = "/Home/index/1";
     //$.ajax({

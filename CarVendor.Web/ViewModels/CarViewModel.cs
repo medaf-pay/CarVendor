@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CarVendor.data.Entities;
+using CarVendor.Web.Dtos;
 
 namespace CarVendor.mvc
 {
     public class CarViewModel
     {
+       public CarViewModel()
+        {
+            SelectedCurrency = new CurrencyDTO();
+        }
         public long Id { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
@@ -15,6 +20,7 @@ namespace CarVendor.mvc
         public string FirstImageView { get; set; }
         public long BrandId { get; set; }
         public CarFamilyModel CarFamily { get;  set; }
+        public  CurrencyDTO SelectedCurrency { get;  set; }
     }
     public class BaseViewModel
     {

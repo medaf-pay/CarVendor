@@ -1,15 +1,9 @@
 ﻿app.controller('CartCTR', function ($scope, $http, $location) {
     //var urlParams = new URLSearchParams(window.location.search);
     //var RequestId = urlParams.get('RequestId');
-    $scope.currency = "EGP";
-    $scope.currencyValue = 1;
+  
     $scope.cart;
-    $('#currencydropdown').change(function () {
-
-        updateCurrency($('#currencydropdown option:selected').text(),
-            $('#currencydropdown option:selected').val());
-        console.log($scope.currency);
-    });
+  
     function updateCurrency(text, value) {
         $scope.currency = text;
         $scope.currencyValue = value;
@@ -36,7 +30,7 @@
 
             $scope.totalQuantity = $scope.totalQuantity + value.Quantity;
         });
-        $('.cartSpan').html($scope.totalQuantity + " | " + eval($scope.totalPrice / $scope.currencyValue) + $scope.currency);
+        $('.cartSpan').html($scope.totalQuantity + " | " + eval($scope.totalPrice) + Currency.Name);
         $('.cartpart').css("background-color", "#8ad329");
 
     };
@@ -134,15 +128,14 @@ app.controller('HomeCTR', function ($scope, $http) {
 
     var cartProduct = [];
     var eventValue = null;
-    $scope.currency = "EGP";
-    $scope.currencyValue = 1;
+   
     $scope.cart;
-    $('#currencydropdown').change(function () {
-
-        updateCurrency($('#currencydropdown option:selected').text(),
-            $('#currencydropdown option:selected').val());
-        console.log($scope.currency);
-    });
+    //$('#currencydropdown').change(function () {
+    //    $scope.currency = Curancy.Name;
+    //    $scope.currencyValue = Curancy.Code;
+    //    updateCurrency($scope.currency, $scope.currencyValue);
+    //    console.log($scope.currency);
+    //});
     function updateCurrency(text, value) {
         $scope.currency = text;
         $scope.currencyValue = value;
@@ -229,8 +222,8 @@ app.controller('HomeCTR', function ($scope, $http) {
             sum += cart[i].NewPrice * eval(cart[i].Quantity);
             TatalQuantity += eval(cart[i].Quantity);
         }
-        sum = sum / $scope.currencyValue;
-        $('.cartSpan').html(TatalQuantity + " | " + sum + $scope.currency);
+   
+        $('.cartSpan').html(TatalQuantity + " | " + sum +" "+ Currency.Name);
         $('.cartpart').css("background-color", "#8ad329");
     }
 
