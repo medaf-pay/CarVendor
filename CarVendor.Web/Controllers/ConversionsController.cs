@@ -11,6 +11,7 @@ using CarVendor.data.Entities;
 
 namespace CarVendor.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ConversionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
