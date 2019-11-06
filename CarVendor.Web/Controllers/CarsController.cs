@@ -34,7 +34,7 @@ namespace CarVendor.Web.Controllers
             {
                 return HttpNotFound();
             }
-           var CarCategory= car.Carcategories.Where(cat => cat.Id == Category).FirstOrDefault();
+           var CarCategory= car.Carcategories.Where(cat => cat.CategoryId == Category).FirstOrDefault();
             return View(CarCategory);
         }
 

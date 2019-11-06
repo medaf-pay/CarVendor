@@ -6,18 +6,18 @@
 
 
 @*<link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
-      crossorigin="anonymous" />*@
+    href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+    crossorigin="anonymous" />*@
 <!-- Optional theme -->
 @*<link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
-      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ"
-      crossorigin="anonymous" />
- Latest compiled and minified JavaScript 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-        crossorigin="anonymous"></script>*@
+          href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ"
+          crossorigin="anonymous" />
+     Latest compiled and minified JavaScript
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>*@
 <link href="~/Content/css/carousalcss.css" rel="stylesheet" />
 
 <script type="text/javascript"
@@ -51,7 +51,7 @@
                                 <li style="padding-left:10px; padding-right:10px;">
                                     <img src="~/images/car1.jpg" height="220" class="img-responsive" />
                                 </li>
-                              
+
                             </ul>
                         </div>
                     </div>
@@ -61,12 +61,11 @@
                             <ul id="flexiselDemo4">
                                 <li style="padding-right:10px; padding-left:10px;">
                                     <div class="videoWrapper">
-                                    <iframe width="560" height="349"
-                                           
-                                            src="https://www.youtube.com/embed/CAAunvoyI5I"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
+                                        <iframe width="560" height="349"
+                                                src="https://www.youtube.com/embed/CAAunvoyI5I"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
                                     </div>
                                 </li>
                                 <li style="padding-right:10px; padding-left:10px;">
@@ -87,7 +86,7 @@
                                                 allowfullscreen></iframe>
                                     </div>
                                 </li>
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -95,164 +94,207 @@
                 <div class="col-sm-12 col-xs-12 col-md-12 col-lg-4">
                     <div class="row marginBottom">
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Gear
+                            @Html.DisplayNameFor(model => model.Car.Name)
                         </div>
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            Automatic
+                            @Html.DisplayFor(model => model.Car.Name)
                         </div>
                     </div>
 
                     <div class="row marginBottom">
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
+                            @Html.DisplayNameFor(model => model.Category.Name)
+
                         </div>
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
+                            @Html.DisplayFor(model => model.Category.Name)
                         </div>
                     </div>
 
                     <div class="row marginBottom">
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
+                            @Html.DisplayNameFor(model => model.CylindersNo)
+
+
                         </div>
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
+                            @Html.DisplayFor(model => model.CylindersNo)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.CastingsNo)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.CastingsNo)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ElectronicFuelInjection)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+
+                            @if (Model.ElectronicFuelInjection == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.MaximumTorque)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.MaximumTorque)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.EnginePower)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.EnginePower)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.Acceleration)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.Acceleration)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.TractionType)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.TractionType)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.SeatsNo)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.SeatsNo)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.DoorsNo)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.DoorsNo)
+
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.AvgFuelConsumption)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.AvgFuelConsumption)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FuelTankCapacity)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.FuelTankCapacity)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.GroundClearance)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.GroundClearance)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.MaxSpeed)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.MaxSpeed)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FuelRecommended)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.FuelRecommended)
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.DriverAirbags)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.DriverAirbags == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FrontPassengerAirbags)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+
+                            @if (Model.FrontPassengerAirbags == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
                         </div>
                     </div>
 
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Gear
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            Automatic
-                        </div>
-                    </div>
-
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Gear
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            Automatic
-                        </div>
-                    </div>
-
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div><div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div><div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div><div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div><div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
-@*down part*@
+            @*down part*@
             <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
                     <div class="row marginBottom">
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
+                            @Html.DisplayNameFor(model => model.ElectricChairs)
                         </div>
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
+                            @if (Model.ElectricChairs == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -260,103 +302,1338 @@
                 <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
                     <div class="row marginBottom marginLeftBigScreen">
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
+                            @Html.DisplayNameFor(model => model.BrakeSystemABS)
+
                         </div>
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
+                            @if (Model.BrakeSystemABS == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ElectronicBalanceProgram)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ElectronicBalanceProgram == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.AntitheftAlarmSystem)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.AntitheftAlarmSystem == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ImmobilizerSystemAgainstTheft)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ImmobilizerSystemAgainstTheft == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.SportRims)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.SportRims == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.RimSize)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @Html.DisplayFor(model => model.RimSize)
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FrontFogLanterns)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.FrontFogLanterns == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackFogLanterns)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackFogLanterns == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackCleaners)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackCleaners == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+
+                            @Html.DisplayNameFor(model => model.ElectricSideMirrors)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ElectricSideMirrors == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ElectricallyFoldingSideMirrors)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ElectricallyFoldingSideMirrors == false)
+                            {
+                            <p> Not Available </p>
+                            }
+                            else
+                            {
+                            <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.SideMirrorsSignals)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.SideMirrorsSignals == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.XenonBulbsLighting)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.XenonBulbsLighting == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.HeadlampWipers)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.HeadlampWipers == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+
+                            @Html.DisplayNameFor(model => model.SensitiveHeadlamps)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.SensitiveHeadlamps == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.HeadlampControl)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.HeadlampControl == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.HeadlampLightingLED)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.HeadlampLightingLED == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.TaillightsLightingLED)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.TaillightsLightingLED == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackSpoiler)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackSpoiler == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.IntelligentParkingSystem)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.IntelligentParkingSystem == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.SoundSystem)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.SoundSystem == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.CDDriver)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.CDDriver == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.AUXPort)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.AUXPort == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.USBPort)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.USBPort == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.Bluetooth)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.Bluetooth == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FrontHeadrests)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.FrontHeadrests == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.RearHeadrests)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.RearHeadrests == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ElectricWindshield)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ElectricWindshield == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ElectricRearGlass)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ElectricRearGlass == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.OneTouchGlassControl)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.OneTouchGlassControl == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.RemoteControlToLockAndOpenDoors)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.RemoteControlToLockAndOpenDoors == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.DriverHeightControl)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.DriverHeightControl == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.LeatherBrushes)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.LeatherBrushes == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.EngineStartStopButtonSystem)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.EngineStartStopButtonSystem == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.Sunroof)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.Sunroof == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ElectricSunroof)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+
+                            @if (Model.ElectricSunroof == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackCamera)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackCamera == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+
+                            @Html.DisplayNameFor(model => model.ComputerTrips)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ComputerTrips == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.SteeringWheelType)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.SteeringWheelType == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ControllableSteeringWheel)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+
+                            @if (Model.ControllableSteeringWheel == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.ControlTheSoundSystemOfTheSteeringWheel)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.ControlTheSoundSystemOfTheSteeringWheel == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.CruiseControl)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.CruiseControl == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.LeatherSteeringWheel)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.LeatherSteeringWheel == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.LeatherTransmission)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.LeatherTransmission == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FrontDoorStorage)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.FrontDoorStorage == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackDoorStorageAreas)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackDoorStorageAreas == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.PossibilityToFoldBackSeats)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.PossibilityToFoldBackSeats == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.Lighter)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.Lighter == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.MobileAshtray)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.MobileAshtray == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.CentralDoorLock)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.CentralDoorLock == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.AlarmSoundWhenTheCarIsNotClosed)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.AlarmSoundWhenTheCarIsNotClosed == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+
+                            @Html.DisplayNameFor(model => model.FrontCupHolder)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.FrontCupHolder == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackCupHolder)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackCupHolder == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FrontArmrest)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.FrontArmrest == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.AirConditionedFrontArmrest)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.AirConditionedFrontArmrest == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackArmrest)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackArmrest == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackTrunkCover)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackTrunkCover == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.FrontStorageDrawer)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.FrontStorageDrawer == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.PowerOutlet)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+
+                            @if (Model.PowerOutlet == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackOutletPowerOutlet)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackOutletPowerOutlet == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackWipers)
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackWipers == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.RainSensitiveWindshieldWipers)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.RainSensitiveWindshieldWipers == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+
+                            @Html.DisplayNameFor(model => model.BackLight)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackLight == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.SensitiveHeadlampsForLighting)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+
+                            @if (Model.SensitiveHeadlampsForLighting == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom marginLeftBigScreen">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackTrunkSpace)
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackTrunkSpace == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
+                    <div class="row marginBottom">
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
+                            @Html.DisplayNameFor(model => model.BackSeatBelt)
+
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
+                            @if (Model.BackSeatBelt == false)
+                            {
+                                <p> Not Available </p>
+                            }
+                            else
+                            {
+                                <p>Available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            
+            </div>
+
 
         </div>
+        <script type="text/javascript">
+            $(window).load(function () {
+                let numberOfVideos = $("#flexiselDemo4").children().length;
+                if (numberOfVideos <= 1) {
+                    visibleVideos = numberOfVideos;
+                    autoPlayVideo = false;
+                } else {
+                    visibleVideos = 1;
+                    autoPlayVideo = true;
+                }
 
-            <div class="row">
-                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                </div>
+                $("#flexiselDemo3").flexisel({
+                    visibleItems: 2,
+                    itemsToScroll: 1,
+                    autoPlay: {
+                        enable: true,
+                        interval: 5000,
+                        pauseOnHover: true
+                    }
+                });
 
-                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
-                    <div class="row marginBottom marginLeftBigScreen">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
-                    <div class="row marginBottom">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6">
-                    <div class="row marginBottom marginLeftBigScreen">
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spTitle">
-                            Air Bags
-                        </div>
-                        <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
-                            <img src="~/images/icon.png" width="20px" height="20px" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+                $("#flexiselDemo4").flexisel({
+                    visibleItems: visibleVideos,
+                    itemsToScroll: 1,
+                    autoPlay: {
+                        enable: autoPlayVideo,
+                        interval: 5000,
+                        pauseOnHover: true
+                    }
+                });
+            });
+        </script>
     </div>
-    <script type="text/javascript">
-        $(window).load(function () {
-            let numberOfVideos = $("#flexiselDemo4").children().length;
-            if (numberOfVideos <= 1) {
-                visibleVideos = numberOfVideos;
-                autoPlayVideo = false;
-            } else {
-                visibleVideos = 1;
-                autoPlayVideo = true;
-            }
+    <p>
 
-            $("#flexiselDemo3").flexisel({
-                visibleItems: 2,
-                itemsToScroll: 1,
-                autoPlay: {
-                    enable: true,
-                    interval: 5000,
-                    pauseOnHover: true
-                }
-            });
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <script src="~/Scripts/carosel.js"></script>
 
-            $("#flexiselDemo4").flexisel({
-                visibleItems: visibleVideos,
-                itemsToScroll: 1,
-                autoPlay: {
-                    enable: autoPlayVideo,
-                    interval: 5000,
-                    pauseOnHover: true
-                }
-            });
-        });
-    </script>
-</div>
-<p>
-   
-    @Html.ActionLink("Back to List", "Index")
-</p>
-<script src="~/Scripts/carosel.js"></script>
 

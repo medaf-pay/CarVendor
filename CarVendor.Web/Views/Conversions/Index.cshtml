@@ -26,9 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Plus)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
+    
         <th></th>
     </tr>
 
@@ -48,9 +46,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Plus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
