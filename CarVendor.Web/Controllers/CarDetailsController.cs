@@ -204,6 +204,7 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/GetFinalItems")]
         public IHttpActionResult GetFinalItems()
         {
+            CartData();
             var Items = Utilities._shopingCarts.FirstOrDefault().CartItems;
             return Ok(Items);
         }
