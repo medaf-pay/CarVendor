@@ -381,7 +381,7 @@ namespace CarVendor.mvc.Controllers
                         {
                             var color = car.Carcategories.Where(c => c.Id == item.Id).Select(s => s.CarColors.Where(c1 => c1.Id == colorData.Id).FirstOrDefault()).FirstOrDefault();
                             color.Id = colorData.Id;
-                            color.CarImages.Select(s2 => { s2.ImageURL = colorData.file; s2.IsDeleted = false; return s2; }).ToList();
+                            color.CarImages.Select(s2 => { s2.ImageURL = colorData.file==null? s2.ImageURL: colorData.file; s2.IsDeleted = false; return s2; }).ToList();
                             color.ColorId = colorData.Color;
                             color.IsDeleted = false;
                             color.Price = colorData.Price;

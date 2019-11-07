@@ -68,7 +68,7 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
     };
 
     $scope.SetFile = function (file, Id) {
-        var y = $scope.Options;
+   
         if (file.length > 0)
             $("#" + Id).attr('src', URL.createObjectURL(file[0]));
 
@@ -90,13 +90,16 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
         $scope.CarImages = [];
         angular.forEach(Car.Options, function (Optionvalue, Optionkey) {
             angular.forEach(Optionvalue.MoreDetails, function (value, key) {
+              
+
                 $scope.CarImages.push(value.file);
             });
         });
         Upload.upload({
             url: "/api/CartDetails/UploadFiles",
             data:{
-                files: $scope.CarImages
+                files: $scope.CarImages,
+                
             }
         }).then(function (response) {
 
@@ -105,7 +108,7 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
             
             angular.forEach(Car.Options, function (Optionvalue, Optionkey) {
                 angular.forEach(Optionvalue.MoreDetails, function (value, key) {
-                    value.file = response.data[i++];
+                    value.file = $scope.CarImages[i++].name;
                 });
             });
 
@@ -117,7 +120,7 @@ CarApp.controller('EditCarCTR', function ($scope, $http, Upload, $window, $timeo
                 $("#FocusBtn").click();
                 $timeout(function () {
                     $scope.successMessagebool = false;
-                    $window.location.reload();
+                    $window.location.href="/";
                 }, 5000);
 
             });
