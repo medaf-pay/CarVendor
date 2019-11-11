@@ -36,38 +36,44 @@ namespace CarVendor.mvc.Controllers
            
             var user = User.Identity;
             string role = UserManager.GetRoles(user.GetUserId())[0];
-            if(role == "Admin")
-            {
-                if (EndDate < StartDate)
-                {
-                    ViewBag.ErrorMsg = "End Date Must be After Start Date";
-                    List<Order> _orders = db.Orders.ToList();
-                    return View(_orders.ToList());
-                }
-                else if ((EndDate == null || StartDate == null) && EndDate != StartDate)
-                {
-                    ViewBag.ErrorMsg = "Make sure to enter both Start and End Dates";
-                    List<Order> _orders = db.Orders.ToList();
-                    return View(_orders.ToList());
-                }
-                else if(EndDate==null&&StartDate==null)
-                {
-                    ViewBag.ErrorMsg = "";
-                    List<Order> _orders = db.Orders.ToList();
-                    return View(_orders.ToList());
-                }
-                else
-                {
-                    List<Order> _orders = db.Orders.Where(o=>o.OrderDate>StartDate&&o.OrderDate<EndDate).ToList();
-                    return View(_orders.ToList());
-                }
+            List<Order> _orders = db.Orders.ToList();
 
-                
+          
+
+
+            if (role != "Admin")
+            {
+                var aspUser = User.Identity;
+                var userId = UserManager.FindById(aspUser.GetUserId()).user.Id;
+                _orders = _orders?.Where(s => s.User.Id == userId).ToList();
             }
-            var aspUser = User.Identity;
-            var userId =  UserManager.FindById(aspUser.GetUserId()).user.Id;
-            var orders = db.Orders.Where(s=>s.User.Id==userId).ToList();
-            return View(orders.ToList());
+
+            if (EndDate < StartDate)
+            {
+                ViewBag.ErrorMsg = "End Date Must be After Start Date";
+
+                return View(_orders.ToList());
+            }
+            else if ((EndDate == null || StartDate == null) && EndDate != StartDate)
+            {
+                ViewBag.ErrorMsg = "Make sure to enter both Start and End Dates";
+               
+                return View(_orders.ToList());
+            }
+            else if (EndDate == null && StartDate == null)
+            {
+                ViewBag.ErrorMsg = "";
+               
+                return View(_orders.ToList());
+            }
+            else
+            {
+                 _orders = _orders.Where(o => o.OrderDate > StartDate && o.OrderDate < EndDate).ToList();
+                return View(_orders.ToList());
+            }
+
+    
+      
 
         }
 

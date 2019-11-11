@@ -106,7 +106,10 @@ app.controller('HomeCTR', function ($scope, $http) {
 
     var cartProduct = [];
     var eventValue = null;
-   
+    $scope.Brandselected = "0";
+    $scope.Familyselected = "0";
+    $scope.Categoryselected = "0";
+    $scope.Colorselected = '0';
     $scope.cart;
 
     function updateCurrency(text, value) {
@@ -166,7 +169,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     };
 
     $scope.FindCar = function () {
-        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Family=" + $scope.Familyselected + "&Category=" + $scope.Categoryselected + "&Color=0" + $scope.Colorselected).then(
+        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Family=" + $scope.Familyselected + "&Category=" + $scope.Categoryselected + "&Color=" + $scope.Colorselected).then(
             function (data) {
                 $scope.Cars = data.data;
             });
