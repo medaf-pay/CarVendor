@@ -214,6 +214,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Dtos\CurrencyDTO.cs" />
     <Compile Include="Dtos\OrderDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -508,7 +509,6 @@
     <Content Include="Scripts\booking\font\icomoon.woff" />
     <Content Include="Scripts\booking\less\booking.less" />
     <Content Include="Scripts\booking\less\mixins.less" />
-    <Content Include="images\_Layout.cshtml" />
     <Content Include="Content\bootstrap-select.css.map" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />

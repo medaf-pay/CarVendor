@@ -244,16 +244,16 @@
 
                                                 <div class="row">
                                                     <div class='mainContainer'>
-                                                        <div class='num1' ng-if="carDiscount[$index]!=0"><span class="badge" Id="Discount_{{car.Id}}" ng-init="carDiscount[$index]=(car.Categories[0].Colors[0].Discount/currencyValue)" style="background-color:wheat;color:red;margin:10px;">- <span ng-bind="(carDiscount[$index]/currencyValue)"></span>{{currency}}</span></div>
+                                                        <div class='num1' ng-if="carDiscount[$index]!=0"><span class="badge" Id="Discount_{{car.Id}}" ng-init="carDiscount[$index]=(car.Categories[0].Colors[0].Discount)" style="background-color:wheat;color:red;margin:10px;">- <span ng-bind="(carDiscount[$index])"></span>{{car.SelectedCurrency.Name}}</span></div>
                                                         <div class='num2'><img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" /></div>
                                                     </div>
                                                 </div>
                                             </a>
                                             <div class="row info wow fadeIn" style="margin-top:205px;" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <span class="first col-md-6" style="padding-right: 22px; color:black;font-weight:700">Brand: <span class="highlighted">{{car.Brand}}</span></span>
-                                                <span class="second"  ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700"><strike>Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price/currencyValue)" class="highlighted">{{CarPrice[$index]/currencyValue}}</span> {{currency}} </strike></span>
-                                                <span class="second" ng-if="carDiscount[$index]==0" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price/currencyValue)" class="highlighted">{{CarPrice[$index]/currencyValue}}</span> {{currency}}</span>
-                                                <span class="second" ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700">New Price: <span Id="NewPrice_{{car.Id}}" style="color:red" ng-init="carNewPrice[$index]=(car.Categories[0].Colors[0].NewPrice/currencyValue)" class="highlighted">{{carNewPrice[$index]/currencyValue}}</span> {{currency}} </span>
+                                                <span class="second"  ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700"><strike>Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted">{{CarPrice[$index]}}</span> {{car.SelectedCurrency.Name}} </strike></span>
+                                                <span class="second" ng-if="carDiscount[$index]==0" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted">{{CarPrice[$index]}}</span>{{car.SelectedCurrency.Name}}</span>
+                                                <span class="second" ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700">New Price: <span Id="NewPrice_{{car.Id}}" style="color:red" ng-init="carNewPrice[$index]=(car.Categories[0].Colors[0].NewPrice)" class="highlighted">{{carNewPrice[$index]}}</span>{{car.SelectedCurrency.Name}} </span>
 
                                             </div>
                                             <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
