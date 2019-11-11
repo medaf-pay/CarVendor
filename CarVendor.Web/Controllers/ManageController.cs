@@ -250,7 +250,13 @@ namespace CarVendor.Web.Controllers
         {
             return View();
         }
+        // GET: /Manage/UnderDevelopment
 
+            [AllowAnonymous]
+        public ActionResult UnderDevelopment()
+        {
+            return View();
+        }
         //
         // POST: /Manage/SetPassword
         [HttpPost]
