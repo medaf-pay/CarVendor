@@ -750,6 +750,7 @@
     <Content Include="Views\Conversions\Edit.cshtml" />
     <Content Include="Views\Conversions\Index.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
+    <Content Include="Views\Manage\UnderDevelopment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

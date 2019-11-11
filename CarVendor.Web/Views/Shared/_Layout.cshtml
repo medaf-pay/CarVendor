@@ -72,17 +72,21 @@
 
                     <div class="authorization-block">
 
-                        <select id="currencydropdown"  class="form-control">
+                        <select id="currencydropdown" class="form-control">
                             @for (int i = 0; i < conversions.Count; i++)
                             {
-                            <option value="@conversions[i].Value">@conversions[i].ToCurrency.Name</option>
+                                <option value="@conversions[i].Value">@conversions[i].ToCurrency.Name</option>
                             }
                         </select>
-                        <select class="form-control">
-                            <option value="Ar">Arabic</option>
-                            <option value="AM">English</option>
-                            <option value="Fr">French</option>
-                        </select>
+                        @if (false)
+                        {
+                            <select class="form-control">
+                                <option value="Ar">Arabic</option>
+                                <option value="AM">English</option>
+                                <option value="Fr">French</option>
+                            </select>
+                        }
+
                         @if (userId == null)
                         {
                             <div class="authorization">
@@ -141,7 +145,7 @@
                                             <li><a href="/cars/create">Add Car</a></li>
                                             <li><a href="/Currencies/index">Currencies</a></li>
                                             <li><a href="/Conversions/index">Conversions</a></li>
-                                            <li><a href="/mails/index">Customer Service Mails</a></li>
+                                            <li><a href="/mails/index">Customer Service Emails</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -192,7 +196,7 @@
                                 <div class="box2">
                                     <h5>Car research</h5>
                                     <ul class="list1">
-                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Research Cars</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="~/Content/#">Car Research</a></li>
                                         <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="~/Content/#">Car Evaluation</a></li>
                                         <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"><a href="~/Content/#">Car Finance</a></li>
                                         <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s"><a href="~/Content/#">Car Insurance</a></li>
