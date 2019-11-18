@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<CarVendor.mvc.CarViewModel>
-  
+
 @{
     ViewBag.Title = "Home Page";
 
@@ -46,15 +46,16 @@
     .mainContainer {
         position: relative;
     }
+
     .num1 {
-        position:absolute;
+        position: absolute;
         z-index: 2;
     }
 
     .num2 {
-        position:absolute;
-        height:200px;
-        width:270px;
+        position: absolute;
+        height: 200px;
+        width: 270px;
         z-index: 1;
     }
 </style>
@@ -135,7 +136,7 @@
                         </div>
                         <div class="banner1" style="background-color:#3030304a">
                             <h2 class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s" style="color:forestgreen">
-                             About our Services
+                                About our Services
                             </h2>
                             <p class="wow fadeIn" style="color:black" data-wow-duration="1s" data-wow-delay="0.2s">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
                         </div>
@@ -235,7 +236,7 @@
 
 
                                     <div class="form-group col-md-4 mb-3 col-sm-6" ng-repeat="car  in Cars">
-                                        
+
                                         <div class="box1 carView">
                                             <a href="/cars/details?id={{car.Id}}&Category={{CarCategoryselected}}">
                                                 <h4 class="wow fadeIn" style="color:forestgreen;font-weight:800" data-wow-duration="1s" data-wow-delay="0.1s">
@@ -245,13 +246,13 @@
                                                 <div class="row">
                                                     <div class='mainContainer' ng-if="car.FirstImageView!=undefined">
                                                         <div class='num1' ng-if="carDiscount[$index]!=0"><span class="badge" Id="Discount_{{car.Id}}" ng-init="carDiscount[$index]=(car.Categories[0].Colors[0].Discount)" style="background-color:wheat;color:red;margin:10px;">- <span ng-bind="(carDiscount[$index])"></span>{{car.SelectedCurrency.Name}}</span></div>
-                                                        <div class='num2' ><img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" /></div>
+                                                        <div class='num2'><img id="car.Id" class="wow fadeIn" width="270" height="200" data-wow-duration="1s" data-wow-delay="0.2s" src="/images/{{car.FirstImageView}}" alt="" /></div>
                                                     </div>
                                                 </div>
                                             </a>
                                             <div class="row info wow fadeIn" style="margin-top:205px;" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <span class="first col-md-6" style="padding-right: 22px; color:black;font-weight:700">Brand: <span class="highlighted">{{car.Brand}}</span></span>
-                                                <span class="second"  ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700"><strike>Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted">{{CarPrice[$index]}}</span> {{car.SelectedCurrency.Name}} </strike></span>
+                                                <span class="second" ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700"><strike>Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted">{{CarPrice[$index]}}</span> {{car.SelectedCurrency.Name}} </strike></span>
                                                 <span class="second" ng-if="carDiscount[$index]==0" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted">{{CarPrice[$index]}}</span>{{car.SelectedCurrency.Name}}</span>
                                                 <span class="second" ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700">New Price: <span Id="NewPrice_{{car.Id}}" style="color:red" ng-init="carNewPrice[$index]=(car.Categories[0].Colors[0].NewPrice)" class="highlighted">{{carNewPrice[$index]}}</span>{{car.SelectedCurrency.Name}} </span>
 
@@ -277,7 +278,6 @@
                                             </div>
                                             @{if (User.IsInRole("Admin"))
                                                 {
-
                                                     <div>
 
                                                         <button type="button" class="btn btn-secondary"><a class="nav-link" style="color:white" href="/cars/edit?CarCode={{car.Id}}">Edit</a></button>
@@ -296,14 +296,14 @@
                             </div>
 
 
-                           
-                                <div class="button-wrapper1">
-                                    <a class="btn-big-green wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s" href="/">
-                                        <span>See all cars</span>
-                                    </a>
-                                </div>
-                        
-                           
+
+                            <div class="button-wrapper1">
+                                <a class="btn-big-green wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s" href="/">
+                                    <span>See all cars</span>
+                                </a>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

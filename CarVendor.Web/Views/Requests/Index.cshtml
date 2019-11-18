@@ -188,6 +188,9 @@
                 @Html.DisplayName("Sequence")
             </th>
             <th>
+                @Html.DisplayName("Order Date")
+            </th>
+            <th>
                 @Html.DisplayName("Ordered Items")
             </th>
             <th>
@@ -202,67 +205,71 @@
         @foreach (var item in Model)
         {
             i++;
-            <tr>
-                <td>
+        <tr>
+            <td>
 
-                    <span>@i</span>
-                </td>
-                <td>
-                    @foreach (var order in item.OrderItems)
-                    {
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span style="color:green">
-                                    Car Name:
-                                </span>
-                                <span style="color:chocolate">
-                                    @order.Car.Name
-                                </span>
-                            </div>
-                            <div class="col-md-2">
-                                <span style="color:green">
-                                    Model:
-                                </span>
-                                <span style="color:chocolate">
-                                    @order.Car.Model
-                                </span>
-                            </div>
-                            <div class="col-md-2">
-                                <span style="color:green">
-                                    Quantity:
-                                </span>
-                                <span style="color:chocolate">
-                                    @order.Quantity
-                                </span>
-                            </div>
-                            <div class="col-md-2">
-                                <span style="color:green">
-                                    Color:
-                                </span>
-                                <span style="color:chocolate">
-                                    @order.Color
-                                </span>
-                            </div>
-                            <div class="col-md-3">
-                                <span style="color:green">
-                                    Category:
-                                </span>
-                                <span style="color:chocolate">
-                                    @order.Category
-                                </span>
-                            </div>
+                <span>@i</span>
+            </td>
+            <td>
+
+                <span>@item.OrderDate</span>
+            </td>
+            <td>
+                @foreach (var order in item.OrderItems)
+                {
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span style="color:green">
+                                Car Name:
+                            </span>
+                            <span style="color:chocolate">
+                                @order.Car.Name
+                            </span>
                         </div>
+                        <div class="col-md-2">
+                            <span style="color:green">
+                                Model:
+                            </span>
+                            <span style="color:chocolate">
+                                @order.Car.Model
+                            </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span style="color:green">
+                                Quantity:
+                            </span>
+                            <span style="color:chocolate">
+                                @order.Quantity
+                            </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span style="color:green">
+                                Color:
+                            </span>
+                            <span style="color:chocolate">
+                                @order.Color
+                            </span>
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:green">
+                                Category:
+                            </span>
+                            <span style="color:chocolate">
+                                @order.Category
+                            </span>
+                        </div>
+                    </div>
 
-                    }
-                </td>
-                <td>
-                    @{ }
-                    @Html.DisplayFor(modelItem => item.User.FName) @Html.DisplayFor(modelItem => item.User.MName)  @Html.DisplayFor(modelItem => item.User.LName)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item..State)
-                    </td>*@
-            </tr>
+                }
+            </td>
+            <td>
+                @{ }
+                @Html.DisplayFor(modelItem => item.User.FName) @Html.DisplayFor(modelItem => item.User.MName)  @Html.DisplayFor(modelItem => item.User.LName)
+            </td>
+            @*<td>
+        @Html.DisplayFor(modelItem => item..State)
+        </td>*@
+        </tr>
                         }
      
 
