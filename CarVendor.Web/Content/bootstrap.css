@@ -202,10 +202,10 @@ th {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
   }
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
+    a,
+    a:visited {
+        text-decoration: none;
+    }
   a[href]:after {
     content: " (" attr(href) ")";
   }
