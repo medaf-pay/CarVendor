@@ -3,6 +3,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script src="https://unpkg.com/js-datepicker"></script>
 <style>
     .ui-datepicker {
         width: 216px;
@@ -17,9 +19,11 @@
         .ui-datepicker a {
             text-decoration: none;
         }
+
         .ui-datepicker table {
             width: 100%;
         }
+
     .ui-datepicker-header {
         background: url('../img/dark_leather.png') repeat 0 0 #000;
         color: #e0e0e0;
@@ -34,9 +38,11 @@
         border-style: solid;
         border-color: #111;
     }
+
     .ui-datepicker-title {
         text-align: center;
     }
+
     .ui-datepicker-prev, .ui-datepicker-next {
         display: inline-block;
         width: 30px;
@@ -48,6 +54,7 @@
         line-height: 600%;
         overflow: hidden;
     }
+
     .ui-datepicker-prev {
         float: left;
         background-position: center -30px;
@@ -57,6 +64,7 @@
         float: right;
         background-position: center 0px;
     }
+
     .ui-datepicker thead {
         background-color: #f7f7f7;
         background-image: -moz-linear-gradient(top, #f7f7f7 0%, #f1f1f1 100%);
@@ -68,6 +76,7 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
         border-bottom: 1px solid #bbb;
     }
+
     .ui-datepicker th {
         text-transform: uppercase;
         font-size: 6pt;
@@ -76,13 +85,16 @@
         text-shadow: 1px 0px 0px #fff;
         filter: dropshadow(color=#fff, offx=1, offy=0);
     }
+
     .ui-datepicker tbody td {
         padding: 0;
         border-right: 1px solid #bbb;
     }
+
         .ui-datepicker tbody td:last-child {
             border-right: 0px;
         }
+
     .ui-datepicker tbody tr {
         border-bottom: 1px solid #bbb;
     }
@@ -90,6 +102,7 @@
         .ui-datepicker tbody tr:last-child {
             border-bottom: 0px;
         }
+
     .ui-datepicker tbody tr {
         border-bottom: 1px solid #bbb;
     }
@@ -97,6 +110,7 @@
         .ui-datepicker tbody tr:last-child {
             border-bottom: 0px;
         }
+
     .ui-datepicker td span, .ui-datepicker td a {
         display: inline-block;
         font-weight: bold;
@@ -127,9 +141,11 @@
         background: #f4f4f4;
         color: #b4b3b3;
     }
+
     .ui-datepicker-calendar .ui-state-hover {
         background: #f7f7f7;
     }
+
     .ui-datepicker-calendar .ui-state-active {
         background: #6eafbf;
         -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
@@ -142,6 +158,7 @@
         position: relative;
         margin: -1px;
     }
+
     .ui-datepicker-calendar td:first-child .ui-state-active {
         width: 29px;
         margin-left: 0;
@@ -151,6 +168,7 @@
         width: 29px;
         margin-right: 0;
     }
+
     .ui-datepicker-calendar tr:last-child .ui-state-active {
         height: 29px;
         margin-bottom: 0;
@@ -164,22 +182,22 @@
     </p>
 </div>
 @*<div id="datepicker">
-    
-</div>*@
+
+    </div>*@
 
 
 @using (Html.BeginForm("Index", "Requests", FormMethod.Post))
 {
     @Html.ValidationSummary(true);
 
-  <label>Start Date</label>
- @Html.TextBox("StartDate", null, new { @class = "date-picker", autocomplete = "off" })
+    <label>Start Date</label>
+    @Html.TextBox("StartDate", null, new { @class = "date-picker1", autocomplete = "off" })
     <label>End Date</label>
-    @Html.TextBox("EndDate", null, new { @class = "date-picker", autocomplete = "off" })
+    @Html.TextBox("EndDate", null, new { @class = "date-picker2", autocomplete = "off" })
     <input type="submit" value="Query" />
 
-} 
-<p style="color:red" >@ViewBag.ErrorMsg</p>
+}
+<p style="color:red">@ViewBag.ErrorMsg</p>
 @if (Model.Count() > 0)
 {
     <table class="table">
@@ -200,104 +218,102 @@
         </tr>
         @{
             int i = 0;
-            }
+        }
 
         @foreach (var item in Model)
         {
             i++;
-        <tr>
-            <td>
+            <tr>
+                <td>
 
-                <span>@i</span>
-            </td>
-            <td>
+                    <span>@i</span>
+                </td>
+                <td>
 
-                <span>@item.OrderDate</span>
-            </td>
-            <td>
-                @foreach (var order in item.OrderItems)
-                {
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span style="color:green">
-                                Car Name:
-                            </span>
-                            <span style="color:chocolate">
-                                @order.Car.Name
-                            </span>
+                    <span>@item.OrderDate</span>
+                </td>
+                <td>
+                    @foreach (var order in item.OrderItems)
+                    {
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span style="color:green">
+                                    Car Name:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Car.Name
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <span style="color:green">
+                                    Model:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Car.Model
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <span style="color:green">
+                                    Quantity:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Quantity
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <span style="color:green">
+                                    Color:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Color
+                                </span>
+                            </div>
+                            <div class="col-md-3">
+                                <span style="color:green">
+                                    Category:
+                                </span>
+                                <span style="color:chocolate">
+                                    @order.Category
+                                </span>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <span style="color:green">
-                                Model:
-                            </span>
-                            <span style="color:chocolate">
-                                @order.Car.Model
-                            </span>
-                        </div>
-                        <div class="col-md-2">
-                            <span style="color:green">
-                                Quantity:
-                            </span>
-                            <span style="color:chocolate">
-                                @order.Quantity
-                            </span>
-                        </div>
-                        <div class="col-md-2">
-                            <span style="color:green">
-                                Color:
-                            </span>
-                            <span style="color:chocolate">
-                                @order.Color
-                            </span>
-                        </div>
-                        <div class="col-md-3">
-                            <span style="color:green">
-                                Category:
-                            </span>
-                            <span style="color:chocolate">
-                                @order.Category
-                            </span>
-                        </div>
-                    </div>
 
-                }
-            </td>
-            <td>
-                @{ }
-                @Html.DisplayFor(modelItem => item.User.FName) @Html.DisplayFor(modelItem => item.User.MName)  @Html.DisplayFor(modelItem => item.User.LName)
-            </td>
-            @*<td>
-        @Html.DisplayFor(modelItem => item..State)
-        </td>*@
-        </tr>
-                        }
-     
+                    }
+                </td>
+                <td>
+                    @{ }
+                    @Html.DisplayFor(modelItem => item.User.FName) @Html.DisplayFor(modelItem => item.User.MName)  @Html.DisplayFor(modelItem => item.User.LName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item..State)
+                    </td>*@
+            </tr>
+        }
+
 
     </table>
 }
-else {
+else
+{
     <div>
 
         <img src="~/Content/images/NoData.png" />
 
-     </div>
+    </div>
 }
 @*<script type="text/javascript">
-    $(function () {
-        // This will make every element with the class "date-picker" into a DatePicker element
-        $('.date-picker').datepicker();
-    })
-</script>*@
-<script type="text/javascript">
         $(function () {
-            $('.date-picker').datepicker({
-                inline: true,
-                showOtherMonths: true,
-                dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            })
-      
-    });
+            // This will make every element with the class "date-picker" into a DatePicker element
+            $('.date-picker').datepicker();
+        })
+    </script>*@
+<script type="text/javascript">
+    const picker1 = datepicker('.date-picker1', { id: 'date-picker1' });
+    const picker2 = datepicker('.date-picker2', { id: 'date-picker2' });
 
 
 
-    </script>
+
+
+
+</script>
