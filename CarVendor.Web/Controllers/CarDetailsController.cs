@@ -35,7 +35,7 @@ namespace CarVendor.mvc.Controllers
             decimal ExchangeRate = 1;
             if (Utilities._currencyDTO.Code != 1)
             {
-                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             var cars = db.Cars.Select(s =>
                 new CarViewModel
@@ -49,6 +49,7 @@ namespace CarVendor.mvc.Controllers
                     {
                         Id = s1.Category.Id,
                         Name = s1.Category.Name,
+                        CategoryCode="c"+s1.CategoryId+"c",
                         Colors = s1.CarColors.Select(s2 => new ColorViewModel
                         {
                             Id = s2.ColorId,
@@ -153,7 +154,7 @@ namespace CarVendor.mvc.Controllers
             decimal ExchangeRate = 1;
             if (Utilities._currencyDTO.Code != 1)
             {
-                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             if (Utilities._shopingCarts.Count() == 0)
             {

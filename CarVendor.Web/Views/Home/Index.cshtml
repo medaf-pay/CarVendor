@@ -144,86 +144,26 @@
                     <div class="grid_9">
                         <div class="slider-wrapper">
                             <div id="camera_wrap">
-                                <div data-src="/images/slider1.png">
-                                    <div class="caption fadeIn">
-                                        <div class="heading">
-                                            <span class="first">2019 Alto</span>
-                                            <span class="second"> Start From <span class="price">120000 EGP</span></span>
-                                        </div>
-                                        <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                            <span class="first">
-                                                Mileage: <strong>130 000</strong> km
-                                            </span>
-                                            <span class="second">
-                                                Volume capacity: <strong>1.3</strong>l
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div data-src="/images/slider2.png">
-                                    <div class="caption fadeIn">
-                                        <div class="heading">
-                                            <span class="first">2019 APV</span>
-                                            <span class="second"> Start From <span class="price">86000 EGP</span></span>
-                                        </div>
-                                        <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                            <span class="first">
-                                                Mileage: <strong>130 000</strong> km
-                                            </span>
-                                            <span class="second">
-                                                Volume capacity: <strong>1.3</strong>l
-                                            </span>
+                                @for (int i = 0; i < @ViewBag.Slides.Count; i++)
+                                {
+                                    <div data-src="/images/@ViewBag.Slides[i].ImagePath">
+                                        <div class="caption fadeIn">
+                                            <div class="heading">
+                                                <span class="first">@ViewBag.Slides[i].Model</span>
+                                                <span class="second"> Start From <span class="price">@Decimal.ToInt32(ViewBag.Slides[i].Price)</span> {{currency}}</span>
+                                            </div>
+                                            <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
+                                                <span class="first">
+                                                    Mileage: <strong>@ViewBag.Slides[i].Mileage</strong> km
+                                                </span>
+                                                <span class="second">
+                                                    Volume capacity: <strong>@ViewBag.Slides[i].VolumeCapacity</strong>l
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div data-src="/images/slider3.png">
-                                    <div class="caption fadeIn">
-                                        <div class="heading">
-                                            <span class="first">2019 Ciaz</span>
-                                            <span class="second"> Start From <span class="price">260000 EGP</span></span>
-                                        </div>
-                                        <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                            <span class="first">
-                                                Mileage: <strong>130 000</strong> km
-                                            </span>
-                                            <span class="second">
-                                                Volume capacity: <strong>1.3</strong>l
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div data-src="/images/slider4.png">
-                                    <div class="caption fadeIn">
-                                        <div class="heading">
-                                            <span class="first">2019 Ertiga</span>
-                                            <span class="second">Start From <span class="price">195000 EGP</span></span>
-                                        </div>
-                                        <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                            <span class="first">
-                                                Mileage: <strong>130 000</strong> km
-                                            </span>
-                                            <span class="second">
-                                                Volume capacity: <strong>1.3</strong>l
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div data-src="/images/slider5.png">
-                                    <div class="caption fadeIn">
-                                        <div class="heading">
-                                            <span class="first">2019 Swift Dzire</span>
-                                            <span class="second">Start From <span class="price">91560 EGP</span></span>
-                                        </div>
-                                        <div class="info wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                                            <span class="first">
-                                                Mileage: <strong>130 000</strong> km
-                                            </span>
-                                            <span class="second">
-                                                Volume capacity: <strong>1.3</strong>l
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                }
+
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -262,13 +202,13 @@
                                                     <div class="form-row" style="margin-top:10px">
                                                         <div class="form-group col-md-6">
                                                             <span class="heading" style="color:black;font-weight:700">Category:</span>
-                                                            <select name="Make" Id="category_{{car.Id}}" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-change="CategoryChange(car,CarCategoryselected,$index)" ng-init="CarCategoryselected=car.Categories[0].Id.toString()" ng-model="CarCategoryselected">
-                                                                <option ng-repeat="Category in car.Categories" value="{{Category.Id}}">{{Category.Name}}</option>
+                                                            <select name="Make" Id="category_{{car.Id}}" class="tmSelect auto" data-class="tmSelect tmSelect2" ng-change="CategoryChange(car,CarCategoryselected,$index)" ng-init="CarCategoryselected=car.Categories[0].CategoryCode" ng-model="CarCategoryselected">
+                                                                <option ng-repeat="Category in car.Categories" value="{{Category.CategoryCode}}">{{Category.Name}}</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-5">
                                                             <span class="heading" style="padding-right:20px;color:black;font-weight:700">Color:</span>
-                                                            <select name="Make" Id="color_{{car.Id}}" class="tmSelect auto" ng-repeat="Category in car.Categories |filter: {Id:CarCategoryselected }" ng-change="ColorChange(car,Category,CarColorselected,$parent.$index)" data-class="tmSelect tmSelect2" ng-init="CarColorselected=Category.Colors[0].Id.toString()" ng-model="CarColorselected">
+                                                            <select name="Make" Id="color_{{car.Id}}" class="tmSelect auto" ng-repeat="Category in car.Categories |filter: {CategoryCode:CarCategoryselected }" ng-change="ColorChange(car,Category,CarColorselected,$parent.$index)" data-class="tmSelect tmSelect2" ng-init="CarColorselected=Category.Colors[0].Id.toString()" ng-model="CarColorselected">
                                                                 <option ng-repeat="Color in Category.Colors" value="{{Color.Id}}">{{Color.Name}}</option>
                                                             </select>
                                                         </div>

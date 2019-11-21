@@ -20,7 +20,7 @@ namespace CarVendor.Web.Controllers
         }
 
         // GET: Cars/Details/5
-        public ActionResult Details(long? id, int Category)
+        public ActionResult Details(long? id, string Category)
         {
             if (id == null)
             {
@@ -31,9 +31,9 @@ namespace CarVendor.Web.Controllers
             {
                 return HttpNotFound();
             }
-            var CarCategory = car.Carcategories.Where(cat => cat.CategoryId == Category).FirstOrDefault();
+            var CarCategory = car.Carcategories.Where(cat => cat.CategoryId == int.Parse(Category.Trim('c'))).FirstOrDefault();
             ViewBag.carId = id;
-            ViewBag.categoryId = Category;
+            ViewBag.categoryId = int.Parse(Category.Trim('c'));
             return View(CarCategory);
         }
 

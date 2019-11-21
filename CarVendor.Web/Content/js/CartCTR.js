@@ -111,6 +111,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     $scope.Categoryselected = "0";
     $scope.Colorselected = '0';
     $scope.cart;
+    $scope.currency = Currency.Name;
 
     function updateCurrency(text, value) {
         $scope.currency = text;
@@ -148,8 +149,9 @@ app.controller('HomeCTR', function ($scope, $http) {
     });
 
     $scope.CategoryChange = function (car, Id, index) {
-        cardata = car.Categories.find(x => x.Id == Id).Colors[0];
-        //$scope.CarColorselected = cardata.Id.toString();
+        cardata = car.Categories.find(x => x.CategoryCode == Id).Colors[0];
+      //  $scope.CarColorselected = cardata.Id.toString();
+
         $scope.CarPrice[index] = cardata.Price;
         $scope.carDiscount[index] = cardata.Discount;
         $scope.carNewPrice[index] = cardata.NewPrice;
@@ -213,9 +215,7 @@ app.controller('HomeCTR', function ($scope, $http) {
             window.location.href = "/home/cart";
         });
     };
-   
-
-});
+   });
 
 app.controller('CardInfoCTR', function ($scope, $http) {
     $scope.loading = false;

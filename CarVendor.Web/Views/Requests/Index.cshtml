@@ -173,13 +173,13 @@
     @Html.ValidationSummary(true);
 
   <label>Start Date</label>
- @Html.TextBox("StartDate", null, new { @class = "date-picker" })
+ @Html.TextBox("StartDate", null, new { @class = "date-picker", autocomplete = "off" })
     <label>End Date</label>
-    @Html.TextBox("EndDate", null, new { @class = "date-picker" })
+    @Html.TextBox("EndDate", null, new { @class = "date-picker", autocomplete = "off" })
     <input type="submit" value="Query" />
 
 } 
-<p>@ViewBag.ErrorMsg</p>
+<p style="color:red" >@ViewBag.ErrorMsg</p>
 @if (Model.Count() > 0)
 {
     <table class="table">

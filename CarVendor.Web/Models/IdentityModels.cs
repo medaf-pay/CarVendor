@@ -54,6 +54,7 @@ namespace CarVendor.Web.Models
         public System.Data.Entity.DbSet<CarVendor.data.Entities.Currency> Currencies { get; set; }
 
         public System.Data.Entity.DbSet<CarVendor.data.Entities.Conversion> Conversions { get; set; }
+        public System.Data.Entity.DbSet<CarVendor.data.Entities.Carosel> Carosels { get; set; }
 
     }
 }

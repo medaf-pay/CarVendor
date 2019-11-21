@@ -218,6 +218,7 @@
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CarDetailsController.cs" />
     <Compile Include="Controllers\CarFamiliesController.cs" />
+    <Compile Include="Controllers\CaroselsController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ConversionsController.cs" />
@@ -232,9 +233,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911041609254_v1.cs" />
-    <Compile Include="Migrations\201911041609254_v1.Designer.cs">
-      <DependentUpon>201911041609254_v1.cs</DependentUpon>
+    <Compile Include="Migrations\201911201432118_v0.0.0.cs" />
+    <Compile Include="Migrations\201911201432118_v0.0.0.Designer.cs">
+      <DependentUpon>201911201432118_v0.0.0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911211124453_v0.0.1.cs" />
+    <Compile Include="Migrations\201911211124453_v0.0.1.Designer.cs">
+      <DependentUpon>201911211124453_v0.0.1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -780,6 +785,11 @@
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Manage\UnderDevelopment.cshtml" />
     <Content Include="Views\Cars\EditCategory.cshtml" />
+    <Content Include="Views\Carosels\Create.cshtml" />
+    <Content Include="Views\Carosels\Delete.cshtml" />
+    <Content Include="Views\Carosels\Details.cshtml" />
+    <Content Include="Views\Carosels\Edit.cshtml" />
+    <Content Include="Views\Carosels\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -813,8 +823,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911041609254_v1.resx">
-      <DependentUpon>201911041609254_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911201432118_v0.0.0.resx">
+      <DependentUpon>201911201432118_v0.0.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911211124453_v0.0.1.resx">
+      <DependentUpon>201911211124453_v0.0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
