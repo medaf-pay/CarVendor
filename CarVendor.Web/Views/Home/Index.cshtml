@@ -65,8 +65,16 @@
     }
 
     .lineThrough {
-        text-decoration: line-through;
-        padding-right: 5px;
+        position:relative;
+    }
+
+    .lineThrough::after {
+        position:absolute;
+        border-bottom:2px solid blue;
+        content:"";
+        left:0;
+        top:50%;
+        width:100%;
     }
 
     .mainContainer {
