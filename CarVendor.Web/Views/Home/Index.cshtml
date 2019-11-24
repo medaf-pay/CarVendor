@@ -63,6 +63,7 @@
         color: #333333 !important;
         text-decoration: none;
     }
+    
 
     .lineThrough {
         position:relative;
@@ -229,8 +230,8 @@
                                                 
                                             </div>
                                             <div>
-                                                <span class="second" ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted lineThrough">{{CarPrice[$index]}}</span><span Id="NewPrice_{{car.Id}}" style="color:red" ng-init="carNewPrice[$index]=(car.Categories[0].Colors[0].NewPrice)" class="highlighted">{{carNewPrice[$index]}}</span> {{car.SelectedCurrency.Name}} </span>
-                                                <span class="second" ng-if="carDiscount[$index]==0" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted">{{CarPrice[$index]}}</span> {{car.SelectedCurrency.Name}}</span>
+                                                <span class="second" ng-if="carDiscount[$index]!=0" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted lineThrough"> {{CarPrice[$index]}}</span><span Id="NewPrice_{{car.Id}}" style="color:red" ng-init="carNewPrice[$index]=(car.Categories[0].Colors[0].NewPrice)" class="highlighted"> {{carNewPrice[$index]}}</span> {{car.SelectedCurrency.Name}} </span>
+                                                <span class="second" ng-if="carDiscount[$index]==0" style="padding-right: 7px;color:black;font-weight:700">Price: <span Id="Price_{{car.Id}}" style="color:red" ng-init="CarPrice[$index]=(car.Categories[0].Colors[0].Price)" class="highlighted"> {{CarPrice[$index]}}</span> {{car.SelectedCurrency.Name}}</span>
                                             </div>
                                             <div class="info wow fadeIn row" data-wow-duration="1s" data-wow-delay=".2s">
                                                 <div class="container" style="padding-right: 11px;">

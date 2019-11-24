@@ -225,6 +225,7 @@
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailsController.cs" />
+    <Compile Include="Controllers\MainInfoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -661,6 +662,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\carosel.js" />
     <Content Include="Scripts\css\animate.css" />
@@ -790,6 +792,8 @@
     <Content Include="Views\Carosels\Details.cshtml" />
     <Content Include="Views\Carosels\Edit.cshtml" />
     <Content Include="Views\Carosels\Index.cshtml" />
+    <Content Include="Views\MainInfo\Privacypolicy.cshtml" />
+    <Content Include="Views\MainInfo\Termsofservice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -69,7 +69,7 @@ namespace CarVendor.mvc.Controllers
             else if ( StartDate == null)
             {
                 ViewBag.ErrorMsg = "";
-                _orders = _orders.Where(o =>  o.OrderDate < EndDate).ToList();
+                _orders = _orders.Where(o =>  o.OrderDate.Date <= EndDate).ToList();
 
 
                 return View(_orders.ToList());
@@ -77,7 +77,7 @@ namespace CarVendor.mvc.Controllers
             else if (EndDate == null)
             {
                 ViewBag.ErrorMsg = "";
-                _orders = _orders.Where(o => o.OrderDate > StartDate).ToList();
+                _orders = _orders.Where(o => o.OrderDate.Date >= StartDate).ToList();
 
                 return View(_orders.ToList());
             }
@@ -90,7 +90,7 @@ namespace CarVendor.mvc.Controllers
             }
             else
             {
-                 _orders = _orders.Where(o => o.OrderDate > StartDate && o.OrderDate < EndDate).ToList();
+                 _orders = _orders.Where(o => o.OrderDate.Date >= StartDate && o.OrderDate.Date <= EndDate).ToList();
                 return View(_orders.ToList());
             }
 

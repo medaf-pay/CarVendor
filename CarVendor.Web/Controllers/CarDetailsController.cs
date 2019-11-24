@@ -361,8 +361,8 @@ namespace CarVendor.mvc.Controllers
                     DataTable dt = new DataTable();
                     try
                     {
-                        
-                      
+
+
 
                         oledbConn.Open();
                         using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Sheet1$]", oledbConn))
@@ -637,6 +637,7 @@ namespace CarVendor.mvc.Controllers
                     }
                     catch (Exception ex)
                     {
+                        throw (ex);
                     }
                     finally
                     {
@@ -651,7 +652,7 @@ namespace CarVendor.mvc.Controllers
 
 
             //Send OK Response to Client.
-            return Request.CreateResponse(/*filesPaths*/);
+            return Request.CreateResponse();
         }
 
         [Route("api/CartDetails/AddNewCar")]
