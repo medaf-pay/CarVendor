@@ -22,15 +22,16 @@ namespace CarVendor.mvc.Controllers
     {
         private DataBaseContext db = new DataBaseContext();
 
-
         [HttpGet]
         [Route("api/CarDetails/IndexData")]
         public IHttpActionResult IndexData(long Brand = 0, long Family = 0, long Category = 0, long Color = 0)
         {
-            decimal ExchangeRate=1;
-            if (Utilities._currencyDTO.Code!=1)
+           
+
+            decimal ExchangeRate =1;
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code!=1)
             {
-                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             var cars = db.Cars.Select(s =>
                 new CarViewModel
@@ -58,7 +59,7 @@ namespace CarVendor.mvc.Controllers
                     }).ToList(),
                     FirstImageView = s.Carcategories.Select(s1 => s1.CarColors.Select(s2 => s2.CarImages.Select(s3 => s3.ImageURL).FirstOrDefault()).FirstOrDefault()).FirstOrDefault(),
                     CarFamily = new CarFamilyModel { Id = s.Type.Id, Name = s.Type.Name },
-                    SelectedCurrency =new CurrencyDTO() { Code = Utilities._currencyDTO.Code, Name = Utilities._currencyDTO.Name }
+                    SelectedCurrency =new CurrencyDTO() { Code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code, Name = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Name }
                     }).ToList();
 
 
@@ -146,9 +147,9 @@ namespace CarVendor.mvc.Controllers
         public IHttpActionResult CartData()
         {
             decimal ExchangeRate = 1;
-            if (Utilities._currencyDTO.Code != 1)
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code != 1)
             {
-                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             if (Utilities._shopingCarts.Count() == 0)
                 return Ok(new List<CartItemModel>());
@@ -182,7 +183,7 @@ namespace CarVendor.mvc.Controllers
 
                          Quantity = item.Quantity == 0 ? 1 : item.Quantity,
 
-                         Currency = new CurrencyDTO() { Code = Utilities._currencyDTO.Code, Name = Utilities._currencyDTO.Name }
+                         Currency = new CurrencyDTO() { Code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code, Name = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Name }
                      }).FirstOrDefault();
                 Cars.Add(car);
             }
@@ -439,19 +440,30 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/ChangeCurrency")]
         [HttpGet]
         public IHttpActionResult ChangeCurrency(long CCode)
+
         {
+            var currency = db.Currencies.Where(c => c.Id == CCode).Select(s => new CurrencyDTO() { Code = s.Id, Name = s.Name }).FirstOrDefault();
 
-        var currency = db.Currencies.Where(c => c.Id == CCode).Select(s => new CurrencyDTO() { Code = s.Id, Name = s.Name }).FirstOrDefault();
-            Utilities._currencyDTO = currency;
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Count()>0)
+            {
+                Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code = currency.Code;
+                Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Name = currency.Name;
+            }
+            else
+            {
+                currency.UserIdentity = User.Identity.GetUserId();
+                Utilities._currencyDTO.Add(currency);
+            }
+      
 
-            return Ok(Utilities._currencyDTO);
+            return Ok(currency);
         }
 
         [Route("api/CartDetails/ReadCurancy")]
         [HttpGet]
         public IHttpActionResult ReadCurrency()
         {
-           return Ok(Utilities._currencyDTO);
+           return Ok(Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First());
         }
 
     }

@@ -12,7 +12,8 @@ namespace CarVendor.mvc.Common
     public class Utilities
     {
         public static List<CartModel> _shopingCarts = new List<CartModel>();
-        public static CurrencyDTO _currencyDTO = new CurrencyDTO() { Code=1,Name="EGP"};
+
+        public static List<CurrencyDTO> _currencyDTO = new List<CurrencyDTO>() { new CurrencyDTO() { Code = 1, Name = "EGP" } };
     
       
         public static long SetOrderDetails( DataBaseContext db, CreditCardModel creditCard =null, BankTransferModel BankTransfer=null,long UserId=0)

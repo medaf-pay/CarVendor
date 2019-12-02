@@ -9,6 +9,8 @@ namespace CarVendor.Web.Dtos
     {
         public long Code { get; set; }
         public string Name { get; set; }
+        public string UserIdentity { get; set; }
+
 
     }
 }

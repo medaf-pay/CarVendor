@@ -73,7 +73,7 @@
 
                     <div class="authorization-block">
 
-                        <select id="currencydropdown" onchange="ChangeCurrency()" class="form-control">
+                        <select id="currencydropdown" onchange="ChangeCurrency(userId)" class="form-control">
                             @for (int i = 0; i < Currencies.Count; i++)
                             {
                             <option  id="@Currencies[i].Id" value="@Currencies[i].Id">@Currencies[i].Name</option>

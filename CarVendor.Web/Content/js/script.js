@@ -162,11 +162,15 @@ function CategoryChange(CategoryId, carId) {
 }
 function Onload() {
     
+
     $.ajax({
         url: "/api/CartDetails/ReadCurancy", success: function(result)
         {
             Currency = result;
-            var yy = $('#currencydropdown #' + result.Code)
+            if (result == null) {
+                Currency = getCookie('ppkcookie');
+            }
+            var yy = $('#currencydropdown #' + Currency.Code)
             console.log(yy)
              yy.attr("selected", true);
             console.log(yy)
@@ -175,18 +179,43 @@ function Onload() {
         }
     });
 }
-function ChangeCurrency() {
-    var code = $('#currencydropdown option:selected').val();
-    $.ajax({
-        url: "/api/CartDetails/ChangeCurrency?CCode=" + code, success: function (result) {
-            Currency = result;
-            $('#currencydropdown #' + result.Code).attr("selected", true);
-            location.reload();
-            console.log(result)
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+function eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999;';
+}
+function ChangeCurrency(userId) {
+   
+        var code = $('#currencydropdown option:selected').val();
+        setCookie('LagguageUser', code, 1);
+        $.ajax({
+            url: "/api/CartDetails/ChangeCurrency?CCode=" + code, success: function (result) {
+                Currency = result;
+                $('#currencydropdown #' + result.Code).attr("selected", true);
+                location.reload();
+                console.log(result)
 
 
-        }
-    });
+            }
+        });
+    
 }
 Onload();
 function filterCars(CarsId) {
