@@ -92,7 +92,10 @@ namespace CarVendor.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(conversion).State = EntityState.Modified;
+                var oldConversion = db.Conversions.Find(conversion.Id);
+                 oldConversion.FromCurrencyId= conversion.FromCurrencyId;
+                 oldConversion.ToCurrencyId= conversion.ToCurrencyId;
+               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

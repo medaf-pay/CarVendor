@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    @if (Model!=null && Model.Individually==2)
+    @if (Model != null && Model.Individually == 2)
     {
         <div class="form-group row">
 
@@ -208,12 +208,35 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" />
+            <input class="acceptPolicyCheckbox" onclick="acceptPolicy()" type="checkbox" id="acceptPolicyCheckbox" value="accept" name="accept"> I accept this legal agreements: <a  target="_blank" rel="noopener noreferrer" href="/MainInfo/Privacypolicy"> Privacy Policy </a> , <a  target="_blank" rel="noopener noreferrer" href="/maininfo/termsofservice">Terms of Service</a>
         </div>
     </div>
+ 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input disabled type="submit" value="Create" class="btn btn-success" id="createButton" />
+            </div>
+        </div>
+   
+    
+
 </div>
     }
 
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
+    <script>
+        function acceptPolicy() {
+            var checked = document.getElementById("acceptPolicyCheckbox").checked;
+
+            if (checked) {
+
+                document.getElementById("createButton").disabled = false;
+            }
+            else {
+                document.getElementById("createButton").disabled = true;
+
+            }
+        }
+    </script>

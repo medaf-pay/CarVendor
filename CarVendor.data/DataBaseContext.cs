@@ -55,5 +55,6 @@ namespace CarVendor.data
         public DbSet<BankTransferInfo> BanksTransferInfo { get; set; }
         public DbSet<CarFamily> CarFamilies { get; set; }
         public DbSet<Mail> Mails { get; set; }
+        public DbSet<Carosel> Carosels { get; set; }
     }
 }

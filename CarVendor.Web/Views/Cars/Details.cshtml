@@ -500,11 +500,11 @@
                         <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 spData">
                             @if (Model.ElectricallyFoldingSideMirrors == false)
                             {
-                            <p> Not Available </p>
+                                <p> Not Available </p>
                             }
                             else
                             {
-                            <p>Available</p>
+                                <p>Available</p>
                             }
                         </div>
                     </div>
@@ -1592,9 +1592,14 @@
                     </div>
                 </div>
 
-            
+
             </div>
 
+            @{if (User.IsInRole("Admin"))
+                {
+                    <button type="button" class="btn btn-secondary"><a class="nav-link" style="color:white" href="/cars/EditCategory?carId=@ViewBag.carId&categoryId=@ViewBag.categoryId">Edit</a></button>
+                }
+            }
 
         </div>
         <script type="text/javascript">

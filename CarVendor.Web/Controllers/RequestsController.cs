@@ -54,21 +54,43 @@ namespace CarVendor.mvc.Controllers
 
                 return View(_orders.ToList());
             }
-            else if ((EndDate == null || StartDate == null) && EndDate != StartDate)
-            {
-                ViewBag.ErrorMsg = "Make sure to enter both Start and End Dates";
+            //else if ((EndDate == null || StartDate == null) && EndDate != StartDate)
+            //{
+            //    ViewBag.ErrorMsg = "Make sure to enter both Start and End Dates";
                
-                return View(_orders.ToList());
-            }
+            //    return View(_orders.ToList());
+            //}
             else if (EndDate == null && StartDate == null)
             {
                 ViewBag.ErrorMsg = "";
                
                 return View(_orders.ToList());
             }
+            else if ( StartDate == null)
+            {
+                ViewBag.ErrorMsg = "";
+                _orders = _orders.Where(o =>  o.OrderDate.Date <= EndDate).ToList();
+
+
+                return View(_orders.ToList());
+            }
+            else if (EndDate == null)
+            {
+                ViewBag.ErrorMsg = "";
+                _orders = _orders.Where(o => o.OrderDate.Date >= StartDate).ToList();
+
+                return View(_orders.ToList());
+            }
+            else if (StartDate== EndDate)
+            {
+                ViewBag.ErrorMsg = "";
+                _orders = _orders.Where(o => o.OrderDate.Date == StartDate).ToList();
+
+                return View(_orders.ToList());
+            }
             else
             {
-                 _orders = _orders.Where(o => o.OrderDate > StartDate && o.OrderDate < EndDate).ToList();
+                 _orders = _orders.Where(o => o.OrderDate.Date >= StartDate && o.OrderDate.Date <= EndDate).ToList();
                 return View(_orders.ToList());
             }
 

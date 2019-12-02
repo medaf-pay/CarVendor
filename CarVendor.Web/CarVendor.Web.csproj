@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.9.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.9.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
     </Reference>
@@ -60,9 +63,18 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.5.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -127,6 +139,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -205,12 +218,14 @@
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CarDetailsController.cs" />
     <Compile Include="Controllers\CarFamiliesController.cs" />
+    <Compile Include="Controllers\CaroselsController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ConversionsController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailsController.cs" />
+    <Compile Include="Controllers\MainInfoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -219,9 +234,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911041609254_v1.cs" />
-    <Compile Include="Migrations\201911041609254_v1.Designer.cs">
-      <DependentUpon>201911041609254_v1.cs</DependentUpon>
+    <Compile Include="Migrations\201911201432118_v0.0.0.cs" />
+    <Compile Include="Migrations\201911201432118_v0.0.0.Designer.cs">
+      <DependentUpon>201911201432118_v0.0.0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911211124453_v0.0.1.cs" />
+    <Compile Include="Migrations\201911211124453_v0.0.1.Designer.cs">
+      <DependentUpon>201911211124453_v0.0.1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -352,6 +371,7 @@
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\camera.js" />
+    <Content Include="Content\js\EditCarCategoryController.js" />
     <Content Include="Content\js\EditCarController.js" />
     <Content Include="Content\js\CarController.js" />
     <Content Include="Content\js\CardInfo.js" />
@@ -640,6 +660,9 @@
     <Content Include="Scripts\bootstrap-select.min.js.map" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\carosel.js" />
     <Content Include="Scripts\css\animate.css" />
@@ -763,6 +786,14 @@
     <Content Include="Views\Conversions\Index.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Manage\UnderDevelopment.cshtml" />
+    <Content Include="Views\Cars\EditCategory.cshtml" />
+    <Content Include="Views\Carosels\Create.cshtml" />
+    <Content Include="Views\Carosels\Delete.cshtml" />
+    <Content Include="Views\Carosels\Details.cshtml" />
+    <Content Include="Views\Carosels\Edit.cshtml" />
+    <Content Include="Views\Carosels\Index.cshtml" />
+    <Content Include="Views\MainInfo\Privacypolicy.cshtml" />
+    <Content Include="Views\MainInfo\Termsofservice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -796,8 +827,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911041609254_v1.resx">
-      <DependentUpon>201911041609254_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911201432118_v0.0.0.resx">
+      <DependentUpon>201911201432118_v0.0.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911211124453_v0.0.1.resx">
+      <DependentUpon>201911211124453_v0.0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

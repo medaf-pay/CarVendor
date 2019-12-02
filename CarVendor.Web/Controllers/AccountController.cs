@@ -23,6 +23,7 @@ namespace CarVendor.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private DataBaseContext db=new DataBaseContext();
+        private ApplicationDbContext context = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -195,9 +196,10 @@ namespace CarVendor.Web.Controllers
                         UserAddresses = UserAddresses,
 
                     };
+                    var corporateDetails = new CorporateDetails();
                     if (model.Individually == 2)
                     {
-                        var corporateDetails = new CorporateDetails()
+                         corporateDetails = new CorporateDetails()
                         {
                             CorporateName = model.CorporateName,
                             CorporateSite = model.CorporateSite,
@@ -223,7 +225,37 @@ namespace CarVendor.Web.Controllers
                     EmailTemplate Email = new EmailTemplate();
                     string path = @"~/Common/WelcomeEmailTemplate.html";
                     var emailHtml = Email.ReadTemplateEmail(user, path);
-                    GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", new List<string>(){ model.Email } , "Welcome", emailHtml, null);
+                    try
+                    {
+                        GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", new List<string>() { model.Email }, "Welcome", emailHtml, null);
+                    }
+                    catch (Exception e)
+                    {
+                        db.CorporatesDetails.Remove(corporateDetails);
+                        var logins = ASPUser.Logins;
+                        var rolesForUser = await _userManager.GetRolesAsync(ASPUser.Id);
+                        using (var transaction = context.Database.BeginTransaction())
+                        {
+
+                            foreach (var login in logins.ToList())
+                            {
+                                await _userManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+                            }
+
+                            if (rolesForUser.Count() > 0)
+                            {
+                                foreach (var item in rolesForUser.ToList())
+                                {
+                                    await _userManager.RemoveFromRoleAsync(ASPUser.Id, item);
+                                }
+                            }
+                            await _userManager.DeleteAsync(ASPUser);
+                            transaction.Commit();
+                        }
+
+                        db.SaveChanges();
+
+                    }
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

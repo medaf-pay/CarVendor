@@ -1,0 +1,39 @@
+﻿<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    .thumb {
+        width: 24px;
+        height: 24px;
+        float: none;
+        position: relative;
+        top: 7px;
+    }
+
+    form .progress {
+        line-height: 15px;
+    }
+
+    .progress {
+        display: inline-block;
+        width: 100px;
+        border: 3px groove #ccc;
+    }
+
+        .progress > div {
+            font-size: smaller;
+            background-color: red;
+            width: 0%;
+        }
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+<script src="~/Content/js/EditCarCategoryController.js"></script>
+
+<div ng-app="EditCarCategoryApp" ng-controller="EditCarCategory">
+    <input type="file" multiple="multiple" ngf-select="SetFile($files)" />
+    <hr />
+    <button class="btn btn-primary" ng-click="UploadFiles(@ViewBag.carId,@ViewBag.categoryId)">Update Category</button>
+</div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using CarVendor.data.Entities;
 using CarVendor.Web.Dtos;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace CarVendor.mvc
 {
@@ -31,8 +32,7 @@ namespace CarVendor.mvc
     public class CategoryViewModel : BaseViewModel
     {
         public List<ColorViewModel> Colors { get; set; }
-
-       
+        public string CategoryCode { get; internal set; }
     }
     public class ColorViewModel : BaseViewModel
     {

@@ -14,6 +14,7 @@
     <script src="~/Content/js/script.js"></script>
         </div>
         <![endif]-->
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
     @using Microsoft.AspNet.Identity;
     @using CarVendor.data;
     @{
@@ -62,7 +63,7 @@
 
                         <a href="/">
 
-                            <img class="thumbnail" height="99px" width="260px" style="margin-top: -4px;" src="~/Content/images/final-final.png" />
+                            <img class="thumbnail"  width="400px"  style="margin-top: 10px;" src="~/Content/images/final-final.png" />
 
 
 
@@ -129,7 +130,7 @@
 
                             <li id="NavAbout" class="nav-item"><a class="nav-link" href="/Home/About">About Us</a></li>
                             <li id="NavContact" class="nav-item"><a class="nav-link" href="/Home/Contact">Contact Us</a></li>
-                            <li onclick="goToCart()" class="nav-item cartpart"><img src="../images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>
+                            <li onclick="goToCart()" class="nav-item cartpart"><img src="~/images/Cart_imag.png" style="margin-top: -9px;margin-bottom: -50px;" /> <a class="nav-link" style="cursor:pointer"><span class="glyphicon  cartSpan" id="cartSpan"></span></a></li>
 
                         </ul>
 
@@ -146,6 +147,7 @@
                                             <li><a href="/cars/create">Add Car</a></li>
                                             <li><a href="/Currencies/index">Currencies</a></li>
                                             <li><a href="/Conversions/index">Conversions</a></li>
+                                            <li><a href="/Carosels/index">Car Slider</a></li>
                                             <li><a href="/mails/index">Customer Service Emails</a></li>
                                         </ul>
                                     </li>
@@ -184,6 +186,8 @@
                                     <ul class="list1">
                                         <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s"><a href="/Home/About">About Us</a></li>
                                         <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="/Home/Contact">Contact Us</a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="/MainInfo/Privacypolicy"> Privacy Policy </a></li>
+                                        <li class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s"><a href="/maininfo/termsofservice">Terms of Service</a></li>
 
                                     </ul>
                                 </div>
@@ -232,12 +236,12 @@
                 </div>
             </div>
             <div class="wrapper5">
-                <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset3">
+                   <div class="width-wrapper width-wrapper__inset1 width-wrapper__inset3">
                     <div>
                         <div>
                             <div class="grid_12">
                                 <div class="privacy-block wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                                    <a href="~/Content/index.html">Car sell</a> &copy; <span id="copyright-year"></span>. <a href="~/Content/index-5.html">Privacy policy</a>
+                                    <a href="~/Content/index.html">Car sell</a> &copy; <span id="copyright-year"></span>. 
                                     <!--{%FOOTER_LINK} -->
                                 </div>
                             </div>

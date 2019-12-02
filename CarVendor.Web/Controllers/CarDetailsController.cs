@@ -1,19 +1,24 @@
 ﻿using CarVendor.data;
+using CarVendor.data.Entities;
+using CarVendor.mvc.Common;
 using CarVendor.mvc.Models;
+using CarVendor.mvc.ViewModels;
+using CarVendor.Web.Dtos;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using CarVendor.mvc.ViewModels;
-using CarVendor.data.Entities;
-using CarVendor.mvc.Dtos;
-using CarVendor.mvc.Common;
+using System.Reflection;
 using System.Web;
-using System.IO;
-using Microsoft.AspNet.Identity;
-using CarVendor.Web.Dtos;
+using System.Web.Http;
+using System.Web.WebPages;
 
 namespace CarVendor.mvc.Controllers
 {
@@ -45,14 +50,15 @@ namespace CarVendor.mvc.Controllers
                     {
                         Id = s1.Category.Id,
                         Name = s1.Category.Name,
+                        CategoryCode="c"+s1.CategoryId+"c",
                         Colors = s1.CarColors.Select(s2 => new ColorViewModel
                         {
                             Id = s2.ColorId,
                             Name = s2.Color.Name,
-                            Price =s2.Price/ ExchangeRate,
+                            Price = s2.Price / ExchangeRate,
                             Images = s2.CarImages.Select(s3 => new BaseViewModel { Id = s3.Id, Name = s3.ImageURL }).ToList(),
-                            Discount =s2.Discount/ ExchangeRate,
-                            NewPrice =(( s2.Price/ ExchangeRate) -(s2.Discount/ ExchangeRate))
+                            Discount = s2.Discount / ExchangeRate,
+                            NewPrice = ((s2.Price / ExchangeRate) - (s2.Discount / ExchangeRate))
                         }).ToList()
 
 
@@ -152,12 +158,17 @@ namespace CarVendor.mvc.Controllers
                 ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             if (Utilities._shopingCarts.Count() == 0)
+            {
                 return Ok(new List<CartItemModel>());
+            }
 
             var userCart = Utilities._shopingCarts.FirstOrDefault();
 
             if (userCart.CartItems == null)
+            {
                 return Ok(new List<CartItemModel>());
+            }
+
             List<CartItemModel> Cars = new List<CartItemModel>();
             CartItemModel car;
             foreach (var item in userCart.CartItems)
@@ -177,9 +188,9 @@ namespace CarVendor.mvc.Controllers
                          Category = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => new CategoryModel { Id = s1.Category.Id, Text = s1.Category.Name }).FirstOrDefault(),
                          Color = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).
                          Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
-                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name  , Price = (s1.Price/ ExchangeRate), NewPrice =( (s1.Price/ ExchangeRate )-( s1.Discount/ ExchangeRate)) }).FirstOrDefault()).FirstOrDefault(),
-                         Price =( s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price).FirstOrDefault()).FirstOrDefault())/ ExchangeRate,
-                         NewPrice = (s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price-s2.Discount).FirstOrDefault()).FirstOrDefault())/ ExchangeRate,
+                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name, Price = (s1.Price / ExchangeRate), NewPrice = ((s1.Price / ExchangeRate) - (s1.Discount / ExchangeRate)) }).FirstOrDefault()).FirstOrDefault(),
+                         Price = (s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price).FirstOrDefault()).FirstOrDefault()) / ExchangeRate,
+                         NewPrice = (s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price - s2.Discount).FirstOrDefault()).FirstOrDefault()) / ExchangeRate,
 
                          Quantity = item.Quantity == 0 ? 1 : item.Quantity,
 
@@ -238,7 +249,10 @@ namespace CarVendor.mvc.Controllers
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
             long result = Utilities.SetOrderDetails(db, creditCard, null, UserId);
             if (result == -1)
+            {
                 return NotFound();
+            }
+
             Utilities._shopingCarts = new List<CartModel>();
             return Ok(result);
         }
@@ -251,7 +265,10 @@ namespace CarVendor.mvc.Controllers
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
             long result = Utilities.SetOrderDetails(db, null, BankTransfer, UserId);
             if (result == -1)
+            {
                 return NotFound();
+            }
+
             Utilities._shopingCarts = new List<CartModel>();
             return Ok(result);
         }
@@ -297,6 +314,346 @@ namespace CarVendor.mvc.Controllers
 
             //Send OK Response to Client.
             return Request.CreateResponse(filesPaths);
+        }
+        [Route("api/EditCategory/UploadFile")]
+        [HttpPost]
+        public HttpResponseMessage UploadFile(long? id, int Category)
+        {
+            HttpPostedFile postedFile = HttpContext.Current.Request.Files[0];
+
+            Car car = db.Cars.Find(id);
+            var CarCategory = car.Carcategories.Where(cat => cat.CategoryId == Category).FirstOrDefault();
+
+
+            if (postedFile.ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(postedFile.FileName).ToLower();
+                string query = null;
+                string connString = "";
+
+
+
+
+                string[] validFileTypes = { ".xls", ".xlsx" };
+
+                string filePath = string.Format("{0}/{1}", HttpContext.Current.Server.MapPath("~/Content/Uploads"), postedFile.FileName);
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Uploads"));
+                }
+                if (validFileTypes.Contains(extension))
+                {
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    postedFile.SaveAs(filePath);
+                    if (extension.Trim() == ".xls")
+                    {
+                        connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+
+
+                    }
+                    else if (extension.Trim() == ".xlsx")
+                    {
+                        connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                    }
+                    OleDbConnection oledbConn = new OleDbConnection(connString);
+                    DataTable dt = new DataTable();
+                    try
+                    {
+
+
+
+                        oledbConn.Open();
+                        using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Sheet1$]", oledbConn))
+                        {
+                            OleDbDataAdapter oleda = new OleDbDataAdapter();
+                            oleda.SelectCommand = cmd;
+                            DataSet ds = new DataSet();
+                            oleda.Fill(ds);
+
+                            dt = ds.Tables[0];
+                        }
+
+                        #region Region
+
+
+                        CarCategory.EngineCapacity = int.Parse(dt.Rows[0]["EngineCapacity"].ToString());
+
+
+                        CarCategory.TransfersNo = int.Parse(dt.Rows[0]["TransfersNo"].ToString());
+
+
+                        CarCategory.CylindersNo = int.Parse(dt.Rows[0]["CylindersNo"].ToString());
+
+
+                        CarCategory.CastingsNo = int.Parse(dt.Rows[0]["CastingsNo"].ToString());
+
+
+                        CarCategory.ElectronicFuelInjection = dt.Rows[0]["ElectronicFuelInjection"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.MaximumTorque = dt.Rows[0]["MaximumTorque"].ToString();
+
+
+                        CarCategory.EnginePower = dt.Rows[0]["EnginePower"].ToString();
+
+
+                        CarCategory.Acceleration = int.Parse(dt.Rows[0]["Acceleration"].ToString());
+
+
+                        CarCategory.TractionType = dt.Rows[0]["TractionType"].ToString();
+
+
+                        CarCategory.SeatsNo = int.Parse(dt.Rows[0]["SeatsNo"].ToString());
+
+
+                        CarCategory.DoorsNo = int.Parse(dt.Rows[0]["DoorsNo"].ToString());
+
+
+                        CarCategory.AvgFuelConsumption = int.Parse(dt.Rows[0]["AvgFuelConsumption"].ToString());
+
+
+                        CarCategory.FuelTankCapacity = int.Parse(dt.Rows[0]["FuelTankCapacity"].ToString());
+
+
+                        CarCategory.GroundClearance = int.Parse(dt.Rows[0]["GroundClearance"].ToString());
+
+
+                        CarCategory.MaxSpeed = int.Parse(dt.Rows[0]["MaxSpeed"].ToString());
+
+
+                        CarCategory.FuelRecommended = dt.Rows[0]["FuelRecommended"].ToString();
+
+
+                        CarCategory.DriverAirbags = dt.Rows[0]["DriverAirbags"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.FrontPassengerAirbags = dt.Rows[0]["FrontPassengerAirbags"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectricChairs = dt.Rows[0]["ElectricChairs"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BrakeSystemABS = dt.Rows[0]["BrakeSystemABS"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectronicBrakeDistribution = dt.Rows[0]["ElectronicBrakeDistribution"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectronicBalanceProgram = dt.Rows[0]["ElectronicBalanceProgram"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.AntitheftAlarmSystem = dt.Rows[0]["AntitheftAlarmSystem"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ImmobilizerSystemAgainstTheft = dt.Rows[0]["ImmobilizerSystemAgainstTheft"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.SportRims = dt.Rows[0]["SportRims"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.RimSize = int.Parse(dt.Rows[0]["RimSize"].ToString());
+
+
+                        CarCategory.FrontFogLanterns = dt.Rows[0]["FrontFogLanterns"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackFogLanterns = dt.Rows[0]["BackFogLanterns"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackCleaners = dt.Rows[0]["BackCleaners"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectricSideMirrors = dt.Rows[0]["ElectricSideMirrors"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectricallyFoldingSideMirrors = dt.Rows[0]["ElectricallyFoldingSideMirrors"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.SideMirrorsSignals = dt.Rows[0]["SideMirrorsSignals"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.XenonBulbsLighting = dt.Rows[0]["XenonBulbsLighting"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.HeadlampWipers = dt.Rows[0]["HeadlampWipers"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.SensitiveHeadlamps = dt.Rows[0]["SensitiveHeadlamps"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.HeadlampControl = dt.Rows[0]["HeadlampControl"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.HeadlampLightingLED = dt.Rows[0]["HeadlampLightingLED"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.TaillightsLightingLED = dt.Rows[0]["TaillightsLightingLED"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackSpoiler = dt.Rows[0]["BackSpoiler"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.IntelligentParkingSystem = dt.Rows[0]["IntelligentParkingSystem"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.SoundSystem = dt.Rows[0]["SoundSystem"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.CDDriver = dt.Rows[0]["CDDriver"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.AUXPort = dt.Rows[0]["AUXPort"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.USBPort = dt.Rows[0]["USBPort"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.Bluetooth = dt.Rows[0]["Bluetooth"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.FrontHeadrests = dt.Rows[0]["FrontHeadrests"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.RearHeadrests = dt.Rows[0]["RearHeadrests"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectricWindshield = dt.Rows[0]["ElectricWindshield"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectricRearGlass = dt.Rows[0]["ElectricRearGlass"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.OneTouchGlassControl = dt.Rows[0]["OneTouchGlassControl"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.RemoteControlToLockAndOpenDoors = dt.Rows[0]["RemoteControlToLockAndOpenDoors"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.DriverHeightControl = dt.Rows[0]["DriverHeightControl"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.LeatherBrushes = dt.Rows[0]["LeatherBrushes"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.EngineStartStopButtonSystem = dt.Rows[0]["EngineStartStopButtonSystem"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.Sunroof = dt.Rows[0]["Sunroof"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ElectricSunroof = dt.Rows[0]["ElectricSunroof"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackCamera = dt.Rows[0]["BackCamera"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ComputerTrips = dt.Rows[0]["ComputerTrips"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.SteeringWheelType = dt.Rows[0]["SteeringWheelType"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ControllableSteeringWheel = dt.Rows[0]["ControllableSteeringWheel"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.ControlTheSoundSystemOfTheSteeringWheel = dt.Rows[0]["ControlTheSoundSystemOfTheSteeringWheel"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.CruiseControl = dt.Rows[0]["CruiseControl"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.LeatherSteeringWheel = dt.Rows[0]["LeatherSteeringWheel"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.LeatherTransmission = dt.Rows[0]["LeatherTransmission"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.FrontDoorStorage = dt.Rows[0]["FrontDoorStorage"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackDoorStorageAreas = dt.Rows[0]["BackDoorStorageAreas"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.PossibilityToFoldBackSeats = dt.Rows[0]["PossibilityToFoldBackSeats"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.Lighter = dt.Rows[0]["Lighter"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.MobileAshtray = dt.Rows[0]["MobileAshtray"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.CentralDoorLock = dt.Rows[0]["CentralDoorLock"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.AlarmSoundWhenTheCarIsNotClosed = dt.Rows[0]["AlarmSoundWhenTheCarIsNotClosed"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.FrontCupHolder = dt.Rows[0]["FrontCupHolder"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackCupHolder = dt.Rows[0]["BackCupHolder"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.FrontArmrest = dt.Rows[0]["FrontArmrest"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.AirConditionedFrontArmrest = dt.Rows[0]["AirConditionedFrontArmrest"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackArmrest = dt.Rows[0]["BackArmrest"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackTrunkCover = dt.Rows[0]["BackTrunkCover"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.FrontStorageDrawer = dt.Rows[0]["FrontStorageDrawer"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.PowerOutlet = dt.Rows[0]["PowerOutlet"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackOutletPowerOutlet = dt.Rows[0]["BackOutletPowerOutlet"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.BackWipers = dt.Rows[0]["BackWipers"].ToString() == "0" ? false : true;
+
+
+                        CarCategory.RainSensitiveWindshieldWipers = dt.Rows[0]["RainSensitiveWindshieldWipers"].ToString() == "0" ? false : true;
+
+                        CarCategory.BackLight = dt.Rows[0]["BackLight"].ToString() == "0" ? false : true;
+
+                        CarCategory.SensitiveHeadlampsForLighting = dt.Rows[0]["SensitiveHeadlampsForLighting"].ToString() == "0" ? false : true;
+
+                        CarCategory.BackTrunkSpace = dt.Rows[0]["BackTrunkSpace"].ToString() == "0" ? false : true;
+
+                        CarCategory.BackSeatBelt = dt.Rows[0]["BackSeatBelt"].ToString() == "0" ? false : true;
+                        #endregion
+
+                        db.SaveChanges();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        throw (ex);
+                    }
+                    finally
+                    {
+
+                        oledbConn.Close();
+                    }
+
+                }
+
+
+            }
+
+
+            //Send OK Response to Client.
+            return Request.CreateResponse();
         }
 
         [Route("api/CartDetails/AddNewCar")]
@@ -382,7 +739,7 @@ namespace CarVendor.mvc.Controllers
                         {
                             var color = car.Carcategories.Where(c => c.Id == item.Id).Select(s => s.CarColors.Where(c1 => c1.Id == colorData.Id).FirstOrDefault()).FirstOrDefault();
                             color.Id = colorData.Id;
-                            color.CarImages.Select(s2 => { s2.ImageURL = colorData.file==null? s2.ImageURL: colorData.file; s2.IsDeleted = false; return s2; }).ToList();
+                            color.CarImages.Select(s2 => { s2.ImageURL = colorData.file == null ? s2.ImageURL : colorData.file; s2.IsDeleted = false; return s2; }).ToList();
                             color.ColorId = colorData.Color;
                             color.IsDeleted = false;
                             color.Price = colorData.Price;

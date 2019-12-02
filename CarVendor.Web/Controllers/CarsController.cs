@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CarVendor.data.Entities;
+using CarVendor.Web.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using CarVendor.Web.Models;
-using CarVendor.data.Entities;
 
 namespace CarVendor.Web.Controllers
 {
@@ -23,7 +20,7 @@ namespace CarVendor.Web.Controllers
         }
 
         // GET: Cars/Details/5
-        public ActionResult Details(long? id,int Category)
+        public ActionResult Details(long? id, string Category)
         {
             if (id == null)
             {
@@ -34,8 +31,18 @@ namespace CarVendor.Web.Controllers
             {
                 return HttpNotFound();
             }
-           var CarCategory= car.Carcategories.Where(cat => cat.CategoryId == Category).FirstOrDefault();
+            var CarCategory = car.Carcategories.Where(cat => cat.CategoryId == int.Parse(Category.Trim('c'))).FirstOrDefault();
+            ViewBag.carId = id;
+            ViewBag.categoryId = int.Parse(Category.Trim('c'));
             return View(CarCategory);
+        }
+
+        public ActionResult EditCategory(long? carId, int categoryId)
+        {
+          
+            ViewBag.carId = carId;
+            ViewBag.categoryId = categoryId;
+            return View();
         }
 
         // GET: Car/Create
@@ -63,7 +70,7 @@ namespace CarVendor.Web.Controllers
         // GET: Cars/Edit/5
         public ActionResult Edit(long CarCode)
         {
-           
+
             Car car = db.Cars.Find(CarCode);
             if (car == null)
             {

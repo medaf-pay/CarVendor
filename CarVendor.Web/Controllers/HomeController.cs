@@ -1,17 +1,17 @@
 ﻿using CarVendor.data;
+using CarVendor.data.Entities;
 using CarVendor.mvc.Common;
 using CarVendor.mvc.Models;
 using CarVendor.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace CarVendor.mvc.Controllers
-{ 
+{
     public class HomeController : Controller
     {
         DataBaseContext db = new DataBaseContext();
@@ -40,10 +40,16 @@ namespace CarVendor.mvc.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = User.Identity;
-                ViewBag.role = UserManager.GetRoles(user.GetUserId())[0];    
+                ViewBag.role = UserManager.GetRoles(user.GetUserId())[0];
             }
-            
-                return View();
+            decimal ExchangeRate = 1;
+            if (Utilities._currencyDTO.Code != 1)
+            {
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+            }
+            var carosels = db.Carosels.ToList();
+            ViewBag.Slides = carosels.Select(s => { s.Price =(decimal) s.Price/ ExchangeRate; return s; }).ToList();
+            return View();
         }
 
         public ActionResult About()
@@ -63,7 +69,7 @@ namespace CarVendor.mvc.Controllers
         [HttpPost]
         public ActionResult Cart(CartModel model)
         {
-           
+
             Utilities._shopingCarts = new List<CartModel>();
             Utilities._shopingCarts.Add(model);
             return Json(model);
@@ -72,7 +78,7 @@ namespace CarVendor.mvc.Controllers
         [Route("Home/cart")]
         public ActionResult Cart(string RequestId)
         {
-            
+
             return View();
         }
         [Authorize]
@@ -81,7 +87,7 @@ namespace CarVendor.mvc.Controllers
         {
             return View();
         }
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("Home/NewCar")]
         public ActionResult NewCar()
         {
@@ -96,11 +102,11 @@ namespace CarVendor.mvc.Controllers
             decimal total = 0;
             foreach (var item in items)
             {
-             //   total += db.CarCategories.Where(c => c.CarId == item.CarId && c.CategoryId == item.Category.Id).Select(s => s.Price).FirstOrDefault() * item.Quantity;
+                //   total += db.CarCategories.Where(c => c.CarId == item.CarId && c.CategoryId == item.Category.Id).Select(s => s.Price).FirstOrDefault() * item.Quantity;
             }
             ViewData["total"] = total;
-                
-                return View();
+
+            return View();
         }
 
     }
