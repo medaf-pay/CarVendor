@@ -26,12 +26,19 @@ namespace CarVendor.mvc.Controllers
 
         [HttpGet]
         [Route("api/CarDetails/IndexData")]
-        public IHttpActionResult IndexData(long Brand = 0, long Family = 0, long Category = 0, long Color = 0)
+        public IHttpActionResult IndexData(long Brand = 0, long Family = 0, long Category = 0, long Color = 0,int currencyCode=0)
         {
            
 
             decimal ExchangeRate =1;
-            CurrencyDTO currency = Utilities._currencyDTO.First();
+            CurrencyDTO currency = Utilities._currencyDTO.Select(s=>new CurrencyDTO {Code=s.Code,Name=s.Name }).FirstOrDefault();
+            if(currencyCode!=0)
+            {
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == currencyCode).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                currency = db.Currencies.Where(c => c.Id == currencyCode).Select(s => new CurrencyDTO { Code = s.Id, Name = s.Name }).FirstOrDefault();
+             
+
+            }
             if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() != 0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s=>s.Code).FirstOrDefault()!=1)
             { var code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code;
                 ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
@@ -168,7 +175,7 @@ namespace CarVendor.mvc.Controllers
 
             var userCart = Utilities._shopingCarts.Where(s => s.UserId == userId).FirstOrDefault();
 
-            if (userId == null || userCart.CartItems == null)
+            if (userId == null || userCart == null)
             {
                 return Ok(new List<CartItemModel>());
             }
@@ -182,6 +189,9 @@ namespace CarVendor.mvc.Controllers
                     Cars.Where(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id).Select(s => { s.Quantity = s.Quantity + 1; return s; }).ToList();
                     continue;
                 }
+                CurrencyDTO currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s =>new CurrencyDTO { Code = s.Code, Name = s.Name }).FirstOrDefault();
+
+
                 car = new CartItemModel();
                 car = db.Cars.Where(c => c.Id == item.CarId/* && c.Carcategories.Any(g=>g.CategoryId==item.Category.Id) && c.CarColors.Any(g => g.ColorId == item.Color.Id)*/).Select(s =>
                      new CartItemModel
@@ -198,8 +208,9 @@ namespace CarVendor.mvc.Controllers
 
                          Quantity = item.Quantity == 0 ? 1 : item.Quantity,
 
-                         Currency = new CurrencyDTO() { Code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code, Name = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Name }
-                     }).FirstOrDefault();
+                        
+            }).FirstOrDefault();
+                car.Currency = currency;
                 Cars.Add(car);
             }
             Utilities._shopingCarts.Where(c=>c.UserId==userId).FirstOrDefault().CartItems = Cars;

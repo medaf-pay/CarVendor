@@ -126,7 +126,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     }
 
  
-    $http.get("/api/CarDetails/IndexData").then(function (data) {
+    $http.get("/api/CarDetails/IndexData?currencyCode=" + Currency.Code).then(function (data) {
         $scope.Cars = data.data;
         $scope.CarPrice = new Array($scope.Cars.length);
         $scope.carDiscount = new Array($scope.Cars.length);
@@ -172,7 +172,8 @@ app.controller('HomeCTR', function ($scope, $http) {
     };
 
     $scope.FindCar = function () {
-        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Family=" + $scope.Familyselected + "&Category=" + $scope.Categoryselected + "&Color=" + $scope.Colorselected).then(
+      
+        $http.get("/api/CarDetails/IndexData?Brand=" + $scope.Brandselected + "&Family=" + $scope.Familyselected + "&Category=" + $scope.Categoryselected + "&Color=" + $scope.Colorselected + "&currencyCode=" + Currency.Code).then(
             function (data) {
                 $scope.Cars = data.data;
             });

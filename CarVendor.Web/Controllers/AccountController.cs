@@ -88,12 +88,14 @@ namespace CarVendor.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    //TempData["cartModel"] = model;
-                    var cartData = TempData["cartModel"] as CartModel;
-                    if (cartData != null)
                     {
+                        //TempData["cartModel"] = model;
                         ApplicationUser user = UserManager.FindByName(model.Email);
                         string UserId = user.Id;
+                        var cartData = TempData["cartModel"] as CartModel;
+                    if (cartData != null)
+                    {
+                       
                         cartData.UserId = UserId;
                         if (Utilities._shopingCarts.Where(c => c.UserId == UserId).Count() > 0)
                         {
@@ -104,14 +106,21 @@ namespace CarVendor.Web.Controllers
                             Utilities._shopingCarts.Add(cartData);
                         }
                     }
-                    return RedirectToLocal(returnUrl);
-                    {
+                 
+                    
                         var currency = db.Currencies.Where(c => c.Id.ToString() == Currency).Select(s => new CurrencyDTO() { Code = s.Id, Name = s.Name }).FirstOrDefault();
 
                       
-                            currency.UserIdentity = User.Identity.GetUserId();
+                            currency.UserIdentity = UserId;
+                        if (Utilities._currencyDTO.Where(c => c.UserIdentity == UserId).Count() > 0)
+                        {
+                            Utilities._currencyDTO.Where(c => c.UserIdentity == UserId).Select(s=> { s = currency; return s; });
+
+                        }
+                        else
+                        {
                             Utilities._currencyDTO.Add(currency);
-                        
+                        }
 
                         return RedirectToLocal(returnUrl);
                     }

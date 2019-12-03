@@ -8,8 +8,11 @@ using System.Web;
 namespace CarVendor.mvc.Models
 {
     public class CartItemModel
-    {
-      
+    { public CartItemModel()
+        {
+            Currency = new CurrencyDTO();
+        }
+
         public long CarId { get; set; }
         public string CarName { get; set; }
         public string Brand { get; set; }
