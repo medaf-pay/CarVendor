@@ -21,5 +21,9 @@ namespace CarVendor.Web.Controllers
         {
             return View();
         }
+        public ActionResult Refundpolicy()
+        {
+            return View();
+        }
     }
 }

@@ -14,10 +14,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using System.Web;
 using System.Web.Http;
-using System.Web.WebPages;
 
 namespace CarVendor.mvc.Controllers
 {
@@ -54,7 +52,7 @@ namespace CarVendor.mvc.Controllers
                     {
                         Id = s1.Category.Id,
                         Name = s1.Category.Name,
-                        CategoryCode="c"+s1.CategoryId+"c",
+                        CategoryCode = "c" + s1.CategoryId + "c",
                         Colors = s1.CarColors.Select(s2 => new ColorViewModel
                         {
                             Id = s2.ColorId,
@@ -157,6 +155,7 @@ namespace CarVendor.mvc.Controllers
         public IHttpActionResult CartData()
         {
             decimal ExchangeRate = 1;
+            var userId = User.Identity.GetUserId();
             if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() !=0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s=>s.Code).FirstOrDefault() != 1)
             {
                 var code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code;
@@ -167,18 +166,18 @@ namespace CarVendor.mvc.Controllers
                 return Ok(new List<CartItemModel>());
             }
 
-            var userCart = Utilities._shopingCarts.FirstOrDefault();
+            var userCart = Utilities._shopingCarts.Where(s => s.UserId == userId).FirstOrDefault();
 
-            if (userCart.CartItems == null)
+            if (userId == null || userCart.CartItems == null)
             {
                 return Ok(new List<CartItemModel>());
             }
-
             List<CartItemModel> Cars = new List<CartItemModel>();
+
             CartItemModel car;
             foreach (var item in userCart.CartItems)
             {
-                if (Cars.Any(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id))
+                if (Cars.Count > 0 && Cars.Any(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id))
                 {
                     Cars.Where(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id).Select(s => { s.Quantity = s.Quantity + 1; return s; }).ToList();
                     continue;
@@ -203,7 +202,7 @@ namespace CarVendor.mvc.Controllers
                      }).FirstOrDefault();
                 Cars.Add(car);
             }
-            Utilities._shopingCarts.FirstOrDefault().CartItems = Cars;
+            Utilities._shopingCarts.Where(c=>c.UserId==userId).FirstOrDefault().CartItems = Cars;
             return Ok(Cars);
         }
 
@@ -211,7 +210,7 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/SetFinalItems")]
         public IHttpActionResult SetFinalItems(List<CartItemModel> Items)
         {
-            Utilities._shopingCarts.FirstOrDefault().CartItems = Items;
+            Utilities._shopingCarts.Where(s=>s.UserId== User.Identity.GetUserId()).FirstOrDefault().CartItems = Items;
             return Ok();
 
             // return View(userCart.CartItems);
@@ -222,7 +221,7 @@ namespace CarVendor.mvc.Controllers
         public IHttpActionResult GetFinalItems()
         {
             CartData();
-            var Items = Utilities._shopingCarts.FirstOrDefault().CartItems;
+            var Items = Utilities._shopingCarts.Where(s => s.UserId == User.Identity.GetUserId()).FirstOrDefault().CartItems;
             return Ok(Items);
         }
 
@@ -235,11 +234,11 @@ namespace CarVendor.mvc.Controllers
 
             Address.DeliveryAddress = CustomerInfo.DeliveryAddress;
             db.SaveChanges();
-            if (Utilities._shopingCarts.FirstOrDefault().CartItems.Sum(s => s.Quantity) > 10)
+            if (Utilities._shopingCarts.Where(s => s.UserId == User.Identity.GetUserId()).FirstOrDefault().CartItems.Sum(s => s.Quantity) > 10)
             {
                 long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
                 Utilities.SetOrderDetails(db, null, null, UserId);
-                Utilities._shopingCarts = new List<CartModel>();
+                Utilities._shopingCarts.RemoveAll(s => s.UserId == User.Identity.GetUserId()); 
                 return Ok(10);
             }
 
@@ -258,7 +257,7 @@ namespace CarVendor.mvc.Controllers
                 return NotFound();
             }
 
-            Utilities._shopingCarts = new List<CartModel>();
+            Utilities._shopingCarts.RemoveAll(s => s.UserId == User.Identity.GetUserId());
             return Ok(result);
         }
 
@@ -274,7 +273,7 @@ namespace CarVendor.mvc.Controllers
                 return NotFound();
             }
 
-            Utilities._shopingCarts = new List<CartModel>();
+            Utilities._shopingCarts.RemoveAll(s => s.UserId == User.Identity.GetUserId());
             return Ok(result);
         }
 

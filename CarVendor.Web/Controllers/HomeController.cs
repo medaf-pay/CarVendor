@@ -71,8 +71,21 @@ namespace CarVendor.mvc.Controllers
         public ActionResult Cart(CartModel model)
         {
 
-            Utilities._shopingCarts = new List<CartModel>();
+
+            model.UserId = User.Identity.GetUserId();
+
+            if (User.Identity.GetUserId()==null)
+            {
+                TempData["cartModel"] = model;
+                return RedirectToAction("Login", "Account");
+            }
+            else if (Utilities._shopingCarts.Where(c => c.UserId == User.Identity.GetUserId()).Count() > 0)
+            {
+                Utilities._shopingCarts.Where(c => c.UserId == User.Identity.GetUserId()).FirstOrDefault().CartItems=model.CartItems;
+            }
+            else { 
             Utilities._shopingCarts.Add(model);
+        }
             return Json(model);
         }
         [Authorize]
@@ -99,7 +112,7 @@ namespace CarVendor.mvc.Controllers
         [Route("Home/CardInfo")]
         public ActionResult CardInfo(string RequestId)
         {
-            var items = Utilities._shopingCarts.FirstOrDefault().CartItems;
+            var items = Utilities._shopingCarts.Where(s => s.UserId == User.Identity.GetUserId()).FirstOrDefault().CartItems;
             decimal total = 0;
             foreach (var item in items)
             {

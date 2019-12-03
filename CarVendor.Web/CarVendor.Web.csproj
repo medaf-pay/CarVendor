@@ -371,6 +371,7 @@
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\camera.js" />
+    <Content Include="Content\js\CookiesManager.js" />
     <Content Include="Content\js\EditCarCategoryController.js" />
     <Content Include="Content\js\EditCarController.js" />
     <Content Include="Content\js\CarController.js" />
@@ -794,6 +795,7 @@
     <Content Include="Views\Carosels\Index.cshtml" />
     <Content Include="Views\MainInfo\Privacypolicy.cshtml" />
     <Content Include="Views\MainInfo\Termsofservice.cshtml" />
+    <Content Include="Views\MainInfo\Refundpolicy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

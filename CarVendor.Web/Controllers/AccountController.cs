@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using CarVendor.data;
 using CarVendor.mvc.Common;
 using CarVendor.Web.Dtos;
+using CarVendor.mvc.Models;
 
 namespace CarVendor.Web.Controllers
 {
@@ -65,6 +66,7 @@ namespace CarVendor.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -86,6 +88,23 @@ namespace CarVendor.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    //TempData["cartModel"] = model;
+                    var cartData = TempData["cartModel"] as CartModel;
+                    if (cartData != null)
+                    {
+                        ApplicationUser user = UserManager.FindByName(model.Email);
+                        string UserId = user.Id;
+                        cartData.UserId = UserId;
+                        if (Utilities._shopingCarts.Where(c => c.UserId == UserId).Count() > 0)
+                        {
+                            Utilities._shopingCarts.Where(c => c.UserId == UserId).Select(s => s = cartData);
+                        }
+                        else
+                        {
+                            Utilities._shopingCarts.Add(cartData);
+                        }
+                    }
+                    return RedirectToLocal(returnUrl);
                     {
                         var currency = db.Currencies.Where(c => c.Id.ToString() == Currency).Select(s => new CurrencyDTO() { Code = s.Id, Name = s.Name }).FirstOrDefault();
 
