@@ -1,4 +1,5 @@
-﻿app.controller('CartCTR', function ($scope, $http, $location) {
+﻿/// <reference path="cookiesmanager.js" />
+app.controller('CartCTR', function ($scope, $http, $location) {
     //var urlParams = new URLSearchParams(window.location.search);
     //var RequestId = urlParams.get('RequestId');
   
@@ -185,10 +186,10 @@ app.controller('HomeCTR', function ($scope, $http) {
         // var dd= $scope.CarColorselected color_
         colorId = $("#color_" + product.Id).val();
         product.CarId = product.Id;
-        product.NewPrice = product.Categories.find(x => x.Id == categoryId).Colors.find(c => c.Id == colorId).NewPrice;
-        product.Color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
-        product.Category = { id: $("#category_" + product.Id).val(), text: $("#category_" + product.Id).children("option:selected").text() }
+        product.NewPrice = product.Categories.find(x => x.CategoryCode == categoryId).Colors.find(c => c.Id == colorId).NewPrice;
+        product.Category = { id: categoryId.split("c")[1], text: $("#category_" + product.Id).children("option:selected").text() }
         product.Quantity = 1;
+        product.Color = { id: $("#color_" + product.Id).val(), text: $("#color_" + product.Id).children("option:selected").text() };
         cartProduct.push(angular.copy(product));
         updateCart(cartProduct);
     };
@@ -200,7 +201,6 @@ app.controller('HomeCTR', function ($scope, $http) {
             sum += cart[i].NewPrice * eval(cart[i].Quantity);
             TatalQuantity += eval(cart[i].Quantity);
         }
-   
         $('.cartSpan').html(TatalQuantity + " | " + sum +" "+ Currency.Name);
         $('.cartpart').css("background-color", "#8ad329");
     }
