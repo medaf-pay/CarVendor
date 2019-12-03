@@ -4,8 +4,7 @@ using CarVendor.mvc.Common;
 using CarVendor.mvc.Models;
 using CarVendor.mvc.ViewModels;
 using CarVendor.Web.Dtos;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
+
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -34,9 +33,14 @@ namespace CarVendor.mvc.Controllers
            
 
             decimal ExchangeRate =1;
-            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code!=1)
-            {
-                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+            CurrencyDTO currency = Utilities._currencyDTO.First();
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() != 0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s=>s.Code).FirstOrDefault()!=1)
+            { var code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code;
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                currency.Code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code;
+                currency.Name = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Name;
+
+
             }
             var cars = db.Cars.Select(s =>
                 new CarViewModel
@@ -65,7 +69,7 @@ namespace CarVendor.mvc.Controllers
                     }).ToList(),
                     FirstImageView = s.Carcategories.Select(s1 => s1.CarColors.Select(s2 => s2.CarImages.Select(s3 => s3.ImageURL).FirstOrDefault()).FirstOrDefault()).FirstOrDefault(),
                     CarFamily = new CarFamilyModel { Id = s.Type.Id, Name = s.Type.Name },
-                    SelectedCurrency =new CurrencyDTO() { Code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code, Name = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Name }
+                    SelectedCurrency =new CurrencyDTO() { Code = currency.Code, Name = currency.Name }
                     }).ToList();
 
 
@@ -153,9 +157,10 @@ namespace CarVendor.mvc.Controllers
         public IHttpActionResult CartData()
         {
             decimal ExchangeRate = 1;
-            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code != 1)
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() !=0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s=>s.Code).FirstOrDefault() != 1)
             {
-                ExchangeRate = db.Conversions.Where(cc => cc.ToCurrencyId == Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                var code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code;
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             if (Utilities._shopingCarts.Count() == 0)
             {
@@ -806,7 +811,7 @@ namespace CarVendor.mvc.Controllers
                 Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code = currency.Code;
                 Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Name = currency.Name;
             }
-            else
+            else if(User.Identity.GetUserId()!=null)
             {
                 currency.UserIdentity = User.Identity.GetUserId();
                 Utilities._currencyDTO.Add(currency);
@@ -820,7 +825,7 @@ namespace CarVendor.mvc.Controllers
         [HttpGet]
         public IHttpActionResult ReadCurrency()
         {
-           return Ok(Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First());
+           return Ok(Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).FirstOrDefault());
         }
 
     }

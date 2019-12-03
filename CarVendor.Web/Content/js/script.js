@@ -167,8 +167,24 @@ function Onload() {
         url: "/api/CartDetails/ReadCurancy", success: function(result)
         {
             Currency = result;
-            if (result == null) {
-                Currency = getCookie('ppkcookie');
+            var code = getCookie('LagguageUser');
+           
+         
+            if (result == null && code != null) {
+              
+                Currency = {};
+                Currency.Name = $('#currencydropdown #' + code).text();
+                Currency.Code = code;
+                $('#currencydropdown #' + code).attr("selected", true);
+
+            }
+            else if (result == null && code == null) {
+               
+                Currency = {};
+                code = $('#currencydropdown option:selected').val();
+                Currency.Name = $('#currencydropdown #' + code).text();
+                Currency.Code = code;
+                $('#currencydropdown #' + code).attr("selected", true);
             }
             var yy = $('#currencydropdown #' + Currency.Code)
             console.log(yy)
@@ -201,7 +217,7 @@ function getCookie(name) {
 function eraseCookie(name) {
     document.cookie = name + '=; Max-Age=-99999999;';
 }
-function ChangeCurrency(userId) {
+function ChangeCurrency() {
    
         var code = $('#currencydropdown option:selected').val();
         setCookie('LagguageUser', code, 1);

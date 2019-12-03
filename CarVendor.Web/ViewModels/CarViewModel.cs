@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using CarVendor.data.Entities;
 using CarVendor.Web.Dtos;
-using DocumentFormat.OpenXml.Spreadsheet;
+
 
 namespace CarVendor.mvc
 {
@@ -12,7 +12,6 @@ namespace CarVendor.mvc
     {
        public CarViewModel()
         {
-            SelectedCurrency = new CurrencyDTO();
         }
         public long Id { get; set; }
         public string Name { get; set; }

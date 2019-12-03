@@ -43,9 +43,10 @@ namespace CarVendor.mvc.Controllers
                 ViewBag.role = UserManager.GetRoles(user.GetUserId())[0];
             }
             decimal ExchangeRate = 1;
-            if (Utilities._currencyDTO.Code != 1)
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault()!=0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s=>s.Code).FirstOrDefault() != 1)
             {
-                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == Utilities._currencyDTO.Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+                var Code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code;
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == Code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             var carosels = db.Carosels.ToList();
             ViewBag.Slides = carosels.Select(s => { s.Price =(decimal) s.Price/ ExchangeRate; return s; }).ToList();

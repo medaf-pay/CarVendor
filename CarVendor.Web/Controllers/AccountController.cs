@@ -14,6 +14,7 @@ using CarVendor.data.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using CarVendor.data;
 using CarVendor.mvc.Common;
+using CarVendor.Web.Dtos;
 
 namespace CarVendor.Web.Controllers
 {
@@ -73,7 +74,7 @@ namespace CarVendor.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl,string Currency)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +86,16 @@ namespace CarVendor.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        var currency = db.Currencies.Where(c => c.Id.ToString() == Currency).Select(s => new CurrencyDTO() { Code = s.Id, Name = s.Name }).FirstOrDefault();
+
+                      
+                            currency.UserIdentity = User.Identity.GetUserId();
+                            Utilities._currencyDTO.Add(currency);
+                        
+
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
