@@ -177,6 +177,7 @@ namespace CarVendor.mvc.Controllers
 
             if (userId == null || userCart == null)
             {
+
                 return Ok(new List<CartItemModel>());
             }
             List<CartItemModel> Cars = new List<CartItemModel>();
