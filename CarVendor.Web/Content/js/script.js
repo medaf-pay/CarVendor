@@ -185,6 +185,7 @@ function Onload() {
                 Currency.Name = $('#currencydropdown #' + code).text();
                 Currency.Code = code;
                 $('#currencydropdown #' + code).attr("selected", true);
+                ChangeCurrency();
             }
             var yy = $('#currencydropdown #' + Currency.Code)
             console.log(yy)
