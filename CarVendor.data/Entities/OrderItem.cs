@@ -9,7 +9,10 @@ namespace CarVendor.data.Entities
     public class OrderItem:TEntity<long>
     {
         public string Color { get; set; }
+        public decimal UnitPrice { get; set; }
+   
         public int Quantity { get; set; }
+        public decimal TotalPrice { get { return UnitPrice * Quantity; } set { } }
         public string Category { get; set; }
         #region [ Car ]
         public long CarId { get; set; }

@@ -279,7 +279,7 @@ namespace CarVendor.mvc.Controllers
         {
             string Email = User.Identity.GetUserName();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
-            long result = Utilities.SetOrderDetails(db, false, BankTransfer, UserId);
+            long result = Utilities.SetOrderDetails(db, true, BankTransfer, UserId);
             if (result == -1)
             {
                 return NotFound();

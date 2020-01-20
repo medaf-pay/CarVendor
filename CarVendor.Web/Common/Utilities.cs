@@ -33,7 +33,8 @@ namespace CarVendor.mvc.Common
                     Color = orderItem.Color.Text,
                     Quantity = (int)orderItem.Quantity,
                     Category = orderItem.Category.Text,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    UnitPrice = orderItem.NewPrice
 
                 });
             }
@@ -66,10 +67,13 @@ namespace CarVendor.mvc.Common
             }).FirstOrDefault();
             db.Orders.Add(newOrder);
             // TODO: Send Mail Here
-           EmailTemplate Email = new EmailTemplate();
-           string path = @"~/Common/OrderDetailsEmailTemplate.html";
-           var emailHtml = Email.ReadTemplateEmail(customer_cart, path);
-            GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", db.Mails.Select(s => s.mail).ToList(), "Order", emailHtml, null);
+            if (VIP)
+            {
+                EmailTemplate Email = new EmailTemplate();
+                string path = @"~/Common/OrderDetailsEmailTemplate.html";
+                var emailHtml = Email.ReadTemplateEmail(customer_cart, path);
+                GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", db.Mails.Select(s => s.mail).ToList(), "Order", emailHtml, null);
+            }
             try
             {
                 db.SaveChanges();
@@ -104,113 +108,47 @@ namespace CarVendor.mvc.Common
 
         }
 
-        public static long ChangeOrderStatus(DataBaseContext db)
+        public static void ChangeOrderStatus(DataBaseContext db,long OrderId,string status)
         {
-
-            var customer_cart = _shopingCarts.FirstOrDefault();
-            if (customer_cart == null && customer_cart.CustomerInfo == null && customer_cart.CartItems == null && customer_cart.CartItems.Count < 1)
+            Order order = db.Orders.Where(c => c.Id == OrderId).FirstOrDefault();
+            order.Status = status;
+            db.SaveChanges();
+            CartModel customer_cart = new CartModel();
+            customer_cart.Order = order;
+            customer_cart.CartItems = order.OrderItems.Select(s=> new CartItemModel
             {
-                return -1;
-            }
-
-            List<OrderItem> newOrderItems = new List<OrderItem>();
-            foreach (var orderItem in customer_cart.CartItems)
-            {
-                newOrderItems.Add(new OrderItem()
-                {
-                    CarId = orderItem.CarId,
-                    Color = orderItem.Color.Text,
-                    Quantity = (int)orderItem.Quantity,
-                    Category = orderItem.Category.Text,
-                    IsDeleted = false
-
-                });
-            }
-
-            Order newOrder = new Order()
-            {
-                OrderDate = DateTime.Now,
-                OrderNumber = "S" + DateTime.Now.Day.ToString() + "I" + DateTime.Now.Month + "G" + DateTime.Now.Year.ToString().Substring(2, 2),
-                OrderItems = newOrderItems,
-                IsDeleted = false,
-                UserId = UserId,
-                Status = "Pending"
-
-            };
-            customer_cart.Order = newOrder;
-            CardInfo card = null;
-            if (creditCard != null)
-            {
-                card = new CardInfo()
-                {
-                    CardNumber = creditCard.Number,
-                    ExpiryDateMonth = creditCard.ExpiryDateMonth,
-                    ExpiryDateYear = creditCard.ExpiryDateYear,
-                    CVCode = creditCard.CVCode
-
-                };
-            }
-
-            //   CorporateDetails corporateDetails = null;
-
-            //  CustomerDeliveryDetails Owner = new CustomerDeliveryDetails()
-            //{
-            //    Email = customer_cart.CustomerInfo.Email,
-            //    Mobile = customer_cart.CustomerInfo.Phone,
-            //    FirstName = customer_cart.CustomerInfo.FName,
-            //    MiddleName = customer_cart.CustomerInfo.MName,
-            //    LastName = customer_cart.CustomerInfo.LName,
-            //    Address = customer_cart.CustomerInfo.MainAddress,
-            //    DeliveryAddress = customer_cart.CustomerInfo.DeliveryAddress,
-            //    City = customer_cart.CustomerInfo.City,
-            //    Country = customer_cart.CustomerInfo.Country,
-            //    Individually = customer_cart.CustomerInfo.Individually,
-            //    PaymethodTypeId = 1,
-            //    Zip = customer_cart.CustomerInfo.Zip,
-            //    CardInfo = card,
-            //    BankTransferInfo = bankTransferInfo
-
-            //};
-
-            //newOrder.DeliveryDetails = Owner;
-            customer_cart.CustomerInfo = db.Users.Where(s => s.Id == UserId).Select(u => new CustomerInfoModel
+                Brand = s.Car.Brand.Name,
+                CarName = s.Car.Name,
+                Category = new CategoryModel { Text = s.Category },
+                Color = new ColorModel { Text = s.Color },
+                Price = s.TotalPrice,
+                Quantity = s.Quantity
+            } ).ToList();
+ 
+            customer_cart.CustomerInfo = db.Users.Where(s => s.Id == order.UserId).Select(u => new CustomerInfoModel
             {
                 Individually = u.Individually,
                 FName = u.FName,
                 MName = u.MName,
                 LName = u.LName,
                 Phone = u.Phone,
-                DeliveryAddress = u.UserAddresses.Where(a => a.User.Id == UserId).FirstOrDefault().Address.DeliveryAddress,
-                MainAddress = u.UserAddresses.Where(a => a.User.Id == UserId).FirstOrDefault().Address.MainAddress
+                DeliveryAddress = u.UserAddresses.Where(a => a.User.Id == order.UserId).FirstOrDefault().Address.DeliveryAddress,
+                MainAddress = u.UserAddresses.Where(a => a.User.Id == order.UserId).FirstOrDefault().Address.MainAddress
 
                 //DeliveryAddress=u.UserAddresses,
             }).FirstOrDefault();
-            db.Orders.Add(newOrder);
+    
             // TODO: Send Mail Here
-            //   EmailTemplate Email = new EmailTemplate();
-            //  string path = @"~/Common/OrderDetailsEmailTemplate.html";
-            //   var emailHtml = Email.ReadTemplateEmail(customer_cart, path);
-            // GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", db.Mails.Select(s => s.mail).ToList(), "Order", emailHtml, null);
+              EmailTemplate Email = new EmailTemplate();
+              string path = @"~/Common/OrderDetailsEmailTemplate.html";
+               var emailHtml = Email.ReadTemplateEmail(customer_cart, path);
+            var Emails = db.Mails.Select(s => s.mail).ToList();
+         
             try
             {
-                db.SaveChanges();
-                BankTransferInfo bankTransferInfo = null;
-                if (BankTransfer != null)
-                {
-                    bankTransferInfo = new BankTransferInfo()
-                    {
-                        ACH = BankTransfer.ACH,
-                        BBranch = BankTransfer.BBranch,
-                        BName = BankTransfer.BName,
-                        InputReferenceNo = BankTransfer.InputReferenceNo,
-                        Memo = BankTransfer.Memo,
-                        PaymentDate = BankTransfer.PaymentDate,
-                        TransferNo = BankTransfer.TransferNo,
-                        OrderId = newOrder.Id
-                    };
-                    db.BanksTransferInfo.Add(bankTransferInfo);
-                    db.SaveChanges();
-                }
+                Emails.Add(order.User.Email);
+                GmailSender.SendEmail("mpay.services@medafinvestment.com", "Serious!1", Emails, "Order", emailHtml, null);
+          
 
             }
             catch (Exception ex)
@@ -221,7 +159,7 @@ namespace CarVendor.mvc.Common
             }
 
 
-            return newOrder.Id;
+           
 
         }
 

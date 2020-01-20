@@ -1,5 +1,7 @@
 ﻿using CarVendor.data;
 using CarVendor.data.Entities;
+using CarVendor.mvc.Common;
+using CarVendor.Web.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,13 +19,15 @@ namespace CarVendor.Web.Controllers
         private DataBaseContext db = new DataBaseContext();
         [HttpPost]
         [Route("api/order/CallBackQNB")]
-        public IHttpActionResult CallBackQNB(dynamic data)
+        public IHttpActionResult CallBackQNB(QNBResponceModel data)
         {
             var StrObj = JsonConvert.SerializeObject(data);
             PaymentCallBack callBackObj = new PaymentCallBack();
             callBackObj.ResopnceObject = StrObj;
             db.paymentCallBacks.Add(callBackObj);
             db.SaveChanges();
+            Utilities.ChangeOrderStatus(db, data.order.id, data.result);
+
             return Ok();
         }
       
