@@ -227,6 +227,7 @@
     <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Controllers\MainInfoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Dtos\CurrencyDTO.cs" />
@@ -241,6 +242,10 @@
     <Compile Include="Migrations\201911211124453_v0.0.1.cs" />
     <Compile Include="Migrations\201911211124453_v0.0.1.Designer.cs">
       <DependentUpon>201911211124453_v0.0.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001200759507_CallBack-v-0.1.cs" />
+    <Compile Include="Migrations\202001200759507_CallBack-v-0.1.Designer.cs">
+      <DependentUpon>202001200759507_CallBack-v-0.1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -838,6 +843,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911211124453_v0.0.1.resx">
       <DependentUpon>201911211124453_v0.0.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001200759507_CallBack-v-0.1.resx">
+      <DependentUpon>202001200759507_CallBack-v-0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

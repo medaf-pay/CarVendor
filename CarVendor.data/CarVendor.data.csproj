@@ -68,17 +68,27 @@
     <Compile Include="Entities\Mail.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderItem.cs" />
+    <Compile Include="Entities\PaymentCallBack.cs" />
     <Compile Include="Entities\PaymethodType.cs" />
     <Compile Include="Entities\TEntity.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserAddress.cs" />
     <Compile Include="Entities\Video.cs" />
+    <Compile Include="Migrations\202001200801521_CallBack-v-0.1.cs" />
+    <Compile Include="Migrations\202001200801521_CallBack-v-0.1.Designer.cs">
+      <DependentUpon>202001200801521_CallBack-v-0.1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001200801521_CallBack-v-0.1.resx">
+      <DependentUpon>202001200801521_CallBack-v-0.1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

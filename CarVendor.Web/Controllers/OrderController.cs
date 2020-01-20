@@ -1,0 +1,31 @@
+﻿using CarVendor.data;
+using CarVendor.data.Entities;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Xml.Serialization;
+
+namespace CarVendor.Web.Controllers
+{
+    public class OrderController : ApiController
+    {
+        private DataBaseContext db = new DataBaseContext();
+        [HttpPost]
+        [Route("api/order/CallBackQNB")]
+        public IHttpActionResult CallBackQNB(dynamic data)
+        {
+            var StrObj = JsonConvert.SerializeObject(data);
+            PaymentCallBack callBackObj = new PaymentCallBack();
+            callBackObj.ResopnceObject = StrObj;
+            db.paymentCallBacks.Add(callBackObj);
+            db.SaveChanges();
+            return Ok();
+        }
+      
+    }
+}

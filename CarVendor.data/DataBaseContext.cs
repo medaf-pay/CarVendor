@@ -56,5 +56,6 @@ namespace CarVendor.data
         public DbSet<CarFamily> CarFamilies { get; set; }
         public DbSet<Mail> Mails { get; set; }
         public DbSet<Carosel> Carosels { get; set; }
+        public DbSet<PaymentCallBack> paymentCallBacks { get; set; }
     }
 }
