@@ -19,7 +19,7 @@ namespace CarVendor.data.Entities
         //[ForeignKey("DeliveryDetailsId")]
         //public virtual CustomerDeliveryDetails DeliveryDetails { get; set; }
         #endregion
-
+        public string Status { get; set; }
 
     }
 }

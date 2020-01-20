@@ -4,8 +4,8 @@ app.controller('CartCTR', function ($scope, $http, $location) {
     //var RequestId = urlParams.get('RequestId');
   
     $scope.cart;
-  
-   
+ 
+ 
     $http.get("/api/CarDetails/CartData").then(function (data) {
         console.log(data);
         $scope.Items = data.data;
@@ -276,17 +276,53 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         }
     };
 
+  
+  
+    
     $scope.PayByCreditCard = function () {
-        $scope.CreditCard.TotalPrice = $scope.totalPrice;
-        if ($scope.CartInfoFrom.$valid) {
+       
+        $scope.CreditCard = {};
+       // $scope.CreditCard.TotalPrice = $scope.totalPrice;
+      
             $scope.loading = true;
             $http.post("/api/CartDetails/paybycreditcard", $scope.CreditCard).then(function (data) {
                 $scope.loading = false;
-                window.location.href = "/Requests";
+              
+                payObject = {
+                    merchant: 'TESTQNBAATEST001',
+                    order: {
+                        amount: $scope.totalPrice,
+                        currency: data.data.currency,
+                        description: 'Ordered goods',
+                        id: data.data.orderId,
+                        //notificationUrl:'http://81.10.30.157:81/api/payment/callback'
+                    },
+                    interaction: {
+                        operation: 'PURCHASE',
+                        merchant: {
+                            name: 'merchant.TESTQNBAATEST001',
+                            address: {
+                                line1: '200 Sample St',
+                                line2: '1234 Example Town'
+                            },
+                            email: 'order@yourMerchantEmailAddress.com',
+                            phone: '+201066805842',
+                            logo: 'https://imageURL'
+                        },
+                        locale: 'en_US',
+                        theme: 'default',
+                        displayControl: {
+                            billingAddress: 'HIDE',
+                            customerEmail: 'HIDE',
+                            orderSummary: 'SHOW',
+                            shipping: 'HIDE'
+                        }
+                    }
+                };
+                Checkout.configure(payObject);
+                Checkout.showLightbox();
             });
-        }
-        else {
-            $scope.SubmetAction = true;
-        }
+        
+    
     };
 });

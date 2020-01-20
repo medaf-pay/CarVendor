@@ -249,7 +249,7 @@ namespace CarVendor.mvc.Controllers
             if (Utilities._shopingCarts.Where(s => s.UserId == User.Identity.GetUserId()).FirstOrDefault().CartItems.Sum(s => s.Quantity) > 10)
             {
                 long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
-                Utilities.SetOrderDetails(db, null, null, UserId);
+                Utilities.SetOrderDetails(db,true ,null, UserId);
                 Utilities._shopingCarts.RemoveAll(s => s.UserId == User.Identity.GetUserId()); 
                 return Ok(10);
             }
@@ -263,14 +263,14 @@ namespace CarVendor.mvc.Controllers
         {
             string Email = User.Identity.GetUserName();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
-            long result = Utilities.SetOrderDetails(db, creditCard, null, UserId);
+            long result = Utilities.SetOrderDetails(db, false, null, UserId);
             if (result == -1)
             {
                 return NotFound();
             }
-
+            var currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Name).FirstOrDefault();
             Utilities._shopingCarts.RemoveAll(s => s.UserId == User.Identity.GetUserId());
-            return Ok(result);
+            return Ok(new { orderId = result, currency= currency });
         }
 
         [HttpPost]
@@ -279,7 +279,7 @@ namespace CarVendor.mvc.Controllers
         {
             string Email = User.Identity.GetUserName();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
-            long result = Utilities.SetOrderDetails(db, null, BankTransfer, UserId);
+            long result = Utilities.SetOrderDetails(db, false, BankTransfer, UserId);
             if (result == -1)
             {
                 return NotFound();
