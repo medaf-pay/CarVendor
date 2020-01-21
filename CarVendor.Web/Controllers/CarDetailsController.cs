@@ -4,7 +4,7 @@ using CarVendor.mvc.Common;
 using CarVendor.mvc.Models;
 using CarVendor.mvc.ViewModels;
 using CarVendor.Web.Dtos;
-
+using CarVendor.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -264,13 +264,15 @@ namespace CarVendor.mvc.Controllers
             string Email = User.Identity.GetUserName();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
             long result = Utilities.SetOrderDetails(db, false, null, UserId);
+
             if (result == -1)
             {
                 return NotFound();
             }
             var currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Name).FirstOrDefault();
-            Utilities._shopingCarts.RemoveAll(s => s.UserId == User.Identity.GetUserId());
-            return Ok(new { orderId = result, currency= currency });
+          
+            var SessionData = Utilities.CallOutAPI<ResponceSession>("https://qnbalahli.test.gateway.mastercard.com/api/rest/version/54/merchant/TESTQNBAATEST001/session", new ResponceSession());
+            return Ok(new { orderId = result, currency= currency, sessionId=SessionData.session.id });
         }
 
         [HttpPost]

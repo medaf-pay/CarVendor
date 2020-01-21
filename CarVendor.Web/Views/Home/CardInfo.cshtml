@@ -2,11 +2,14 @@
 
 
 <script src="~/Content/js/angular.min.js"></script>
+
+
 <script src="~/Content/js/Module.js"></script>
 <script src="~/Content/js/CartCTR.js"></script>
 <script src="https://qnbalahli.test.gateway.mastercard.com/checkout/version/54/checkout.js"
         data-error="errorCallback"
-        data-cancel="cancelCallback">
+        data-cancel="cancelCallback"
+        data-complete="doneCallback">
 </script>
 <script>
     function errorCallback(error) {
@@ -14,6 +17,18 @@
     }
     function cancelCallback() {
         console.log('Payment cancelled');
+    }
+    function doneCallback() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                window.location.href = "/Requests/Index";
+            }
+        };
+    
+        xhttp.open("POST", "/api/CartDetails/SetFinalItems", true);
+        xhttp.send();
+   
     }
 </script>
 
@@ -92,7 +107,7 @@
                     </div>
 
                     <br />
-                    <a class="btn btn-success btn-lg btn-block" ng-click="PayByCreditCard()"  role="button">Pay</a>
+                    <a class="btn btn-success btn-lg btn-block" ng-click="PayByCreditCard()" role="button">Pay</a>
                 </div>
             </div>
         </div>

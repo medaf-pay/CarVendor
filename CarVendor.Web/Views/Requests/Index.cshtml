@@ -3,226 +3,238 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<script src="https://unpkg.com/js-datepicker"></script>
-<style>
-    .ui-datepicker {
-        width: 216px;
-        height: auto;
-        margin: 5px auto 0;
-        font: 9pt Arial, sans-serif;
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-    }
-
-        .ui-datepicker a {
-            text-decoration: none;
-        }
-
-        .ui-datepicker table {
-            width: 100%;
-        }
-
-    .ui-datepicker-header {
-        background: url('../img/dark_leather.png') repeat 0 0 #000;
-        color: #e0e0e0;
-        font-weight: bold;
-        -webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
-        -moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
-        box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
-        text-shadow: 1px -1px 0px #000;
-        filter: dropshadow(color=#000, offx=1, offy=-1);
-        line-height: 30px;
-        border-width: 1px 0 0 0;
-        border-style: solid;
-        border-color: #111;
-    }
-
-    .ui-datepicker-title {
-        text-align: center;
-    }
-
-    .ui-datepicker-prev, .ui-datepicker-next {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        cursor: pointer;
-        background-image: url('../img/arrow.png');
-        background-repeat: no-repeat;
-        line-height: 600%;
-        overflow: hidden;
-    }
-
-    .ui-datepicker-prev {
-        float: left;
-        background-position: center -30px;
-    }
-
-    .ui-datepicker-next {
-        float: right;
-        background-position: center 0px;
-    }
-
-    .ui-datepicker thead {
-        background-color: #f7f7f7;
-        background-image: -moz-linear-gradient(top, #f7f7f7 0%, #f1f1f1 100%);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f1f1f1));
-        background-image: -webkit-linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
-        background-image: -o-linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
-        background-image: -ms-linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
-        background-image: linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
-        border-bottom: 1px solid #bbb;
-    }
-
-    .ui-datepicker th {
-        text-transform: uppercase;
-        font-size: 6pt;
-        padding: 5px 0;
-        color: #666666;
-        text-shadow: 1px 0px 0px #fff;
-        filter: dropshadow(color=#fff, offx=1, offy=0);
-    }
-
-    .ui-datepicker tbody td {
-        padding: 0;
-        border-right: 1px solid #bbb;
-    }
-
-        .ui-datepicker tbody td:last-child {
-            border-right: 0px;
-        }
-
-    .ui-datepicker tbody tr {
-        border-bottom: 1px solid #bbb;
-    }
-
-        .ui-datepicker tbody tr:last-child {
-            border-bottom: 0px;
-        }
-
-    .ui-datepicker tbody tr {
-        border-bottom: 1px solid #bbb;
-    }
-
-        .ui-datepicker tbody tr:last-child {
-            border-bottom: 0px;
-        }
-
-    .ui-datepicker td span, .ui-datepicker td a {
-        display: inline-block;
-        font-weight: bold;
-        text-align: center;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        color: #666666;
-        text-shadow: 1px 1px 0px #fff;
-        filter: dropshadow(color=#fff, offx=1, offy=1);
-    }
-
-    .ui-datepicker-calendar .ui-state-default {
-        background: #ededed;
-        background: -moz-linear-gradient(top, #ededed 0%, #dedede 100%);
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede));
-        background: -webkit-linear-gradient(top, #ededed 0%,#dedede 100%);
-        background: -o-linear-gradient(top, #ededed 0%,#dedede 100%);
-        background: -ms-linear-gradient(top, #ededed 0%,#dedede 100%);
-        background: linear-gradient(top, #ededed 0%,#dedede 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 );
-        -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
-        -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
-        box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
-    }
-
-    .ui-datepicker-unselectable .ui-state-default {
-        background: #f4f4f4;
-        color: #b4b3b3;
-    }
-
-    .ui-datepicker-calendar .ui-state-hover {
-        background: #f7f7f7;
-    }
-
-    .ui-datepicker-calendar .ui-state-active {
-        background: #6eafbf;
-        -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
-        -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
-        box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
-        color: #e0e0e0;
-        text-shadow: 0px 1px 0px #4d7a85;
-        filter: dropshadow(color=#4d7a85, offx=0, offy=1);
-        border: 1px solid #55838f;
-        position: relative;
-        margin: -1px;
-    }
-
-    .ui-datepicker-calendar td:first-child .ui-state-active {
-        width: 29px;
-        margin-left: 0;
-    }
-
-    .ui-datepicker-calendar td:last-child .ui-state-active {
-        width: 29px;
-        margin-right: 0;
-    }
-
-    .ui-datepicker-calendar tr:last-child .ui-state-active {
-        height: 29px;
-        margin-bottom: 0;
-    }
-</style>
-<h2>Orders</h2><br />
-<div>
-
-    <p>
-        @Html.ActionLink("New Order", "", "Home")
-    </p>
-</div>
-@*<div id="datepicker">
-
-    </div>*@
-
-
-@using (Html.BeginForm("Index", "Requests", FormMethod.Post))
-{
-    @Html.ValidationSummary(true);
-
-    <label>Start Date</label>
-    @Html.TextBox("StartDate", null, new { @class = "date-picker1", autocomplete = "off" })
-    <label>End Date</label>
-    @Html.TextBox("EndDate", null, new { @class = "date-picker2", autocomplete = "off" })
-    <input type="submit" value="Query" />
-
+@using Microsoft.AspNet.Identity;
+@using CarVendor.data;
+@{
+    DataBaseContext db = new DataBaseContext();
+    var userId = User.Identity.GetUserId();
 }
-<p style="color:red">@ViewBag.ErrorMsg</p>
-@if (Model.Count() > 0)
-{
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayName("Sequence")
-            </th>
-            <th>
-                @Html.DisplayName("Order Date")
-            </th>
-            <th>
-                @Html.DisplayName("Ordered Items")
-            </th>
-            <th>
-                @Html.DisplayName("Delivery Details")
-            </th>
-            @*<th>@Html.DisplayNameFor(model => model.DeliveryDetails.State)</th>*@
-        </tr>
-        @{
-            int i = 0;
+
+    <script src="https://unpkg.com/js-datepicker"></script>
+    <style>
+        .ui-datepicker {
+            width: 216px;
+            height: auto;
+            margin: 5px auto 0;
+            font: 9pt Arial, sans-serif;
+            -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+            -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
         }
 
-        @foreach (var item in Model)
-        {
-            i++;
+            .ui-datepicker a {
+                text-decoration: none;
+            }
+
+            .ui-datepicker table {
+                width: 100%;
+            }
+
+        .ui-datepicker-header {
+            background: url('../img/dark_leather.png') repeat 0 0 #000;
+            color: #e0e0e0;
+            font-weight: bold;
+            -webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+            -moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+            box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+            text-shadow: 1px -1px 0px #000;
+            filter: dropshadow(color=#000, offx=1, offy=-1);
+            line-height: 30px;
+            border-width: 1px 0 0 0;
+            border-style: solid;
+            border-color: #111;
+        }
+
+        .ui-datepicker-title {
+            text-align: center;
+        }
+
+        .ui-datepicker-prev, .ui-datepicker-next {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            cursor: pointer;
+            background-image: url('../img/arrow.png');
+            background-repeat: no-repeat;
+            line-height: 600%;
+            overflow: hidden;
+        }
+
+        .ui-datepicker-prev {
+            float: left;
+            background-position: center -30px;
+        }
+
+        .ui-datepicker-next {
+            float: right;
+            background-position: center 0px;
+        }
+
+        .ui-datepicker thead {
+            background-color: #f7f7f7;
+            background-image: -moz-linear-gradient(top, #f7f7f7 0%, #f1f1f1 100%);
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f1f1f1));
+            background-image: -webkit-linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
+            background-image: -o-linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
+            background-image: -ms-linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
+            background-image: linear-gradient(top, #f7f7f7 0%,#f1f1f1 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
+            border-bottom: 1px solid #bbb;
+        }
+
+        .ui-datepicker th {
+            text-transform: uppercase;
+            font-size: 6pt;
+            padding: 5px 0;
+            color: #666666;
+            text-shadow: 1px 0px 0px #fff;
+            filter: dropshadow(color=#fff, offx=1, offy=0);
+        }
+
+        .ui-datepicker tbody td {
+            padding: 0;
+            border-right: 1px solid #bbb;
+        }
+
+            .ui-datepicker tbody td:last-child {
+                border-right: 0px;
+            }
+
+        .ui-datepicker tbody tr {
+            border-bottom: 1px solid #bbb;
+        }
+
+            .ui-datepicker tbody tr:last-child {
+                border-bottom: 0px;
+            }
+
+        .ui-datepicker tbody tr {
+            border-bottom: 1px solid #bbb;
+        }
+
+            .ui-datepicker tbody tr:last-child {
+                border-bottom: 0px;
+            }
+
+        .ui-datepicker td span, .ui-datepicker td a {
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            color: #666666;
+            text-shadow: 1px 1px 0px #fff;
+            filter: dropshadow(color=#fff, offx=1, offy=1);
+        }
+
+        .ui-datepicker-calendar .ui-state-default {
+            background: #ededed;
+            background: -moz-linear-gradient(top, #ededed 0%, #dedede 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede));
+            background: -webkit-linear-gradient(top, #ededed 0%,#dedede 100%);
+            background: -o-linear-gradient(top, #ededed 0%,#dedede 100%);
+            background: -ms-linear-gradient(top, #ededed 0%,#dedede 100%);
+            background: linear-gradient(top, #ededed 0%,#dedede 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 );
+            -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+            -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+            box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+        }
+
+        .ui-datepicker-unselectable .ui-state-default {
+            background: #f4f4f4;
+            color: #b4b3b3;
+        }
+
+        .ui-datepicker-calendar .ui-state-hover {
+            background: #f7f7f7;
+        }
+
+        .ui-datepicker-calendar .ui-state-active {
+            background: #6eafbf;
+            -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+            -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+            box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+            color: #e0e0e0;
+            text-shadow: 0px 1px 0px #4d7a85;
+            filter: dropshadow(color=#4d7a85, offx=0, offy=1);
+            border: 1px solid #55838f;
+            position: relative;
+            margin: -1px;
+        }
+
+        .ui-datepicker-calendar td:first-child .ui-state-active {
+            width: 29px;
+            margin-left: 0;
+        }
+
+        .ui-datepicker-calendar td:last-child .ui-state-active {
+            width: 29px;
+            margin-right: 0;
+        }
+
+        .ui-datepicker-calendar tr:last-child .ui-state-active {
+            height: 29px;
+            margin-bottom: 0;
+        }
+    </style>
+    <h2>Orders</h2><br />
+    <div>
+
+        <p>
+            @Html.ActionLink("New Order", "", "Home")
+        </p>
+    </div>
+    @*<div id="datepicker">
+
+        </div>*@
+
+
+    @using (Html.BeginForm("Index", "Requests", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true);
+
+        <label>Start Date</label>
+        @Html.TextBox("StartDate", null, new { @class = "date-picker1", autocomplete = "off" })
+        <label>End Date</label>
+        @Html.TextBox("EndDate", null, new { @class = "date-picker2", autocomplete = "off" })
+        <input type="submit" value="Query" />
+
+    }
+    <p style="color:red">@ViewBag.ErrorMsg</p>
+    @if (Model.Count() > 0)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Sequence")
+                </th>
+                <th>
+                    @Html.DisplayName("Order Date")
+                </th>
+                <th>
+                    @Html.DisplayName("Ordered Items")
+                </th>
+                <th>
+                    @Html.DisplayName("Order Status")
+                </th>
+                @if (User.IsInRole("Admin"))
+                {
+                        <th>
+                            @Html.DisplayName("Delivery Details")
+                        </th>
+                }
+                        @*<th>@Html.DisplayNameFor(model => model.DeliveryDetails.State)</th>*@
+                    </tr>
+            @{
+                int i = 0;
+            }
+
+            @foreach (var item in Model)
+            {
+                i++;
             <tr>
                 <td>
 
@@ -281,39 +293,44 @@
                     }
                 </td>
                 <td>
-                    @{ }
-                    @Html.DisplayFor(modelItem => item.User.FName) @Html.DisplayFor(modelItem => item.User.MName)  @Html.DisplayFor(modelItem => item.User.LName)
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item..State)
-                    </td>*@
-            </tr>
-        }
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.User.FName) @Html.DisplayFor(modelItem => item.User.MName)  @Html.DisplayFor(modelItem => item.User.LName)
+                    </td>
+                }
+
+                </tr>
 
 
-    </table>
-}
-else
-{
-    <div>
+                   }
+                
+        </table>
+    }
+    else
+    {
+        <div>
 
-        <img src="~/Content/images/NoOrders.png" />
+            <img src="~/Content/images/NoOrders.png" />
 
-    </div>
-}
-@*<script type="text/javascript">
-        $(function () {
-            // This will make every element with the class "date-picker" into a DatePicker element
-            $('.date-picker').datepicker();
-        })
-    </script>*@
-<script type="text/javascript">
-    const picker1 = datepicker('.date-picker1', { id: 'date-picker1' });
-    const picker2 = datepicker('.date-picker2', { id: 'date-picker2' });
-
-
-
-
+        </div>
+    }
+    @*<script type="text/javascript">
+            $(function () {
+                // This will make every element with the class "date-picker" into a DatePicker element
+                $('.date-picker').datepicker();
+            })
+        </script>*@
+    <script type="text/javascript">
+        const picker1 = datepicker('.date-picker1', { id: 'date-picker1' });
+        const picker2 = datepicker('.date-picker2', { id: 'date-picker2' });
 
 
-</script>
+
+
+
+
+    </script>

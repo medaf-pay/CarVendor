@@ -218,7 +218,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     };
    });
 
-app.controller('CardInfoCTR', function ($scope, $http) {
+app.controller('CardInfoCTR', ['$scope', '$http', function ($scope, $http) {
     $scope.loading = false;
     $scope.CreditCard = {};
     $scope.BankInfo = {};
@@ -284,10 +284,12 @@ app.controller('CardInfoCTR', function ($scope, $http) {
         $scope.CreditCard = {};
        // $scope.CreditCard.TotalPrice = $scope.totalPrice;
       
-            $scope.loading = true;
+     
+        $scope.loading = true;
+     
             $http.post("/api/CartDetails/paybycreditcard", $scope.CreditCard).then(function (data) {
-                $scope.loading = false;
-              
+
+
                 payObject = {
                     merchant: 'TESTQNBAATEST001',
                     order: {
@@ -317,12 +319,17 @@ app.controller('CardInfoCTR', function ($scope, $http) {
                             orderSummary: 'SHOW',
                             shipping: 'HIDE'
                         }
+                    },
+                    session: {
+                     id:   data.data.sessionId
                     }
                 };
                 Checkout.configure(payObject);
+                $scope.loading = false;
                 Checkout.showLightbox();
             });
-        
+
+        };
     
-    };
-});
+
+}]);
