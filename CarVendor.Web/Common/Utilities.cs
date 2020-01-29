@@ -17,13 +17,13 @@ namespace CarVendor.mvc.Common
         public static List<CartModel> _shopingCarts = new List<CartModel>();
 
         public static List<CurrencyDTO> _currencyDTO = new List<CurrencyDTO>() { new CurrencyDTO() { Code = 1, Name = "EGP",UserIdentity= "default" } };
-    
-      
-        public static long SetOrderDetails( DataBaseContext db, bool VIP=false, BankTransferModel BankTransfer=null,long UserId=0,string Currency="EGP")
+
+
+        public static long SetOrderDetails(DataBaseContext db, bool VIP = false, BankTransferModel BankTransfer = null, string Identity = null, long UserId=0,string Currency="EGP")
         {
 
-            var customer_cart = _shopingCarts.Where(c=>c.UserId==UserId.ToString()).FirstOrDefault();
-            if (customer_cart == null && customer_cart.CustomerInfo == null && customer_cart.CartItems == null && customer_cart.CartItems.Count < 1)
+            var customer_cart = _shopingCarts.Where(c=>c.UserId== Identity).FirstOrDefault();
+            if (customer_cart == null || customer_cart.CustomerInfo == null || customer_cart.CartItems == null || customer_cart.CartItems.Count < 1)
             {
                 return -1;
             }
