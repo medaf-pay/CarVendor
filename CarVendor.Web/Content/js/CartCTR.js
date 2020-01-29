@@ -328,6 +328,9 @@ app.controller('CardInfoCTR', ['$scope', '$http', function ($scope, $http) {
                 $scope.loading = false;
                 
                 Checkout.showLightbox();
+            }, function (error) {
+
+                    alert(error)
             });
 
         };

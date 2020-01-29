@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
@@ -259,21 +260,29 @@ namespace CarVendor.mvc.Controllers
 
         [HttpPost]
         [Route("api/cartdetails/paybycreditcard")]
-        public IHttpActionResult PayCreditCard(CreditCardModel creditCard)
+        public async Task<IHttpActionResult> PayCreditCard(CreditCardModel creditCard)
+
         {
+           
             string Email = User.Identity.GetUserName();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
             var currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Name).FirstOrDefault();
-
-            long result = Utilities.SetOrderDetails(db, false, null, User.Identity.GetUserId(),UserId, currency);
-
-            if (result == -1)
+            try
             {
-                return NotFound();
+                long result = Utilities.SetOrderDetails(db, false, null, User.Identity.GetUserId(), UserId, currency);
+
+                if (result == -1)
+                {
+                    return NotFound();
+                }
+
+                var SessionData =await Utilities.CallOutAPI<ResponceSession>("https://qnbalahli.test.gateway.mastercard.com/api/rest/version/54/merchant/TESTQNBAATEST001/session", new ResponceSession());
+                return  Ok( new { orderId = result, currency = currency, sessionId = SessionData.session.id });
             }
-         
-            var SessionData = Utilities.CallOutAPI<ResponceSession>("https://qnbalahli.test.gateway.mastercard.com/api/rest/version/54/merchant/TESTQNBAATEST001/session", new ResponceSession());
-            return Ok(new { orderId = result, currency= currency, sessionId=SessionData.session.id });
+            catch(Exception ex) {
+                return InternalServerError();
+            }
+               
         }
 
         [HttpPost]

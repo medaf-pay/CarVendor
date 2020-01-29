@@ -171,15 +171,15 @@ function Onload() {
             var code = getCookie('LagguageUser');
            
          
-            if (result == null && code != null) {
+            if (result == null && code != null && code!="") {
               
                 Currency = {};
                 Currency.Name = $('#currencydropdown #' + code).text();
                 Currency.Code = code;
                 $('#currencydropdown #' + code).attr("selected", true);
-
+                ChangeCurrency(1);
             }
-            else if (result == null && code == null) {
+            else if (result == null && (code == "" ||code == null)) {
                
                 Currency = {};
                 code = $('#currencydropdown option:selected').val();
@@ -223,9 +223,11 @@ function ChangeCurrency(type) {
    
         var code = $('#currencydropdown option:selected').val();
         setCookie('LagguageUser', code, 1);
+
         $.ajax({
             url: "/api/CartDetails/ChangeCurrency?CCode=" + code, success: function (result) {
                 Currency = result;
+                debugger;
                 $('#currencydropdown #' + result.Code).attr("selected", true);
                 if (type != 1) {
                     location.reload();

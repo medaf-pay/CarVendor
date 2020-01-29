@@ -3,12 +3,15 @@ using CarVendor.data.Entities;
 using CarVendor.mvc.Models;
 using CarVendor.Web.Dtos;
 using Microsoft.AspNet.Identity;
+using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace CarVendor.mvc.Common
 {
@@ -208,34 +211,27 @@ namespace CarVendor.mvc.Common
 
         }
 
-        public  static T CallOutAPI<T>( string URL ,T result)
+        public async static Task<T> CallOutAPI<T>( string URL ,T result)
         {
      
     
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
 
-            client.DefaultRequestHeaders.Add("ContentType", "application/json");
 
-            //This is the key section you were missing    
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes("merchant.TESTQNBAATEST001:9c6a123857f1ea50830fa023ad8c8d1b");
-            string val = System.Convert.ToBase64String(plainTextBytes);
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + val);
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = new RestClient(URL);
+            client.Authenticator = new HttpBasicAuthenticator("merchant.TESTQNBAATEST001", "9c6a123857f1ea50830fa023ad8c8d1b");
 
-            // List data response.
-            HttpResponseMessage response = client.PostAsJsonAsync(URL, result).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-            if (response.IsSuccessStatusCode)
+            var request = new RestRequest(Method.POST);
+
+            var response = client.Execute<T>(request);
+        if (response.IsSuccessful)
             {
                 // Parse the response body.
-                result = response.Content.ReadAsAsync<T>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+               result =  response.Data;  //Make sure to add a reference to System.Net.Http.Formatting.dll
             
             }
          
 
-         client.Dispose();
+        
         
             
             return result;
