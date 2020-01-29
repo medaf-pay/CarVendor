@@ -2,11 +2,13 @@
 using CarVendor.data.Entities;
 using CarVendor.mvc.Models;
 using CarVendor.Web.Dtos;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Principal;
 
 namespace CarVendor.mvc.Common
 {
@@ -17,18 +19,20 @@ namespace CarVendor.mvc.Common
         public static List<CurrencyDTO> _currencyDTO = new List<CurrencyDTO>() { new CurrencyDTO() { Code = 1, Name = "EGP",UserIdentity= "default" } };
     
       
-        public static long SetOrderDetails( DataBaseContext db, bool VIP=false, BankTransferModel BankTransfer=null,long UserId=0)
+        public static long SetOrderDetails( DataBaseContext db, bool VIP=false, BankTransferModel BankTransfer=null,long UserId=0,string Currency="EGP")
         {
 
-            var customer_cart = _shopingCarts.FirstOrDefault();
+            var customer_cart = _shopingCarts.Where(c=>c.UserId==UserId.ToString()).FirstOrDefault();
             if (customer_cart == null && customer_cart.CustomerInfo == null && customer_cart.CartItems == null && customer_cart.CartItems.Count < 1)
             {
                 return -1;
             }
 
             List<OrderItem> newOrderItems = new List<OrderItem>();
+            decimal TotalAmount=0;
             foreach (var orderItem in customer_cart.CartItems)
             {
+                TotalAmount += (orderItem.NewPrice*orderItem.Quantity);
                 newOrderItems.Add(new OrderItem()
                 {
                     CarId = orderItem.CarId,
@@ -46,7 +50,9 @@ namespace CarVendor.mvc.Common
                 OrderDate = DateTime.Now,
                 OrderNumber = "S" + DateTime.Now.Day.ToString() + "I" + DateTime.Now.Month + "G" + DateTime.Now.Year.ToString().Substring(2, 2),
                 OrderItems = newOrderItems,
-                IsDeleted = false,
+                TotalAmount = TotalAmount,
+                Currency = Currency,
+            IsDeleted = false,
                 UserId = UserId,
                Status= "Pending"
 
@@ -110,10 +116,47 @@ namespace CarVendor.mvc.Common
 
         }
 
-        public static void ChangeOrderStatus(DataBaseContext db,long OrderId,string status)
+        public static void ChangeOrderStatus(DataBaseContext db, CarVendor.Web.Models.Order ROrder, string status)
         {
-            Order order = db.Orders.Where(c => c.Id == OrderId).FirstOrDefault();
-            order.Status = status;
+            Order order = db.Orders.Where(c => c.Id == ROrder.id).FirstOrDefault();
+            var exchange = db.Conversions.Where(cc => cc.FromCurrency.Name == ROrder.currency).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+
+            switch (ROrder.currency)
+            {
+                case "USD":
+                 if(order.Currency=="USD" && order.TotalAmount== (decimal)ROrder.amount)
+                    {
+                        order.Status = status;
+                       
+                    }
+                    else
+                    {
+                        order.Status = "Different Amount";
+                    }
+                   
+                    break;
+                case "EUR":
+                    if (order.Currency == "EUR" && order.TotalAmount == (decimal)ROrder.amount)
+                    {
+                        order.Status = status;
+                    }
+                    else
+                    {
+                        order.Status = "Different Amount";
+                    }
+                    break;
+                default:
+                    if (order.Currency == "EGP" && order.TotalAmount == (decimal)ROrder.amount)
+                    {
+                        order.Status = status;
+                    }
+                    else
+                    {
+                        order.Status = "Different Amount";
+                    }
+                    break;
+            }
+            
             db.SaveChanges();
             CartModel customer_cart = new CartModel();
             customer_cart.Order = order;

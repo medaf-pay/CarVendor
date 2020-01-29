@@ -166,6 +166,7 @@ function Onload() {
     $.ajax({
         url: "/api/CartDetails/ReadCurancy", success: function(result)
         {
+            debugger;
             Currency = result;
             var code = getCookie('LagguageUser');
            

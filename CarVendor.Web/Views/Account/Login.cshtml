@@ -2,7 +2,7 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
-    var cookie = Request.Cookies.Get("LagguageUser");
+    var cookie = Request.Cookies.Get("LagguageUser")??new HttpCookie("LagguageUser");
   
 }
 

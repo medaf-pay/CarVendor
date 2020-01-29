@@ -296,7 +296,7 @@ app.controller('CardInfoCTR', ['$scope', '$http', function ($scope, $http) {
                         amount: $scope.totalPrice,
                         currency: data.data.currency,
                         description: 'Ordered goods',
-                        id: data.data.orderId,
+                        id: 'o'+data.data.orderId,
                         //notificationUrl:'http://81.10.30.157:81/api/payment/callback'
                     },
                     interaction: {
@@ -326,6 +326,7 @@ app.controller('CardInfoCTR', ['$scope', '$http', function ($scope, $http) {
                 };
                 Checkout.configure(payObject);
                 $scope.loading = false;
+                
                 Checkout.showLightbox();
             });
 

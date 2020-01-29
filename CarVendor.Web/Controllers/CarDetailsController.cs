@@ -263,14 +263,15 @@ namespace CarVendor.mvc.Controllers
         {
             string Email = User.Identity.GetUserName();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
-            long result = Utilities.SetOrderDetails(db, false, null, UserId);
+            var currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Name).FirstOrDefault();
+
+            long result = Utilities.SetOrderDetails(db, false, null, UserId, currency);
 
             if (result == -1)
             {
                 return NotFound();
             }
-            var currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Name).FirstOrDefault();
-          
+         
             var SessionData = Utilities.CallOutAPI<ResponceSession>("https://qnbalahli.test.gateway.mastercard.com/api/rest/version/54/merchant/TESTQNBAATEST001/session", new ResponceSession());
             return Ok(new { orderId = result, currency= currency, sessionId=SessionData.session.id });
         }

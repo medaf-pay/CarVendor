@@ -7,7 +7,11 @@ using System.Web;
 namespace CarVendor.mvc.Models
 {
     public class CartModel
-    {
+    {public CartModel()
+        {
+            CartItems = new List<CartItemModel>();
+            CustomerInfo = new CustomerInfoModel();
+        }
         public string UserId { get; set; }
         public List<CartItemModel> CartItems { get; set; }
         public CustomerInfoModel CustomerInfo { get; set; }

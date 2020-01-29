@@ -121,7 +121,10 @@ namespace CarVendor.Web.Controllers
                         {
                             Utilities._currencyDTO.Add(currency);
                         }
-
+                        if(returnUrl==null)
+                        {
+                            returnUrl = "/";
+                        }
                         return RedirectToLocal(returnUrl);
                     }
                 case SignInStatus.LockedOut:

@@ -26,9 +26,9 @@ namespace CarVendor.Web.Controllers
             callBackObj.ResopnceObject = StrObj;
             db.paymentCallBacks.Add(callBackObj);
             db.SaveChanges();
-            Utilities.ChangeOrderStatus(db, data.order.id, data.result);
+            Utilities.ChangeOrderStatus(db, data.order, data.result);
 
-            return Ok();
+            return Ok("Done");
         }
       
     }
