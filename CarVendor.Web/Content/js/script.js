@@ -227,7 +227,7 @@ function ChangeCurrency(type) {
         $.ajax({
             url: "/api/CartDetails/ChangeCurrency?CCode=" + code, success: function (result) {
                 Currency = result;
-                debugger;
+               
                 $('#currencydropdown #' + result.Code).attr("selected", true);
                 if (type != 1) {
                     location.reload();

@@ -236,5 +236,44 @@ namespace CarVendor.mvc.Common
             
             return result;
         }
+        public static List<CartItemModel> SetCartItem(DataBaseContext db,string Identity,decimal ExchangeRate, List<CartItemModel> CartItems)
+        {
+            CartItemModel car;
+            List<CartItemModel> items = new List<CartItemModel>();
+            CurrencyDTO currency = _currencyDTO.Where(c => c.UserIdentity ==Identity).Select(s => new CurrencyDTO { Code = s.Code, Name = s.Name }).FirstOrDefault();
+
+            foreach (var item in CartItems)
+            {
+                if (items.Count > 0 && items.Any(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id))
+                {
+                    items.Where(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id).Select(s => { s.Quantity = s.Quantity + 1; return s; }).ToList();
+                    continue;
+                }
+
+
+                car = new CartItemModel();
+                car = db.Cars.Where(c => c.Id == item.CarId/* && c.Carcategories.Any(g=>g.CategoryId==item.Category.Id) && c.CarColors.Any(g => g.ColorId == item.Color.Id)*/).Select(s =>
+                     new CartItemModel
+                     {
+                         Brand = s.Brand.Name,
+                         CarId = s.Id,
+                         CarName = s.Name,
+                         Category = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => new CategoryModel { Id = s1.Category.Id, Text = s1.Category.Name }).FirstOrDefault(),
+                         Color = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).
+                         Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
+                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name, Price = (s1.Price / ExchangeRate), NewPrice = ((s1.Price / ExchangeRate) - (s1.Discount / ExchangeRate)) }).FirstOrDefault()).FirstOrDefault(),
+                         Price = (s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price).FirstOrDefault()).FirstOrDefault()) / ExchangeRate,
+                         NewPrice = (s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price - s2.Discount).FirstOrDefault()).FirstOrDefault()) / ExchangeRate,
+
+                         Quantity = item.Quantity == 0 ? 1 : item.Quantity,
+
+
+                     }).FirstOrDefault();
+                car.Currency = currency;
+                items.Add(car);
+            }
+            return items;
+        }
     }
+
 }

@@ -163,10 +163,10 @@ namespace CarVendor.mvc.Controllers
         public IHttpActionResult CartData()
         {
             decimal ExchangeRate = 1;
-            var userId = User.Identity.GetUserId();
-            if (Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() !=0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s=>s.Code).FirstOrDefault() != 1)
+            string Identity = User.Identity.GetUserId();
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == Identity).Select(s => s.Code).FirstOrDefault() !=0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s=>s.Code).FirstOrDefault() != 1)
             {
-                var code = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).First().Code;
+                var code = Utilities._currencyDTO.Where(c => c.UserIdentity == Identity).First().Code;
                 ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
             }
             if (Utilities._shopingCarts.Count() == 0)
@@ -174,48 +174,18 @@ namespace CarVendor.mvc.Controllers
                 return Ok(new List<CartItemModel>());
             }
 
-            var userCart = Utilities._shopingCarts.Where(s => s.UserId == userId).FirstOrDefault();
+            var userCart = Utilities._shopingCarts.Where(s => s.UserId == Identity).FirstOrDefault();
 
-            if (userId == null || userCart == null)
+            if (Identity == null || userCart == null)
             {
 
                 return Ok(new List<CartItemModel>());
             }
             List<CartItemModel> Cars = new List<CartItemModel>();
-
-            CartItemModel car;
-            foreach (var item in userCart.CartItems)
-            {
-                if (Cars.Count > 0 && Cars.Any(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id))
-                {
-                    Cars.Where(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id).Select(s => { s.Quantity = s.Quantity + 1; return s; }).ToList();
-                    continue;
-                }
-                CurrencyDTO currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s =>new CurrencyDTO { Code = s.Code, Name = s.Name }).FirstOrDefault();
-
-
-                car = new CartItemModel();
-                car = db.Cars.Where(c => c.Id == item.CarId/* && c.Carcategories.Any(g=>g.CategoryId==item.Category.Id) && c.CarColors.Any(g => g.ColorId == item.Color.Id)*/).Select(s =>
-                     new CartItemModel
-                     {
-                         Brand = s.Brand.Name,
-                         CarId = s.Id,
-                         CarName = s.Name,
-                         Category = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => new CategoryModel { Id = s1.Category.Id, Text = s1.Category.Name }).FirstOrDefault(),
-                         Color = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).
-                         Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
-                         Select(s1 => new ColorModel { Id = s1.Color.Id, Text = s1.Color.Name, Price = (s1.Price / ExchangeRate), NewPrice = ((s1.Price / ExchangeRate) - (s1.Discount / ExchangeRate)) }).FirstOrDefault()).FirstOrDefault(),
-                         Price = (s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price).FirstOrDefault()).FirstOrDefault()) / ExchangeRate,
-                         NewPrice = (s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => s1.CarColors.Select(s2 => s2.Price - s2.Discount).FirstOrDefault()).FirstOrDefault()) / ExchangeRate,
-
-                         Quantity = item.Quantity == 0 ? 1 : item.Quantity,
-
-                        
-            }).FirstOrDefault();
-                car.Currency = currency;
-                Cars.Add(car);
-            }
-            Utilities._shopingCarts.Where(c=>c.UserId==userId).FirstOrDefault().CartItems = Cars;
+           
+            Cars= Utilities.SetCartItem(db, Identity, ExchangeRate, userCart.CartItems);
+          
+            Utilities._shopingCarts.Where(c=>c.UserId== Identity).FirstOrDefault().CartItems = Cars;
             return Ok(Cars);
         }
 
@@ -223,7 +193,20 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/SetFinalItems")]
         public IHttpActionResult SetFinalItems(List<CartItemModel> Items)
         {
-            Utilities._shopingCarts.Where(s=>s.UserId== User.Identity.GetUserId()).FirstOrDefault().CartItems = Items;
+
+            decimal ExchangeRate = 1;
+            string Identity = User.Identity.GetUserId();
+            if (Utilities._currencyDTO.Where(c => c.UserIdentity == Identity).Select(s => s.Code).FirstOrDefault() != 0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() != 1)
+            {
+                var code = Utilities._currencyDTO.Where(c => c.UserIdentity == Identity).First().Code;
+                ExchangeRate = db.Conversions.Where(cc => cc.FromCurrencyId == code).OrderByDescending(o => o.CreationDate).Select(s => s.Value).FirstOrDefault();
+            }
+            List<CartItemModel> Cars = new List<CartItemModel>();
+           
+            Cars = Utilities.SetCartItem(db, Identity, ExchangeRate, Items);
+
+            Utilities._shopingCarts.Where(c => c.UserId == Identity).FirstOrDefault().CartItems = Cars;
+         
             return Ok();
 
             // return View(userCart.CartItems);
