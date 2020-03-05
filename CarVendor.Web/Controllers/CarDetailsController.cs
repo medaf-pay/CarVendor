@@ -16,6 +16,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Http;
 
 namespace CarVendor.mvc.Controllers
@@ -55,13 +56,13 @@ namespace CarVendor.mvc.Controllers
                     BrandId = s.BrandId,
                     Name = s.Name,
                     Id = s.Id,
-                    Categories = s.Carcategories.Select(s1 =>
+                    Categories = s.Carcategories.Where(cc=>cc.IsDeleted==false).Select(s1 =>
                     new CategoryViewModel
                     {
                         Id = s1.Category.Id,
                         Name = s1.Category.Name,
                         CategoryCode = "c" + s1.CategoryId + "c",
-                        Colors = s1.CarColors.Select(s2 => new ColorViewModel
+                        Colors = s1.CarColors.Where(cc => cc.IsDeleted == false).Select(s2 => new ColorViewModel
                         {
                             Id = s2.ColorId,
                             Name = s2.Color.Name,
@@ -118,12 +119,12 @@ namespace CarVendor.mvc.Controllers
                         CarName = s.Name,
                         Id = s.Id,
                         Model = s.Model,
-                        Options = s.Carcategories.Select(s1 =>
+                        Options = s.Carcategories.Where(cc=>cc.IsDeleted==false).Select(s1 =>
                      new Option
                      {
                          Id = s1.Id,
                          Category = s1.Category.Id,
-                         moreDetails = s1.CarColors.Select(s2 => new MoreDetails
+                         moreDetails = s1.CarColors.Where(cc=>cc.IsDeleted==false).Select(s2 => new MoreDetails
                          {
                              Id = s2.Id,
                              Color = s2.ColorId,
@@ -248,6 +249,7 @@ namespace CarVendor.mvc.Controllers
         {
            
             string Email = User.Identity.GetUserName();
+            ResponceSession SessionData=new ResponceSession();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
             var currency = Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Name).FirstOrDefault();
             try
@@ -258,12 +260,16 @@ namespace CarVendor.mvc.Controllers
                 {
                     return NotFound();
                 }
+                string APIURL = WebConfigurationManager.AppSettings["APIURL"];
+                
+                SessionData = await Utilities.CallOutAPI<ResponceSession>(APIURL, new ResponceSession());
+                SessionData.merchantName = "Merchant.MODERNMOTORS";
+                return Ok(new { orderId = result, currency = currency, sessionId = SessionData.session.id, merchantName = SessionData.merchantName, merchantId = SessionData.merchant });
 
-                var SessionData =await Utilities.CallOutAPI<ResponceSession>("https://qnbalahli.test.gateway.mastercard.com/api/rest/version/54/merchant/TESTQNBAATEST001/session", new ResponceSession());
-                return  Ok( new { orderId = result, currency = currency, sessionId = SessionData.session.id });
             }
-            catch(Exception ex) {
-                return InternalServerError();
+            catch (Exception ex)
+            {
+                return Ok(new { ex = ex, responce = SessionData });
             }
                
         }

@@ -280,8 +280,66 @@ app.controller('CardInfoCTR', ['$scope', '$http', function ($scope, $http) {
   
     
     $scope.PayByCreditCard = function () {
-        var _0x48a7 = ['+201066805842', 'currency', 'TESTQNBAATEST001', 'HIDE', '/api/CartDetails/paybycreditcard', '1234\x20Example\x20Town', 'merchant.TESTQNBAATEST001', 'SHOW', '200\x20Sample\x20St', 'PURCHASE', 'https://imageURL', 'order@yourMerchantEmailAddress.com', 'CreditCard', 'en_US', 'data', 'orderId', 'totalPrice', 'sessionId', 'loading', 'default', 'showLightbox', 'configure', 'Ordered\x20goods']; (function (_0x5b868b, _0xc5f47c) { var _0x45191d = function (_0x5ce1ba) { while (--_0x5ce1ba) { _0x5b868b['push'](_0x5b868b['shift']()); } }; _0x45191d(++_0xc5f47c); }(_0x48a7, 0x195)); var _0x4ffc = function (_0x5b868b, _0xc5f47c) { _0x5b868b = _0x5b868b - 0x0; var _0x45191d = _0x48a7[_0x5b868b]; return _0x45191d; }; $scope[_0x4ffc('0x15')] = {}; $scope[_0x4ffc('0x4')] = !![]; $http['post'](_0x4ffc('0xd'), $scope[_0x4ffc('0x15')])['then'](function (_0x1d0a2c) { payObject = { 'merchant': _0x4ffc('0xb'), 'order': { 'amount': $scope[_0x4ffc('0x2')], 'currency': _0x1d0a2c['data'][_0x4ffc('0xa')], 'description': _0x4ffc('0x8'), 'id': 'o' + _0x1d0a2c[_0x4ffc('0x0')][_0x4ffc('0x1')] }, 'interaction': { 'operation': _0x4ffc('0x12'), 'merchant': { 'name': _0x4ffc('0xf'), 'address': { 'line1': _0x4ffc('0x11'), 'line2': _0x4ffc('0xe') }, 'email': _0x4ffc('0x14'), 'phone': _0x4ffc('0x9'), 'logo': _0x4ffc('0x13') }, 'locale': _0x4ffc('0x16'), 'theme': _0x4ffc('0x5'), 'displayControl': { 'billingAddress': _0x4ffc('0xc'), 'customerEmail': _0x4ffc('0xc'), 'orderSummary': _0x4ffc('0x10'), 'shipping': _0x4ffc('0xc') } }, 'session': { 'id': _0x1d0a2c[_0x4ffc('0x0')][_0x4ffc('0x3')] } }; Checkout[_0x4ffc('0x7')](payObject); $scope[_0x4ffc('0x4')] = ![]; Checkout[_0x4ffc('0x6')](); }, function (_0x17b559) { alert(_0x17b559); });
-        };
+
+        $scope.CreditCard = {};
+        // $scope.CreditCard.TotalPrice = $scope.totalPrice;
+
+
+        $scope.loading = true;
+
+        $http.post("/api/CartDetails/paybycreditcard", $scope.CreditCard).then(function (data) {
+
+
+
+
+
+            payObject = {
+                merchant: data.data.merchantId,
+                order: {
+                    amount: $scope.totalPrice,
+                    currency: data.data.currency,
+                    description: 'Ordered goods',
+                    id: 'o' + data.data.orderId,
+                    //notificationUrl:'http://81.10.30.157:81/api/payment/callback'
+                },
+                interaction: {
+                    operation: 'PURCHASE',
+                    merchant: {
+                        name: data.data.merchantName,
+                        address: {
+                            line1: '200 Sample St',
+                            line2: '1234 Example Town'
+                        },
+                        email: 'ayman.abdallah@seoudi.com',
+                        phone: '+201129313331',
+                        logo: 'https://imageURL'
+                    },
+                    locale: 'en_US',
+                    theme: 'default',
+                    displayControl: {
+                        billingAddress: 'HIDE',
+                        customerEmail: 'HIDE',
+                        orderSummary: 'SHOW',
+                        shipping: 'HIDE'
+                    }
+                },
+                session: {
+                    id: data.data.sessionId
+                }
+            };
+            Checkout.configure(payObject);
+            $scope.loading = false;
+
+            Checkout.showLightbox();
+
+        }, function (error) {
+
+            alert(error)
+        });
+
+
+    };
+
     
 
 }]);

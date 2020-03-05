@@ -218,7 +218,7 @@ namespace CarVendor.mvc.Common
 
 
             var client = new RestClient(URL);
-            client.Authenticator = new HttpBasicAuthenticator("merchant.TESTQNBAATEST001", "9c6a123857f1ea50830fa023ad8c8d1b");
+            client.Authenticator = new HttpBasicAuthenticator("Merchant.MODERNMOTORS", "bb078bb07b5102fbe9589ab82378c999");
 
             var request = new RestRequest(Method.POST);
 

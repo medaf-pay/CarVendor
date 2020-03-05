@@ -16,6 +16,7 @@ namespace CarVendor.Web.Models
 
     public class ResponceSession
     {
+        public string merchantName { get; set; }
         public string merchant { get; set; }
         public string result { get; set; }
         public Session session { get; set; }
