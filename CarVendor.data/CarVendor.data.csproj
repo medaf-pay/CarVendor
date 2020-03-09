@@ -82,6 +82,10 @@
     <Compile Include="Migrations\202001201723280_CallBack-v-0.2.Designer.cs">
       <DependentUpon>202001201723280_CallBack-v-0.2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003091606222_Add Payment Type.cs" />
+    <Compile Include="Migrations\202003091606222_Add Payment Type.Designer.cs">
+      <DependentUpon>202003091606222_Add Payment Type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001201723280_CallBack-v-0.2.resx">
       <DependentUpon>202001201723280_CallBack-v-0.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091606222_Add Payment Type.resx">
+      <DependentUpon>202003091606222_Add Payment Type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

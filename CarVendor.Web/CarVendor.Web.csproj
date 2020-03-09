@@ -258,6 +258,10 @@
     <Compile Include="Migrations\202001281347337_v0.0.3.Designer.cs">
       <DependentUpon>202001281347337_v0.0.3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003091610016_add pay type.cs" />
+    <Compile Include="Migrations\202003091610016_add pay type.Designer.cs">
+      <DependentUpon>202003091610016_add pay type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankTransferModel.cs" />
@@ -865,6 +869,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001281347337_v0.0.3.resx">
       <DependentUpon>202001281347337_v0.0.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091610016_add pay type.resx">
+      <DependentUpon>202003091610016_add pay type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

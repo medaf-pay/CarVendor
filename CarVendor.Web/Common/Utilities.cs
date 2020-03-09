@@ -43,7 +43,8 @@ namespace CarVendor.mvc.Common
                     Quantity = (int)orderItem.Quantity,
                     Category = orderItem.Category.Text,
                     IsDeleted = false,
-                    UnitPrice = orderItem.NewPrice
+                    UnitPrice = orderItem.NewPrice,
+                    PaymenType=orderItem.PaymentType==1?"Full Payment":"Down Payment"
 
                 });
             }
@@ -258,6 +259,7 @@ namespace CarVendor.mvc.Common
                          Brand = s.Brand.Name,
                          CarId = s.Id,
                          CarName = s.Name,
+                         PaymentType=item.PaymentType,
                          Category = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).Select(s1 => new CategoryModel { Id = s1.Category.Id, Text = s1.Category.Name }).FirstOrDefault(),
                          Color = s.Carcategories.Where(c => c.CategoryId == item.Category.Id).
                          Select(s2 => s2.CarColors.Where(c => c.ColorId == item.Color.Id).
@@ -270,6 +272,22 @@ namespace CarVendor.mvc.Common
 
                      }).FirstOrDefault();
                 car.Currency = currency;
+                if(item.PaymentType==2)
+                {
+                    car.Price = 10000 / ExchangeRate;
+                    car.NewPrice = 10000 / ExchangeRate;
+                    car.Color.NewPrice = 10000 / ExchangeRate;
+                    car.Color.Price = 10000 / ExchangeRate;
+
+                }
+                var g = car.Color.Price.ToString().IndexOf('.');
+                car.Color.Price =decimal.Parse(car.Color.Price.ToString().Substring(0,car.Color.Price.ToString().IndexOf('.')!=-1? car.Color.Price.ToString().IndexOf('.') + 3: car.Color.Price.ToString().Length)) ;
+                car.Price =decimal.Parse(car.Price.ToString().Substring(0,car.Price.ToString().IndexOf('.') != -1 ? car.Price.ToString().IndexOf('.') + 3 : car.Price.ToString().Length )) ;
+                car.Color.NewPrice = decimal.Parse(car.Color.NewPrice.ToString().Substring(0, car.Color.NewPrice.ToString().IndexOf('.') != -1 ? car.Color.NewPrice.ToString().IndexOf('.') + 3 : car.Color.NewPrice.ToString().Length ));
+                car.NewPrice = decimal.Parse(car.NewPrice.ToString().Substring(0, car.NewPrice.ToString().IndexOf('.') != -1 ? car.NewPrice.ToString().IndexOf('.') + 3 : car.NewPrice.ToString().Length ));
+              
+          
+
                 items.Add(car);
             }
             return items;

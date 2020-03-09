@@ -16,6 +16,7 @@ namespace CarVendor.mvc.Models
         public long CarId { get; set; }
         public string CarName { get; set; }
         public string Brand { get; set; }
+        public int PaymentType { get; set; }
         public ColorModel Color { get; set; }
         public CategoryModel Category { get; set; }
         public decimal  Price { get; set; }

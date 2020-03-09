@@ -16,6 +16,7 @@ namespace CarVendor.data.Entities
         public string Category { get; set; }
         #region [ Car ]
         public long CarId { get; set; }
+        public string PaymenType { get; set; }
         public virtual Car Car { get; set; }
         #endregion
 
