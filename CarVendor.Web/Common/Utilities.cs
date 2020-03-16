@@ -242,7 +242,8 @@ namespace CarVendor.mvc.Common
             CartItemModel car;
             List<CartItemModel> items = new List<CartItemModel>();
             CurrencyDTO currency = _currencyDTO.Where(c => c.UserIdentity ==Identity).Select(s => new CurrencyDTO { Code = s.Code, Name = s.Name }).FirstOrDefault();
-
+            if(CartItems==null)
+            { return items; }
             foreach (var item in CartItems)
             {
                 if (items.Count > 0 && items.Any(c => c.CarId == item.CarId && c.Category.Id == item.Category.Id && c.Color.Id == item.Color.Id))

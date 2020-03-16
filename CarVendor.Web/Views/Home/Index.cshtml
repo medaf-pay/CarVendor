@@ -291,20 +291,31 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Type Payment</h5>
+                                <h5 class="modal-title" id="exampleModalLabel" style="text-transform: capitalize !important;">Type of Payment</h5>
                                
                             </div>
                             <div class="modal-body">
                                 <div class="radio">
-                                    <label><input type="radio" name="optradio"  ng-model="TypePayment" value="1" checked>Full Payment</label>
-                              
-                                    <label><input type="radio" ng-model="TypePayment" name="optradio" value="2">Down Payment</label>
-                                </div>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>
+                                                    <input type="radio" name="optradio" ng-model="TypePayment" value="1" checked> Full Payment
+                                                </label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>
+                                                    <input type="radio" ng-model="TypePayment" name="optradio" value="2"> Down Payment
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="TypePayModalCls" type="button" class="btn btn-secondary" hidden data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" ng-click="SelectPaymentType()">Save</button>
+                                    </div>
                             </div>
-                            <div class="modal-footer">
-                                <button id="TypePayModalCls" type="button" class="btn btn-secondary" hidden data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" ng-click="SelectPaymentType()">Save</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
