@@ -224,7 +224,7 @@ namespace CarVendor.mvc.Common
 
                 var request = new RestRequest(Method.POST);
 
-                var response = client.Execute<T>(request);
+                var response =await client.ExecuteAsync<T>(request);
                 if (response.IsSuccessful)
                 {
                     // Parse the response body.

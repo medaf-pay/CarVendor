@@ -177,7 +177,7 @@ function Onload() {
                 Currency.Name = $('#currencydropdown #' + code).text();
                 Currency.Code = code;
                 $('#currencydropdown #' + code).attr("selected", true);
-                ChangeCurrency(1);
+         
             }
             else if (result == null && (code == "" ||code == null)) {
                

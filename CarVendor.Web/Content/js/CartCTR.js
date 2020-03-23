@@ -104,7 +104,7 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
 });
 
 app.controller('HomeCTR', function ($scope, $http) {
-
+    debugger;
     var cartProduct = [];
     var eventValue = null;
     $scope.Brandselected = "0";
@@ -112,7 +112,8 @@ app.controller('HomeCTR', function ($scope, $http) {
     $scope.Categoryselected = "0";
     $scope.Colorselected = '0';
     $scope.cart;
-    $scope.currency = Currency.Name;
+    $scope.currency ;
+   if (Currency != null && Currency.Name != null) { $scope.currency = Currency.Name; }
 
     function updateCurrency(text, value) {
         $scope.currency = text;
