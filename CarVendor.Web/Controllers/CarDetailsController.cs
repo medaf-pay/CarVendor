@@ -194,9 +194,15 @@ namespace CarVendor.mvc.Controllers
         [Route("api/CartDetails/SetFinalItems")]
         public IHttpActionResult SetFinalItems(List<CartItemModel> Items)
         {
-
             decimal ExchangeRate = 1;
             string Identity = User.Identity.GetUserId();
+            if (Items==null||Items.Count==0)
+            {
+                Utilities._shopingCarts.Where(c => c.UserId == Identity).FirstOrDefault().CartItems = new List<CartItemModel>();
+
+                return Ok();
+            }
+      
             if (Utilities._currencyDTO.Where(c => c.UserIdentity == Identity).Select(s => s.Code).FirstOrDefault() != 0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() != 1)
             {
                 var code = Utilities._currencyDTO.Where(c => c.UserIdentity == Identity).First().Code;
@@ -247,7 +253,7 @@ namespace CarVendor.mvc.Controllers
         public async Task<IHttpActionResult> PayCreditCard(CreditCardModel creditCard)
 
         {
-           
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             string Email = User.Identity.GetUserName();
             ResponceSession SessionData=new ResponceSession();
             long UserId = db.Users.Where(c => c.Email == Email).Select(s => s.Id).FirstOrDefault();
@@ -262,9 +268,9 @@ namespace CarVendor.mvc.Controllers
                 }
                 string APIURL = WebConfigurationManager.AppSettings["APIURL"];
                 
-                SessionData = await Utilities.CallOutAPI<ResponceSession>(APIURL, new ResponceSession());
+                SessionData =await  Utilities.CallOutAPI<ResponceSession>(APIURL, new ResponceSession());
                 SessionData.merchantName = "Merchant.MODERNMOTORS";
-                return Ok(new { orderId = result, currency = currency, sessionId = SessionData.session.id, merchantName = SessionData.merchantName, merchantId = SessionData.merchant });
+                return Ok(new { orderId = result, currency = currency, sessionId = SessionData.session?.id, merchantName = SessionData.merchantName, merchantId = SessionData.merchant });
 
             }
             catch (Exception ex)

@@ -8,9 +8,11 @@ using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Principal;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CarVendor.mvc.Common
@@ -212,29 +214,27 @@ namespace CarVendor.mvc.Common
 
         }
 
-        public async static Task<T> CallOutAPI<T>( string URL ,T result)
+        public async  static Task<T> CallOutAPI<T>( string URL ,T result)
         {
-     
-    
 
 
-            var client = new RestClient(URL);
-            client.Authenticator = new HttpBasicAuthenticator("Merchant.MODERNMOTORS", "bb078bb07b5102fbe9589ab82378c999");
-
-            var request = new RestRequest(Method.POST);
-
-            var response = client.Execute<T>(request);
-        if (response.IsSuccessful)
-            {
-                // Parse the response body.
-               result =  response.Data;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            RestClient client = new RestClient(URL);
             
-            }
-         
+                client.Authenticator = new HttpBasicAuthenticator("Merchant.MODERNMOTORS", "bb078bb07b5102fbe9589ab82378c999");
 
-        
-        
+                var request = new RestRequest(Method.POST);
+
+                var response = client.Execute<T>(request);
+                if (response.IsSuccessful)
+                {
+                    // Parse the response body.
+                    result = response.Data;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+
+                }
+
             
+
+
             return result;
         }
         public static List<CartItemModel> SetCartItem(DataBaseContext db,string Identity,decimal ExchangeRate, List<CartItemModel> CartItems)
