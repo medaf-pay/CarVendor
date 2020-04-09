@@ -7,7 +7,7 @@ app.controller('CartCTR', function ($scope, $http, $location) {
  
  
     $http.get("/api/CarDetails/CartData").then(function (data) {
-        console.log(data);
+     
         $scope.Items = data.data;
     
         calcTotal();
@@ -104,7 +104,7 @@ app.controller('CustomerInfoCTR', function ($scope, $http) {
 });
 
 app.controller('HomeCTR', function ($scope, $http) {
-    debugger;
+   
     var cartProduct = [];
     var eventValue = null;
     $scope.Brandselected = "0";
@@ -112,13 +112,32 @@ app.controller('HomeCTR', function ($scope, $http) {
     $scope.Categoryselected = "0";
     $scope.Colorselected = '0';
     $scope.cart;
-    $scope.currency ;
-   if (Currency != null && Currency.Name != null) { $scope.currency = Currency.Name; }
-
+    $scope.currency;
+    try {
+        if (Currency != null && Currency.Name != null) {
+            $scope.currency = Currency.Name;
+            $http.get("/api/CartDetails/ChangeCurrency?CCode=" + Currency.Code).then(function (data) {
+            
+            });
+        } else {
+            Currency = { Code: 1, Name: "EGP" };
+            $http.get("/api/CartDetails/ChangeCurrency?CCode=" + Currency.Code).then(function (data) {
+              
+            });
+        }
+       
+    }
+    catch{
+      
+        Currency = { Code: 1, Name: "EGP" };
+        $http.get("/api/CartDetails/ChangeCurrency?CCode=" + Currency.Code).then(function (data) {
+        
+                   });
+    }
     function updateCurrency(text, value) {
         $scope.currency = text;
         $scope.currencyValue = value;
-        console.log($scope.currency, "update");
+    
         if (cartProduct.length != 0) {
             updateCart(cartProduct);
         }
@@ -135,7 +154,7 @@ app.controller('HomeCTR', function ($scope, $http) {
 
     });
     $http.get("/api/CarDetails/CartData").then(function (data) {
-        console.log(data);
+  
         cartProduct = data.data;
         if (cartProduct.length > 0) {
             updateCart(cartProduct);

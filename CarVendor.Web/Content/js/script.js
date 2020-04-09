@@ -156,7 +156,7 @@ function CategoryChange(CategoryId, carId) {
             var tt = result;
             $('#Price_' + carId).text(result);
             var s = $('#Price_' + carId).val();
-            console.log(s)
+        
         }
     });
 }
@@ -188,10 +188,10 @@ function Onload() {
                 $('#currencydropdown #' + code).attr("selected", true);
                 ChangeCurrency(1);
             }
-            var yy = $('#currencydropdown #' + Currency.Code)
-            console.log(yy)
-             yy.attr("selected", true);
-            console.log(yy)
+            var CurrencySelecte = $('#currencydropdown #' + Currency.Code)
+           
+            CurrencySelecte.attr("selected", true);
+    
            
 
         }
@@ -233,7 +233,7 @@ function ChangeCurrency(type) {
                     location.reload();
                 }
                 
-                console.log(result)
+            
 
 
             }
@@ -321,7 +321,7 @@ function getJSessionId() {
 changeNavSelection();
 function changeNavSelection(ElementId) {
     var url = window.location.pathname.split("/");
-    console.log(url);
+ 
     var action = url[url.length - 1];
    
     $('#Nav' + action).addClass("current");
