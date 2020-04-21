@@ -261,7 +261,7 @@ app.controller('HomeCTR', function ($scope, $http) {
     };
    });
 
-app.controller('CardInfoCTR', ['$scope', '$http', function ($scope, $http) {
+app.controller('CardInfoCTR', ['$scope', '$http','$timeout', function ($scope, $http, $timeout) {
     $scope.loading = false;
     $scope.CreditCard = {};
     $scope.BankInfo = {};
@@ -320,12 +320,71 @@ app.controller('CardInfoCTR', ['$scope', '$http', function ($scope, $http) {
     };
 
   
-  
+     Order = {};
     
     $scope.PayByCreditCard = function () {
 
-       
-       var _0x2f3e = ['HIDE', 'Ordered\x20goods', 'loading', 'CreditCard', 'SHOW', 'data', 'orderId', '/api/CartDetails/paybycreditcard', 'showLightbox', '200\x20Sample\x20St', 'ayman.abdallah@seoudi.com', '1234\x20Example\x20Town', 'post', 'merchantId', 'configure', 'totalPrice', '+201129313331', 'then', 'https://imageURL']; (function (_0x6bbf23, _0x2f3e03) { var _0x7f5900 = function (_0x7e4de4) { while (--_0x7e4de4) { _0x6bbf23['push'](_0x6bbf23['shift']()); } }; _0x7f5900(++_0x2f3e03); }(_0x2f3e, 0x80)); var _0x7f59 = function (_0x6bbf23, _0x2f3e03) { _0x6bbf23 = _0x6bbf23 - 0x0; var _0x7f5900 = _0x2f3e[_0x6bbf23]; return _0x7f5900; }; $scope[_0x7f59('0x8')] = {}; $scope[_0x7f59('0x7')] = !![]; $http[_0x7f59('0x11')](_0x7f59('0xc'), $scope[_0x7f59('0x8')])[_0x7f59('0x3')](function (_0x1c6b6a) { payObject = { 'merchant': _0x1c6b6a[_0x7f59('0xa')][_0x7f59('0x12')], 'order': { 'amount': $scope[_0x7f59('0x1')], 'currency': _0x1c6b6a[_0x7f59('0xa')]['currency'], 'description': _0x7f59('0x6'), 'id': _0x1c6b6a['data'][_0x7f59('0xb')] }, 'interaction': { 'operation': 'PURCHASE', 'merchant': { 'name': _0x1c6b6a['data']['merchantName'], 'address': { 'line1': _0x7f59('0xe'), 'line2': _0x7f59('0x10') }, 'email': _0x7f59('0xf'), 'phone': _0x7f59('0x2'), 'logo': _0x7f59('0x4') }, 'locale': 'en_US', 'theme': 'default', 'displayControl': { 'billingAddress': _0x7f59('0x5'), 'customerEmail': _0x7f59('0x5'), 'orderSummary': _0x7f59('0x9'), 'shipping': _0x7f59('0x5') } }, 'session': { 'id': _0x1c6b6a[_0x7f59('0xa')]['sessionId'] } }; Checkout[_0x7f59('0x0')](payObject); $scope['loading'] = ![]; Checkout[_0x7f59('0xd')](); }, function (_0x25a189) { alert(_0x25a189); });
+        $scope.CreditCard = {};
+        // $scope.CreditCard.TotalPrice = $scope.totalPrice;
+
+        $('#Loder').show();
+        $scope.loading = true;
+
+        $http.post("/api/CartDetails/paybycreditcard", $scope.CreditCard).then(function (data) {
+
+
+            Order.Id = data.data.orderId;
+
+
+            payObject = {
+                merchant: data.data.merchantId,
+                order: {
+                    amount: $scope.totalPrice,
+                    currency: data.data.currency,
+                    description: 'Ordered goods',
+                    id: data.data.orderId,
+                    //notificationUrl:'http://81.10.30.157:81/api/payment/callback'
+                },
+                interaction: {
+                    operation: 'PURCHASE',
+                    merchant: {
+                        name: data.data.merchantName,
+                        address: {
+                            line1: '200 Sample St',
+                            line2: '1234 Example Town'
+                        },
+                        email: 'ayman.abdallah@seoudi.com',
+                        phone: '+201129313331',
+                        logo: 'https://imageURL'
+                    },
+                    locale: 'en_US',
+                    theme: 'default',
+                    displayControl: {
+                        billingAddress: 'HIDE',
+                        customerEmail: 'HIDE',
+                        orderSummary: 'SHOW',
+                        shipping: 'HIDE'
+                    }
+                },
+                session: {
+                    id: data.data.sessionId
+                }
+            };
+            Checkout.configure(payObject);
+         
+
+            Checkout.showLightbox();
+
+            $timeout(function ()
+            {
+                
+            }, 7000);
+        }, function (error) {
+
+            alert(error)
+        });
+
+    //   var _0x2f3e = ['HIDE', 'Ordered\x20goods', 'loading', 'CreditCard', 'SHOW', 'data', 'orderId', '/api/CartDetails/paybycreditcard', 'showLightbox', '200\x20Sample\x20St', 'ayman.abdallah@seoudi.com', '1234\x20Example\x20Town', 'post', 'merchantId', 'configure', 'totalPrice', '+201129313331', 'then', 'https://imageURL']; (function (_0x6bbf23, _0x2f3e03) { var _0x7f5900 = function (_0x7e4de4) { while (--_0x7e4de4) { _0x6bbf23['push'](_0x6bbf23['shift']()); } }; _0x7f5900(++_0x2f3e03); }(_0x2f3e, 0x80)); var _0x7f59 = function (_0x6bbf23, _0x2f3e03) { _0x6bbf23 = _0x6bbf23 - 0x0; var _0x7f5900 = _0x2f3e[_0x6bbf23]; return _0x7f5900; }; $scope[_0x7f59('0x8')] = {}; $scope[_0x7f59('0x7')] = !![]; $http[_0x7f59('0x11')](_0x7f59('0xc'), $scope[_0x7f59('0x8')])[_0x7f59('0x3')](function (_0x1c6b6a) { payObject = { 'merchant': _0x1c6b6a[_0x7f59('0xa')][_0x7f59('0x12')], 'order': { 'amount': $scope[_0x7f59('0x1')], 'currency': _0x1c6b6a[_0x7f59('0xa')]['currency'], 'description': _0x7f59('0x6'), 'id': _0x1c6b6a['data'][_0x7f59('0xb')] }, 'interaction': { 'operation': 'PURCHASE', 'merchant': { 'name': _0x1c6b6a['data']['merchantName'], 'address': { 'line1': _0x7f59('0xe'), 'line2': _0x7f59('0x10') }, 'email': _0x7f59('0xf'), 'phone': _0x7f59('0x2'), 'logo': _0x7f59('0x4') }, 'locale': 'en_US', 'theme': 'default', 'displayControl': { 'billingAddress': _0x7f59('0x5'), 'customerEmail': _0x7f59('0x5'), 'orderSummary': _0x7f59('0x9'), 'shipping': _0x7f59('0x5') } }, 'session': { 'id': _0x1c6b6a[_0x7f59('0xa')]['sessionId'] } }; Checkout[_0x7f59('0x0')](payObject); $scope['loading'] = ![]; Checkout[_0x7f59('0xd')](); }, function (_0x25a189) { alert(_0x25a189); });
 
     };
 

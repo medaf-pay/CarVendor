@@ -14,18 +14,39 @@
 <script>
     function errorCallback(error) {
         console.log(JSON.stringify(error));
+        $('#Loder').hide()
     }
     function cancelCallback() {
+    
+
+        $('#Loder').hide()
         console.log('Payment cancelled');
+    
     }
     function doneCallback() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
+        
+                var data = JSON.parse(xhttp.responseText)
+                var xhttp2 = new XMLHttpRequest();
+                xhttp2.open("Get", data.URL + "api/qnb/CallBankStatusAPI/" + data.AppId + "/" + Order.Id, true);
+                xhttp2.send();
+
+
+            xhttp2.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    $('#Loder').hide();
+
+                }
+            };
             if (this.readyState == 4 && this.status == 200) {
-                window.location.href = "/Requests/Index";
+
+
+                $('#Loder').hide();
+               window.location.href = "/Requests/Index";
             }
         };
-    
+
         xhttp.open("POST", "/api/CartDetails/SetFinalItems", true);
         xhttp.send();
    

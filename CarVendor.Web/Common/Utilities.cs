@@ -220,11 +220,11 @@ namespace CarVendor.mvc.Common
 
             RestClient client = new RestClient(URL);
             
-               // client.Authenticator = new HttpBasicAuthenticator("Merchant.MODERNMOTORS", "bb078bb07b5102fbe9589ab82378c999");
+                client.Authenticator = new HttpBasicAuthenticator("Merchant.MODERNMOTORS", "bb078bb07b5102fbe9589ab82378c999");
               
                 var request = new RestRequest(Method.POST);
 
-            request.AddJsonBody(new { MerchantId= "MODERNMOTORS", ProviderAppId="1" });
+            //request.AddJsonBody(new { MerchantId= "MODERNMOTORS", ProviderAppId="1" });
                 var response = client.Execute<T>(request);
                 if (response.IsSuccessful)
                 {

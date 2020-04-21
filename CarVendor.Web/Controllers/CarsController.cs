@@ -27,7 +27,7 @@ namespace CarVendor.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Car car = db.Cars.Find(id);
-            if (car == null)
+            if (car == null || car.IsDeleted == true)
             {
                 return HttpNotFound();
             }
@@ -72,7 +72,7 @@ namespace CarVendor.Web.Controllers
         {
 
             Car car = db.Cars.Find(CarCode);
-            if (car == null)
+            if (car == null || car.IsDeleted == true)
             {
                 return HttpNotFound();
             }
@@ -107,7 +107,7 @@ namespace CarVendor.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Car car = db.Cars.Find(id);
-            if (car == null)
+            if (car == null || car.IsDeleted==true)
             {
                 return HttpNotFound();
             }
@@ -120,7 +120,7 @@ namespace CarVendor.Web.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
             Car car = db.Cars.Find(id);
-            db.Cars.Remove(car);
+            car.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index","Home");
         }

@@ -49,7 +49,7 @@ namespace CarVendor.mvc.Controllers
 
 
             }
-            var cars = db.Cars.Select(s =>
+            var cars = db.Cars.Where(c=>c.IsDeleted!=true).Select(s =>
                 new CarViewModel
                 {
                     Brand = s.Brand.Name,
@@ -112,7 +112,7 @@ namespace CarVendor.mvc.Controllers
         public IHttpActionResult GetCarByCode(long Id)
         {
 
-            CarModel cars = db.Cars.Where(c => c.Id == Id).Select(s =>
+            CarModel cars = db.Cars.Where(c => c.Id == Id && c.IsDeleted!=true).Select(s =>
                     new CarModel
                     {
                         Brand = s.Brand.Id,
@@ -198,9 +198,11 @@ namespace CarVendor.mvc.Controllers
             string Identity = User.Identity.GetUserId();
             if (Items==null||Items.Count==0)
             {
-                Utilities._shopingCarts.Where(c => c.UserId == Identity).FirstOrDefault().CartItems = new List<CartItemModel>();
+               // Utilities._shopingCarts.Where(c => c.UserId == Identity).FirstOrDefault().CartItems = new List<CartItemModel>();
+                string PaymentURL = WebConfigurationManager.AppSettings["PaymentURL"];
+                string AppId = WebConfigurationManager.AppSettings["AppId"];
 
-                return Ok();
+                return Ok(new {URL= PaymentURL, AppId = AppId });
             }
       
             if (Utilities._currencyDTO.Where(c => c.UserIdentity == Identity).Select(s => s.Code).FirstOrDefault() != 0 && Utilities._currencyDTO.Where(c => c.UserIdentity == User.Identity.GetUserId()).Select(s => s.Code).FirstOrDefault() != 1)
@@ -731,7 +733,7 @@ namespace CarVendor.mvc.Controllers
         [HttpPost]
         public HttpResponseMessage Edit(long carCode, CarModel carModel)
         {
-            Car car = db.Cars.Where(c => c.Id == carCode).FirstOrDefault();
+            Car car = db.Cars.Where(c => c.Id == carCode && c.IsDeleted!=true).FirstOrDefault();
             car.BrandId = carModel.Brand;
             car.Condition = CarCondition.New;
             car.IsDeleted = false;
