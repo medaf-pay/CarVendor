@@ -13,43 +13,49 @@
 </script>
 <script>
     function errorCallback(error) {
+        callpaymentgateway();
         console.log(JSON.stringify(error));
         $('#Loder').hide()
     }
     function cancelCallback() {
     
-
+        callpaymentgateway();
         $('#Loder').hide()
         console.log('Payment cancelled');
     
     }
     function doneCallback() {
+       
+        callpaymentgateway();
+    }
+    function callpaymentgateway() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
-        
-                var data = JSON.parse(xhttp.responseText)
-                var xhttp2 = new XMLHttpRequest();
-                xhttp2.open("Get", data.URL + "api/qnb/CallBankStatusAPI/" + data.AppId + "/" + Order.Id, true);
-                xhttp2.send();
+            debugger;
+            var data = JSON.parse(xhttp.responseText)
+            var xhttp2 = new XMLHttpRequest();
+            debugger;
+            xhttp2.open("Get", data.URL + "api/qnb/CallBankStatusAPI/" + data.AppId + "/" + Order.Id, true);
+            xhttp2.send();
 
-
+            debugger;
             xhttp2.onreadystatechange = function () {
+                debugger;
                 if (this.readyState == 4 && this.status == 200) {
                     $('#Loder').hide();
 
                 }
             };
             if (this.readyState == 4 && this.status == 200) {
-
+                debugger;
 
                 $('#Loder').hide();
-               window.location.href = "/Requests/Index";
+                window.location.href = "/Requests/Index";
             }
         };
 
         xhttp.open("POST", "/api/CartDetails/SetFinalItems", true);
         xhttp.send();
-   
     }
 </script>
 

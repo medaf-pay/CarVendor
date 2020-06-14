@@ -198,7 +198,11 @@ namespace CarVendor.mvc.Controllers
             string Identity = User.Identity.GetUserId();
             if (Items==null||Items.Count==0)
             {
-               // Utilities._shopingCarts.Where(c => c.UserId == Identity).FirstOrDefault().CartItems = new List<CartItemModel>();
+                if (Utilities._shopingCarts.Any(c => c.UserId == Identity))
+                {
+                    Utilities._shopingCarts.Where(c => c.UserId == Identity).FirstOrDefault().CartItems = new List<CartItemModel>();
+
+                }
                 string PaymentURL = WebConfigurationManager.AppSettings["PaymentURL"];
                 string AppId = WebConfigurationManager.AppSettings["AppId"];
 

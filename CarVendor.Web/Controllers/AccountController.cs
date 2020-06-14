@@ -97,9 +97,10 @@ namespace CarVendor.Web.Controllers
                     {
                        
                         cartData.UserId = UserId;
-                        if (Utilities._shopingCarts.Where(c => c.UserId == UserId).Count() > 0)
+                        if (Utilities._shopingCarts.Any(c => c.UserId == UserId))
                         {
-                            Utilities._shopingCarts.Where(c => c.UserId == UserId).Select(s => s = cartData);
+                               
+                            Utilities._shopingCarts.Where(c => c.UserId == UserId).Select(s => { s = cartData; return s; });
                         }
                         else
                         {
